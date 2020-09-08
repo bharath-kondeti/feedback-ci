@@ -162,6 +162,35 @@ echo $baseurl . '/asset/js/chart.bundle.min.js';
             </div>
           </div>
         </form>
+        <div>
+        <div class="table-responsive">
+          <table class="text-center table-bordered table-striped table table-hover">
+            <thead class="">
+              <tr>
+                <th>Product</th>
+                <th>Date</th>
+                <th>Buyer </th>
+                <th>Rating</th>
+                <th>Comment</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>SKU, Image, OrderID</td>
+                <td>25-12-2020</td>
+                <td>Colin</td>
+                <td class="text-warning">
+                  <strong>
+										<?php for ($x = 1; $x <= 5; $x++) {
+												echo "<i class='fa fa-star'></i>";
+                      }?>
+                </td>
+                <td>Good Product</td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
       <br>
       <hr>

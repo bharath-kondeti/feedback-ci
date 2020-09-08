@@ -483,7 +483,9 @@
 .padding-bottom-7{
 	padding-bottom:7px;
 }
-
+.justify-start {
+  justify-content: start !important;
+}
 .review-block{
 	background-color:#FAFAFA;
 	border:1px solid #EFEFEF;

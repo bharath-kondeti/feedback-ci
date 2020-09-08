@@ -389,7 +389,7 @@ $base_url = base_url();
                               <div class="col-sm-12">
                                 <div class="form-group mx-sm-12 mb-12">
                                   <div class="col-sm-3">
-                                    <label for="status-select" class="mr-2">Enter Campaign name</label>
+                                    <label for="status-select" class="mr-2 justify-start">Enter Campaign name</label>
                                   </div>
                                   <div class="col-sm-8">
                                     <input type="text" style="width:100%" id="camp_name" name="" class="form-control mr-10" ng-model='cmp.camp_name' placeholder="Enter Campaign name">
@@ -398,7 +398,7 @@ $base_url = base_url();
                                 <br>
                                 <div class="form-group mx-sm-12 mb-12">
                                   <div class="col-sm-3">
-                                    <label for="status-select" class="mr-2">Customer Type</label>
+                                    <label for="status-select" class="mr-2 justify-start">Customer Type</label>
                                   </div>
                                   <div class="col-sm-8">
                                     <select style="width:100%" class="form-control" ng-model='cmp.camp_type'>
@@ -411,7 +411,7 @@ $base_url = base_url();
                                 <br>
                                 <div class="form-group mx-sm-12 mb-12">
                                   <div class="col-sm-3">
-                                    <label for="status-select" class="mr-2">Fulfillment</label>
+                                    <label for="status-select" class="mr-2 justify-start">Fulfillment</label>
                                   </div>
                                   <div class="col-sm-8">
                                     <select style="width:100%" class="form-control" ng-model='cmp.camp_fulfill'>
@@ -424,11 +424,11 @@ $base_url = base_url();
                                 <br>
                                 <div class="form-group mx-sm-12 mb-12">
                                   <div class="col-sm-3">
-                                    <label for="status-select" class="mr-2">Campaign Status</label>
+                                    <label for="status-select" class="mr-2 justify-start">Campaign Status</label>
                                   </div>
                                   <div class="col-sm-8">
                                     <select style="width:100%" class="form-control" ng-model='cmp.camp_status'>
-                                      <option value='1'>Draft</option>
+                                      <option default value='1'>Draft</option>
                                       <option value='2'>Test</option>
                                       <option value='3'>Live</option>
                                       <option value='4'>Paused</option>
@@ -438,7 +438,7 @@ $base_url = base_url();
                                 <br>
                                 <div class="form-group mx-sm-12 mb-12">
                                   <div class="col-sm-3">
-                                    <label for="status-select" class="mr-2">Goal Type</label>
+                                    <label for="status-select" class="mr-2 justify-start">Goal Type</label>
                                   </div>
                                   <div class="col-sm-8">
                                     <select style="width:100%" class="form-control" ng-model='cmp.camp_goaltype'>
@@ -1290,6 +1290,8 @@ $base_url = base_url();
         $scope.cmp.camp_country = '<?php echo $store_country ?>';
         $scope.cmp.camp_sku = '';
         $scope.cmp.camp_fulfill = 'ALL';
+        $scope.cmp.camp_status = 'Draft';
+        $scope.cmp.camp_goaltype = '1'
         $scope.cmp.camp_type = '1';
         $scope.cmp.camp_template = '';
         $scope.cmp.camp_trigger = '1';
@@ -1355,6 +1357,8 @@ $base_url = base_url();
           $scope.template_content = '';
           $scope.cmp.camp_sku = '';
           $scope.cmp.camp_fulfill = '1';
+          $scope.cmp.camp_status = '1';
+          $scope.cmp.camp_goaltype = '1'
           $scope.cmp.camp_type = '1';
           $scope.cmp.camp_template = '';
           $scope.cmp.camp_trigger = '1';
@@ -1696,6 +1700,7 @@ $base_url = base_url();
                 $scope.template_list = response.template_list;
                 $scope.metrics = response.metrics;
                 $scope.product_list = response.product_list;
+                console.log('here', $scope.product_list)
               } else
               {
                 swal('Error!', response.status_text, 'error');
