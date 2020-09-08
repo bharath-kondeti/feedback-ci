@@ -190,7 +190,7 @@ $base_url = base_url();
           </div>
         </div>
 	</div>
-	
+
 <div class="Campaigns">
     <div class="tab-content">
           <div class="tab-pane active" id="my_campaigns" ng-controller='campaignCtrl'>
@@ -382,6 +382,7 @@ $base_url = base_url();
                     <div class="col-12">
                       <div class="card">
                         <div class="card-body">
+                          <h4 class="page-title">Campaign Details</h4>
                           <a href="" id="menuToggle" style="margin-top:-15px;" class="pull-right  dropdown-toggle waves-effect waves-light" data-toggle="dropdown" aria-expanded="true" ng-click='togggle_view()'>Close</a>
                           <div class="col-sm-12">
                             <div class="form-inline">
@@ -420,6 +421,33 @@ $base_url = base_url();
                                     </select>
                                   </div>
                                 </div>
+                                <br>
+                                <div class="form-group mx-sm-12 mb-12">
+                                  <div class="col-sm-3">
+                                    <label for="status-select" class="mr-2">Campaign Status</label>
+                                  </div>
+                                  <div class="col-sm-8">
+                                    <select style="width:100%" class="form-control" ng-model='cmp.camp_status'>
+                                      <option value='1'>Draft</option>
+                                      <option value='2'>Test</option>
+                                      <option value='3'>Live</option>
+                                      <option value='4'>Paused</option>
+                                    </select>
+                                  </div>
+                                </div>
+                                <br>
+                                <div class="form-group mx-sm-12 mb-12">
+                                  <div class="col-sm-3">
+                                    <label for="status-select" class="mr-2">Goal Type</label>
+                                  </div>
+                                  <div class="col-sm-8">
+                                    <select style="width:100%" class="form-control" ng-model='cmp.camp_goaltype'>
+                                      <option value='1'>Customer Service</option>
+                                      <option value='2'>Feedback</option>
+                                      <option value='3'>Review</option>
+                                    </select>
+                                  </div>
+                                </div>
                               </div>
                             </div>
                           </div>
@@ -429,6 +457,7 @@ $base_url = base_url();
                     <div class="col-12">
                       <div class="card">
                         <div class="card-body">
+                          <h4 class="page-title">Stock Details</h4>
                           <br>
                           <div class="tab-pane" id="basictab3" ng-class="tb.currentTab=='tab3'?'tab-pane fade active in':'tab-pane'"><br>
                             <div class="col-sm-12">
@@ -504,10 +533,11 @@ $base_url = base_url();
                     <div class="col-12">
                       <div class="card">
                         <div class="card-body">
+                          <h4 class="page-title">Mailing Details</h4>
                           <br>
                           <div class="tab-pane" id="basictab4" ng-class="tb.currentTab=='tab4'?'tab-pane fade active in':'tab-pane'">
                             <div class="row">
-								
+
 								<div class="col-sm-4 form-group">
 									<label for="simpleinput">Trigger On</label>
 									<select ng-model='cmp.camp_trigger' class="form-control">
@@ -529,7 +559,7 @@ $base_url = base_url();
 									<label for="simpleinput">Minutes</label>
 									<input ng-model='cmp.camp_min' type='number' placeholder="Minutes" class="form-control">
 								</div>
-								
+
 								<div class="col-sm-2 form-group">
 									<label for="simpleinput">&nbsp;</label>
 									<select ng-model='cmp.camp_am_pm' class="form-control">
@@ -537,7 +567,7 @@ $base_url = base_url();
 									  <option value='2'>PM</option>
 									</select>
 								</div>
-								
+
                               <div class="col-sm-12">
                                 <div style="margin-top: 10px;">
                                   <span ng-model='cmp.camp_review'></span>
@@ -577,7 +607,7 @@ $base_url = base_url();
                       </div>
                     </div>
                   </div>
-             
+
             </div>
           </div>
           <!-----------------------------Templates----------------------------->
@@ -651,7 +681,7 @@ $base_url = base_url();
 				  </table>
 				</div>
 				</div>
-                
+
 				<div class="row" ng-show='show_dash_email==0'>
                   <div class="col-12">
                     <div class="card">
@@ -691,7 +721,7 @@ $base_url = base_url();
                     <input type="password" class="form-control" id="inputPassword2" placeholder="Search Order ID or Buyer Email">
                   </div>
 			  </div>
-				<div class="col-md-3">  
+				<div class="col-md-3">
                   <div class="dropdown">
                     <a class="btn btn-primary btn-block dropdown-toggle" href="" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                       Select a campaign<i class="mdi mdi-chevron-down"></i>
@@ -1821,7 +1851,7 @@ $base_url = base_url();
 
             $scope.tmplt.template_content_html = $sce.trustAsHtml(CKEDITOR.instances.editor.getData());
 
-            //alert("TEST");		
+            //alert("TEST");
 
           });
 
@@ -2250,7 +2280,7 @@ $base_url = base_url();
 
                     swal('Success!', html.status_text, 'success');
 
-                    // $scope.template_list=html.payload; 
+                    // $scope.template_list=html.payload;
 
                     $scope.get_predata();
 
