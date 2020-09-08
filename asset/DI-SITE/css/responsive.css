@@ -1,0 +1,409 @@
+@media (min-width: 992px) and (max-width: 1199px) {
+    .menu_area .navbar-brand {
+        font-size: 42px;
+    }
+    .menu_area #nav .nav-link {
+        padding: 35px 7.5px;
+    }
+    .sing-up-button > a {
+        color: #fff;
+        height: 40px;
+        min-width: 152px;
+        line-height: 36px;
+        font-size: 14px;
+    }
+	.wellcome_area {
+
+	    background-position: bottom center;
+    background-size: cover;
+	}
+    .welcome-thumb {
+        width: 50%;
+        bottom: -100px;
+        right: 50px;
+    }
+    .video-area {
+        height: 550px;
+    }
+    .app_screenshots_slides {
+        padding: 0 4%;
+    }
+    .header_area.sticky .menu_area #nav .nav-link {
+        padding: 23px 7.5px;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+    .header_area {
+        padding: 0;
+    }
+    .menu_area .navbar-brand {
+        font-size: 48px;
+    }
+    .header_area.sticky {
+        height: 82px;
+    }
+    .header_area .menu_area #nav .nav-link,
+    .header_area.sticky .menu_area #nav .nav-link {
+        padding: 7.5px 15px;
+		color:#000;
+    }
+    #ca-navbar {
+        padding: 30px;
+        border-radius: 3px;
+        background-color: #efefef;
+        text-align: left;
+    }
+    .sing-up-button {
+        margin-top: 30px;
+        text-align: left;
+    }
+  /*  .welcome-thumb {
+        width: 50%;
+        bottom: -100px;
+        right: 0;
+    }
+    .wellcome-heading {
+        margin-bottom: 70px;
+    }
+	 .wellcome-heading > h2 {
+	 margin-top:150px;
+        font-size: 38px;
+    }
+	 .wellcome-heading > p {
+	 display:block
+      
+    } */
+	
+	
+	.wellcome-heading{
+ margin-bottom:0px;
+ }
+    .wellcome-heading > h2 {
+	margin-top:70px;
+        font-size: 38px;
+		width:100%;
+    }
+	
+	 .wellcome-heading > p {
+	 display:block;
+	 font-size:14px;
+	 }
+		.get-started-button12{
+	margin:0px;
+  
+    }
+	
+	 .get-start-area {
+        max-width: 100%;
+    }
+	
+    .get-start-area .email {
+	margin-top:20px;
+	margin-left:80px;
+		width:500px;
+    }
+.get-start-area .submit {
+	margin-top:20px;
+}
+.our-monthly-membership {
+padding-bottom:70px;
+}
+	.wellcome_area {
+
+	    background-position: bottom center;
+    background-size: cover;
+	}
+    .welcome-thumb{
+        width: 90%;
+		padding:0px;
+        bottom:-100px;
+        left: 0;
+		display:none;
+    }
+	
+
+		.special_description_img >iframe{
+	width:100%;
+	}
+	.feature-icon{
+	margin-left:10px;
+	width:100px;;
+	}
+
+    .single-special {
+        padding: 30px 10px;
+    }
+    .special_description_area.mt-150 {
+        margin-top: 50px;
+    }
+    .special_description_content > h2 {
+        font-size: 30px;
+    }
+    .video-area {
+        height: 350px;
+    }
+    .section-heading > h2 {
+        font-size: 38px;
+    }
+    .address-text > p,
+    .phone-text > p,
+    .email-text > p {
+        font-size: 16px;
+    }
+    .footer-text > p {
+        margin-bottom: 30px;
+    }
+    .section-heading {
+        margin-bottom: 50px;
+    }
+    .sing-up-button > a {
+        margin-top: 4px;
+        display: inline-block;
+        border: 2px solid #a883e9;
+        height: 40px;
+        min-width: 160px;
+        line-height: 36px;
+        font-size: 14px;
+    }
+
+    .counter-area {
+        min-width: 50px;
+    }
+    .counter-area > h3 {
+        font-size: 30px;
+    }
+    .app_screenshots_slides {
+        padding: 0;
+    }
+    .clients-feedback-area .slick-slide.slick-current img {
+        width: 90px !important;
+        height: 90px !important;
+    }
+	
+	.tp-caption.big,h1.big{font-size:35px!important;line-height:35px!important;letter-spacing:0!important;}
+}
+
+@media (min-width: 320px) and (max-width: 767px) {
+    .header_area {
+        padding: 0;
+    }
+    .menu_area .navbar-brand {
+        font-size: 48px;
+    }
+    .header_area.sticky {
+        height: 82px;
+    }
+    .header_area .menu_area #nav .nav-link,
+    .header_area.sticky .menu_area #nav .nav-link {
+        padding: 5px 15px;
+		color:#000;
+    }
+    #ca-navbar {
+        padding: 20px;
+        border-radius: 3px;
+        background-color: #fff;
+        text-align: left;
+    }
+    .sing-up-button {
+        margin-top: 30px;
+        text-align: left;
+    }
+    .header_area {
+        top: 0;
+    }
+    .welcome_text .cd-intro > p {
+        font-size: 14px;
+    }
+ .wellcome-heading{
+ margin-top:-100px;
+ margin-bottom:0px;
+ }
+    .wellcome-heading > h2 {
+	margin-top:10px;
+        font-size: 24px;
+		width:100%;
+		text-align:center;
+    }
+	
+	 .wellcome-heading > p {
+
+		width:100%;
+		text-align:center;
+    }
+
+		.get-started-button12{
+	margin:0px;
+  
+    }
+    .get-start-area .email {
+        margin-bottom: 0px;;
+		height:50px;
+        max-width: 100%;
+    }
+.get-start-area .submit {
+margin-top:0px;
+width:100%;
+}
+	.get-started-buttons > a{
+	min-width:100%;
+	}
+.our-monthly-membership {
+padding-bottom:70px;
+}
+	.wellcome_area {
+
+	    background-position: bottom center;
+    background-size: cover;
+	}
+    .welcome-thumb{
+        width: 90%;
+		padding:0px;
+        bottom:-100px;
+        left: 0;
+		display:none;
+    }
+	.btn{
+	margin-left:18px;
+	}
+			.sp1{
+	z-index:0 !important;
+	display:none;
+		}
+    .logo_area > a > h2 {
+        font-size: 40px;
+        margin-top: 10px;
+    }
+    .section-heading > h2 {
+        font-size: 32px;
+    }
+	.special_description_img >iframe{
+	width:100%;
+	}
+	.feature-icon{
+	margin-left:10px;
+	width:100px;;
+	}
+
+	    .single-icon1 > img {
+ border-radius: 50%;
+width:50%;
+}
+        .single-special1 > h4 {
+    font-size: 20px;
+    color: #333;
+}
+    .single-special {
+        margin-bottom: 30px;
+    }
+    .special_description_area.mt-150 {
+        margin-top: 50px;
+    }
+    .special_description_content > h2 {
+        font-size: 30px;
+    }
+    .app-download-btn:first-child {
+        margin-right: 0;
+    }
+    .app-download-area {
+        display: block;
+    }
+    .app-download-btn {
+        margin-bottom: 20px;
+    }
+    .video-area {
+        border: 10px solid #fff;
+        border-radius: 20px;
+        height: 250px;
+    }
+    .video-area::after {
+        top: -10px;
+        left: -10px;
+        width: calc(100% + 20px);
+        height: calc(100% + 20px);
+        border: 1px solid #f1f4f8;
+        z-index: 2;
+        border-radius: 20px;
+    }
+    .clients-feedback-area .client-description > p {
+        font-size: 20px;
+    }
+    .clients-feedback-area .slick-slide img {
+        width: 60px !important;
+        height: 60px !important;
+    }
+    .clients-feedback-area .slick-slide.slick-current img {
+        width: 70px !important;
+        height: 70px !important;
+    }
+    .membership-description > h2 {
+        font-size: 24px;
+    }
+    .get-started-button {
+        text-align: left;
+        margin-top: 20px;
+    }
+    .contact_from {
+        margin-top: 30px;
+    }
+    .wellcome-heading > h3 {
+        font-size: 252px;
+        top: -105px;
+        left: -1px;
+    }
+
+    .single-cool-fact {
+        margin-bottom: 50px;
+    }
+    .cool_facts_area .col-12:last-of-type .single-cool-fact {
+        margin-bottom: 0;
+    }
+}
+@media (min-width: 360px) and (max-width: 640px) {
+   	.btn{
+	margin-left:35px;
+	}
+   }
+@media (min-width: 480px) and (max-width: 767px) {
+    .wellcome-heading > h3 {
+        font-size: 284px;
+    }
+    .wellcome-heading > h2 {
+	margin-top:50px;
+        font-size: 34px;
+    }
+		.wellcome_area {
+
+	    background-position: bottom center;
+    background-size: cover;
+	}
+    .welcome-thumb {
+        bottom: -109px;
+        width: 75%;
+		display:none;
+    }
+    .wellcome-heading {
+        margin-bottom: 0px;
+    }
+    .wellcome-heading > h3 {
+        top: -139px;
+    }
+    .get-start-area .email {
+        max-width: 370px;
+    }
+}
+
+@media (min-width: 576px) and (max-width: 767px) {
+    .wellcome-heading > h3 {
+        font-size: 180px;
+    }
+	.wellcome_area {
+
+	    background-position: bottom center;
+    background-size: cover;
+	}
+    .get-start-area .email {
+        margin-bottom: 0;
+    }
+}
+

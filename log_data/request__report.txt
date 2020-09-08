@@ -1,0 +1,136 @@
+  
+Array
+(
+    [0] => Array
+        (
+            [store_id] => 7
+            [seller_id] => ATXB4ROORF5N6
+            [auth_token] => amzn.mws.b8b18e1b-effc-8cbe-ff94-367984dbb6ee
+            [access_key] => AKIAJUE4YCIVIZTIC6GQ
+            [secret_key] => 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
+            [amz_code] => A21TJRUUN4KGV
+            [jt_days] => 2
+            [plan_id] => 1
+            [country_code] => IN
+            [country_name] => INDIA
+            [mws_url] => mws.amazonservices.in
+        )
+
+    [1] => Array
+        (
+            [store_id] => 6
+            [seller_id] => A36IVIGAYBFGU
+            [auth_token] => amzn.mws.e6b73768-c95a-856b-dfd5-38a2784984aa
+            [access_key] => AKIAJUE4YCIVIZTIC6GQ
+            [secret_key] => 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
+            [amz_code] => A1RKKUPIHCS9HS
+            [jt_days] => 2
+            [plan_id] => 1
+            [country_code] => ES
+            [country_name] => SPAIN
+            [mws_url] => mws.amazonservices.es
+        )
+
+    [2] => Array
+        (
+            [store_id] => 5
+            [seller_id] => A36IVIGAYBFGU
+            [auth_token] => amzn.mws.e6b73768-c95a-856b-dfd5-38a2784984aa
+            [access_key] => AKIAJUE4YCIVIZTIC6GQ
+            [secret_key] => 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
+            [amz_code] => A13V1IB3VIYZZH
+            [jt_days] => 2
+            [plan_id] => 1
+            [country_code] => FR
+            [country_name] => FRANCE
+            [mws_url] => mws.amazonservices.fr
+        )
+
+    [3] => Array
+        (
+            [store_id] => 4
+            [seller_id] => A36IVIGAYBFGU
+            [auth_token] => amzn.mws.e6b73768-c95a-856b-dfd5-38a2784984aa
+            [access_key] => AKIAJUE4YCIVIZTIC6GQ
+            [secret_key] => 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
+            [amz_code] => A1PA6795UKMFR9
+            [jt_days] => 2
+            [plan_id] => 1
+            [country_code] => DE
+            [country_name] => GERMAN
+            [mws_url] => mws.amazonservices.de
+        )
+
+    [4] => Array
+        (
+            [store_id] => 3
+            [seller_id] => A36IVIGAYBFGU
+            [auth_token] => amzn.mws.e6b73768-c95a-856b-dfd5-38a2784984aa
+            [access_key] => AKIAJUE4YCIVIZTIC6GQ
+            [secret_key] => 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
+            [amz_code] => APJ6JRA9NG5V4
+            [jt_days] => 2
+            [plan_id] => 1
+            [country_code] => IT
+            [country_name] => ITALY
+            [mws_url] => mws.amazonservices.it
+        )
+
+    [5] => Array
+        (
+            [store_id] => 2
+            [seller_id] => A36IVIGAYBFGU
+            [auth_token] => amzn.mws.e6b73768-c95a-856b-dfd5-38a2784984aa
+            [access_key] => AKIAJUE4YCIVIZTIC6GQ
+            [secret_key] => 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
+            [amz_code] => A1F83G8C2ARO7P
+            [jt_days] => 4
+            [plan_id] => 1
+            [country_code] => UK
+            [country_name] => UK
+            [mws_url] => mws.amazonservices.co.uk
+        )
+
+)
+Array
+(
+    [Action] => RequestReport
+    [ReportType] => _GET_FBA_FULFILLMENT_CUSTOMER_RETURNS_DATA_
+    [MarketplaceIdList.Id.1] => A21TJRUUN4KGV
+    [StartDate] => 2019-11-02T04:59:01Z
+)
+Array
+(
+    [Action] => RequestReport
+    [ReportType] => _GET_FBA_FULFILLMENT_CUSTOMER_RETURNS_DATA_
+    [MarketplaceIdList.Id.1] => A1RKKUPIHCS9HS
+    [StartDate] => 2019-11-02T04:59:02Z
+)
+Array
+(
+    [Action] => RequestReport
+    [ReportType] => _GET_FBA_FULFILLMENT_CUSTOMER_RETURNS_DATA_
+    [MarketplaceIdList.Id.1] => A13V1IB3VIYZZH
+    [StartDate] => 2019-11-02T04:59:02Z
+)
+Array
+(
+    [Action] => RequestReport
+    [ReportType] => _GET_FBA_FULFILLMENT_CUSTOMER_RETURNS_DATA_
+    [MarketplaceIdList.Id.1] => A1PA6795UKMFR9
+    [StartDate] => 2019-11-02T04:59:03Z
+)
+Array
+(
+    [Action] => RequestReport
+    [ReportType] => _GET_FBA_FULFILLMENT_CUSTOMER_RETURNS_DATA_
+    [MarketplaceIdList.Id.1] => APJ6JRA9NG5V4
+    [StartDate] => 2019-11-02T04:59:03Z
+)
+Array
+(
+    [Action] => RequestReport
+    [ReportType] => _GET_FBA_FULFILLMENT_CUSTOMER_RETURNS_DATA_
+    [MarketplaceIdList.Id.1] => A1F83G8C2ARO7P
+    [StartDate] => 2019-11-02T04:59:04Z
+)

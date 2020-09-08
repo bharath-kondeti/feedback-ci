@@ -1,0 +1,88 @@
+  
+Array
+(
+    [0] => Array
+        (
+            [store_id] => 8
+            [seller_id] => A36IVIGAYBFGU
+            [auth_token] => amzn.mws.e6b73768-c95a-856b-dfd5-38a2784984aa
+            [access_key] => AKIAJUE4YCIVIZTIC6GQ
+            [secret_key] => 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
+            [amz_code] => A1F83G8C2ARO7P
+            [jt_days] => 43
+            [country_code] => UK
+            [country_name] => UK
+            [mws_url] => mws.amazonservices.co.uk
+        )
+
+    [1] => Array
+        (
+            [store_id] => 9
+            [seller_id] => A36IVIGAYBFGU
+            [auth_token] => amzn.mws.e6b73768-c95a-856b-dfd5-38a2784984aa
+            [access_key] => AKIAJUE4YCIVIZTIC6GQ
+            [secret_key] => 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
+            [amz_code] => A1PA6795UKMFR9
+            [jt_days] => 43
+            [country_code] => DE
+            [country_name] => GERMAN
+            [mws_url] => mws.amazonservices.de
+        )
+
+    [2] => Array
+        (
+            [store_id] => 10
+            [seller_id] => A36IVIGAYBFGU
+            [auth_token] => amzn.mws.e6b73768-c95a-856b-dfd5-38a2784984aa
+            [access_key] => AKIAJUE4YCIVIZTIC6GQ
+            [secret_key] => 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
+            [amz_code] => A13V1IB3VIYZZH
+            [jt_days] => 43
+            [country_code] => FR
+            [country_name] => FRANCE
+            [mws_url] => mws.amazonservices.fr
+        )
+
+    [3] => Array
+        (
+            [store_id] => 11
+            [seller_id] => A36IVIGAYBFGU
+            [auth_token] => amzn.mws.e6b73768-c95a-856b-dfd5-38a2784984aa
+            [access_key] => AKIAJUE4YCIVIZTIC6GQ
+            [secret_key] => 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
+            [amz_code] => A1RKKUPIHCS9HS
+            [jt_days] => 43
+            [country_code] => ES
+            [country_name] => SPAIN
+            [mws_url] => mws.amazonservices.es
+        )
+
+)
+Array
+(
+    [Action] => RequestReport
+    [ReportType] => _GET_CONVERGED_FLAT_FILE_ORDER_REPORT_DATA_
+    [MarketplaceIdList.Id.1] => A1F83G8C2ARO7P
+    [StartDate] => 2020-02-27T13:15:01Z
+)
+Array
+(
+    [Action] => RequestReport
+    [ReportType] => _GET_CONVERGED_FLAT_FILE_ORDER_REPORT_DATA_
+    [MarketplaceIdList.Id.1] => A1PA6795UKMFR9
+    [StartDate] => 2020-02-27T13:15:02Z
+)
+Array
+(
+    [Action] => RequestReport
+    [ReportType] => _GET_CONVERGED_FLAT_FILE_ORDER_REPORT_DATA_
+    [MarketplaceIdList.Id.1] => A13V1IB3VIYZZH
+    [StartDate] => 2020-02-27T13:15:03Z
+)
+Array
+(
+    [Action] => RequestReport
+    [ReportType] => _GET_CONVERGED_FLAT_FILE_ORDER_REPORT_DATA_
+    [MarketplaceIdList.Id.1] => A1RKKUPIHCS9HS
+    [StartDate] => 2020-02-27T13:15:03Z
+)

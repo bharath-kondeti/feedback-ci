@@ -1,0 +1,44 @@
+
+
+
+SELECT cpgn_id,cpgn_type,cpgn_fullfill,cpgn_hour,cpgn_min,cpgn_days,cpgn_day,cpgn_am_pm,cpgn_trigger,cpgn_if_no_review,cpgn_attachment,created_by,fbk_order,created_on,joined_on,DATEDIFF(CURDATE(),joined_on) AS diff FROM campaign_manager 
+    INNER JOIN `store_access` AS b ON created_by=b.store_id 
+    INNER JOIN scr_user ON scr_u_id=user_id   AND created_by=8 AND is_active='1' AND is_deleted=0 
+
+
+1
+
+
+SELECT order_no,seller_sku,last_updated,purchase_date,shipped_on,IFNULL(calc_deliverydate,DATE_ADD(shipped_on, INTERVAL 5 DAY)) AS calc_deliverydate  FROM campaign_asin INNER JOIN amz_order_info AS odr ON cmp_id=4  AND odr.asin=cmp_asin AND odr.seller_sku=cmp_sku   AND sales_country=cmp_country AND IF(odr.fulfillment_channel='AFN','FBA','FBM')=cmp_fc AND store_id=8 AND buyer_email IS NOT NULL  INNER JOIN amz_ship_date as shp on sh_order_id=order_no AND shipped_on >'2020-03-04 00:00:00' AND odr.fulfillment_channel = 'AFN' AND ((order_tfmstatus='PickedUp' AND order_status='Shipped') OR (order_status='Shipped'))
+
+
+1
+
+
+SELECT order_no,seller_sku,last_updated,purchase_date,shipped_on,IFNULL(calc_deliverydate,DATE_ADD(shipped_on, INTERVAL 5 DAY)) AS calc_deliverydate  FROM campaign_asin INNER JOIN amz_order_info AS odr ON cmp_id=5  AND odr.asin=cmp_asin AND odr.seller_sku=cmp_sku   AND sales_country=cmp_country AND IF(odr.fulfillment_channel='AFN','FBA','FBM')=cmp_fc AND store_id=8 AND buyer_email IS NOT NULL  INNER JOIN amz_ship_date as shp on sh_order_id=order_no AND shipped_on >'2020-03-04 00:00:00' AND ((order_tfmstatus='PickedUp' AND order_status='Shipped') OR (order_status='Shipped'))
+
+
+
+
+
+SELECT cpgn_id,cpgn_type,cpgn_fullfill,cpgn_hour,cpgn_min,cpgn_days,cpgn_day,cpgn_am_pm,cpgn_trigger,cpgn_if_no_review,cpgn_attachment,created_by,fbk_order,created_on,joined_on,DATEDIFF(CURDATE(),joined_on) AS diff FROM campaign_manager 
+    INNER JOIN `store_access` AS b ON created_by=b.store_id 
+    INNER JOIN scr_user ON scr_u_id=user_id   AND created_by=9 AND is_active='1' AND is_deleted=0 
+
+
+
+
+
+SELECT cpgn_id,cpgn_type,cpgn_fullfill,cpgn_hour,cpgn_min,cpgn_days,cpgn_day,cpgn_am_pm,cpgn_trigger,cpgn_if_no_review,cpgn_attachment,created_by,fbk_order,created_on,joined_on,DATEDIFF(CURDATE(),joined_on) AS diff FROM campaign_manager 
+    INNER JOIN `store_access` AS b ON created_by=b.store_id 
+    INNER JOIN scr_user ON scr_u_id=user_id   AND created_by=10 AND is_active='1' AND is_deleted=0 
+
+
+
+
+
+SELECT cpgn_id,cpgn_type,cpgn_fullfill,cpgn_hour,cpgn_min,cpgn_days,cpgn_day,cpgn_am_pm,cpgn_trigger,cpgn_if_no_review,cpgn_attachment,created_by,fbk_order,created_on,joined_on,DATEDIFF(CURDATE(),joined_on) AS diff FROM campaign_manager 
+    INNER JOIN `store_access` AS b ON created_by=b.store_id 
+    INNER JOIN scr_user ON scr_u_id=user_id   AND created_by=11 AND is_active='1' AND is_deleted=0 
+
+
