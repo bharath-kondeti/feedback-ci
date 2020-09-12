@@ -77,7 +77,7 @@ $base_url=base_url();
                           <div class="col-md-10 col-xs-10 col-sm-10">
                             <ul class="nav nav-tabs nav-bordered">
 
-                              <li class="nav-item">
+                              <li ng-click="filter('all')" class="nav-item">
 
                                 <a href="#all" data-toggle="tab" aria-expanded="false" class="nav-link active">
 
@@ -87,7 +87,7 @@ $base_url=base_url();
 
                               </li>
 
-                              <li class="nav-item">
+                              <li ng-click="filter('pos')" class="nav-item">
 
                                 <a href="#positive" data-toggle="tab" aria-expanded="true" class="nav-link text-success">
 
@@ -97,7 +97,7 @@ $base_url=base_url();
 
                               </li>
 
-                              <li class="nav-item">
+                              <li ng-click="filter('neut')" class="nav-item">
 
                                 <a href="#netural" data-toggle="tab" aria-expanded="true" class="nav-link">
 
@@ -107,7 +107,7 @@ $base_url=base_url();
 
                               </li>
 
-                              <li class="nav-item">
+                              <li ng-click="filter('neg')" class="nav-item">
 
                                 <a href="#negative" data-toggle="tab" aria-expanded="true" class="nav-link text-danger">
 
@@ -117,7 +117,7 @@ $base_url=base_url();
 
                               </li>
 
-                              <li class="nav-item">
+                              <li ng-click="filter('bad')" class="nav-item">
 
                                 <a href="#all_bad" data-toggle="tab" aria-expanded="true" class="nav-link text-danger">
 
@@ -361,6 +361,45 @@ $base_url=base_url();
 
 											</form>
 
+                      <div class="table-responsive">
+                      	<table class="text-center table-bordered table-striped table table-hover">
+                      		<thead class="">
+                      			<tr>
+                      				<th>Product</th>
+                      				<th>Date</th>
+                      				<th>Buyer </th>
+                      				<th>Sent</th>
+                      				<th>Rating</th>
+                      				<th>Comment</th>
+                      			</tr>
+                      		</thead>
+                      		<tbody>
+                      			<tr ng-repeat="idx in feedback_all track by $index">
+                              <td>
+                                {{idx.itm_title}}
+                              </td>
+                              <td>
+                                {{idx.fbk_date}}
+                              </td>
+                              <td>
+                                {{idx.rater_email}}
+                              </td>
+                              <td>
+                                {{idx.rater_email}}
+                              </td>
+                              <td>
+                                <div class="text-warning mb-2 font-13">
+                                  <i ng-repeat="i in setRound(idx.fbk_rating) track by $index" class='fa fa-star'></i>
+                                </div>
+                              </td>
+                              <td>
+                                {{idx.asin}}
+                              </td>
+                      			</tr>
+                      		</tbody>
+                      	</table>
+                      </div>
+
 										</div>
 
 											<br>
@@ -422,7 +461,6 @@ $base_url=base_url();
 
 
 											</div>
-
 
 
 
@@ -545,8 +583,6 @@ crawlApp.factory('dashFactory', function($http,$q,limitToFilter) {
 
 
 
-
-
   return {
 
     get_data:get_data,
@@ -580,7 +616,11 @@ crawlApp.controller('dashCtrl',function($scope,$parse,$window,dashFactory,$http,
      $scope.sale_graph=0;
 
      $scope.campaign_graph=1;
-
+    $scope.feedback_all = [];
+    $scope.feedback_negative = [];
+    $scope.feedback_positive = [];
+    $scope.feedback_neutral = [];
+    $scope.feedback_temp = [];
 
 
       $scope.block_site=function()
@@ -669,8 +709,27 @@ crawlApp.controller('dashCtrl',function($scope,$parse,$window,dashFactory,$http,
 
    };
 
+   $scope.filter = function(n) {
+     console.log(n)
+    if(n === 'all') {
+      $scope.feedback_all = $scope.feedback_temp;
+    } else if (n=== 'pos') {
+      $scope.feedback_all = $scope.feedback_positive;
+    } else if (n === 'neg') {
+      $scope.feedback_all = $scope.feedback_negative;
+    } else if (n === 'neut') {
+      $scope.feedback_all = $scope.feedback_neutral;
+    } else if (n === 'bad') {
+      var arr = [];
+      var arr  = arr.concat($scope.feedback_neutral, $scope.feedback_negative);
+      $scope.feedback_all = arr;
+    }
+   };
+   $scope.setRound = function(n) {
+      return new Array(parseInt(n));
+    };
 
-
+    
    $scope.prevPage = function()
 
    {
@@ -832,25 +891,26 @@ crawlApp.controller('dashCtrl',function($scope,$parse,$window,dashFactory,$http,
                                 if(response.status_code == '1')
 
                                 {
-
-
-
-                                      $scope.revenue=response.revenue[0];
-
-									  $scope.metrics=response.metrics;
-
-                                      $scope.fbk_data=response.fbk_data[0];
-
-									  $scope.recent_ten_orders=response.recent_ten_orders;
-
-                                      $scope.graph_data=response.graph_data;
-
-                                      $scope.show_revenue_graph(response.graph_data.order_date,response.graph_data[0].total_amt);
-
-
-
-
-
+                                  var resp = response;
+                                  var negOb = [], posOb = [], neuOb = [], all = [];
+                                  negOb = Object.entries(response.fbks.negative);
+                                  var neg = negOb.map((item) => {
+                                    return item['1']
+                                  })
+                                  posOb = Object.entries(response.fbks.positive);
+                                  var pos = posOb.map((item) => {
+                                    return item['1']
+                                  })
+                                  neuOb = Object.entries(response.fbks.neutral);
+                                  var neut = neuOb.map((item) => {
+                                    return item['1']
+                                  })
+                                  all = all.concat(pos,neg,neut);
+                                  $scope.feedback_all = all;
+                                  $scope.feedback_negative = neg;
+                                  $scope.feedback_positive = pos;
+                                  $scope.feedback_neutral = neut;
+                                  $scope.feedback_temp = all;
                                 }
 
                                 else
@@ -881,179 +941,179 @@ crawlApp.controller('dashCtrl',function($scope,$parse,$window,dashFactory,$http,
 
 
 
-      $scope.visualise_data=function()
+  //     $scope.visualise_data=function()
 
-      {
+  //     {
 
-        var ctx = document.getElementById("chartBig1").getContext('2d');
+  //       var ctx = document.getElementById("chartBig1").getContext('2d');
 
-        var gradientStroke = ctx.createLinearGradient(0, 230, 0, 50);
+  //       var gradientStroke = ctx.createLinearGradient(0, 230, 0, 50);
 
-        gradientStroke.addColorStop(1, 'rgba(72,72,176,0.1)');
+  //       gradientStroke.addColorStop(1, 'rgba(72,72,176,0.1)');
 
-        gradientStroke.addColorStop(0.4, 'rgba(72,72,176,0.0)');
+  //       gradientStroke.addColorStop(0.4, 'rgba(72,72,176,0.0)');
 
-        gradientStroke.addColorStop(0, 'rgba(119,52,169,0)'); //purple colors
+  //       gradientStroke.addColorStop(0, 'rgba(119,52,169,0)'); //purple colors
 
-        var config = {
+  //       var config = {
 
-                      type: 'line',
+  //                     type: 'line',
 
-                      data: {
+  //                     data: {
 
-                        labels: [],
+  //                       labels: [],
 
-                        datasets: [{
+  //                       datasets: [{
 
-                         label: "Graph Data",
+  //                        label: "Graph Data",
 
-                          fill: true,
+  //                         fill: true,
 
-                          backgroundColor: gradientStroke,
+  //                         backgroundColor: gradientStroke,
 
-                          borderColor: '#0e76bd',
+  //                         borderColor: '#0e76bd',
 
-                          borderWidth: 2,
+  //                         borderWidth: 2,
 
-                          borderDash: [],
+  //                         borderDash: [],
 
-                          borderDashOffset: 0.0,
+  //                         borderDashOffset: 0.0,
 
-                          pointBackgroundColor: '#00acc1',
+  //                         pointBackgroundColor: '#00acc1',
 
-                          pointBorderColor: 'rgba(255,255,255,0)',
+  //                         pointBorderColor: 'rgba(255,255,255,0)',
 
-                          pointHoverBackgroundColor: '#00acc1',
+  //                         pointHoverBackgroundColor: '#00acc1',
 
-                          pointBorderWidth: 20,
+  //                         pointBorderWidth: 20,
 
-                          pointHoverRadius: 4,
+  //                         pointHoverRadius: 4,
 
-                          pointHoverBorderWidth: 15,
+  //                         pointHoverBorderWidth: 15,
 
-                          pointRadius: 4,
+  //                         pointRadius: 4,
 
-                          data: [],
+  //                         data: [],
 
-                        }]
+  //                       }]
 
-                      },
+  //                     },
 
-                     options: {
+  //                    options: {
 
-        scales: {
+  //       scales: {
 
-              xAxes: [{
+  //             xAxes: [{
 
-            gridLines: {
+  //           gridLines: {
 
-                color: "rgba(0, 0, 0, 0)",
+  //               color: "rgba(0, 0, 0, 0)",
 
-            },
+  //           },
 
-			 offset: true,
+	// 		 offset: true,
 
-			stacked: true,
+	// 		stacked: true,
 
-			ticks: {
+	// 		ticks: {
 
-                    beginAtZero:true
+  //                   beginAtZero:true
 
-                }
+  //               }
 
-        }],
+  //       }],
 
-        yAxes: [{
+  //       yAxes: [{
 
-            gridLines: {
+  //           gridLines: {
 
-                color: "rgba(0, 0, 0, 0)",
+  //               color: "rgba(0, 0, 0, 0)",
 
 
 
-            },
+  //           },
 
-			stacked: true,
+	// 		stacked: true,
 
-			 offset: true,
+	// 		 offset: true,
 
-            gridThickness: 1,
+  //           gridThickness: 1,
 
 
 
-             ticks: {
+  //            ticks: {
 
-                    beginAtZero:true
+  //                   beginAtZero:true
 
-                }
+  //               }
 
-		}],
+	// 	}],
 
-	}
+	// }
 
 
 
-    }
+  //   }
 
-                    };
+  //                   };
 
-        $scope.myChartData = new Chart(ctx,config);
+  //       $scope.myChartData = new Chart(ctx,config);
 
 
 
-      }
+  //     }
 
 
 
-      $scope.visualise_data();
+  //     $scope.visualise_data();
 
-      $scope.show_revenue_graph=function()
+  //     $scope.show_revenue_graph=function()
 
-      {
+  //     {
 
-		   $scope.myChartData.config.data.datasets.length > 1?$scope.myChartData.config.data.datasets.pop():'';
+	// 	   $scope.myChartData.config.data.datasets.length > 1?$scope.myChartData.config.data.datasets.pop():'';
 
-		    $scope.myChartData.config.data.datasets.length > 2?$scope.myChartData.config.data.datasets.pop():'';
+	// 	    $scope.myChartData.config.data.datasets.length > 2?$scope.myChartData.config.data.datasets.pop():'';
 
-         $scope.revenue_graph=1;
+  //        $scope.revenue_graph=1;
 
-         $scope.sale_graph=0;
+  //        $scope.sale_graph=0;
 
-         $scope.campaing_graph=0;
+  //        $scope.campaing_graph=0;
 
-         var lnth=$scope.graph_data.length;
+  //        var lnth=$scope.graph_data.length;
 
-         var chart_data=[];
+  //        var chart_data=[];
 
-         var chart_labels=[];
+  //        var chart_labels=[];
 
-         for(var i=0;i<lnth;i++)
+  //        for(var i=0;i<lnth;i++)
 
-         {
+  //        {
 
-          chart_data[i] =$scope.graph_data[i].total_amt ;
+  //         chart_data[i] =$scope.graph_data[i].total_amt ;
 
-          chart_labels[i] =$scope.graph_data[i].order_date ;
+  //         chart_labels[i] =$scope.graph_data[i].order_date ;
 
-         }
+  //        }
 
-         $scope.chart_for="Revenue";
+  //        $scope.chart_for="Revenue";
 
-         $scope.chart_desc="Total Revenue";
+  //        $scope.chart_desc="Total Revenue";
 
-		  $scope.myChartData.config.type='line';
+	// 	  $scope.myChartData.config.type='line';
 
-         $scope.myChartData.config.data.datasets[0].label="Revenue";
+  //        $scope.myChartData.config.data.datasets[0].label="Revenue";
 
-         $scope.myChartData.config.data.labels=chart_labels;
+  //        $scope.myChartData.config.data.labels=chart_labels;
 
-         $scope.myChartData.config.data.datasets[0].data = chart_data;
+  //        $scope.myChartData.config.data.datasets[0].data = chart_data;
 
-         $scope.myChartData.config.data.datasets.length > 1?$scope.myChartData.config.data.datasets.pop():'';
+  //        $scope.myChartData.config.data.datasets.length > 1?$scope.myChartData.config.data.datasets.pop():'';
 
-         $scope.myChartData.update();
+  //        $scope.myChartData.update();
 
-      }
+  //     }
 
 
 
