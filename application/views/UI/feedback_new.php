@@ -44,7 +44,7 @@ $base_url=base_url();
 
                                     <div class="page-title-right">
 
-                                      
+
 
                                     </div>
 
@@ -54,23 +54,23 @@ $base_url=base_url();
 
                             </div>
 
-                        </div>     
+                        </div>
 
-                        <!-- end page title --> 
+                        <!-- end page title -->
 
-						
+
 
 						<!----------Notification Starts------------>
 
-		
-								
+
+
 
 									<div class="card-box Campaigns">
                     <div class="row">
 
 									  <div class="col-md-12 col-lg-2 col-sm-12">
 											<h4 class="page-title">Feedback </h4>
-										</div>										
+										</div>
 
 											<div class="col-md-12 col-lg-10 col-sm-12">
                         <div class="row">
@@ -91,7 +91,7 @@ $base_url=base_url();
 
                                 <a href="#positive" data-toggle="tab" aria-expanded="true" class="nav-link text-success">
 
-                                  <img src="<?php echo $baseurl.'/assets/img/positive_smile.png'?>" width="20px"> Positive 
+                                  <img src="<?php echo $baseurl.'/assets/img/positive_smile.png'?>" width="20px"> Positive
 
                                 </a>
 
@@ -111,7 +111,7 @@ $base_url=base_url();
 
                                 <a href="#negative" data-toggle="tab" aria-expanded="true" class="nav-link text-danger">
 
-                                  <img src="<?php echo $baseurl.'/assets/img/negative_smile.png'?>" width="20px"> Negative 
+                                  <img src="<?php echo $baseurl.'/assets/img/negative_smile.png'?>" width="20px"> Negative
 
                                 </a>
 
@@ -121,7 +121,7 @@ $base_url=base_url();
 
                                 <a href="#all_bad" data-toggle="tab" aria-expanded="true" class="nav-link text-danger">
 
-                                  All Bad 
+                                  All Bad
 
                                 </a>
 
@@ -233,7 +233,7 @@ $base_url=base_url();
 
 
 
-                                  
+
 
                                 </div><div class="slimScrollBar" style="background: rgb(158, 165, 171); width: 8px; position: absolute; top: 0px; opacity: 0.4; display: none; border-radius: 7px; z-index: 99; right: 1px; height: 124.764px;"></div><div class="slimScrollRail" style="width: 8px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 7px; background: rgb(51, 51, 51); opacity: 0.2; z-index: 90; right: 1px;"></div></div>
 
@@ -261,7 +261,7 @@ $base_url=base_url();
                       </div>
 
 
-									
+
 
 										<hr>
 
@@ -349,15 +349,15 @@ $base_url=base_url();
 
 										</form>
 
-												
 
-												
 
-												
+
+
+
 
 													<!----------------------------------------->
 
-												
+
 
 											</form>
 
@@ -381,7 +381,7 @@ $base_url=base_url();
 
 												<div class="tab-pane" id="all">
 
-													
+
 
 												</div>
 
@@ -389,7 +389,7 @@ $base_url=base_url();
 
 												<div class="tab-pane" id="positive">
 
-													
+
 
 												</div>
 
@@ -397,7 +397,7 @@ $base_url=base_url();
 
 												<div class="tab-pane" id="neutral">
 
-													
+
 
 												</div>
 
@@ -405,7 +405,7 @@ $base_url=base_url();
 
 												<div class="tab-pane" id="negative">
 
-													
+
 
 												</div>
 
@@ -413,19 +413,19 @@ $base_url=base_url();
 
 												<div class="tab-pane" id="all_bad">
 
-													
+
 
 												</div>
 
 												<!-----------------------------all bad----------------------------->
 
-												
+
 
 											</div>
 
-										
 
-	
+
+
 
 									</div> <!-- end card-box-->
 
@@ -435,9 +435,9 @@ $base_url=base_url();
 
 						<!------------------------------------------------->
 
-                        
 
-                        
+
+
 
                     </div> <!-- container -->
 
@@ -445,9 +445,9 @@ $base_url=base_url();
 
                 </div> <!-- content -->
 
-				
 
-				
+
+
 
 <script type="text/javascript">
 
@@ -485,7 +485,7 @@ $('#reportrange').daterangepicker({
 
 //$('.ranges li').addClass('btn').css( "width", "100%" );;
 
-</script>				
+</script>
 
 				<script type="text/javascript">
 
@@ -497,17 +497,17 @@ crawlApp.factory('dashFactory', function($http,$q,limitToFilter) {
 
 
 
-   
+
 
    var get_data = function () {
 
-        var dataset_path="<?php echo $baseurl.'dashboard/get_pre_data'?>";
+        var dataset_path="<?php echo $baseurl.'dashboard/get_feedbacks'?>";
 
         var deferred = $q.defer();
 
         var path =dataset_path;
 
-        
+
 
         $http.get(path)
 
@@ -515,7 +515,7 @@ crawlApp.factory('dashFactory', function($http,$q,limitToFilter) {
 
         .error(function(data, status, headers, config) { deferred.reject(status);});
 
-        
+
 
         return deferred.promise;
 
@@ -523,7 +523,7 @@ crawlApp.factory('dashFactory', function($http,$q,limitToFilter) {
 
 	var inv_list_url        =   "<?php echo $baseurl."dashboard/get_top_product/"?>";
 
-    var get_transaction_list = function (orderby,direction,offset,limit,search) 
+    var get_transaction_list = function (orderby,direction,offset,limit,search)
 
     {
 
@@ -543,7 +543,7 @@ crawlApp.factory('dashFactory', function($http,$q,limitToFilter) {
 
 
 
-    
+
 
 
 
@@ -557,7 +557,7 @@ crawlApp.factory('dashFactory', function($http,$q,limitToFilter) {
 
 });
 
-crawlApp.controller('dashCtrl',function($scope,$parse,$window,dashFactory,$http,$sce,$q,$timeout,Upload,limitToFilter) {        
+crawlApp.controller('dashCtrl',function($scope,$parse,$window,dashFactory,$http,$sce,$q,$timeout,Upload,limitToFilter) {
 
      $scope.date_filter_tmpl="date_filter_tmpl.html";
 
@@ -579,29 +579,29 @@ crawlApp.controller('dashCtrl',function($scope,$parse,$window,dashFactory,$http,
 
      $scope.sale_graph=0;
 
-     $scope.campaign_graph=1;      
+     $scope.campaign_graph=1;
 
-      
+
 
       $scope.block_site=function()
 
         {
 
-            $.blockUI({ css: { 
+            $.blockUI({ css: {
 
-                border: 'none', 
+                border: 'none',
 
-                padding: '3px', 
+                padding: '3px',
 
-                backgroundColor: '#000', 
+                backgroundColor: '#000',
 
-                '-webkit-border-radius': '10px', 
+                '-webkit-border-radius': '10px',
 
-                '-moz-border-radius': '10px', 
+                '-moz-border-radius': '10px',
 
-                opacity: .5, 
+                opacity: .5,
 
-                color: '#fff' 
+                color: '#fff'
 
             }});
 
@@ -609,7 +609,7 @@ crawlApp.controller('dashCtrl',function($scope,$parse,$window,dashFactory,$http,
 
         }
 
-		
+
 
 	$scope.itemsPerPage = 10;
 
@@ -631,7 +631,7 @@ crawlApp.controller('dashCtrl',function($scope,$parse,$window,dashFactory,$http,
 
     $scope.campList=[];
 
-    
+
 
     $scope.range = function()
 
@@ -675,7 +675,7 @@ crawlApp.controller('dashCtrl',function($scope,$parse,$window,dashFactory,$http,
 
    {
 
-        if ($scope.currentPage > 0) 
+        if ($scope.currentPage > 0)
 
         {
 
@@ -723,7 +723,7 @@ crawlApp.controller('dashCtrl',function($scope,$parse,$window,dashFactory,$http,
 
 
 
-   $scope.pageCount = function() 
+   $scope.pageCount = function()
 
    {
 
@@ -737,7 +737,7 @@ crawlApp.controller('dashCtrl',function($scope,$parse,$window,dashFactory,$http,
 
    {
 
-        if (n > 0 && n < $scope.pageCount()) 
+        if (n > 0 && n < $scope.pageCount())
 
         {
 
@@ -747,7 +747,7 @@ crawlApp.controller('dashCtrl',function($scope,$parse,$window,dashFactory,$http,
 
    };
 
-   $scope.$watch("currentPage",function(newValue, oldValue) 
+   $scope.$watch("currentPage",function(newValue, oldValue)
 
    {
 
@@ -757,7 +757,7 @@ crawlApp.controller('dashCtrl',function($scope,$parse,$window,dashFactory,$http,
 
 
 
-  
+
 
    $scope.get_transaction_list=function(currentPage)
 
@@ -775,7 +775,7 @@ crawlApp.controller('dashCtrl',function($scope,$parse,$window,dashFactory,$http,
 
          {
 
-              
+
 
               $scope.transactionList=value.datalist;
 
@@ -783,7 +783,7 @@ crawlApp.controller('dashCtrl',function($scope,$parse,$window,dashFactory,$http,
 
 			  $scope.outstanding=value.outstanding;
 
-              
+
 
          }
 
@@ -799,13 +799,13 @@ crawlApp.controller('dashCtrl',function($scope,$parse,$window,dashFactory,$http,
 
             console.log(value);
 
-             
 
-         }     
 
-       }, 
+         }
 
-      function(reason) 
+       },
+
+      function(reason)
 
       {
 
@@ -815,7 +815,7 @@ crawlApp.controller('dashCtrl',function($scope,$parse,$window,dashFactory,$http,
 
    }
 
-   
+
 
          $scope.get_predata = function()
 
@@ -833,7 +833,7 @@ crawlApp.controller('dashCtrl',function($scope,$parse,$window,dashFactory,$http,
 
                                 {
 
-                                   
+
 
                                       $scope.revenue=response.revenue[0];
 
@@ -847,9 +847,9 @@ crawlApp.controller('dashCtrl',function($scope,$parse,$window,dashFactory,$http,
 
                                       $scope.show_revenue_graph(response.graph_data.order_date,response.graph_data[0].total_amt);
 
-                                     
 
-                                    
+
+
 
                                 }
 
@@ -861,23 +861,23 @@ crawlApp.controller('dashCtrl',function($scope,$parse,$window,dashFactory,$http,
 
                                 }
 
-                             }, 
+                             },
 
                              function(reason)
 
                              {
 
-                             
+
 
                              }
 
                           );
 
-        }        
+        }
 
         $scope.get_predata();
 
-        
+
 
 
 
@@ -905,7 +905,7 @@ crawlApp.controller('dashCtrl',function($scope,$parse,$window,dashFactory,$http,
 
                         datasets: [{
 
-                         label: "Graph Data",  
+                         label: "Graph Data",
 
                           fill: true,
 
@@ -969,7 +969,7 @@ crawlApp.controller('dashCtrl',function($scope,$parse,$window,dashFactory,$http,
 
                 color: "rgba(0, 0, 0, 0)",
 
-				
+
 
             },
 
@@ -977,21 +977,21 @@ crawlApp.controller('dashCtrl',function($scope,$parse,$window,dashFactory,$http,
 
 			 offset: true,
 
-            gridThickness: 1,			
+            gridThickness: 1,
 
-			
+
 
              ticks: {
 
                     beginAtZero:true
 
-                }			
+                }
 
 		}],
 
-	}		
+	}
 
-        
+
 
     }
 
@@ -999,7 +999,7 @@ crawlApp.controller('dashCtrl',function($scope,$parse,$window,dashFactory,$http,
 
         $scope.myChartData = new Chart(ctx,config);
 
-    
+
 
       }
 
@@ -1057,9 +1057,9 @@ crawlApp.controller('dashCtrl',function($scope,$parse,$window,dashFactory,$http,
 
 
 
-     
 
-       
+
+
 
 
 
@@ -1079,11 +1079,11 @@ $(document).ready(function(){
 
     $('[data-toggle="popover"]').popover({
 
-    html: true, 
+    html: true,
 
-  
 
-});   
+
+});
 
 });
 
