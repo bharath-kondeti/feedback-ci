@@ -275,7 +275,7 @@ $base_url=base_url();
 
 													<label for="search" class="sr-only">Search</label>
 
-													<input type="password" class="form-control" id="inputPassword2" placeholder="Search Order ID or Buyer Email">
+													<input type="text" class="form-control" placeholder="Search Order ID or Buyer Email">
 
 												</div>
 
@@ -327,7 +327,7 @@ $base_url=base_url();
 
 															<i class="glyphicon glyphicon-calendar fa fa-calendar"></i>&nbsp;
 
-															<span></span> <b class="caret"></b>
+															<span id="calendar-date"></span> <b class="caret"></b>
 
 														</div>
 
@@ -339,7 +339,7 @@ $base_url=base_url();
 
 													<div class="form-group">
 
-														<a class="btn btn-primary  text-light"> Filter </a>
+														<a ng-click="get_predata()" class="btn btn-primary  text-light"> Filter </a>
 
 													</div>
 
@@ -537,13 +537,13 @@ crawlApp.factory('dashFactory', function($http,$q,limitToFilter) {
 
 
 
-   var get_data = function () {
+   var get_data = function (frm_date,to_date) {
 
         var dataset_path="<?php echo $baseurl.'dashboard/get_feedbacks'?>";
 
         var deferred = $q.defer();
 
-        var path =dataset_path;
+        var path =dataset_path+'/'+frm_date+'/'+to_date;
 
 
 
@@ -879,8 +879,13 @@ crawlApp.controller('dashCtrl',function($scope,$parse,$window,dashFactory,$http,
          $scope.get_predata = function()
 
          {
-
-            var promise=dashFactory.get_data();
+            var ele = document.getElementById('calendar-date');
+            var text = ele.innerHTML;
+            var dates = text.split("-");
+            var date1 = moment(dates[0], 'MMMM DD, YYYY').format('YYYY-MM-DD');
+            var date2 = moment(dates[1], 'MMMM DD, YYYY').format('YYYY-MM-DD');
+            console.log(date1, date2)
+            var promise=dashFactory.get_data(date1,date2);
 
               promise.then(
 
@@ -892,25 +897,35 @@ crawlApp.controller('dashCtrl',function($scope,$parse,$window,dashFactory,$http,
 
                                 {
                                   var resp = response;
-                                  var negOb = [], posOb = [], neuOb = [], all = [];
-                                  negOb = Object.entries(response.fbks.negative);
-                                  var neg = negOb.map((item) => {
-                                    return item['1']
-                                  })
-                                  posOb = Object.entries(response.fbks.positive);
-                                  var pos = posOb.map((item) => {
-                                    return item['1']
-                                  })
-                                  neuOb = Object.entries(response.fbks.neutral);
-                                  var neut = neuOb.map((item) => {
-                                    return item['1']
-                                  })
+                                  var negOb = [], posOb = [], neuOb = [], all = [], pos = [], neg = [], neut = [];
+                                  if ('positive' in response.fbks) {
+                                    posOb = Object.entries(response.fbks.positive);
+                                    pos = posOb.map((item) => {
+                                      return item['1']
+                                    })
+                                    $scope.feedback_positive = pos;
+                                  }
+                                  if('negative' in response.fbks) {
+                                    negOb = Object.entries(response.fbks.negative);
+                                    neg = negOb.map((item) => {
+                                      return item['1']
+                                    })
+                                    $scope.feedback_negative = neg;
+                                  }
+                                  if('neutral' in response.fbks) {
+                                    neuOb = Object.entries(response.fbks.neutral);
+                                    neut = neuOb.map((item) => {
+                                      return item['1']
+                                    })
+                                    $scope.feedback_neutral = neut;
+                                  }
+
                                   all = all.concat(pos,neg,neut);
                                   $scope.feedback_all = all;
-                                  $scope.feedback_negative = neg;
-                                  $scope.feedback_positive = pos;
-                                  $scope.feedback_neutral = neut;
                                   $scope.feedback_temp = all;
+                                  
+                                 
+                                  
                                 }
 
                                 else
