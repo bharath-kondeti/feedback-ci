@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Feedback_new extends CI_Controller 
+class Feedback_new extends CI_Controller
 {
   public function  __construct()
   {
@@ -8,19 +8,19 @@ class Feedback_new extends CI_Controller
      $this->load->model('login_model');
      if(!$this->login_model->userLoginCheck() && !$this->input->is_ajax_request())
      {
-      redirect('uauth');
+      redirect('user_auth');
      }
 	 else
      {
-       $user=$this->session->userdata('user_logged_in');  
+       $user=$this->session->userdata('user_logged_in');
        $this->user_id=$user['id'];
-	   $store=$this->session->userdata('store_info');  
+	   $store=$this->session->userdata('store_info');
        $this->store_id=$store['store_id'];
 	   $this->store_country=$store['store_country'];
        $this->load->model('dash_model');
        $this->load->model('campaign_model');
-	 }  
-     
+	 }
+
   }
   public function index()
 	{
@@ -30,7 +30,7 @@ class Feedback_new extends CI_Controller
 		$this->load->view('UI/feedback_new');
 		$this->load->view('UI/footer');
 	}
- 
+
   public function get_pre_data()
   {
       $to_date=date('Y-m-d');
@@ -45,11 +45,11 @@ class Feedback_new extends CI_Controller
       $data['fbk_data']=$this->campaign_model->get_feedback_data($frm_date,$to_date);
       echo json_encode($data);
   }
-  
+
    public function get_top_product($orderby='',$direction='',$offet,$limit,$searchterm='')
   {
     $result_set=$this->dash_model->get_top_product($orderby,$direction,$offet,$limit,$searchterm);
-    echo json_encode($result_set); 
+    echo json_encode($result_set);
   }
-  
+
  }
