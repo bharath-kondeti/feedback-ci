@@ -365,10 +365,11 @@ $base_url=base_url();
                       	<table class="text-center table-bordered table-striped table table-hover">
                       		<thead class="">
                       			<tr>
-                      				<th>Product</th>
+                      				<th>Product SKU</th>
+                              <th>Image</th>
+                              <th>Order ID</th>
                       				<th>Date</th>
                       				<th>Buyer </th>
-                      				<th>Sent</th>
                       				<th>Rating</th>
                       				<th>Comment</th>
                       			</tr>
@@ -376,13 +377,16 @@ $base_url=base_url();
                       		<tbody>
                       			<tr ng-repeat="idx in feedback_all track by $index">
                               <td>
-                                {{idx.itm_title}}
+                                {{idx.seller_sku}}
+                              </td>
+                              <td>
+                                <img width='32' height="32" src="{{idx.prod_image}}">
+                              </td>
+                              <td>
+                                {{idx.order_id}}
                               </td>
                               <td>
                                 {{idx.fbk_date}}
-                              </td>
-                              <td>
-                                {{idx.rater_email}}
                               </td>
                               <td>
                                 {{idx.rater_email}}
@@ -392,13 +396,25 @@ $base_url=base_url();
                                   <i ng-repeat="i in setRound(idx.fbk_rating) track by $index" class='fa fa-star'></i>
                                 </div>
                               </td>
-                              <td>
-                                {{idx.asin}}
+                              <td width="20%">
+                                {{idx.fbk_comment}}
                               </td>
                       			</tr>
                       		</tbody>
                       	</table>
                       </div>
+                      <ul class="pagination pagination-rounded justify-content-end my-2">
+                      	<li ng-class="prevPageDisabled()" class="page-item">
+                      		<a href="javascript:void(0)" ng-click="prevPage()" class="page-link">Previous</a>
+                      	</li>
+                      	<li ng-repeat="n in range()" ng-class="{active: n == currentPage}" ng-click="setPage(n)"
+                      		class="page-item">
+                      		<a href="javascript:void(0)" class="page-link">{{n+1}}</a>
+                      	</li>
+                      	<li ng-class="nextPageDisabled()" class="page-item">
+                      		<a href="javascript:void(0)" ng-click="nextPage()" class="page-link">Next</a>
+                      	</li>
+                      </ul>
 
 										</div>
 
@@ -828,7 +844,7 @@ crawlApp.controller('dashCtrl',function($scope,$parse,$window,dashFactory,$http,
 
          promise.then(function(value){
 
-          $.unblockUI();
+          
 
          if(value.status_code==1)
 
@@ -856,8 +872,6 @@ crawlApp.controller('dashCtrl',function($scope,$parse,$window,dashFactory,$http,
 
             $scope.outstanding=value.outstanding;
 
-            console.log(value);
-
 
 
          }
@@ -879,12 +893,12 @@ crawlApp.controller('dashCtrl',function($scope,$parse,$window,dashFactory,$http,
          $scope.get_predata = function()
 
          {
+          $scope.block_site();
             var ele = document.getElementById('calendar-date');
             var text = ele.innerHTML;
             var dates = text.split("-");
             var date1 = moment(dates[0], 'MMMM DD, YYYY').format('YYYY-MM-DD');
             var date2 = moment(dates[1], 'MMMM DD, YYYY').format('YYYY-MM-DD');
-            console.log(date1, date2)
             var promise=dashFactory.get_data(date1,date2);
 
               promise.then(
@@ -924,7 +938,7 @@ crawlApp.controller('dashCtrl',function($scope,$parse,$window,dashFactory,$http,
                                   $scope.feedback_all = all;
                                   $scope.feedback_temp = all;
                                   
-                                 
+                                  $.unblockUI();
                                   
                                 }
 
