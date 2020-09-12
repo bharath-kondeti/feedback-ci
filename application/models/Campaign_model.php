@@ -387,7 +387,10 @@ class Campaign_model extends CI_Model
 
   public function get_feedbacks($frm_date='',$to_date='')
   {
-    $sql = "SELECT tx.fbk_date, tx.order_id, tx.fbk_rating, tx.rater_email, ao.asin, ao.itm_title, ao.seller_sku FROM amz_feedback_data as tx LEFT JOIN amz_order_info as ao ON tx.order_id = ao.order_no WHERE tx.fbk_for = {$this->store_id}";
+    $sql = "SELECT tx.fbk_date, tx.order_id, tx.fbk_rating, tx.rater_email, tx.fbk_comment, ao.asin, REPLACE(REPLACE(cp.prod_title,'&nbsp;&ndash;&nbsp;','-'),'&nbsp;',' ') AS itm_title, ao.seller_sku, cp.prod_country, tx.fbk_country, cp.prod_image
+      FROM amz_feedback_data as tx
+      INNER JOIN amz_order_info as ao ON tx.order_id = ao.order_no
+      INNER JOIN customer_product cp ON cp.store_id = {$this->store_id} and ao.seller_sku = cp.prod_sku and cp.prod_country = tx.fbk_country and ao.asin = cp.prod_asin WHERE tx.fbk_for = {$this->store_id} AND cp.is_active >= 0 ";
     if(!empty($frm_date) && !empty($to_date)) {
       $frm_date=$frm_date." 00:00:00";
       $to_date=$to_date." 23:59:59";
