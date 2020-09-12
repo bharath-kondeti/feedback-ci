@@ -4,9 +4,9 @@ class Campaign_model extends CI_Model
   public function  __construct()
   {
    		parent::__construct();
-      $user=$this->session->userdata('user_logged_in');  
+      $user=$this->session->userdata('user_logged_in');
       $this->user_id=$user['id'];
-	  $store=$this->session->userdata('store_info');  
+	  $store=$this->session->userdata('store_info');
      $this->store_id=$store['store_id'];
   }
   public function get_campaign_orders($context,$orderby='camp_id',$direction,$offet,$limit,$searchterm='')
@@ -18,15 +18,15 @@ class Campaign_model extends CI_Model
          {
             $str=json_decode(urldecode($searchterm));
             $srterm=urldecode($str[0]->searchtext);
-			
+
          }
-		 
+
 		 $from_date="";
          $to_date=date('Y-m-d');
          if(isset($str[2]->from_date))
          {
             $test_arr  = explode('-', $str[2]->from_date);
-            if (checkdate($test_arr[1], $test_arr[2], $test_arr[0])) 
+            if (checkdate($test_arr[1], $test_arr[2], $test_arr[0]))
             {
                 $from_date=$str[2]->from_date;
             }
@@ -34,7 +34,7 @@ class Campaign_model extends CI_Model
          if(isset($str[3]->to_date))
          {
             $test_arr  = explode('-', $str[3]->to_date);
-            if (checkdate($test_arr[1], $test_arr[2], $test_arr[0])) 
+            if (checkdate($test_arr[1], $test_arr[2], $test_arr[0]))
             {
                 $to_date=$str[3]->to_date;
             }
@@ -44,7 +44,7 @@ class Campaign_model extends CI_Model
          // die();
 
 
-         $sqlcount="SELECT count(*) as total from campaign_order_list 
+         $sqlcount="SELECT count(*) as total from campaign_order_list
          INNER JOIN campaign_manager on created_by=".$this->store_id." AND cpgn_id=camp_id and is_deleted=0 and is_active=1 ";
 
           $sqlquery= "SELECT  trigger_on,cpgn_name as campaign_name,camp_id as campaign_id,dns_reason,is_sent,is_read,is_clicked,dns_status,dns_reason,seller_sku,asin,itm_title,
@@ -59,7 +59,7 @@ class Campaign_model extends CI_Model
           $sqlcount.=" AND is_sent=1  AND trigger_on > now() - INTERVAL 1 MONTH ";
           // $sqlquery.=" AND trigger_on < now()  ";
 
-         } 
+         }
          elseif($context=='schduled_mail' && (empty($srterm)))
          {
           $sqlquery.=" AND is_sent=0 AND dns_status= 0 and trigger_on > now() ";
@@ -69,27 +69,27 @@ class Campaign_model extends CI_Model
          // {
          //  $sqlquery.=" AND is_sent=0 AND trigger_on < now() + INTERVAL 1 MONTH ";
          //  $sqlcount.=" AND is_sent=0 AND trigger_on < now() + INTERVAL 1 MONTH ";
-         // }      
+         // }
 
          $sqlquery.=" INNER join campaign_asin on cmp_id=cpgn_id
                     INNER JOIN amz_order_info AS tx ON order_no=camp_order_no and store_id=".$this->store_id." AND tx.asin=cmp_asin AND tx.seller_sku=cmp_sku  ";
-         
+
          $sqlcount.=" INNER join campaign_asin on cmp_id=cpgn_id
                     INNER JOIN amz_order_info AS tx ON order_no=camp_order_no and store_id=".$this->store_id." AND tx.asin=cmp_asin AND tx.seller_sku=cmp_sku  ";
-        
+
          if($context=='blocked_mail')
          {
           $sqlquery.=" AND ((dns_status=1 AND is_sent=0) OR order_status <> 'Shipped')  AND trigger_on > now() - INTERVAL 1 MONTH ";
           $sqlcount.=" AND ((dns_status=1 AND is_sent=0) OR order_status <> 'Shipped')  AND trigger_on > now() - INTERVAL 1 MONTH ";
          }
 
-   
-                      
-         
+
+
+
         if(isset($str[1]->camp_id) && $str[1]->camp_id > 0  )
         {
-          $sqlquery.= " AND camp_id = ".$str[1]->camp_id; 
-          $sqlcount.= " AND camp_id = ".$str[1]->camp_id; 
+          $sqlquery.= " AND camp_id = ".$str[1]->camp_id;
+          $sqlcount.= " AND camp_id = ".$str[1]->camp_id;
         }
 		if(isset($str[5]->tfm_status))
           {
@@ -103,12 +103,12 @@ class Campaign_model extends CI_Model
 				$sqlquery.=" AND is_sent=0 ";
 				$sqlcount.=" AND is_sent=0 ";
 			}
-		  }	
-      
+		  }
+
         if(!empty($srterm) || $srterm !='')
         {
-          $sqlquery.=" AND (tx.seller_sku LIKE '%".$srterm."%' OR order_no LIKE '%".$srterm."%' OR buyer_name LIKE '%".$srterm."%' OR calc_shipdate LIKE '%".$srterm."%' OR calc_deliverydate LIKE '%".$srterm."%' OR purchase_date LIKE '%".$srterm."%' ) "; 
-          $sqlcount.=" AND (tx.seller_sku LIKE '%".$srterm."%' OR order_no LIKE '%".$srterm."%' OR buyer_name LIKE '%".$srterm."%' OR calc_shipdate LIKE '%".$srterm."%' OR calc_deliverydate LIKE '%".$srterm."%' OR purchase_date LIKE '%".$srterm."%' ) "; 
+          $sqlquery.=" AND (tx.seller_sku LIKE '%".$srterm."%' OR order_no LIKE '%".$srterm."%' OR buyer_name LIKE '%".$srterm."%' OR calc_shipdate LIKE '%".$srterm."%' OR calc_deliverydate LIKE '%".$srterm."%' OR purchase_date LIKE '%".$srterm."%' ) ";
+          $sqlcount.=" AND (tx.seller_sku LIKE '%".$srterm."%' OR order_no LIKE '%".$srterm."%' OR buyer_name LIKE '%".$srterm."%' OR calc_shipdate LIKE '%".$srterm."%' OR calc_deliverydate LIKE '%".$srterm."%' OR purchase_date LIKE '%".$srterm."%' ) ";
         }
         if(!empty($from_date))
         {
@@ -128,23 +128,23 @@ class Campaign_model extends CI_Model
         if($context=='schduled_mail')
          {
           $sqlquery.=" trigger_on ASC  ";
-         } 
-        
+         }
+
         $sqlquery.=" LIMIT ".$offet.",".$limit;
 
         $query=$this->db->query($sqlquery) ;
         $data= $query->result_array();
         $countquery=$this->db->query($sqlcount);
         $numrows= $countquery->result_array();
-		$total=$numrows[0]['total'];  		
-		
+		$total=$numrows[0]['total'];
+
         if(count($data) > 0)
         {
         $result_set=array('status_code'=>'1','status_text'=>'successfully reterived','total' =>$total, 'datalist' => $data ,'searchterm' => $searchterm );
         }
         else
         {
-         $result_set=array('status_code'=>'0','status_text'=>'No data found'); 
+         $result_set=array('status_code'=>'0','status_text'=>'No data found');
         }
         return $result_set;
     }
@@ -161,17 +161,17 @@ class Campaign_model extends CI_Model
        }
 	    if($cmp_status!='ALL' && $cmp_status=='ACT')
        {
-       
+
         $sql.=" AND is_active='1' AND is_deleted='0'";
        }
 	    if($cmp_status!='ALL' && $cmp_status=='IACT')
        {
-       
+
         $sql.=" AND is_active='0' AND is_deleted='0'";
        }
 	   if($cmp_status!='ALL' && $cmp_status=='DEL')
        {
-       
+
         $sql.=" AND is_deleted='1'";
        }
 	   if(!empty($sort_order))
@@ -182,17 +182,17 @@ class Campaign_model extends CI_Model
        {
       $sql.=" Group by cpgn_id ORDER BY cpgn_id ".$dir."  ";
 	   }
-       //die($sql); 
-      $query=$this->db->query($sql);	  
+       //die($sql);
+      $query=$this->db->query($sql);
 	  return $query->result_array();
   }
-  
+
     public function get_template_list()
   {
     $query=$this->db->query("SELECT template_id,template_content,template_name ,subject,is_default FROM email_template  WHERE (created_by=".$this->user_id." OR is_default=1) AND is_active=1 and is_deleted=0 ORDER BY created_on ASC") ;
     return $query->result_array();
   }
- 
+
  public function get_brand_list($country_code='')
   {
     $sql="SELECT prod_brand from customer_product WHERE store_id=".$this->store_id." AND prod_brand<>'' AND prod_country=".$this->db->escape($country_code)." GROUP by prod_brand";
@@ -229,7 +229,7 @@ class Campaign_model extends CI_Model
     $query=$this->db->query($sql);
     return $query->result_array();
   }
-  
+
  public function get_brand_product($brand)
   {
     $sql="SELECT * from customer_product WHERE store_id=".$this->store_id." AND is_active=1 AND is_deleted=0 AND prod_brand<>''";
@@ -255,12 +255,12 @@ class Campaign_model extends CI_Model
 
   public function get_seleted_product($campaign_id)
   {
-    $sql="SELECT  prd.* FROM campaign_asin 
+    $sql="SELECT  prd.* FROM campaign_asin
          INNER JOIN customer_product AS prd ON cmp_id=".$campaign_id." AND prod_sku=cmp_sku AND prod_asin=cmp_asin AND prod_country=cmp_country AND fc_code=cmp_fc";
-    $query=$this->db->query($sql);     
+    $query=$this->db->query($sql);
     return $query->result_array();
   }
-  
+
 
 
   public function create_new_campaign($post,$asin)
@@ -272,7 +272,7 @@ class Campaign_model extends CI_Model
      foreach($asin as $as)
      {
           $insert_asin[]=array('cmp_id'=>$camp_id,'cmp_asin'=>$as->prod_asin,'cmp_country'=>$post->camp_country,'cmp_sku'=>$as->prod_sku,'cmp_fc'=>$as->fc_code);
-     } 
+     }
      $this->db->insert_batch('campaign_asin',$insert_asin);
      $this->db->trans_complete();
      if ($this->db->trans_status() === FALSE)
@@ -284,20 +284,20 @@ class Campaign_model extends CI_Model
               return TRUE;
      }
   }
-  
+
   public function update_campaign($post,$asin)
   {
          $this->db->trans_start();
       $update_campaign=array('cpgn_name'=>$post->camp_name,'cpgn_desc'=>$post->camp_desc,'cpgn_type'=>$post->camp_type,'cpgn_fullfill'=>$post->camp_fulfill,'cpgn_hour'=>$post->camp_hour,'cpgn_min'=>$post->camp_min,'cpgn_day'=>$post->camp_trigger_day,'cpgn_days'=>$post->camp_days,'cpgn_am_pm'=>$post->camp_am_pm,'cpgn_trigger'=>$post->camp_trigger,'cpgn_brand'=>$post->camp_brand,'cpgn_country'=>$post->camp_country,'cpgn_templateID'=>$post->template_id,'created_by'=>$this->store_id,'fbk_order'=>$post->feedback_status,'modified_on'=>date('Y-m-d H:s:i'));
          $this->db->where('cpgn_id', $post->cpgn_id);
          $this->db->update('campaign_manager',$update_campaign);
-		 
-         $this->db->query("DELETE FROM campaign_asin WHERE cmp_id=".$this->db->escape($post->cpgn_id)); 
+
+         $this->db->query("DELETE FROM campaign_asin WHERE cmp_id=".$this->db->escape($post->cpgn_id));
          foreach($asin as $as)
          {
               $insert_asin[]=array('cmp_id'=>$post->cpgn_id,'cmp_asin'=>$as->prod_asin,'cmp_country'=>$post->camp_country,'cmp_sku'=>$as->prod_sku,'cmp_fc'=>$as->fc_code);
-         }  
-		 
+         }
+
          $this->db->insert_ignore_batch('campaign_asin',$insert_asin);
          $this->db->trans_complete();
          if ($this->db->trans_status() === FALSE)
@@ -310,7 +310,7 @@ class Campaign_model extends CI_Model
          }
 
   }
-  
+
    public function get_campaign_metrics($frm_date='',$to_date='')
     {
       $sql="SELECT count(*) as ttl_cmp FROM campaign_manager WHERE created_by={$this->store_id}  AND is_deleted='0' ";
@@ -356,7 +356,7 @@ class Campaign_model extends CI_Model
             INNER JOIN (SELECT COUNT(*) AS camp_created FROM campaign_manager WHERE created_by ={$this->store_id} AND is_deleted=0) AS cpn ON 1=1
             ORDER BY valid_till DESC LIMIT 0,1";
       $qry=$this->db->query($sql);
-      $plan=$qry->result_array();  
+      $plan=$qry->result_array();
       if($plan[0]['camp_allowed'] > $plan[0]['camp_created'] )
       {
         return 1;
@@ -373,10 +373,10 @@ class Campaign_model extends CI_Model
             INNER JOIN (SELECT COUNT(*) AS cur_hijack_count FROM customer_product WHERE store_id ={$this->store_id} AND check_hijack=1) AS cpn ON 1=1
             ORDER BY valid_till DESC LIMIT 0,1";
       $qry=$this->db->query($sql);
-      $plan=$qry->result_array();  
+      $plan=$qry->result_array();
       return $plan[0];
     }
-	
+
 	public function get_recent_orders()
     {
       $sql="SELECT  order_no FROM amz_order_info where order_status='Shipped' AND buyer_email <> '' AND  store_id ='".$this->store_id."' ORDER BY purchase_date DESC LIMIT 0,5";
@@ -385,10 +385,18 @@ class Campaign_model extends CI_Model
     }
 
 
+  public function get_feedbacks($frm_date='',$to_date='')
+  {
+    $sql = "SELECT tx.fbk_date, tx.order_id, tx.fbk_rating, tx.rater_email, ao.asin, ao.itm_title, ao.seller_sku FROM amz_feedback_data as tx LEFT JOIN amz_order_info as ao ON tx.order_id = ao.order_no WHERE tx.fbk_for = {$this->store_id}";
+    if(!empty($frm_date) && !empty($to_date)) {
+      $frm_date=$frm_date." 00:00:00";
+      $to_date=$to_date." 23:59:59";
+      $sql.=" AND fbk_date >= ".$this->db->escape($frm_date)." AND fbk_date <= ".$this->db->escape($to_date);
+    }
+    $query=$this->db->query($sql);
+    return $query->result_array();
+  }
 
-
-  
-  
 }
 ?>
 
