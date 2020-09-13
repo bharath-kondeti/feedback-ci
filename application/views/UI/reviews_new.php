@@ -91,59 +91,191 @@ $base_url=base_url();
                     <table class="table table-stripped table-hover table-bordered table-centered mb-0">
                       <thead class="thead-light">
                         <tr>
-                          <th>S.No</th>
+                          <th>Channel</th>
                           <th>SKU</th>
-                          <th>Item ID</th>
-                          <th>Customer Name</th>
-                          <th>Review Title</th>
-                          <th>Rating</th>
-                          <th>Reviewed On</th>
-                          <th>Status</th>
-                          <th>Actions</th>
+                          <th>Image</th>
+                          <th>Title</th>
+                          <th>ASIN</th>
+                          <th>Total Reviews</th>
+                          <th>Last 7 days Reviews</th>
+                          <th>Positive Reviews</th>
+                          <th>Negative Reviews</th>
+						  <th>Total Reviews</th>
                         </tr>
                       </thead>
-                      <tbody>
-    				          <?php
-                        $serial_no = 1;
-                        foreach($reviews as $review) {
-                      ?>
-      					         <tr>
-                          <td><?php echo $serial_no; ?></td>
-                          <td><?php echo $review['item_SKU']; ?></td>
-                          <td><?php echo $review['item_id']; ?></td>
-                          <td><?php echo $review['cust_name']; ?></td>
-                          <td>
-                            <a href="<?php echo "https://".$review['item_url']; ?>" target="_blanck"><?php echo $review['review_title']; ?></a>
-                          </td>
-                          <td>
-                            <div class="text-warning mb-2 font-13">
-                              <strong><?php echo $review['review_rating'];?><strong> -
-                              <?php $r_count = round($review['review_rating']);?>
-                              <?php
-                                for ($x = 1; $x <= $r_count; $x++) {
-                                  echo "<i class='fa fa-star'></i>";
-                                }
-                              ?>
-                            </div>
-                          </td>
-                          <td>
-                            <?php
-                              $date=date_create($review['review_date']);
-      								        echo date_format($date,"d-M-Y");
-                            ?>
-                          </td>
-                          <td>
-                            <?php
-                              if ($review['is_active']==1) {
-                            ?>
-                              <span class="badge badge-info">Active</span>
-                            <?php } else { ?>
-                              <span class="badge badge-warning">In Active</span>
-                            <?php }?>
-                          </td>
-                          <td><a href="#">View</a></td>
-                        </tr>
-                        <?php $serial_no++; } ?>
+                      <tbody ng-repeat="idx in reviews_data.reviews track by $index">
+ 						<tr>
+ 							<td>Channel</td>
+							<td>{{idx.item_sku}}</td>
+							<td>
+ 								<img src="{{idx.item_image}}" height="32" width="32" alt="">
+							</td>
+							<td>
+								<div ng-click="expand($index)">
+									{{idx.item_title}}
+								</div>								
+							</td>
+							<td>{{idx.item_asin}}</td>
+							<td>{{idx.today_review_count}}</td>
+							<td>{{idx.seven_days_count}}</td>
+							<td>{{idx.positive_review_count}}</td>
+							<td>{{idx.negative_review_count}}</td>
+							<td>{{idx.item_total_reviews}}</td>
+						 </tr>
+						 <tr class="remove-hover" ng-if="idx.expanded">
+						 	<td colspan="10">
+							 <div class="row">
+								<div class="col-xl-4">
+								<img src="{{idx.item_image}}" height="300" width="300" alt="">
+								</div>
+								<div class="col-xl-4">
+									{{idx.item_title}}
+									{{idx.item_asin}}
+								</div>
+							 	<div class="col-xl-4">
+									<div class="row">
+										<div class="col-xs-12 col-md-12">
+											<div class="well well-sm">
+												<div class="row">
+													<div class="col-xs-12 col-md-4 text-center rating-block">
+														<h4 class="header-title mb-3">Customer Reviews</h4>
+														<h1 class="rating-num">
+															4.0</h1>
+														<div class="rating">
+															<span class="fa fa-star"></span><span class="fa fa-star">
+															</span><span class="fa fa-star"></span><span class="fa fa-star">
+															</span><span class="fa fa-star-empty"></span>
+														</div>
+														<div>
+															<span class="fa fa-user"></span> 1,050,008 Total Reviews
+														</div>
+													</div>
+													<div class="col-xs-12 col-md-8 rating-block">
+														<h4 class="header-title mb-3">Rating Breakdown</h4>
+														<div class="pull-left">
+															<div class="pull-left" style="width:35px; line-height:1;">
+																<div style="height:9px; margin:5px 0;">5 <span
+																		class="text-warning fa fa-star"></span></div>
+															</div>
+															<div class="pull-left" style="width:180px;">
+																<div class="progress" style="height:9px; margin:8px 0;">
+																	<div class="progress-bar progress-bar-success" role="progressbar"
+																		aria-valuenow="5" aria-valuemin="0" aria-valuemax="5"
+																		style="width: 1000%">
+																		<span class="sr-only">80% Complete (danger)</span>
+																	</div>
+																</div>
+															</div>
+															<div class="pull-right" style="margin-left:10px;">1</div>
+														</div>
+														<div class="pull-left">
+															<div class="pull-left" style="width:35px; line-height:1;">
+																<div style="height:9px; margin:5px 0;">4 <span
+																		class="text-warning fa fa-star"></span></div>
+															</div>
+															<div class="pull-left" style="width:180px;">
+																<div class="progress" style="height:9px; margin:8px 0;">
+																	<div class="progress-bar progress-bar-primary" role="progressbar"
+																		aria-valuenow="4" aria-valuemin="0" aria-valuemax="5"
+																		style="width: 80%">
+																		<span class="sr-only">80% Complete (danger)</span>
+																	</div>
+																</div>
+															</div>
+															<div class="pull-right" style="margin-left:10px;">1</div>
+														</div>
+														<div class="pull-left">
+															<div class="pull-left" style="width:35px; line-height:1;">
+																<div style="height:9px; margin:5px 0;">3 <span
+																		class="text-warning fa fa-star"></span></div>
+															</div>
+															<div class="pull-left" style="width:180px;">
+																<div class="progress" style="height:9px; margin:8px 0;">
+																	<div class="progress-bar progress-bar-info" role="progressbar"
+																		aria-valuenow="3" aria-valuemin="0" aria-valuemax="5"
+																		style="width: 60%">
+																		<span class="sr-only">80% Complete (danger)</span>
+																	</div>
+																</div>
+															</div>
+															<div class="pull-right" style="margin-left:10px;">0</div>
+														</div>
+														<div class="pull-left">
+															<div class="pull-left" style="width:35px; line-height:1;">
+																<div style="height:9px; margin:5px 0;">2 <span
+																		class="text-warning fa fa-star"></span></div>
+															</div>
+															<div class="pull-left" style="width:180px;">
+																<div class="progress" style="height:9px; margin:8px 0;">
+																	<div class="progress-bar progress-bar-warning" role="progressbar"
+																		aria-valuenow="2" aria-valuemin="0" aria-valuemax="5"
+																		style="width: 40%">
+																		<span class="sr-only">80% Complete (danger)</span>
+																	</div>
+																</div>
+															</div>
+															<div class="pull-right" style="margin-left:10px;">0</div>
+														</div>
+														<div class="pull-left">
+															<div class="pull-left" style="width:35px; line-height:1;">
+																<div style="height:9px; margin:5px 0;">1 <span
+																		class="text-warning fa fa-star"></span></div>
+															</div>
+															<div class="pull-left" style="width:180px;">
+																<div class="progress" style="height:9px; margin:8px 0;">
+																	<div class="progress-bar progress-bar-danger" role="progressbar"
+																		aria-valuenow="1" aria-valuemin="0" aria-valuemax="5"
+																		style="width: 20%">
+																		<span class="sr-only">80% Complete (danger)</span>
+																	</div>
+																</div>
+															</div>
+															<div class="pull-right" style="margin-left:10px;">0</div>
+														</div>
+
+														<!-- end row -->
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+							 	</div>
+							 </div>
+						 		<table class="table table-stripped table-bordered table-centered mb-0 mt-3">
+						 			<thead class="thead-light">
+						 				<tr>
+						 					<th>Date</th>
+						 					<th>Reviewer</th> 
+						 					<th>Rating</th>
+						 					<th>Title </th>
+						 					<th>Review</th>
+						 				</tr>
+						 			</thead>
+						 			<tbody>
+						 				<tr ng-repeat="rid in reviews_data.reviews[$index].review_data">
+						 					<td>
+						 						{{rid.review_date}}
+						 					</td>
+						 					<td>
+						 						{{rid.cust_name}}
+						 					</td>
+						 					<td>
+						 						<div class="text-warning mb-2 font-13">
+						 							<i ng-repeat="i in setRound(idx.review_rating) track by $index"
+						 								class='fa fa-star'></i>
+						 						</div>
+						 					</td>
+						 					<td>
+						 						{{rid.review_title}}
+						 					</td>
+						 					<td width="20%">
+						 						{{rid.review_desc}}
+						 					</td>
+						 				</tr>
+								</tbody>
+							</table>
+							 </td>
+						 </tr>
                       </tbody>
                     </table>
                   </div>
@@ -187,7 +319,10 @@ crawlApp.controller('invCtrl', ['$scope','$parse','$window','invFactory','$http'
       $scope.filter={};
       $scope.filter.search='';
     $scope.filter.list_status='ALL';
-      $scope.filter.export_type='CSV';
+	  $scope.filter.export_type='CSV';
+	  $scope.reviews_data = [];
+	  $scope.reviews = [];
+	  $scope.expand_b = [];
       $scope.reset=function()
       {
       $scope.cpn={};
@@ -285,27 +420,31 @@ crawlApp.controller('invCtrl', ['$scope','$parse','$window','invFactory','$http'
    {
      $scope.get_transaction_list(newValue);
    });
-
+   $scope.expand = function(id) {
+	$scope.reviews_data.reviews[id].expanded = !$scope.reviews_data.reviews[id].expanded;
+   }
    $scope.get_transaction_list=function(currentPage)
    {
       $scope.block_site();
-      var promise= invFactory.get_transaction_list($scope.sortorder,$scope.direction,currentPage*$scope.itemsPerPage,$scope.itemsPerPage,$scope.searchJSON);
+      var promise= invFactory.get_transaction_list();
          promise.then(function(value){
-          $.unblockUI();
-         if(value.status_code==1)
+		  $.unblockUI();
+		//   console.log(value)
+         if(value.status_text === "Success")
          {
 
-              $scope.transactionList=value.datalist;
-              $scope.total=value.total;
-              $scope.outstanding=value.outstanding;
+            //   $scope.transactionList=value.datalist;
+            //   $scope.total=value.total;
+			//   $scope.outstanding=value.outstanding;
+			$scope.reviews_data = value;
 
          }
          else
          {
             $scope.transactionList=[];
             $scope.total=0;
-            $scope.outstanding=value.outstanding;
-            console.log(value);
+			$scope.outstanding=value.outstanding;
+            // console.log(value);
 
          }
        },

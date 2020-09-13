@@ -486,6 +486,11 @@
 .justify-start {
   justify-content: start !important;
 }
+.remove-hover:hover {
+  color: #72747b;
+  background-color: white !important;
+  /* #f1f5f7; */
+} 
 .review-block{
 	background-color:#FAFAFA;
 	border:1px solid #EFEFEF;
