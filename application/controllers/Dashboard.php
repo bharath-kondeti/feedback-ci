@@ -43,6 +43,7 @@ class Dashboard extends CI_Controller
     $data['cmp_info']=$this->dash_model->get_consolidated_campaign_details($frm_date,$to_date);
     $data['metrics']=$this->campaign_model->get_campaign_metrics($frm_date,$to_date);
     $data['fbk_data']=$this->campaign_model->get_feedback_data($frm_date,$to_date);
+    $data['reviews_data']=$this->campaign_model->get_reviews_overview();
     echo json_encode($data);
   }
 
