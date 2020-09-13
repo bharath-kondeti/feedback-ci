@@ -337,7 +337,7 @@ class Campaign_model extends CI_Model
     }
     public function get_feedback_data($frm_date='',$to_date='')
     {
-      $sql="SELECT IFNULL(SUM(IF(fbk_rating >=3,1,0 )),0) as positive_count ,IFNULL(SUM(IF(fbk_rating <3,1,0 )),0) as negative_count,count(order_id) as feedback_count FROM amz_feedback_data as tx
+      $sql="SELECT IFNULL(SUM(IF(fbk_rating >= 4,1,0 )),0) as positive_count ,IFNULL(SUM(IF(fbk_rating <= 2,1,0 )),0) as negative_count, IFNULL(SUM(IF(fbk_rating = 3,1,0 )),0) as neutral_count, count(order_id) as feedback_count FROM amz_feedback_data as tx
             WHERE fbk_for={$this->store_id}";
        if(!empty($frm_date) && !empty($to_date))
        {
@@ -347,9 +347,8 @@ class Campaign_model extends CI_Model
        }
        $query=$this->db->query($sql);
        return $query->result_array();
-
     }
-     public function check_plan_details()
+    public function check_plan_details()
     {
       $sql="SELECT subscribe_id,sub.plan_id,payment_id,valid_till,camp_allowed,camp_created FROM plan_subscriber AS  sub
             INNER JOIN plan_manager AS plr ON plr.plan_id=sub.plan_id AND  subscribed_by={$this->store_id}
@@ -398,6 +397,12 @@ class Campaign_model extends CI_Model
     }
     $query=$this->db->query($sql);
     return $query->result_array();
+  }
+
+  public function get_reviews_overview() {
+    $qry=$this->db->query("SELECT IFNULL(SUM(IF(review_rating >= 4,1,0 )),0) as positive_count ,IFNULL(SUM(IF(review_rating <= 2,1,0 )),0) as negative_count, IFNULL(SUM(IF(review_rating = 3,1,0 )),0) as neutral_count, COUNT(review_rating) as total_review_count FROM customer_product cp INNER JOIN fd_amazon_cust_reviews cr ON cp.prod_sku = cr.item_SKU WHERE cp.store_id = {$this->store_id} AND cr.user_id = " . $this->db->escape($this->user_id));
+    $res=$qry->result_array();
+    return $res;
   }
 
 }
