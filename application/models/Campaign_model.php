@@ -152,7 +152,7 @@ class Campaign_model extends CI_Model
   public function get_campaign_list($frm_date='',$to_date='',$cmp_status='',$sort_order='cpgn_id',$dir='ASC')
   {
 	  //print_r($sort);
-	  $sql="SELECT cpgn_id as campaign_id,fbk_order as feedback_status,cpgn_desc as campaign_desc,is_active,cpgn_name as campaign_name,sum(IF(is_sent=1,1,0)) as sent_count,count(camp_order_no) as total_mail, cpgn_goal_type, cpgn_status from campaign_manager left join campaign_order_list on camp_id=cpgn_id where created_by =".$this->store_id." AND is_deleted='0'";
+	  $sql="SELECT cpgn_id as campaign_id,fbk_order as feedback_status,cpgn_desc as campaign_desc,is_active,cpgn_name as campaign_name,sum(IF(is_sent=1,1,0)) as sent_count,count(camp_order_no) as total_mail, cpgn_goal_type as camp_goaltype, cpgn_status as camp_status from campaign_manager left join campaign_order_list on camp_id=cpgn_id where created_by =".$this->store_id." AND is_deleted='0'";
       if(!empty($frm_date) && !empty($to_date))
        {
         $frm_date=$frm_date." 00:00:00";
