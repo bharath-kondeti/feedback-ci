@@ -933,6 +933,7 @@
                                         $scope.revenue=response.revenue[0];
   									  $scope.metrics=response.metrics;
                                         $scope.fbk_data=response.fbk_data[0];
+                                        $scope.reviews_data=response.reviews_data[0];
   									  $scope.recent_ten_orders=response.recent_ten_orders;
                                         $scope.graph_data=response.graph_data;
                                         $scope.show_revenue_graph(response.graph_data.order_date,response.graph_data[0].total_amt);
