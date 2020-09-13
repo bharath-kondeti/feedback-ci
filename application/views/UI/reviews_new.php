@@ -283,7 +283,7 @@ $base_url=base_url();
               </div>
             </div>
           </div>
-          <div class="">\</div>
+          <div class=""></div>
         </div>
       </div>
     </div>
