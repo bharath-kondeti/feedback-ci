@@ -49,7 +49,6 @@ class Reviews_new extends CI_Controller
   }
 
   function get_reviews() {
-    echo "<pre>";
     $data['status_text']='Success';
     $data['status_code']='1';
     $reviewContent = array();
@@ -63,6 +62,7 @@ class Reviews_new extends CI_Controller
       $reviewContent[$i]['item_title'] = $reviewValue['prod_title'];
       $reviewContent[$i]['item_total_reviews'] = $reviewValue['total_reviews'];
       $reviewContent[$i]['item_image'] = $reviewValue['prod_image'];
+      $reviewContent[$i]['expanded'] = false;
       $getAllReviews = $this->reviews_model->get_all_reviews($reviewValue['item_SKU'],$this->user_id);
       $postiveCount = 0;
       $negativeCount = 0;
