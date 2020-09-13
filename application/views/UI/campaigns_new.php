@@ -328,6 +328,8 @@
                         <th>Scheduled </th>
                         <th>Sent</th>
                         <th>Status</th>
+                        <th>Campaign Status</th>
+                        <th>Goal Type</th>
                         <th>Actions</th>
                       </tr>
                     </thead>
@@ -347,6 +349,8 @@
                           <span ng-if="idx.is_active=='1'" class="badge badge-success">Active</span>
                           <span ng-if="idx.is_active=='0'" class="badge badge-danger">In Active</span>
                         </td>
+                        <td><span style="margin-left:5px">{{idx.cpgn_status}}</span></td>
+                        <td><span style="margin-left:5px">{{idx.cpgn_goal_type}}</span></td>
                         <td>
                           <div class="form-inline"><i ng-click='edit_campaign(idx.campaign_id)' style="font-size:20px;margin-left: 10px" class="fe-edit text-info"></i>
                             <i ng-click='delete_campaign(idx.campaign_id)' style="font-size:20px;margin-left: 10px;" class="fe-trash-2 text-danger"></i>

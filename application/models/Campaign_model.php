@@ -152,7 +152,7 @@ class Campaign_model extends CI_Model
   public function get_campaign_list($frm_date='',$to_date='',$cmp_status='',$sort_order='cpgn_id',$dir='ASC')
   {
 	  //print_r($sort);
-	  $sql="SELECT cpgn_id as campaign_id,fbk_order as feedback_status,cpgn_desc as campaign_desc,is_active,cpgn_name as campaign_name,sum(IF(is_sent=1,1,0)) as sent_count,count(camp_order_no) as total_mail from campaign_manager left join campaign_order_list on camp_id=cpgn_id where created_by =".$this->store_id." AND is_deleted='0'";
+	  $sql="SELECT cpgn_id as campaign_id,fbk_order as feedback_status,cpgn_desc as campaign_desc,is_active,cpgn_name as campaign_name,sum(IF(is_sent=1,1,0)) as sent_count,count(camp_order_no) as total_mail, cpgn_goal_type, cpgn_status from campaign_manager left join campaign_order_list on camp_id=cpgn_id where created_by =".$this->store_id." AND is_deleted='0'";
       if(!empty($frm_date) && !empty($to_date))
        {
         $frm_date=$frm_date." 00:00:00";
@@ -265,50 +265,92 @@ class Campaign_model extends CI_Model
 
   public function create_new_campaign($post,$asin)
   {
-     $this->db->trans_start();
-     $insert_campaign=array('cpgn_name'=>$post->camp_name,'cpgn_desc'=>$post->camp_desc,'cpgn_type'=>$post->camp_type,'cpgn_fullfill'=>$post->camp_fulfill,'cpgn_hour'=>$post->camp_hour,'cpgn_min'=>$post->camp_min,'cpgn_day'=>$post->camp_trigger_day,'cpgn_days'=>$post->camp_days,'cpgn_am_pm'=>$post->camp_am_pm,'cpgn_trigger'=>$post->camp_trigger,'cpgn_brand'=>$post->camp_brand,'cpgn_country'=>$post->camp_country,'cpgn_templateID'=>$post->template_id,'created_by'=>$this->store_id,'fbk_order'=>$post->feedback_status,'created_on'=>date('Y-m-d H:s:i'),'modified_on'=>date('Y-m-d H:s:i'));
-     $this->db->insert('campaign_manager',$insert_campaign);
-     $camp_id=$this->db->insert_id();
-     foreach($asin as $as)
-     {
-          $insert_asin[]=array('cmp_id'=>$camp_id,'cmp_asin'=>$as->prod_asin,'cmp_country'=>$post->camp_country,'cmp_sku'=>$as->prod_sku,'cmp_fc'=>$as->fc_code);
-     }
-     $this->db->insert_batch('campaign_asin',$insert_asin);
-     $this->db->trans_complete();
-     if ($this->db->trans_status() === FALSE)
-     {
-           return FALSE;
-     }
-     else
-     {
-              return TRUE;
-     }
+    $this->db->trans_start();
+    $insert_campaign = array(
+      'cpgn_name' => $post->camp_name,
+      'cpgn_desc'=>$post->camp_desc,
+      'cpgn_type' => $post->camp_type,
+      'cpgn_fullfill' => $post->camp_fulfill,
+      'cpgn_hour' => $post->camp_hour,
+      'cpgn_min' => $post->camp_min,
+      'cpgn_day' => $post->camp_trigger_day,
+      'cpgn_days' => $post->camp_days,
+      'cpgn_am_pm' => $post->camp_am_pm,
+      'cpgn_trigger' => $post->camp_trigger,
+      'cpgn_brand' => $post->camp_brand,
+      'cpgn_country' => $post->camp_country,
+      'cpgn_templateID' => $post->template_id,
+      'created_by' => $this->store_id,
+      'fbk_order' => $post->feedback_status,
+      'created_on' => date('Y-m-d H:s:i'),
+      'modified_on' => date('Y-m-d H:s:i'),
+      'cpgn_goal_type' => $post->camp_goaltype,
+      'cpgn_status' => $post->camp_status
+    );
+    $this->db->insert('campaign_manager',$insert_campaign);
+    $camp_id=$this->db->insert_id();
+    foreach($asin as $as) {
+      $insert_asin[] = array(
+        'cmp_id' => $camp_id,
+        'cmp_asin' => $as->prod_asin,
+        'cmp_country' => $post->camp_country,
+        'cmp_sku' => $as->prod_sku,
+        'cmp_fc' => $as->fc_code
+      );
+    }
+    $this->db->insert_batch('campaign_asin',$insert_asin);
+    $this->db->trans_complete();
+    if ($this->db->trans_status() === FALSE) {
+      return FALSE;
+    }
+    else {
+      return TRUE;
+    }
   }
 
   public function update_campaign($post,$asin)
   {
-         $this->db->trans_start();
-      $update_campaign=array('cpgn_name'=>$post->camp_name,'cpgn_desc'=>$post->camp_desc,'cpgn_type'=>$post->camp_type,'cpgn_fullfill'=>$post->camp_fulfill,'cpgn_hour'=>$post->camp_hour,'cpgn_min'=>$post->camp_min,'cpgn_day'=>$post->camp_trigger_day,'cpgn_days'=>$post->camp_days,'cpgn_am_pm'=>$post->camp_am_pm,'cpgn_trigger'=>$post->camp_trigger,'cpgn_brand'=>$post->camp_brand,'cpgn_country'=>$post->camp_country,'cpgn_templateID'=>$post->template_id,'created_by'=>$this->store_id,'fbk_order'=>$post->feedback_status,'modified_on'=>date('Y-m-d H:s:i'));
-         $this->db->where('cpgn_id', $post->cpgn_id);
-         $this->db->update('campaign_manager',$update_campaign);
-
-         $this->db->query("DELETE FROM campaign_asin WHERE cmp_id=".$this->db->escape($post->cpgn_id));
-         foreach($asin as $as)
-         {
-              $insert_asin[]=array('cmp_id'=>$post->cpgn_id,'cmp_asin'=>$as->prod_asin,'cmp_country'=>$post->camp_country,'cmp_sku'=>$as->prod_sku,'cmp_fc'=>$as->fc_code);
-         }
-
-         $this->db->insert_ignore_batch('campaign_asin',$insert_asin);
-         $this->db->trans_complete();
-         if ($this->db->trans_status() === FALSE)
-         {
-               return FALSE;
-         }
-         else
-         {
-                  return TRUE;
-         }
-
+    $this->db->trans_start();
+    $update_campaign = array(
+      'cpgn_name' => $post->camp_name,
+      'cpgn_desc' => $post->camp_desc,
+      'cpgn_type' => $post->camp_type,
+      'cpgn_fullfill' => $post->camp_fulfill,
+      'cpgn_hour' => $post->camp_hour,
+      'cpgn_min' => $post->camp_min,
+      'cpgn_day' => $post->camp_trigger_day,
+      'cpgn_days' => $post->camp_days,
+      'cpgn_am_pm' => $post->camp_am_pm,
+      'cpgn_trigger' => $post->camp_trigger,
+      'cpgn_brand' => $post->camp_brand,
+      'cpgn_country' => $post->camp_country,
+      'cpgn_templateID' => $post->template_id,
+      'created_by' => $this->store_id,
+      'fbk_order' => $post->feedback_status,
+      'modified_on' => date('Y-m-d H:s:i'),
+      'cpgn_goal_type' => $post->camp_goaltype,
+      'cpgn_status' => $post->camp_status
+    );
+    $this->db->where('cpgn_id', $post->cpgn_id);
+    $this->db->update('campaign_manager',$update_campaign);
+    $this->db->query("DELETE FROM campaign_asin WHERE cmp_id=".$this->db->escape($post->cpgn_id));
+    foreach($asin as $as) {
+      $insert_asin[] = array(
+        'cmp_id' => $post->cpgn_id,
+        'cmp_asin' => $as->prod_asin,
+        'cmp_country' => $post->camp_country,
+        'cmp_sku' => $as->prod_sku,
+        'cmp_fc' => $as->fc_code
+      );
+    }
+    $this->db->insert_ignore_batch('campaign_asin',$insert_asin);
+    $this->db->trans_complete();
+    if ($this->db->trans_status() === FALSE) {
+      return FALSE;
+    }
+    else {
+      return TRUE;
+    }
   }
 
    public function get_campaign_metrics($frm_date='',$to_date='')

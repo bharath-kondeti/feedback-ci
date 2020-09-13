@@ -277,18 +277,17 @@ class Manage_campaign extends CI_Controller
     {
       if(isset($_POST['campaign_id']) && !empty($_POST['campaign_id']))
       {
-        $qry=$this->db->query("SELECT cpgn_id,cpgn_name AS camp_name,fbk_order as feedback_status,cpgn_desc AS camp_desc,cpgn_type AS camp_type,cpgn_brand AS camp_brand,cpgn_country AS camp_country,cpgn_fullfill AS camp_fulfill,IF(cpgn_fullfill='1','ALL',IF(cpgn_fullfill='2','FBA','FBM')) AS fc_code,cpgn_trigger AS camp_trigger,
-cpgn_am_pm AS camp_am_pm,cpgn_day AS camp_trigger_day,cpgn_days AS camp_days,cpgn_hour AS camp_hour,cpgn_min AS camp_min,cpgn_if_no_review AS camp_review,cpgn_templateID as tmp_id,template_id,template_name,template_content,subject FROM campaign_manager INNER JOIN email_template on template_id=cpgn_templateID WHERE cpgn_id=".$this->db->escape($_POST['campaign_id']));
+        $qry=$this->db->query("SELECT cpgn_id, cpgn_name AS camp_name, fbk_order as feedback_status, cpgn_desc AS camp_desc, cpgn_type AS camp_type, cpgn_brand AS camp_brand, cpgn_country AS camp_country, cpgn_fullfill AS camp_fulfill, IF(cpgn_fullfill='1','ALL',IF(cpgn_fullfill='2','FBA','FBM')) AS fc_code,cpgn_trigger AS camp_trigger, cpgn_am_pm AS camp_am_pm, cpgn_day AS camp_trigger_day, cpgn_days AS camp_days, cpgn_hour AS camp_hour,cpgn_min AS camp_min,cpgn_if_no_review AS camp_review, cpgn_templateID as tmp_id, template_id, template_name, template_content, subject, cpgn_goal_type AS camp_goaltype, cpgn_status AS camp_status FROM campaign_manager INNER JOIN email_template on template_id=cpgn_templateID WHERE cpgn_id=".$this->db->escape($_POST['campaign_id']));
         $res=$qry->result_array();
 
         if(count($res) > 0)
         {
           $data['status_text']="Retrived";
           $data['status_code']=1;
-          $data['campaign_detail']=$res;
-          $data['other_product']=$this->campaign_model->get_product_list($res[0]['camp_country'],$res[0]['camp_brand']);
-          $data['brand_list']=$this->campaign_model->get_brand_list($res[0]['camp_country']);
-          $data['selected_product']=$this->campaign_model->get_seleted_product($res[0]['cpgn_id']);
+          $data['campaign_detail'] = $res;
+          $data['other_product'] = $this->campaign_model->get_product_list($res[0]['camp_country'],$res[0]['camp_brand']);
+          $data['brand_list'] = $this->campaign_model->get_brand_list($res[0]['camp_country']);
+          $data['selected_product'] = $this->campaign_model->get_seleted_product($res[0]['cpgn_id']);
         }
         else
         {
