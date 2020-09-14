@@ -253,7 +253,7 @@
                               </span><span class="fa fa-star-empty"></span>
                             </div>
                             <div>
-                              <span class="fa fa-user"></span> 1,050,008 Total Reviews
+                              <span class="fa fa-user"></span> {{fbk_data.feedback_count}} Total Feedback
                             </div>
                           </div>
                           <div class="col-xs-12 col-md-8 rating-block">
@@ -556,7 +556,7 @@
                               </span><span class="fa fa-star-empty"></span>
                             </div>
                             <div>
-                              <span class="fa fa-user"></span> 1,050,008 Total Reviews
+                              <span class="fa fa-user"></span> {{reviews_data.total_review_count}} Total Reviews
                             </div>
                           </div>
                           <div class="col-xs-12 col-md-8 rating-block">
