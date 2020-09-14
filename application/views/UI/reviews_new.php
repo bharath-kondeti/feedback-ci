@@ -96,11 +96,11 @@ $base_url=base_url();
                           <th>Image</th>
                           <th>Title</th>
                           <th>ASIN</th>
-                          <th>Total Reviews</th>
+                          <th>Today Reviews</th>
                           <th>Last 7 days Reviews</th>
                           <th>Positive Reviews</th>
                           <th>Negative Reviews</th>
-						  <th>Total Reviews</th>
+						              <th>Total Reviews</th>
                         </tr>
                       </thead>
                       <tbody ng-repeat="idx in reviews_data.reviews track by $index">
@@ -113,7 +113,7 @@ $base_url=base_url();
 							<td>
 								<div ng-click="expand($index)">
 									{{idx.item_title}}
-								</div>								
+								</div>
 							</td>
 							<td>{{idx.item_asin}}</td>
 							<td>{{idx.today_review_count}}</td>
@@ -147,7 +147,7 @@ $base_url=base_url();
 															</span><span class="fa fa-star-empty"></span>
 														</div>
 														<div>
-															<span class="fa fa-user"></span> 1,050,008 Total Reviews
+															<span class="fa fa-user"></span> {{idx.item_total_reviews}} Total Reviews
 														</div>
 													</div>
 													<div class="col-xs-12 col-md-8 rating-block">
@@ -245,7 +245,7 @@ $base_url=base_url();
 						 			<thead class="thead-light">
 						 				<tr>
 						 					<th>Date</th>
-						 					<th>Reviewer</th> 
+						 					<th>Reviewer</th>
 						 					<th>Rating</th>
 						 					<th>Title </th>
 						 					<th>Review</th>

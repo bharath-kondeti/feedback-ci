@@ -349,10 +349,20 @@
                           <span ng-if="idx.is_active=='1'" class="badge badge-success">Active</span>
                           <span ng-if="idx.is_active=='0'" class="badge badge-danger">In Active</span>
                         </td>
-                        <td><span style="margin-left:5px">{{idx.camp_status}}</span></td>
-                        <td><span style="margin-left:5px">{{idx.camp_goaltype}}</span></td>
                         <td>
-                          <div class="form-inline"><i ng-click='edit_campaign(idx.campaign_id)' style="font-size:20px;margin-left: 10px" class="fe-edit text-info"></i>
+                          <span ng-if="idx.camp_status=='1'" style="margin-left:5px">Draft</span>
+                          <span ng-if="idx.camp_status=='2'" style="margin-left:5px">Test</span>
+                          <span ng-if="idx.camp_status=='3'" style="margin-left:5px">Live</span>
+                          <span ng-if="idx.camp_status=='4'" style="margin-left:5px">Paused</span>
+                        </td>
+                        <td>
+                          <span ng-if="idx.camp_goaltype=='1'" style="margin-left:5px">Customer Service</span>
+                          <span ng-if="idx.camp_goaltype=='2'" style="margin-left:5px">Feedback</span>
+                          <span ng-if="idx.camp_goaltype=='3'" style="margin-left:5px">Review</span>
+                        </td>
+                        <td>
+                          <div class="form-inline">
+                            <i ng-click='edit_campaign(idx.campaign_id)' style="font-size:20px;margin-left: 10px" class="fe-edit text-info"></i>
                             <i ng-click='delete_campaign(idx.campaign_id)' style="font-size:20px;margin-left: 10px;" class="fe-trash-2 text-danger"></i>
                             <label class="switch" style="margin-left: 10px">
                             <input type="checkbox" name='enable_addon' ng-model="idx.is_active" ng-true-value="'1'" ng-false-value="'0'" ng-change='change_status(idx.is_active,idx.campaign_id)'>
