@@ -261,7 +261,7 @@ $base_url=base_url();
 						 					</td>
 						 					<td>
 						 						<div class="text-warning mb-2 font-13">
-						 							<i ng-repeat="i in setRound(idx.review_rating) track by $index"
+						 							<i ng-repeat="i in setRound(rid.review_rating) track by $index"
 						 								class='fa fa-star'></i>
 						 						</div>
 						 					</td>
@@ -454,7 +454,9 @@ crawlApp.controller('invCtrl', ['$scope','$parse','$window','invFactory','$http'
       });
    }
 
-
+   $scope.setRound = function(n) {
+      return new Array(parseInt(n));
+    };
    $scope.filtergrid=function()
    {
      $scope.filterquery=[

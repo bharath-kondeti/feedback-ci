@@ -275,7 +275,7 @@ $base_url=base_url();
 
 													<label for="search" class="sr-only">Search</label>
 
-													<input type="text" class="form-control" placeholder="Search Order ID or Buyer Email">
+													<input ng-model="feedback_search" type="text" class="form-control" placeholder="Search Order ID or Buyer Email">
 
 												</div>
 
@@ -553,13 +553,13 @@ crawlApp.factory('dashFactory', function($http,$q,limitToFilter) {
 
 
 
-   var get_data = function (frm_date,to_date) {
+   var get_data = function (frm_date,to_date,order_id,buyer_email) {
 
         var dataset_path="<?php echo $baseurl.'dashboard/get_feedbacks'?>";
 
         var deferred = $q.defer();
 
-        var path =dataset_path+'/'+frm_date+'/'+to_date;
+        var path =dataset_path+'/'+frm_date+'/'+to_date+'/'+order_id+'/'+buyer_email;
 
 
 
@@ -637,6 +637,7 @@ crawlApp.controller('dashCtrl',function($scope,$parse,$window,dashFactory,$http,
     $scope.feedback_positive = [];
     $scope.feedback_neutral = [];
     $scope.feedback_temp = [];
+    $scope.feedback_search = '';
 
 
       $scope.block_site=function()
@@ -726,7 +727,6 @@ crawlApp.controller('dashCtrl',function($scope,$parse,$window,dashFactory,$http,
    };
 
    $scope.filter = function(n) {
-     console.log(n)
     if(n === 'all') {
       $scope.feedback_all = $scope.feedback_temp;
     } else if (n=== 'pos') {
@@ -833,7 +833,6 @@ crawlApp.controller('dashCtrl',function($scope,$parse,$window,dashFactory,$http,
 
 
 
-
    $scope.get_transaction_list=function(currentPage)
 
    {
@@ -894,12 +893,22 @@ crawlApp.controller('dashCtrl',function($scope,$parse,$window,dashFactory,$http,
 
          {
           $scope.block_site();
-            var ele = document.getElementById('calendar-date');
-            var text = ele.innerHTML;
-            var dates = text.split("-");
-            var date1 = moment(dates[0], 'MMMM DD, YYYY').format('YYYY-MM-DD');
-            var date2 = moment(dates[1], 'MMMM DD, YYYY').format('YYYY-MM-DD');
-            var promise=dashFactory.get_data(date1,date2);
+            var ele,text,dates,date1,date2,search_order_id,search_email,isOrder;
+            ele = document.getElementById('calendar-date');
+            text = ele.innerHTML;
+            dates = text.split("-");
+            date1 = moment(dates[0], 'MMMM DD, YYYY').format('YYYY-MM-DD');
+            date2 = moment(dates[1], 'MMMM DD, YYYY').format('YYYY-MM-DD');
+            search_term = $scope.feedback_search;
+            isOrder = /^\d+\-\d+$/.test(search_term);
+            if(isOrder) {
+              search_order_id = search_term;
+              search_email = "";
+            } else {
+              search_email = search_term;
+              search_order_id = "";
+            }
+            var promise=dashFactory.get_data(date1,date2,search_email,search_order_id);
 
               promise.then(
 
