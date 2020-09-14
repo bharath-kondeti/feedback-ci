@@ -47,7 +47,7 @@ class Dashboard extends CI_Controller
     echo json_encode($data);
   }
 
-  public function get_feedbacks($frm_date = '',$to_date = '') {
+  public function get_feedbacks($frm_date = '',$to_date = '',$order_id = '',$buyer_email = '') {
     $data['status_text']='Success';
     $data['status_code']='1';
     $fbk = array();
