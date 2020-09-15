@@ -1,0 +1,11 @@
+ALTER TABLE `customer_product`
+ADD `review_tracking` int(11) NULL;
+
+ALTER TABLE `campaign_manager`
+ADD `cpgn_goal_type` varchar(100) COLLATE 'utf8_general_ci' NULL,
+ADD `cpgn_status` varchar(100) COLLATE 'utf8_general_ci' NULL AFTER `cpgn_goal_type`;
+
+ALTER TABLE `campaign_manager`
+CHANGE `cpgn_goal_type` `cpgn_goal_type` int(11) NULL AFTER `cpgn_country`,
+CHANGE `cpgn_status` `cpgn_status` int(11) NULL AFTER `cpgn_goal_type`;
+

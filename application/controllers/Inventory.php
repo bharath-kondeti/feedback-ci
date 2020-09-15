@@ -15,13 +15,13 @@ class Inventory extends CI_Controller {
      }
       else
      {
-        $this->load->model("inventory_model");   
-        $user=$this->session->userdata('user_logged_in');  
+        $this->load->model("inventory_model");
+        $user=$this->session->userdata('user_logged_in');
         $this->user_id=$user['id'];
-       
+
      }
   }
-	
+
 	public function index()
 	{
 		$this->load->view('UI/header');
@@ -37,10 +37,32 @@ class Inventory extends CI_Controller {
       $result_set=$this->inventory_model->get_inventory_list($orderby,$direction,$offet,$limit,$searchterm);
       echo json_encode($result_set);
   }
-	
-	
-	
 
-	
-	
+  public function change_status()
+  {
+    if(isset($_POST['status']) && ((int)$_POST['status']==1 ||(int)$_POST['status']==0) )
+    {
+    $status=(int)$_POST['status']==1?'1':'0';
+       $ufql="UPDATE customer_product set review_tracking=".$status." where prod_asin=".$this->db->escape($_POST['asin'])." AND store_id=".$_POST['storeid'];
+
+        if($this->db->query($ufql))
+        {
+          $data['status_text']="Review Tracking Updated";
+          $data['status_code']=1;
+          //$data['campaign_list']=$this->campaign_model->get_campaign_list();
+        }
+        else
+        {
+          $data['status_text']="Something went wrong please try agin after sometime";
+          $data['status_code']=0;
+          //$data['campaign_list']=$this->campaign_model->get_campaign_list();
+
+        }
+        echo json_encode($data);
+    }
+    else
+    {
+      echo '{"status_code":"0","status_text":"Input Error"}';
+    }
+  }
 }
