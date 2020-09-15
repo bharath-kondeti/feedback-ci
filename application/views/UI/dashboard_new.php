@@ -245,7 +245,7 @@
                           <div class="col-xs-12 col-md-4 text-center rating-block">
                             <h4 class="header-title mb-3">Feedback overview</h4>
                             <h1 class="rating-num">
-                              4.0
+                              {{fbk_data.avg_feedback}}
                             </h1>
                             <div class="rating">
                               <span class="fa fa-star"></span><span class="fa fa-star">
@@ -548,7 +548,7 @@
                           <div class="col-xs-12 col-md-4 text-center rating-block">
                             <h4 class="header-title mb-3">Reviews overview</h4>
                             <h1 class="rating-num">
-                              4.0
+                              {{reviews_data.avg_review}}
                             </h1>
                             <div class="rating">
                               <span class="fa fa-star"></span><span class="fa fa-star">
