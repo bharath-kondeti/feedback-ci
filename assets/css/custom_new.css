@@ -490,7 +490,25 @@
   color: #72747b;
   background-color: white !important;
   /* #f1f5f7; */
-} 
+}
+.camp-status {
+  padding: 5px;
+}
+.camp-opts {
+  padding: 5px 10px; 
+}
+.camp-opts:hover {
+  background-color: rgba(0,104,224,.2);
+}
+.relative {
+  position: relative;
+}
+.dir-col {
+  flex-direction: column;
+}
+.cur-pointer {
+  cursor: pointer;
+}
 .review-block{
 	background-color:#FAFAFA;
 	border:1px solid #EFEFEF;

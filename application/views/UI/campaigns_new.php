@@ -333,7 +333,7 @@
                         <th>Name</th>
                         <th>Scheduled </th>
                         <th>Sent</th>
-                        <th>Status</th>
+                        <!-- <th>Status</th> -->
                         <th>Campaign Status</th>
                         <th>Goal Type</th>
                         <th>Actions</th>
@@ -357,15 +357,24 @@
                         <td style="position: relative;">{{idx.campaign_name}}</td>
                         <td><span style="margin-left:5px"> {{idx.total_mail}} </span></td>
                         <td><span style="margin-left:5px"> {{idx.sent_count}} </span></td>
-                        <td>
+                        <!-- <td>
                           <span ng-if="idx.is_active=='1'" class="badge badge-success">Active</span>
                           <span ng-if="idx.is_active=='0'" class="badge badge-danger">In Active</span>
-                        </td>
-                        <td>
-                          <span ng-if="idx.camp_status=='1'" style="margin-left:5px">Draft</span>
-                          <span ng-if="idx.camp_status=='2'" style="margin-left:5px">Test</span>
-                          <span ng-if="idx.camp_status=='3'" style="margin-left:5px">Live</span>
-                          <span ng-if="idx.camp_status=='4'" style="margin-left:5px">Paused</span>
+                        </td> -->
+                        <td class="relative">
+                          <div ng-click="show_camp_drop($index)" class="relative">
+                            <span ng-if="idx.camp_status=='1'" class="badge badge-secondary cur-pointer" style="margin-left:5px; font-size:12px;">Draft</span>
+                            <span ng-if="idx.camp_status=='2'" class="badge badge-warning cur-pointer" style="margin-left:5px; font-size:12px;">Test</span>
+                            <span ng-if="idx.camp_status=='3'" class="badge badge-success cur-pointer" style="margin-left:5px; font-size:12px;">Live</span>
+                            <span ng-if="idx.camp_status=='4'" class="badge badge-danger cur-pointer" style="margin-left:5px; font-size:12px;">Paused</span>
+                            <i class="mdi mdi-chevron-down"></i>
+                            <div class="d-flex camp-status dir-col" ng-if="showCampDrop[$index]">
+                              <div ng-if="idx.camp_status != rid.id" class="camp-opts cur-pointer" ng-repeat="rid in campStatus" ng-click="change_status(rid,idx.campaign_id)">
+                                <span ng-class="{'badge badge-secondary': rid.name == 'Draft' , 'badge badge-warning':rid.name == 'Test',
+              'badge badge-success': rid.name == 'Live', 'badge badge-danger': rid.name == 'Paused' } ">{{rid.name}}</span>
+                              </div>
+                            </div>
+                          </div>
                         </td>
                         <td>
                           <span ng-if="idx.camp_goaltype=='1'" style="margin-left:5px">Customer Service</span>
@@ -1229,7 +1238,7 @@
       });
     };
 
-    var change_status = function(active, campaign_id)
+    var change_status = function(status_id, campaign_id)
     {
       var search_path = "<?php echo $baseurl . 'manage_campaign/change_status/'; ?>";
       return $http({
@@ -1237,7 +1246,7 @@
         url: search_path,
         data:
         {
-          w_status: active,
+          w_status: status_id,
           campaign_id: campaign_id,
         }
       });
@@ -1313,6 +1322,9 @@
       $scope.cmp.feedback_status = '1';
       $scope.cmp.selected_star = [];
       $scope.checkCampaigns = [];
+      $scope.campStatus = [{name: 'Live', id: 3}, {name: 'Draft', id: 1}, {name: 'Test', id: 2}, {name: 'Paused', id: 4}];
+      $scope.showCampDrop = [];
+
       $scope.cmp.selected_star.push({
        star: ''
      });
@@ -1348,6 +1360,12 @@
           $scope.show_dash = 0;
         }
         // console.log($scope.show_dash);
+      }
+      $scope.show_camp_drop = function(val) {
+        $scope.showCampDrop[val] = !$scope.showCampDrop[val];
+      }
+      $scope.changeStatus = function(val,val2) {
+        console.log(val.id, val2.campaign_id);
       }
       $scope.clear_campaign_data = function()
       {
@@ -1629,16 +1647,16 @@
             }
           });
       }
-      $scope.change_status = function(is_active, campaign_id)
+      $scope.change_status = function(status, campaign_id)
       {
-        if (is_active == 1)
-        {
-          var sts = 'Activate';
-        } else
-        {
-          var sts = 'Deactivate';
-        }
-        var msg = "Are you sure to " + sts + " campaign?";
+        // if (is_active == 1)
+        // {
+        //   var sts = 'Activate';
+        // } else
+        // {
+        //   var sts = 'Deactivate';
+        // }
+        var msg = "Are you sure to change campaign status to" + " " + status.name;
         swal({
             title: msg,
             text: "!",
@@ -1652,7 +1670,7 @@
           },
           function(isConfirm) {
             if (isConfirm) {
-              campaignFactory.change_status(is_active, campaign_id)
+              campaignFactory.change_status(status.id, campaign_id)
                 .success(
                   function(html)
                   {
@@ -2761,7 +2779,6 @@
 
     $scope.order = {};
     $scope.allCamps = false;
-
 
 
     $scope.range = function()
