@@ -69,7 +69,9 @@ class Reviews_new extends CI_Controller
       $todayCount = 0;
       $sevenDaysCount = 0;
       $j = 0;
+      $totalRating = 0;
       foreach ($getAllReviews as $getReview => $value) {
+        $totalRating = $totalRating + (float)$value['review_rating'];
         if($value['review_rating'] >= 3) {
           $postiveCount++;
         } else {
@@ -88,6 +90,7 @@ class Reviews_new extends CI_Controller
       $reviewContent[$i]['today_review_count'] = $todayCount;
       $reviewContent[$i]['seven_days_count'] = $sevenDaysCount;
       $reviewContent[$i]['negative_review_count'] = $negativeCount;
+      $reviewContent[$i]['avg_count'] = round(($totalRating/$reviewValue['total_reviews']),2);
       $i++;
     }
 
