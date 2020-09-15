@@ -745,7 +745,7 @@ crawlApp.controller('dashCtrl',function($scope,$parse,$window,dashFactory,$http,
       return new Array(parseInt(n));
     };
 
-    
+
    $scope.prevPage = function()
 
    {
@@ -843,7 +843,7 @@ crawlApp.controller('dashCtrl',function($scope,$parse,$window,dashFactory,$http,
 
          promise.then(function(value){
 
-          
+
 
          if(value.status_code==1)
 
@@ -893,22 +893,27 @@ crawlApp.controller('dashCtrl',function($scope,$parse,$window,dashFactory,$http,
 
          {
           $scope.block_site();
-            var ele,text,dates,date1,date2,search_order_id,search_email,isOrder;
+            var ele,text,dates,date1,date2,search_var,search_param,isOrder;
             ele = document.getElementById('calendar-date');
             text = ele.innerHTML;
             dates = text.split("-");
             date1 = moment(dates[0], 'MMMM DD, YYYY').format('YYYY-MM-DD');
             date2 = moment(dates[1], 'MMMM DD, YYYY').format('YYYY-MM-DD');
             search_term = $scope.feedback_search;
-            isOrder = /^\d+\-\d+$/.test(search_term);
-            if(isOrder) {
-              search_order_id = search_term;
-              search_email = "";
+            if(search_term != '') {
+              isOrder = /^\d+\-\d+\-\d+$/.test(search_term);
+              if(isOrder) {
+                search_var = search_term;
+                search_param = "order";
+              } else {
+                search_var = search_term;
+                search_param = "email";
+              }
             } else {
-              search_email = search_term;
-              search_order_id = "";
+              search_var = "";
+              search_param = "";
             }
-            var promise=dashFactory.get_data(date1,date2,search_email,search_order_id);
+            var promise=dashFactory.get_data(date1,date2,search_var,search_param);
 
               promise.then(
 
@@ -946,9 +951,9 @@ crawlApp.controller('dashCtrl',function($scope,$parse,$window,dashFactory,$http,
                                   all = all.concat(pos,neg,neut);
                                   $scope.feedback_all = all;
                                   $scope.feedback_temp = all;
-                                  
+
                                   $.unblockUI();
-                                  
+
                                 }
 
                                 else
