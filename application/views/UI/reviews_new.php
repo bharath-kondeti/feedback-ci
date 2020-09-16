@@ -111,7 +111,7 @@ $base_url=base_url();
  								<img src="{{idx.item_image}}" height="32" width="32" alt="">
 							</td>
 							<td>
-								<div ng-click="expand($index)">
+								<div class="cur-pointer" ng-click="expand($index)">
 									{{idx.item_title}}
 								</div>
 							</td>
@@ -124,15 +124,19 @@ $base_url=base_url();
 						 </tr>
 						 <tr class="remove-hover" ng-if="idx.expanded">
 						 	<td colspan="10">
-							 <div class="row">
-								<div class="col-xl-4">
-								<img src="{{idx.item_image}}" height="300" width="300" alt="">
+							 <div class="row p-2">
+								<div class="col-xl-3 align-center">
+								<img src="{{idx.item_image}}" height="250" width="250" alt="">
 								</div>
-								<div class="col-xl-4">
-									{{idx.item_title}}
-									{{idx.item_asin}}
+								<div class="col-xl-5 align-center">
+                  <div class="mb-4">
+                    <span class="h5">Title</span> : {{idx.item_title}}
+                  </div>
+									<div class="mt-4">
+                  <span class="h5">ASIN</span> : {{idx.item_asin}} 
+                  </div>
 								</div>
-							 	<div class="col-xl-4">
+							 	<div class="col-xl-4 align-center">
 									<div class="row">
 										<div class="col-xs-12 col-md-12">
 											<div class="well well-sm">
@@ -241,7 +245,7 @@ $base_url=base_url();
 									</div>
 							 	</div>
 							 </div>
-						 		<table class="table table-stripped table-bordered table-centered mb-0 mt-3">
+						 		<table class="table table-stripped table-centered mb-0 mt-3">
 						 			<thead class="thead-light">
 						 				<tr>
 						 					<th>Date</th>
@@ -263,7 +267,10 @@ $base_url=base_url();
 						 						<div class="text-warning mb-2 font-13">
 						 							<i ng-repeat="i in setRound(rid.review_rating) track by $index"
 						 								class='fa fa-star'></i>
-						 						</div>
+                         </div>
+                         <div>
+                           {{rid.review_rating}}
+                         </div>
 						 					</td>
 						 					<td>
 						 						{{rid.review_title}}

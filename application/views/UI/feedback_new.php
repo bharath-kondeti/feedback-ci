@@ -317,7 +317,7 @@ $base_url=base_url();
 
 												</div>-->
 
-												<div class="col-md-6">
+												<div class="col-md-4">
 
 													<!----------------------------------------->
 
@@ -335,7 +335,7 @@ $base_url=base_url();
 
 												</div>
 
-												<div class="col-md-3 text-right">
+												<div class="col-md-3 text-left">
 
 													<div class="form-group">
 
@@ -362,8 +362,8 @@ $base_url=base_url();
 											</form>
 
                       <div class="table-responsive">
-                      	<table class="text-center table-bordered table-striped table table-hover">
-                      		<thead class="">
+                      	<table class="text-center table-bordered table">
+                      		<thead class="thead-light">
                       			<tr>
                       				<th>Product SKU</th>
                               <th>Image</th>
@@ -375,7 +375,7 @@ $base_url=base_url();
                       			</tr>
                       		</thead>
                       		<tbody>
-                      			<tr ng-repeat="idx in feedback_all track by $index">
+                      			<tr ng-if="feedback_all.length != 0" ng-repeat="idx in feedback_all track by $index">
                               <td>
                                 {{idx.seller_sku}}
                               </td>
@@ -392,14 +392,22 @@ $base_url=base_url();
                                 {{idx.rater_email}}
                               </td>
                               <td>
-                                <div class="text-warning mb-2 font-13">
+                                <div class="text-warning mb-1 font-13">
                                   <i ng-repeat="i in setRound(idx.fbk_rating) track by $index" class='fa fa-star'></i>
+                                </div>
+                                <div>
+                                  {{idx.fbk_rating}}
                                 </div>
                               </td>
                               <td width="20%">
                                 {{idx.fbk_comment}}
                               </td>
-                      			</tr>
+                            </tr>
+                            <tr ng-if="feedback_all.length == 0">
+                              <td colspan="7">
+                                No records found.
+                              </td>
+                            </tr>
                       		</tbody>
                       	</table>
                       </div>

@@ -486,10 +486,17 @@
 .justify-start {
   justify-content: start !important;
 }
+.align-center {
+  align-self: center;
+}
 .remove-hover:hover {
   color: #72747b;
   background-color: white !important;
-  /* #f1f5f7; */
+  /* #
+  f1f5f7; */
+}
+.range_inputs > button {
+  padding: 5px 15px;
 }
 .camp-status {
   padding: 5px;
