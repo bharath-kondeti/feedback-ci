@@ -1,27 +1,27 @@
- <?php
+<?php
 $baseurl=base_url();
 $base_url=base_url();
 ?>
- 
-           
+
+
             <div class="wrapper">
                 <div class="content">
 
                     <!-- Start Content-->
                     <div class="container-fluid">
-                        
+
                         <!-- start page title -->
                         <div class="row">
                             <div class="col-12">
                                 <div class="page-title-box">
                                     <div class="page-title-right">
-                                       
+
                                     </div>
                                     <h4 class="page-title">Billing</h4>
                                 </div>
                             </div>
-                        </div>     
-                        <!-- end page title --> 
+                        </div>
+                        <!-- end page title -->
 
 
                         <div class="row justify-content-center">
@@ -105,9 +105,8 @@ $base_url=base_url();
                             </div> <!-- end col-->
                         </div>
                         <!-- end row -->
-                        
+
                     </div> <!-- container -->
 
                 </div> <!-- content -->
 
-               

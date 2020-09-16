@@ -11,14 +11,14 @@ class Order extends CI_Controller {
 
     if(!$this->login_model->userLoginCheck())
     {
-      redirect('uauth');
+      redirect('user_auth');
     }
     else
     {
-        $this->load->model("order_model");   
-        $user=$this->session->userdata('user_logged_in');  
+        $this->load->model("order_model");
+        $user=$this->session->userdata('user_logged_in');
         $this->user_id=$user['id'];
-       
+
      }
   }
 	public function index()
@@ -30,12 +30,12 @@ class Order extends CI_Controller {
         $this->load->view('UI/order',$data);
 		$this->load->view('UI/footer');
 	}
-	
+
 	public function get_order_list($orderby='purchase_date',$direction='DESC',$offet,$limit,$searchterm='')
   {
       $result_set=$this->order_model->get_order_list($orderby,$direction,$offet,$limit,$searchterm);
       echo json_encode($result_set);
   }
-  
-	
+
+
 }

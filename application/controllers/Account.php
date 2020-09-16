@@ -8,12 +8,12 @@ public function  __construct()
      $this->load->model('login_model');
      if(!$this->login_model->userLoginCheck())
      {
-      redirect('uauth');
+      redirect('user_auth');
      }
-	  
+
 	 else
 	 {
-     $user=$this->session->userdata('user_logged_in');  
+     $user=$this->session->userdata('user_logged_in');
      $this->user_id=$user['id'];
      $this->user_email=$user['uname'];
      $this->user_name=$user['fname']." ".$user['lname'];
@@ -28,8 +28,8 @@ public function  __construct()
 		$this->load->view('UI/account');
 		$this->load->view('UI/footer');
 	}
-	
-	
+
+
 	 public function new_plan()
   {
 	  //print_r($_POST['plan_id']);
@@ -49,18 +49,18 @@ public function  __construct()
           $current_amt=isset($res1[0]['current_amt'])?$res1[0]['current_amt']:0;
           if(empty($res))
           {
-             echo '{"status_code":"0","status_text":"Plan detail info not available"}';                 
+             echo '{"status_code":"0","status_text":"Plan detail info not available"}';
              die();
           }
           elseif($plan_amt > $current_amt)
           {
-            echo '{"status_code":"0","status_text":"Not enough money in your account"}';                 
-             die(); 
+            echo '{"status_code":"0","status_text":"Not enough money in your account"}';
+             die();
           }
           elseif($chgn_count >= 2)
           {
-            echo '{"status_code":"0","status_text":"Please contact Feedback Outlook support (support@feedbackoutlook.com) to change plan"}';                 
-             die();  
+            echo '{"status_code":"0","status_text":"Please contact Feedback Outlook support (support@feedbackoutlook.com) to change plan"}';
+             die();
           }
           else
           {
@@ -72,10 +72,10 @@ public function  __construct()
               //if($plan[0]['camp_allowed'] ==-1 || $plan[0]['camp_allowed'] > $plan[0]['camp_created'] )
               if($camp_allowed!=-1 && $created_cmp_cnt > $camp_allowed )
               {
-                  echo '{"status_code":"0","status_text":"Please remove some campaign as its exceeds the allowed limit for this plan "}';                 
-                  die();     
+                  echo '{"status_code":"0","status_text":"Please remove some campaign as its exceeds the allowed limit for this plan "}';
+                  die();
               }
-              
+
           }
 
           $cur_bal=$current_amt-$plan_amt;
@@ -85,57 +85,57 @@ public function  __construct()
           $pay_id=$this->db->insert_id();
           $this->db->query("UPDATE current_balance SET last_pay_id=".$pay_id.",current_amt=current_amt-".$this->db->escape($plan_amt).",updated_on=now() WHERE user_id=".$this->user_id);
           $plan_start_date=date('Y-m-d H:i:s');
-          
+
           if($chgn_count > 0)
           {
             $plan_start_date=date('Y-m-d H:i:s', strtotime('+1 day'));
           }
           $vali_till_dt=date('Y-m-d H:i:s', strtotime('+1 month',strtotime(date($plan_start_date))));
-          
+
           $insert_plan=array('plan_id'=>$res[0]['plan_id'],'payment_id'=>$pay_id,'subscribed_by'=>$this->user_id,'subscribed_on'=>date('Y-m-d H:i:s'),
                             'updated_on'=>$plan_start_date,'valid_till'=>$vali_till_dt);
           $this->db->insert('plan_subscriber',$insert_plan);
           $this->db->trans_complete();
          if ($this->db->trans_status() === FALSE)
          {
-              echo '{"status_code":"0","status_text":"Not able to process now please try again"}';              
+              echo '{"status_code":"0","status_text":"Not able to process now please try again"}';
          }
          else
          {
              $alert_type=$chgn_count>0?"Plan Changed":"New Plan";
              if($chgn_count>0)
              {
-             $alert_subject="Current Plan has been Changed"; 
+             $alert_subject="Current Plan has been Changed";
              $alert_msg="Hi, <br> Your current plan has been changed your plan change will be effect from tommorow and INR ".$plan_amt." has been deducted from your wallet and you current balance is ".$cur_bal;
              }
              else
              {
-             $alert_subject="New plan has been subscribed"; 
+             $alert_subject="New plan has been subscribed";
              $alert_msg="Hi, <br> Your has been subscribed to a new plan and INR ".$plan_amt." has been deducted from your wallet and you current balance is ".$cur_bal;
              }
 
-             
-             
+
+
              //$sent_mail=1;
              //$timestamp=date('Y-m-d H:s:i');
              //$this->load->model('alert_model');
              //$this->alert_model->set_alert($alert_type,$alert_subject,$alert_msg,$sent_mail,$this->user_id,$timestamp);
-  
-             echo '{"status_code":"1","status_text":"Subscription Successful"}';               
+
+             echo '{"status_code":"1","status_text":"Subscription Successful"}';
          }
 
     }
     else
     {
-      echo '{"status_code":"0","status_text":"Something is missing please try again later"}';             
+      echo '{"status_code":"0","status_text":"Something is missing please try again later"}';
     }
   }
   public function load_money()
   {
     if(isset($_POST['amount']) && !empty($_POST['amount']) && $_POST['amount'] > 0)
     {
-          
-       $qry=$this->db->query("SELECT b.company_name,b.comp_addr1 AS comp_addr,b.comp_gst,scr_firstname,scr_lastname,scr_uname,mobile_no FROM scr_user 
+
+       $qry=$this->db->query("SELECT b.company_name,b.comp_addr1 AS comp_addr,b.comp_gst,scr_firstname,scr_lastname,scr_uname,mobile_no FROM scr_user
 INNER JOIN `usr_comp_info` AS b ON b.usr_id=scr_u_id
 INNER JOIN amazon_profile ON scr_u_id=profile_id and scr_u_id=".$this->user_id);
        $res=$qry->result_array();
@@ -154,7 +154,7 @@ INNER JOIN amazon_profile ON scr_u_id=profile_id and scr_u_id=".$this->user_id);
           $config['smtp_port'] = '465';
           $config['smtp_user'] = 'feedback_mail@proseller.in';
           $config['smtp_pass'] = 'Ravi560066';
-           
+
           $config['charset'] = "utf-8";
           $config['mailtype'] = "html";
           $config['newline'] = "\r\n";
@@ -165,7 +165,7 @@ INNER JOIN amazon_profile ON scr_u_id=profile_id and scr_u_id=".$this->user_id);
           $this->email->bcc('griffith.dickins@gmail.com');
           $this->email->subject($subject);
           $this->email->message($msg);
-          if ($this->email->send()) 
+          if ($this->email->send())
           {
             echo '{"status_code":"1","status_text":" We got your request you will get a invoice with payment link to your registered email id, please complete payment to enjoy Proseller services."}';
           }
@@ -173,16 +173,16 @@ INNER JOIN amazon_profile ON scr_u_id=profile_id and scr_u_id=".$this->user_id);
           {
             echo '{"status_code":"0","status_text":"Not able to send Invoice request mail please try again later "}';
           }
-       } 
+       }
        else
        {
         echo '{"status_code":"0","status_text":"Please complete the profile details"}';
-       }  
+       }
 
     }
     else
     {
-      echo '{"status_code":"0","status_text":"Something is missing please try again later"}';             
+      echo '{"status_code":"0","status_text":"Something is missing please try again later"}';
     }
   }
   public function toggle_addon_status()
@@ -201,49 +201,49 @@ INNER JOIN amazon_profile ON scr_u_id=profile_id and scr_u_id=".$this->user_id);
              $timestamp=date('Y-m-d H:s:i');
              $this->load->model('alert_model');
              $this->alert_model->set_alert($alert_type,$alert_subject,$alert_msg,$sent_mail,$this->user_id,$timestamp);
-             echo '{"status_code":"1","status_text":"ADD-ON status updated Successful"}';               
+             echo '{"status_code":"1","status_text":"ADD-ON status updated Successful"}';
           }
           else
           {
-            echo '{"status_code":"0","status_text":"Not able to update status"}';               
+            echo '{"status_code":"0","status_text":"Not able to update status"}';
           }
     }
     else
     {
-      echo '{"status_code":"0","status_text":"Input Error"}';               
+      echo '{"status_code":"0","status_text":"Input Error"}';
     }
-  }  
+  }
 
   public function buy_addon()
   {
     if(isset($_POST['amount']) && !empty($_POST['amount']) && $_POST['amount'] > 0)
     {
-          $_POST['amount']=500; 
+          $_POST['amount']=500;
           $qer=$this->db->query("SELECT * from current_balance where user_id=".$this->user_id);
           $res2=$qer->result_array();
           $current_amt=!empty($res2)?$res2[0]['current_amt']:0;
           if($current_amt <=0 || $current_amt < $_POST['amount'])
           {
              echo '{"status_code":"0","status_text":"Balance not enough for ADD-ON "}';
-             die();                   
+             die();
           }
-          
-          
+
+
           $this->db->trans_start();
-          
+
           $qer=$this->db->query("SELECT * from addon_status where user_id=".$this->user_id);
           $res1=$qer->result_array();
           $addon_amt=!empty($res1)?$res1[0]['current_amt']:0;
           $addon_mail=!empty($res1)?(int)$res1[0]['available_email']+1000:1000;
           $remaining_mail=!empty($res1)?(int)$res1[0]['email_remaining']+1000:1000;
           $addon_bal=$_POST['amount']+$addon_amt;
-          
-          
+
+
           $cur_bal=$current_amt-$_POST['amount'];
           $insert_payment=array('payment_gateway'=>'ADDON_Manual','paid_on'=>date('Y-m-d H:i:s'),'amt'=>$_POST['amount'],'paid_by'=>$this->user_id,'is_debit_credit'=>0,'cur_bal'=>$cur_bal);
           $this->db->insert('payment_details',$insert_payment);
           $pay_id=$this->db->insert_id();
-          
+
           $py_sql="INSERT INTO current_balance (user_id,last_pay_id,current_amt,updated_on)values(".$this->user_id.",".$pay_id.",".$cur_bal.",'".date('Y-m-d H:s:i')."') ON DUPLICATE KEY UPDATE last_pay_id=values(last_pay_id),current_amt=values(current_amt),updated_on=values(updated_on)";
 
           $this->db->query($py_sql);
@@ -254,11 +254,11 @@ INNER JOIN amazon_profile ON scr_u_id=profile_id and scr_u_id=".$this->user_id);
 
 
 
-          
+
           $this->db->trans_complete();
           if ($this->db->trans_status() === FALSE)
          {
-              echo '{"status_code":"0","status_text":"Not able to process now please try again"}';              
+              echo '{"status_code":"0","status_text":"Not able to process now please try again"}';
          }
          else
          {
@@ -269,25 +269,25 @@ INNER JOIN amazon_profile ON scr_u_id=profile_id and scr_u_id=".$this->user_id);
              $timestamp=date('Y-m-d H:s:i');
              $this->load->model('alert_model');
              $this->alert_model->set_alert($alert_type,$alert_subject,$alert_msg,$sent_mail,$this->user_id,$timestamp);
-  
 
-             echo '{"status_code":"1","status_text":"ADD-ON added Successful"}';               
+
+             echo '{"status_code":"1","status_text":"ADD-ON added Successful"}';
          }
 
     }
     else
     {
-      echo '{"status_code":"0","status_text":"Something is missing please try again later"}';             
+      echo '{"status_code":"0","status_text":"Something is missing please try again later"}';
     }
   }
   public function get_plan_data()
   {
     $data['status_text']='Success';
     $data['status_code']='1';
-/* $sql="SELECT COUNT(camp_id) AS sent_count,(email_allowed - COUNT(camp_id)) AS remaining_email,email_allowed,plan_name,plan_amt,email_allowed,camp_allowed,DATE_FORMAT(valid_till,'%d-%m-%Y') AS valid_till,DATE_FORMAT(subscribed_on,'%d-%m-%Y') AS subscribed_on,amt,payment_gateway 
+/* $sql="SELECT COUNT(camp_id) AS sent_count,(email_allowed - COUNT(camp_id)) AS remaining_email,email_allowed,plan_name,plan_amt,email_allowed,camp_allowed,DATE_FORMAT(valid_till,'%d-%m-%Y') AS valid_till,DATE_FORMAT(subscribed_on,'%d-%m-%Y') AS subscribed_on,amt,payment_gateway
 FROM plan_subscriber AS pln
-INNER JOIN payment_details AS pym ON pym.payment_id =pln.payment_id AND paid_by={$this->user_id} AND subscribed_by={$this->user_id} AND  valid_till >= NOW() 
-INNER JOIN plan_manager AS mgr ON mgr.plan_id =pln.plan_id 
+INNER JOIN payment_details AS pym ON pym.payment_id =pln.payment_id AND paid_by={$this->user_id} AND subscribed_by={$this->user_id} AND  valid_till >= NOW()
+INNER JOIN plan_manager AS mgr ON mgr.plan_id =pln.plan_id
 LEFT JOIN campaign_manager AS cpn ON pln.subscribed_by=created_by
 LEFT JOIN campaign_order_list AS ORD ON cpn.cpgn_id=camp_id AND sent_on > subscribed_on AND sent_on < valid_till
 group by subscribed_on
@@ -296,23 +296,23 @@ order by valid_till ASC limit 0,1
   $sql="SELECT  sent_count,remaining_email,email_allowed,plan_name,plan_amt,camp_allowed,valid_till,subscribed_on,plan_id FROM current_plan_info WHERE subscribed_by=".$this->user_id;
   $qry=$this->db->query($sql);
   $data['plan']=$qry->result_array();
-//$sql4="SELECT id,status FROM razorpay_subscription_list WHERE user_id=".$this->user_id;    
+//$sql4="SELECT id,status FROM razorpay_subscription_list WHERE user_id=".$this->user_id;
 //$qry4=$this->db->query($sql4);
 //$data['razorpay_plan']=$qry4->result_array();
 
-    $qry1=$this->db->query("SELECT plan_name,DATE_FORMAT(paid_on,'%d-%m-%Y') AS paid_on,plan_amt,email_allowed,camp_allowed,DATE_FORMAT(subscribed_on,'%d-%m-%Y') AS subscribed_on,DATE_FORMAT(valid_till,'%d-%m-%Y') AS valid_till,amt,payment_gateway 
+    $qry1=$this->db->query("SELECT plan_name,DATE_FORMAT(paid_on,'%d-%m-%Y') AS paid_on,plan_amt,email_allowed,camp_allowed,DATE_FORMAT(subscribed_on,'%d-%m-%Y') AS subscribed_on,DATE_FORMAT(valid_till,'%d-%m-%Y') AS valid_till,amt,payment_gateway
 FROM plan_subscriber AS pln
-INNER JOIN payment_details AS pym ON pym.payment_id =pln.payment_id AND paid_by={$this->user_id} AND subscribed_by={$this->user_id}  
+INNER JOIN payment_details AS pym ON pym.payment_id =pln.payment_id AND paid_by={$this->user_id} AND subscribed_by={$this->user_id}
 INNER JOIN plan_manager AS mgr ON mgr.plan_id =pln.plan_id ORDER BY  subscribe_id DESC LIMIT 0,15");
     $data['plan_history']=$qry1->result_array();
 
     $qry2=$this->db->query("SELECT * from current_balance where user_id=".$this->user_id);
     $cur=$qry2->result_array();
     $data['current_bal']=!empty($cur)?$cur[0]['current_amt']:'0.00';
-   
+
 
     $qry3=$this->db->query("SELECT pay.payment_id,amt,paid_on,payment_gateway,is_debit_credit,cur_bal,plan_name FROM payment_details AS pay
-    LEFT JOIN plan_subscriber AS sub ON subscribed_by={$this->user_id} AND pay.paid_by={$this->user_id} AND sub.subscribed_by=pay.paid_by AND pay.payment_id=sub.payment_id 
+    LEFT JOIN plan_subscriber AS sub ON subscribed_by={$this->user_id} AND pay.paid_by={$this->user_id} AND sub.subscribed_by=pay.paid_by AND pay.payment_id=sub.payment_id
     LEFT JOIN plan_manager AS pln ON pln.plan_id=sub.plan_id WHERE paid_by={$this->user_id} order by payment_id desc limit 0,15");
     $data['pay_history']=$qry3->result_array();
 
@@ -329,13 +329,13 @@ INNER JOIN razorpay_config as cnf ON 1=1 AND cnf.is_active=1 AND scr_u_id=".$thi
 
      $qry7=$this->db->query("SELECT * FROM scr_user WHERE scr_u_id=".$this->user_id);
      $data['setting']=$qry7->result_array();
-	 
+
 	 $qry8=$this->db->query("SELECT * FROM plan_manager WHERE is_deprecated=0");
      $data['plan_manager']=$qry8->result_array();
-    
+
     // $data['pay_history']=$qry1->result_array();
 
-    
+
 
 
     echo json_encode($data);
@@ -357,20 +357,20 @@ INNER JOIN razorpay_config as cnf ON 1=1 AND cnf.is_active=1 AND scr_u_id=".$thi
   {
     if(isset($_POST['plan_id']))
     {
-      $sql4="SELECT id,status FROM razorpay_subscription_list WHERE user_id=".$this->user_id;    
+      $sql4="SELECT id,status FROM razorpay_subscription_list WHERE user_id=".$this->user_id;
       $qry4=$this->db->query($sql4);
       $pln_info=$qry4->result_array();
       if(isset($pln_info[0]['status']) && $pln_info[0]['status']=='active')
       {
         echo '{"status_code":"0","status_text":"Your already have a active plan"}';
-        die();                     
+        die();
       }
-      $qry=$this->db->query("SELECT * FROM plan_manager WHERE plan_code=".$this->db->escape($_POST['plan_id']));  
+      $qry=$this->db->query("SELECT * FROM plan_manager WHERE plan_code=".$this->db->escape($_POST['plan_id']));
       $rs=$qry->result_array();
       if(count($rs) <=0)
       {
         echo '{"status_code":"0","status_text":"Selected plan is not available"}';
-        die();                     
+        die();
       }
       // $plan_id='plan_BqybKsLlea56Qf';
       $plan_id=$rs[0]['razorpay_planID'];
@@ -381,7 +381,7 @@ INNER JOIN razorpay_config as cnf ON 1=1 AND cnf.is_active=1 AND scr_u_id=".$thi
       {
         $this->session->set_userdata('subscription_id',$res['id']);
         $this->session->set_userdata('plan_id',$res['plan_id']);
-        
+
         $insert_subscription=array('id'=>$res['id'],'plan_id'=>$res['plan_id'],'status'=>$res['status'],'user_id'=>$this->user_id);
         $this->db->insert('razorpay_subscription',$insert_subscription);
         $data['status_code']='1';
@@ -398,9 +398,9 @@ INNER JOIN razorpay_config as cnf ON 1=1 AND cnf.is_active=1 AND scr_u_id=".$thi
   {
     $data['status_code']='0';
     $data['status_text']='Input Error';
-  }  
+  }
 echo json_encode($data);
-    
+
   }
 
   public function authorize_subscription()
@@ -425,10 +425,10 @@ echo json_encode($data);
     else
     {
      $data['status_code']='0';
-     $data['status_text']='Not able to create subscription please contact support'; 
+     $data['status_text']='Not able to create subscription please contact support';
      echo json_encode($data);
     }
-    
+
   }
 
   // public function test()
@@ -444,7 +444,7 @@ public function toggle_subscription_status()
     if(isset($_POST['w_status']) && ((int)$_POST['w_status']==1 ||(int)$_POST['w_status']==0) )
     {
           $status=(int)$_POST['w_status']==1?'TRUE':'FALSE';
-		 
+
           if($status=='FALSE')
 		  {
           $sql="SELECT id FROM `razorpay_subscription`  WHERE status='active' and user_id=".$this->user_id." ORDER BY proseller_id DESC LIMIT 0,1";
@@ -464,21 +464,21 @@ public function toggle_subscription_status()
 		 if($this->db->query("update razorpay_subscription SET status='".$resp['status']."' WHERE id='".$resp['id']."' and user_id=".$this->user_id))
           {
 		$this->db->query("update scr_user SET subscription_status=".$status." WHERE scr_u_id=".$this->user_id);
-         echo '{"status_code":"1","status_text":"Subscription to razorpay Canelled Successful"}'; 
+         echo '{"status_code":"1","status_text":"Subscription to razorpay Canelled Successful"}';
 		  }
 		  else
 		  {
-	 echo '{"status_code":"0","status_text":"Not able cancel the subscription please try again"}';  		  
+	 echo '{"status_code":"0","status_text":"Not able cancel the subscription please try again"}';
 		  }
       }
       else
       {
-	   echo '{"status_code":"0","status_text":"Not able cancel the subscription please try again"}';         
+	   echo '{"status_code":"0","status_text":"Not able cancel the subscription please try again"}';
       }
 	}
 			  else
 			  {
-			  echo '{"status_code":"0","status_text":"There are no active subscription to cancel"}'; 	  
+			  echo '{"status_code":"0","status_text":"There are no active subscription to cancel"}';
 			  }
 	      }
            if($status=='TRUE')
@@ -489,23 +489,23 @@ public function toggle_subscription_status()
 
 			  if(!empty($res[0]['id']))
 			  {
-		      echo '{"status_code":"0","status_text":"Please subscribe to a plan to activate subscription."}';  		  
+		      echo '{"status_code":"0","status_text":"Please subscribe to a plan to activate subscription."}';
 			  }
                else
 		      {
-	        echo '{"status_code":"0","status_text":"There are no active subscriptions"}';  		  
-		      }			  
+	        echo '{"status_code":"0","status_text":"There are no active subscriptions"}';
+		      }
 		   }
     }
     else
     {
-      echo '{"status_code":"0","status_text":"Input Error"}';               
+      echo '{"status_code":"0","status_text":"Input Error"}';
     }
   }
- 
+
   public function send_notification_to_admin($paid)
   {
-    $qry=$this->db->query("SELECT b.company_name,b.comp_addr1 AS comp_addr,b.comp_gst,scr_firstname,scr_lastname,scr_uname,mobile_no FROM scr_user 
+    $qry=$this->db->query("SELECT b.company_name,b.comp_addr1 AS comp_addr,b.comp_gst,scr_firstname,scr_lastname,scr_uname,mobile_no FROM scr_user
 INNER JOIN `usr_comp_info` AS b ON b.usr_id=scr_u_id
 INNER JOIN amazon_profile ON scr_u_id=profile_id and scr_u_id=".$this->user_id);
     $res=$qry->result_array();
@@ -526,7 +526,7 @@ INNER JOIN amazon_profile ON scr_u_id=profile_id and scr_u_id=".$this->user_id);
       $config['smtp_port'] = '465';
       $config['smtp_user'] = 'feedback_mail@proseller.in';
       $config['smtp_pass'] = 'Ravi560066';
-       
+
       $config['charset'] = "utf-8";
       $config['mailtype'] = "html";
       $config['newline'] = "\r\n";
@@ -538,12 +538,12 @@ INNER JOIN amazon_profile ON scr_u_id=profile_id and scr_u_id=".$this->user_id);
       $this->email->subject($subject);
       $this->email->message($msg);
       $this->email->send();
-    }  
+    }
 
 
   }
 
-	
-	
-	
+
+
+
 }

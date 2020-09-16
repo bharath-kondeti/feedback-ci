@@ -9,19 +9,19 @@ class Hijack extends CI_Controller {
        parent::__construct();
      if(!$this->login_model->userLoginCheck() && !$this->input->is_ajax_request())
      {
-      redirect('uauth');
+      redirect('user_auth');
      }
-   
+
       else
       {
-        $this->load->model("hijack_alert_model");   
-        $user=$this->session->userdata('user_logged_in');  
+        $this->load->model("hijack_alert_model");
+        $user=$this->session->userdata('user_logged_in');
         $this->user_id=$user['id'];
-		$store=$this->session->userdata('store_info');  
+		$store=$this->session->userdata('store_info');
         $this->store_id=$store['store_id'];
-       
+
       }
-       
+
   }
 	public function index()
 	{
@@ -32,7 +32,7 @@ class Hijack extends CI_Controller {
 		$this->load->view('UI/hijack',$data);
 		$this->load->view('UI/footer');
 	}
-	
+
 	public function get_inventory_list($orderby='',$direction='',$offet,$limit,$searchterm='')
   {
       $orderby=$orderby=='GEN'?'':$orderby;
@@ -61,7 +61,7 @@ class Hijack extends CI_Controller {
       $plan['cur_hijack_count']=count($ord);
       if($plan['hijack_alert'] < $plan['cur_hijack_count'])
       {
-        echo '{"status_code":"0","status_text":"As per your current plan you can not set more than '.$plan['hijack_alert'].' Hijack alert "}'; 
+        echo '{"status_code":"0","status_text":"As per your current plan you can not set more than '.$plan['hijack_alert'].' Hijack alert "}';
       }
       else
       {
@@ -70,7 +70,7 @@ class Hijack extends CI_Controller {
             $sql="UPDATE customer_product SET check_hijack=1 WHERE prod_asin=".$this->db->escape($od->prod_asin)." AND store_id=".$this->store_id;
             $this->db->query($sql);
         }
-        echo '{"status_code":"1","status_text":"Status updated "}';   
+        echo '{"status_code":"1","status_text":"Status updated "}';
       }
     }
     else
@@ -89,7 +89,7 @@ class Hijack extends CI_Controller {
           $sql="UPDATE customer_product SET check_hijack=0 WHERE prod_asin=".$this->db->escape($od->prod_asin)." AND store_id=".$this->store_id;
           $this->db->query($sql);
       }
-     echo '{"status_code":"1","status_text":"Status updated "}'; 
+     echo '{"status_code":"1","status_text":"Status updated "}';
     }
     else
     {
@@ -97,6 +97,6 @@ class Hijack extends CI_Controller {
     }
   }
 
-  
-	
+
+
 }
