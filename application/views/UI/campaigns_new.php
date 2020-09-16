@@ -323,12 +323,6 @@
                   <table class="text-center table-bordered table-striped table table-hover">
                     <thead class="">
                       <tr>
-                        <th style="width: 20px;">
-                          <div class="custom-control custom-checkbox">
-                            <input type="checkbox" class="custom-control-input" id="customCheck1" checklist-model="allCamps"/>
-                            <label class="custom-control-label" for="customCheck1">&nbsp;</label>
-                          </div>
-                        </th>
                         <th>MarketPlace</th>
                         <th>Name</th>
                         <th>Scheduled </th>
@@ -341,12 +335,6 @@
                     </thead>
                     <tbody>
                       <tr ng-repeat="idx in campList track by $index">
-                        <td>
-                          <div class="custom-control custom-checkbox">
-                            <input type="checkbox" checklist-value="idx.campaign_id" checklist-model="checkCampaigns" class="custom-control-input" id="customCheck2-{{$index+1}}">
-                            <label class="custom-control-label" for="customCheck2-{{$index+1}}">&nbsp;</label>
-                          </div>
-                        </td>
                         <td ng-if="store_country=='IN'"><img width="20" height="20" src="<?php echo $base_url . 'assets/img/amazon_logo.png' ?> "><span style="color:#a3afb7;font-weight:300">.in</span></td>
                         <td ng-if="store_country=='US'"><img width="20" height="20" src="<?php echo $base_url . 'assets/img/amazon_logo.png' ?> "><span style="color:#a3afb7;font-weight:300">.com</span></td>
                         <td ng-if="store_country=='UK'"><img width="20" height="20" src="<?php echo $base_url . 'assets/img/amazon_logo.png' ?> "><span style="color:#a3afb7;font-weight:300">.co.uk</span></td>
@@ -3543,10 +3531,6 @@
     {
 
 
-
-      console.log("checkStatus");
-
-      console.log($scope.checkStatus);
 
 
 
