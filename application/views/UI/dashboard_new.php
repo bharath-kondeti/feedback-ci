@@ -264,12 +264,12 @@
                               </div>
                               <div class="pull-left" style="width:180px;">
                                 <div class="progress" style="height:9px; margin:8px 0;">
-                                  <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="5" aria-valuemin="0" aria-valuemax="5" style="width: 1000%">
+                                  <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{fbk_data.five_star}}" aria-valuemin="0" aria-valuemax="5" style="width: 100%">
                                     <span class="sr-only">80% Complete (danger)</span>
                                   </div>
                                 </div>
                               </div>
-                              <div class="pull-right" style="margin-left:10px;">1</div>
+                              <div class="pull-right" style="margin-left:10px;">{{fbk_data.five_star}}</div>
                             </div>
                             <div class="pull-left">
                               <div class="pull-left" style="width:35px; line-height:1;">
@@ -277,12 +277,12 @@
                               </div>
                               <div class="pull-left" style="width:180px;">
                                 <div class="progress" style="height:9px; margin:8px 0;">
-                                  <div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="4" aria-valuemin="0" aria-valuemax="5" style="width: 80%">
+                                  <div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="{{fbk_data.four_star}}" aria-valuemin="0" aria-valuemax="5" style="width: 80%">
                                     <span class="sr-only">80% Complete (danger)</span>
                                   </div>
                                 </div>
                               </div>
-                              <div class="pull-right" style="margin-left:10px;">1</div>
+                              <div class="pull-right" style="margin-left:10px;">{{fbk_data.four_star}}</div>
                             </div>
                             <div class="pull-left">
                               <div class="pull-left" style="width:35px; line-height:1;">
@@ -290,12 +290,12 @@
                               </div>
                               <div class="pull-left" style="width:180px;">
                                 <div class="progress" style="height:9px; margin:8px 0;">
-                                  <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="3" aria-valuemin="0" aria-valuemax="5" style="width: 60%">
+                                  <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="{{fbk_data.three_star}}" aria-valuemin="0" aria-valuemax="5" style="width: 60%">
                                     <span class="sr-only">80% Complete (danger)</span>
                                   </div>
                                 </div>
                               </div>
-                              <div class="pull-right" style="margin-left:10px;">0</div>
+                              <div class="pull-right" style="margin-left:10px;">{{fbk_data.three_star}}</div>
                             </div>
                             <div class="pull-left">
                               <div class="pull-left" style="width:35px; line-height:1;">
@@ -303,12 +303,12 @@
                               </div>
                               <div class="pull-left" style="width:180px;">
                                 <div class="progress" style="height:9px; margin:8px 0;">
-                                  <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="2" aria-valuemin="0" aria-valuemax="5" style="width: 40%">
+                                  <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="{{fbk_data.two_star}}" aria-valuemin="0" aria-valuemax="5" style="width: 40%">
                                     <span class="sr-only">80% Complete (danger)</span>
                                   </div>
                                 </div>
                               </div>
-                              <div class="pull-right" style="margin-left:10px;">0</div>
+                              <div class="pull-right" style="margin-left:10px;">{{fbk_data.two_star}}</div>
                             </div>
                             <div class="pull-left">
                               <div class="pull-left" style="width:35px; line-height:1;">
@@ -316,12 +316,12 @@
                               </div>
                               <div class="pull-left" style="width:180px;">
                                 <div class="progress" style="height:9px; margin:8px 0;">
-                                  <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="1" aria-valuemin="0" aria-valuemax="5" style="width: 20%">
+                                  <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="{{fbk_data.one_star}}" aria-valuemin="0" aria-valuemax="5" style="width: 20%">
                                     <span class="sr-only">80% Complete (danger)</span>
                                   </div>
                                 </div>
                               </div>
-                              <div class="pull-right" style="margin-left:10px;">0</div>
+                              <div class="pull-right" style="margin-left:10px;">{{fbk_data.one_star}}</div>
                             </div>
                             <!-- end row -->
                           </div>
@@ -567,12 +567,12 @@
                               </div>
                               <div class="pull-left" style="width:180px;">
                                 <div class="progress" style="height:9px; margin:8px 0;">
-                                  <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="5" aria-valuemin="0" aria-valuemax="5" style="width: 1000%">
+                                  <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{breakdown.five_star}}" aria-valuemin="0" aria-valuemax="5" style="width: 1000%">
                                     <span class="sr-only">80% Complete (danger)</span>
                                   </div>
                                 </div>
                               </div>
-                              <div class="pull-right" style="margin-left:10px;">1</div>
+                              <div class="pull-right" style="margin-left:10px;">{{breakdown.five_star}}</div>
                             </div>
                             <div class="pull-left">
                               <div class="pull-left" style="width:35px; line-height:1;">
@@ -580,12 +580,12 @@
                               </div>
                               <div class="pull-left" style="width:180px;">
                                 <div class="progress" style="height:9px; margin:8px 0;">
-                                  <div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="4" aria-valuemin="0" aria-valuemax="5" style="width: 80%">
+                                  <div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="{{breakdown.four_star}}" aria-valuemin="0" aria-valuemax="5" style="width: 80%">
                                     <span class="sr-only">80% Complete (danger)</span>
                                   </div>
                                 </div>
                               </div>
-                              <div class="pull-right" style="margin-left:10px;">1</div>
+                              <div class="pull-right" style="margin-left:10px;">{{breakdown.four_star}}</div>
                             </div>
                             <div class="pull-left">
                               <div class="pull-left" style="width:35px; line-height:1;">
@@ -593,12 +593,12 @@
                               </div>
                               <div class="pull-left" style="width:180px;">
                                 <div class="progress" style="height:9px; margin:8px 0;">
-                                  <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="3" aria-valuemin="0" aria-valuemax="5" style="width: 60%">
+                                  <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="{{breakdown.three_star}}" aria-valuemin="0" aria-valuemax="5" style="width: 60%">
                                     <span class="sr-only">80% Complete (danger)</span>
                                   </div>
                                 </div>
                               </div>
-                              <div class="pull-right" style="margin-left:10px;">0</div>
+                              <div class="pull-right" style="margin-left:10px;">{{breakdown.three_star}}</div>
                             </div>
                             <div class="pull-left">
                               <div class="pull-left" style="width:35px; line-height:1;">
@@ -606,12 +606,12 @@
                               </div>
                               <div class="pull-left" style="width:180px;">
                                 <div class="progress" style="height:9px; margin:8px 0;">
-                                  <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="2" aria-valuemin="0" aria-valuemax="5" style="width: 40%">
+                                  <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="{{breakdown.two_star}}" aria-valuemin="0" aria-valuemax="5" style="width: 40%">
                                     <span class="sr-only">80% Complete (danger)</span>
                                   </div>
                                 </div>
                               </div>
-                              <div class="pull-right" style="margin-left:10px;">0</div>
+                              <div class="pull-right" style="margin-left:10px;">{{breakdown.two_star}}</div>
                             </div>
                             <div class="pull-left">
                               <div class="pull-left" style="width:35px; line-height:1;">
@@ -619,12 +619,12 @@
                               </div>
                               <div class="pull-left" style="width:180px;">
                                 <div class="progress" style="height:9px; margin:8px 0;">
-                                  <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="1" aria-valuemin="0" aria-valuemax="5" style="width: 20%">
+                                  <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="{{breakdown.one_star}}" aria-valuemin="0" aria-valuemax="5" style="width: 20%">
                                     <span class="sr-only">80% Complete (danger)</span>
                                   </div>
                                 </div>
                               </div>
-                              <div class="pull-right" style="margin-left:10px;">0</div>
+                              <div class="pull-right" style="margin-left:10px;">{{breakdown.one_star}}</div>
                             </div>
                             <!-- end row -->
                           </div>
@@ -934,6 +934,7 @@
   									  $scope.metrics=response.metrics;
                                         $scope.fbk_data=response.fbk_data[0];
                                         $scope.reviews_data=response.reviews_data[0];
+                                        $scope.breakdown=response.breakdown;
   									  $scope.recent_ten_orders=response.recent_ten_orders;
                                         $scope.graph_data=response.graph_data;
                                         $scope.show_revenue_graph(response.graph_data.order_date,response.graph_data[0].total_amt);
