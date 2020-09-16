@@ -379,7 +379,7 @@ class Campaign_model extends CI_Model
     }
     public function get_feedback_data($frm_date='',$to_date='')
     {
-      $sql="SELECT IFNULL(SUM(IF(fbk_rating >= 4,1,0 )),0) as positive_count ,IFNULL(SUM(IF(fbk_rating <= 2,1,0 )),0) as negative_count, IFNULL(SUM(IF(fbk_rating = 3,1,0 )),0) as neutral_count, count(order_id) as feedback_count, ROUND(AVG(fbk_rating),2) as avg_feedback FROM amz_feedback_data as tx
+      $sql="SELECT IFNULL(SUM(IF(fbk_rating >= 4,1,0 )),0) as positive_count ,IFNULL(SUM(IF(fbk_rating <= 2,1,0 )),0) as negative_count, IFNULL(SUM(IF(fbk_rating = 3,1,0 )),0) as neutral_count, count(order_id) as feedback_count, ROUND(AVG(fbk_rating),2) as avg_feedback, IFNULL(SUM(IF(fbk_rating = 1,1,0 )),0) as one_star, IFNULL(SUM(IF(fbk_rating = 2,1,0 )),0) as two_star, IFNULL(SUM(IF(fbk_rating = 3,1,0 )),0) as three_star, IFNULL(SUM(IF(fbk_rating = 4,1,0 )),0) as four_star, IFNULL(SUM(IF(fbk_rating = 5,1,0 )),0) as five_star FROM amz_feedback_data as tx
             WHERE fbk_for={$this->store_id}";
        // if(!empty($frm_date) && !empty($to_date))
        // {
@@ -453,6 +453,11 @@ class Campaign_model extends CI_Model
     return $res;
   }
 
+  public function get_reviews_breakdown() {
+    $qry=$this->db->query("SELECT review_rating FROM customer_product cp INNER JOIN fd_amazon_cust_reviews cr ON cp.prod_sku = cr.item_SKU WHERE cp.store_id = {$this->store_id} AND cr.user_id = " . $this->db->escape($this->user_id));
+    $res=$qry->result_array();
+    return $res;
+  }
 }
 ?>
 

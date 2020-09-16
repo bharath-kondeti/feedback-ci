@@ -133,7 +133,7 @@ $base_url=base_url();
                     <span class="h5">Title</span> : {{idx.item_title}}
                   </div>
 									<div class="mt-4">
-                  <span class="h5">ASIN</span> : {{idx.item_asin}} 
+                  <span class="h5">ASIN</span> : {{idx.item_asin}}
                   </div>
 								</div>
 							 	<div class="col-xl-4 align-center">
@@ -164,13 +164,13 @@ $base_url=base_url();
 															<div class="pull-left" style="width:180px;">
 																<div class="progress" style="height:9px; margin:8px 0;">
 																	<div class="progress-bar progress-bar-success" role="progressbar"
-																		aria-valuenow="5" aria-valuemin="0" aria-valuemax="5"
+																		aria-valuenow="{{idx.five_star}}" aria-valuemin="0" aria-valuemax="5"
 																		style="width: 1000%">
 																		<span class="sr-only">80% Complete (danger)</span>
 																	</div>
 																</div>
 															</div>
-															<div class="pull-right" style="margin-left:10px;">1</div>
+															<div class="pull-right" style="margin-left:10px;">{{idx.five_star}}</div>
 														</div>
 														<div class="pull-left">
 															<div class="pull-left" style="width:35px; line-height:1;">
@@ -180,13 +180,13 @@ $base_url=base_url();
 															<div class="pull-left" style="width:180px;">
 																<div class="progress" style="height:9px; margin:8px 0;">
 																	<div class="progress-bar progress-bar-primary" role="progressbar"
-																		aria-valuenow="4" aria-valuemin="0" aria-valuemax="5"
+																		aria-valuenow="{{idx.four_star}}" aria-valuemin="0" aria-valuemax="5"
 																		style="width: 80%">
 																		<span class="sr-only">80% Complete (danger)</span>
 																	</div>
 																</div>
 															</div>
-															<div class="pull-right" style="margin-left:10px;">1</div>
+															<div class="pull-right" style="margin-left:10px;">{{idx.four_star}}</div>
 														</div>
 														<div class="pull-left">
 															<div class="pull-left" style="width:35px; line-height:1;">
@@ -196,13 +196,13 @@ $base_url=base_url();
 															<div class="pull-left" style="width:180px;">
 																<div class="progress" style="height:9px; margin:8px 0;">
 																	<div class="progress-bar progress-bar-info" role="progressbar"
-																		aria-valuenow="3" aria-valuemin="0" aria-valuemax="5"
+																		aria-valuenow="{{idx.three_star}}" aria-valuemin="0" aria-valuemax="5"
 																		style="width: 60%">
 																		<span class="sr-only">80% Complete (danger)</span>
 																	</div>
 																</div>
 															</div>
-															<div class="pull-right" style="margin-left:10px;">0</div>
+															<div class="pull-right" style="margin-left:10px;">{{idx.three_star}}</div>
 														</div>
 														<div class="pull-left">
 															<div class="pull-left" style="width:35px; line-height:1;">
@@ -212,13 +212,13 @@ $base_url=base_url();
 															<div class="pull-left" style="width:180px;">
 																<div class="progress" style="height:9px; margin:8px 0;">
 																	<div class="progress-bar progress-bar-warning" role="progressbar"
-																		aria-valuenow="2" aria-valuemin="0" aria-valuemax="5"
+																		aria-valuenow="{{idx.two_star}}" aria-valuemin="0" aria-valuemax="5"
 																		style="width: 40%">
 																		<span class="sr-only">80% Complete (danger)</span>
 																	</div>
 																</div>
 															</div>
-															<div class="pull-right" style="margin-left:10px;">0</div>
+															<div class="pull-right" style="margin-left:10px;">{{idx.two_star}}</div>
 														</div>
 														<div class="pull-left">
 															<div class="pull-left" style="width:35px; line-height:1;">
@@ -228,16 +228,14 @@ $base_url=base_url();
 															<div class="pull-left" style="width:180px;">
 																<div class="progress" style="height:9px; margin:8px 0;">
 																	<div class="progress-bar progress-bar-danger" role="progressbar"
-																		aria-valuenow="1" aria-valuemin="0" aria-valuemax="5"
+																		aria-valuenow="{{idx.one_star}}" aria-valuemin="0" aria-valuemax="5"
 																		style="width: 20%">
 																		<span class="sr-only">80% Complete (danger)</span>
 																	</div>
 																</div>
 															</div>
-															<div class="pull-right" style="margin-left:10px;">0</div>
+															<div class="pull-right" style="margin-left:10px;">{{idx.one_star}}</div>
 														</div>
-
-														<!-- end row -->
 													</div>
 												</div>
 											</div>
