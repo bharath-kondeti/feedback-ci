@@ -82,18 +82,6 @@
 							</li>
 						</ul>
 					</li>
-					<li>
-						<a href="<?php echo $baseurl.'cancel'?>">
-							<i class="fe-star"></i>
-							<span> Cancel Account </span>
-						</a>
-					</li>
-					<li>
-						<a href="<?php echo $baseurl.'preferences'?>">
-							<i class="fe-star"></i>
-							<span> Preferences </span>
-						</a>
-					</li>
 					<!-----------------Settings-------------------->
 
 					<!-----------------Users-------------------->

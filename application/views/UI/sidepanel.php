@@ -145,14 +145,14 @@ echo "</a>";
                         <span>Edit Profile</span>
                     </a>
 
-                    <a href="<?php echo $base_url . 'change_password' ?>" class="dropdown-item notify-item">
+                    <!-- <a href="<?php echo $base_url . 'change_password' ?>" class="dropdown-item notify-item">
                         <i class="fe-edit"></i>
                         <span>Change Password</span>
-                    </a>
-                    <a href="<?php echo $baseurl . 'billing' ?>" class="dropdown-item notify-item">
+                    </a> -->
+                    <!-- <a href="<?php echo $baseurl . 'billing' ?>" class="dropdown-item notify-item">
                         <i class="mdi mdi-credit-card-plus"></i>
                         <span>Billing</span>
-                    </a>
+                    </a> -->
                     <a href="<?php echo $base_url . 'contact_us' ?>" class="dropdown-item notify-item">
                         <i class="fe-mail"></i>
                         <span>Create Ticket</span>
@@ -163,10 +163,15 @@ echo "</a>";
                         <span>Feedback</span>
                     </a>
 
-                    <a href="<?php echo $base_url . 'manage_referal' ?>" class="dropdown-item notify-item">
+                    <a href="<?php echo $baseurl.'preferences'?>" class="dropdown-item notify-item">
+                        <i class="mdi mdi-settings"></i>
+                        <span>Settings</span>
+                    </a>
+
+                    <!-- <a href="<?php echo $base_url . 'manage_referal' ?>" class="dropdown-item notify-item">
                         <i class="fe-user-plus"></i>
                         <span>Referals</span>
-                    </a>
+                    </a> -->
 
                     <a href="<?php echo $base_url . 'alert_manager' ?>" class="dropdown-item notify-item">
                         <i class="fe-alert-circle"></i>

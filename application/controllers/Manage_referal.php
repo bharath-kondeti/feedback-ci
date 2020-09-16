@@ -31,8 +31,8 @@ class Manage_referal extends CI_Controller {
       $query=$this->db->query("SELECT referal_key FROM scr_user WHERE scr_u_id=".$this->user_id);
       $ref=$query->result_array();
       $data['ref_key']=$ref[0]['referal_key'];
-	  $this->load->view('UI/navigation');
-	  $this->load->view('UI/sidepanel');
+	    $this->load->view('UI/navigation');
+	    $this->load->view('UI/sidepanel');
       $this->load->view('UI/manage_referal',$data);
       $this->load->view('UI/footer');
   }
