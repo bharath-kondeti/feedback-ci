@@ -70,6 +70,11 @@ class Reviews_new extends CI_Controller
       $sevenDaysCount = 0;
       $j = 0;
       $totalRating = 0;
+      $one_star = 0;
+      $two_star = 0;
+      $three_star = 0;
+      $four_star = 0;
+      $five_star = 0;
       foreach ($getAllReviews as $getReview => $value) {
         $totalRating = $totalRating + (float)$value['review_rating'];
         if($value['review_rating'] >= 3) {
@@ -83,9 +88,29 @@ class Reviews_new extends CI_Controller
         if($value['review_date'] >= $sevendaysDate) {
           $sevenDaysCount++;
         }
+        if((float)$value['review_rating'] > 0 && (float)$value['review_rating'] <= 1.5 ) {
+          $one_star++;
+        }
+        if((float)$value['review_rating'] > 1.5 && (float)$value['review_rating'] <= 2.5 ) {
+          $two_star++;
+        }
+        if((float)$value['review_rating'] > 2.5 && (float)$value['review_rating'] <= 3.5 ) {
+          $three_star++;
+        }
+        if((float)$value['review_rating'] > 3.5 && (float)$value['review_rating'] <= 4.5 ) {
+          $four_star++;
+        }
+        if((float)$value['review_rating'] > 4.5 && (float)$value['review_rating'] <= 5 ) {
+          $five_star++;
+        }
         $reviewContent[$i]['review_data'][$j] = $value;
         $j++;
       }
+      $reviewContent[$i]['one_star'] = $one_star;
+      $reviewContent[$i]['two_star'] = $two_star;
+      $reviewContent[$i]['three_star'] = $three_star;
+      $reviewContent[$i]['four_star'] = $four_star;
+      $reviewContent[$i]['five_star'] = $five_star;
       $reviewContent[$i]['positive_review_count'] = $postiveCount;
       $reviewContent[$i]['today_review_count'] = $todayCount;
       $reviewContent[$i]['seven_days_count'] = $sevenDaysCount;

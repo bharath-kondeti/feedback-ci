@@ -43,7 +43,35 @@ class Dashboard extends CI_Controller
     $data['cmp_info']=$this->dash_model->get_consolidated_campaign_details($frm_date,$to_date);
     $data['metrics']=$this->campaign_model->get_campaign_metrics($frm_date,$to_date);
     $data['fbk_data']=$this->campaign_model->get_feedback_data($frm_date,$to_date);
-    $data['reviews_data']=$this->campaign_model->get_reviews_overview();
+    $data['reviews_data'] = $this->campaign_model->get_reviews_overview();
+    $review_breakdown = $this->campaign_model->get_reviews_breakdown();
+    $one_star = 0;
+    $two_star = 0;
+    $three_star = 0;
+    $four_star = 0;
+    $five_star = 0;
+    foreach ($review_breakdown as $key => $review) {
+      if((float)$review['review_rating'] > 0 && (float)$review['review_rating'] <= 1.5 ) {
+        $one_star++;
+      }
+      if((float)$review['review_rating'] > 1.5 && (float)$review['review_rating'] <= 2.5 ) {
+        $two_star++;
+      }
+      if((float)$review['review_rating'] > 2.5 && (float)$review['review_rating'] <= 3.5 ) {
+        $three_star++;
+      }
+      if((float)$review['review_rating'] > 3.5 && (float)$review['review_rating'] <= 4.5 ) {
+        $four_star++;
+      }
+      if((float)$review['review_rating'] > 4.5 && (float)$review['review_rating'] <= 5 ) {
+        $five_star++;
+      }
+    }
+    $data['breakdown']['one_star'] = $one_star;
+    $data['breakdown']['two_star'] = $two_star;
+    $data['breakdown']['three_star'] = $three_star;
+    $data['breakdown']['four_star'] = $four_star;
+    $data['breakdown']['five_star'] = $five_star;
     echo json_encode($data);
   }
 
