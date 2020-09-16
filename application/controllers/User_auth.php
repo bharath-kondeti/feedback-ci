@@ -91,7 +91,7 @@ class User_auth extends CI_Controller {
 	   }
 	   else
 		{
-		 redirect('uauth');
+		 redirect('user_auth');
 		}
  }
  public function reset_to_new_password()

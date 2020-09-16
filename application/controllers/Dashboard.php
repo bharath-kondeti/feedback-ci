@@ -8,7 +8,7 @@ class Dashboard extends CI_Controller
      $this->load->model('login_model');
      if(!$this->login_model->userLoginCheck() && !$this->input->is_ajax_request())
      {
-      redirect('uauth');
+      redirect('user_auth');
      }
 	 else
      {

@@ -9,7 +9,7 @@ class Feedback extends CI_Controller {
        parent::__construct();
       if(!$this->login_model->userLoginCheck())
       {
-        redirect('uauth');
+        redirect('user_auth');
       }
       elseif($this->login_model->userLoginCheck() && $this->session->userdata('finance_not_added')=='yes')
      {
@@ -17,14 +17,14 @@ class Feedback extends CI_Controller {
      }
       else
       {
-        $this->load->model("Seller_reviews_model");   
-        $user=$this->session->userdata('user_logged_in');  
+        $this->load->model("Seller_reviews_model");
+        $user=$this->session->userdata('user_logged_in');
         $this->user_id=$user['id'];
-		$store=$this->session->userdata('store_info');  
+		$store=$this->session->userdata('store_info');
         $this->store_id=$store['store_id'];
-       
+
       }
-       
+
   }
 	public function index()
 	{
@@ -35,12 +35,12 @@ class Feedback extends CI_Controller {
 		$this->load->view('UI/feedback',$data);
 		$this->load->view('UI/footer');
 	}
-	
+
 public function get_review_list($orderby='',$direction='DESC',$offet,$limit,$searchterm='')
   {
       $result_set=$this->Seller_reviews_model->get_review_list($orderby,$direction,$offet,$limit,$searchterm);
       echo json_encode($result_set);
   }
-  
- 
+
+
 }
