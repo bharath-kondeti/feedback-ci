@@ -2,6 +2,58 @@
   $baseurl=base_url();
   $base_url=base_url();
 ?>
+<style type="text/css">
+  .switch {
+    position: relative;
+    display: inline-block;
+    width: 40px;
+    height: 20px;
+  }
+  .switch input {
+    display: none;
+  }
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+    border-radius: 10px;
+  }
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 18px;
+    width: 18px;
+    border-radius: 50px;
+    left: -5px;
+    bottom: 1px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  input:checked+.slider {
+    background-color: #0bb900;
+  }
+  input:focus+.slider {
+    box-shadow: 0 0 1px #0bb900;
+  }
+  input:checked+.slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+  }
+  .slider.round {
+    border-radius: 34px;
+  }
+  .slider.round:before {
+    border-radius: 50%;
+  }
+</style>
 <div class="wrapper" ng-controller='invCtrl'>
 <div class="content">
   <div class="container-fluid">
@@ -122,7 +174,7 @@
                       <td>
                         <div class="form-inline">
                           <label class="switch" style="margin-left: 10px">
-                          <input type="checkbox" name='enable_addon' ng-model="lst.review_tracking" ng-true-value="'1'" ng-false-value="'0'" ng-change='change_status(lst.review_tracking,lst.prod_asin,lst.store_id)'>
+                          <input type="checkbox" name='enable_addon' ng-model="lst.review_tracking" ng-true-value="'1'" ng-false-value="'0'" ng-change='change_status(lst.review_tracking, lst.prod_asin, lst.store_id, lst.fc_code, lst.prod_sku)'>
                           <span class="slider round"></span>
                           </label>
                         </div>
@@ -181,7 +233,7 @@
       };
 
 
-      var change_status = function(active, asin, storeid)
+      var change_status = function(active, asin, storeid, fc_code, prod_sku)
     {
       var search_path = "<?php echo $baseurl . 'inventory/change_status/'; ?>";
       return $http({
@@ -192,6 +244,8 @@
           status: active,
           asin: asin,
           storeid: storeid,
+          fc_code: fc_code,
+          prod_sku: prod_sku,
         }
       });
     };
@@ -219,7 +273,7 @@
         }
         $scope.reset();
 
-      $scope.change_status = function(active, asin, storeid)
+      $scope.change_status = function(active, asin, storeid, fc_code, prod_sku)
       {
         if (active == 1)
         {
@@ -242,7 +296,7 @@
           },
           function(isConfirm) {
             if (isConfirm) {
-              invFactory.change_status(active, asin, storeid)
+              invFactory.change_status(active, asin, storeid, fc_code, prod_sku)
                 .success(
                   function(html)
                   {

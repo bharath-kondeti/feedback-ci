@@ -141,5 +141,11 @@ class Inventory_model extends CI_Model
     }
 
 
+    public function get_review_cmp() {
+      $qry=$this->db->query("SELECT * FROM campaign_asin ca INNER JOIN customer_product cp ON cp.prod_country = ca.cmp_country AND ca.cmp_asin = cp.prod_asin WHERE cp.review_tracking = 1 AND cp.store_id = {$this->store_id}");
+      $res=$qry->result_array();
+      return $res;
+    }
+
   }
 ?>

@@ -26,7 +26,7 @@
 							<span> Feedback </span>
 						</a>
 					</li>
-					
+
 					<li>
 						<a href="<?php echo $baseurl.'Reviews_new'?>">
 							<i class="fe-star"></i>
@@ -72,21 +72,24 @@
 					</li>
 					<!-----------------Stores Data-------------------->
 					<li class="has-submenu">
-						<a href="#">
-							<i class="fe-file-text"></i>Channels<div class="arrow-down"></div></a>
-					<ul class="submenu">
+						<a href="#"><i class="fe-file-text"></i>Channels<div class="arrow-down"></div></a>
+						<ul class="submenu">
 							<li>
 								<a href="<?php echo $baseurl.'manage_stores'?>">
 								  <i class="mdi mdi-store"></i>
 									<span>Manage Stores </span>
 								</a>
 							</li>
-							
-							
 						</ul>
 					</li>
+					<li>
+						<a href="<?php echo $baseurl.'Reviews_new'?>">
+							<i class="fe-star"></i>
+							<span> Cancel Account </span>
+						</a>
+					</li>
 					<!-----------------Settings-------------------->
-					
+
 					<!-----------------Users-------------------->
 					<!--<li class="has-submenu">
 						<a href="#">
@@ -107,7 +110,7 @@
 						</ul>
 					</li>-->
 
-					
+
 
 				</ul>
 				<!-- End navigation menu -->

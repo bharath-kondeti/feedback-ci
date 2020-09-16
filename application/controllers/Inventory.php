@@ -34,7 +34,9 @@ class Inventory extends CI_Controller {
 
 	public function get_inventory_list($orderby='pro_id',$direction='ASC',$offet,$limit,$searchterm='')
   {
-      $result_set=$this->inventory_model->get_inventory_list($orderby,$direction,$offet,$limit,$searchterm);
+      // $result_set['inventory'] = $this->inventory_model->get_inventory_list($orderby,$direction,$offet,$limit,$searchterm);
+      // $result_set['review_track'] = $this->inventory_model->get_review_cmp();
+      $result_set = $this->inventory_model->get_inventory_list($orderby,$direction,$offet,$limit,$searchterm);
       echo json_encode($result_set);
   }
 
@@ -43,19 +45,17 @@ class Inventory extends CI_Controller {
     if(isset($_POST['status']) && ((int)$_POST['status']==1 ||(int)$_POST['status']==0) )
     {
     $status=(int)$_POST['status']==1?'1':'0';
-       $ufql="UPDATE customer_product set review_tracking=".$status." where prod_asin=".$this->db->escape($_POST['asin'])." AND store_id=".$_POST['storeid'];
+       $ufql="UPDATE customer_product set review_tracking=".$status." where prod_asin=".$this->db->escape($_POST['asin'])." AND store_id=".$_POST['storeid']." AND fc_code = '".$_POST['fc_code']."' AND prod_sku = '".$_POST['prod_sku']."'";
 
         if($this->db->query($ufql))
         {
           $data['status_text']="Review Tracking Updated";
           $data['status_code']=1;
-          //$data['campaign_list']=$this->campaign_model->get_campaign_list();
         }
         else
         {
           $data['status_text']="Something went wrong please try agin after sometime";
           $data['status_code']=0;
-          //$data['campaign_list']=$this->campaign_model->get_campaign_list();
 
         }
         echo json_encode($data);
