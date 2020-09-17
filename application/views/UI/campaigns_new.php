@@ -182,12 +182,13 @@
                 <a class="btn btn-success btn-block dropdown-toggle" href="" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 All campaigns<i class="mdi mdi-chevron-down"></i>
                 </a>
+                <!-- [{name: 'Live', id: 3}, {name: 'Draft', id: 1}, {name: 'Test', id: 2}, {name: 'Paused', id: 4}] -->
                 <div class="dropdown-menu icon_menu_size" aria-labelledby="dropdownMenuLink" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 35px, 0px);">
-                  <a class="dropdown-item" href="#"> <i class="fe-check text-success"></i> All (0)</a>
-                  <a class="dropdown-item" href="#"> <i class="fe-check-circle text-success"></i> Live (0)</a>
-                  <a class="dropdown-item" href="#"> <i class="fe-minus-circle text-info"></i> Draft (0)</a>
-                  <a class="dropdown-item" href="#"> <i class="fe-play-circle text-primary"></i> Test (0)</a>
-                  <a class="dropdown-item" href="#"> <i class="fe-pause-circle text-warning"></i> Paused (0)</a>
+                  <a ng-click="filterCamps('All','status')" class="dropdown-item" href="javascript:void(0);"> <i class="fe-check text-success"></i> All (0)</a>
+                  <a ng-click="filterCamps('3','status')" class="dropdown-item" href="javascript:void(0);"> <i class="fe-check-circle text-success"></i> Live (0)</a>
+                  <a ng-click="filterCamps('1','status')" class="dropdown-item" href="javascript:void(0);"> <i class="fe-minus-circle text-info"></i> Draft (0)</a>
+                  <a ng-click="filterCamps('2','status')" class="dropdown-item" href="javascript:void(0);"> <i class="fe-play-circle text-primary"></i> Test (0)</a>
+                  <a ng-click="filterCamps('4','status')" class="dropdown-item" href="javascript:void(0);"> <i class="fe-pause-circle text-warning"></i> Paused (0)</a>
                 </div>
               </div>
             </div>
@@ -213,10 +214,11 @@
                 All Goals<i class="mdi mdi-chevron-down"></i>
                 </a>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuLink" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 35px, 0px);">
-                  <a class="dropdown-item" href="#">All Goals</a>
-                  <a class="dropdown-item" href="#">Seller Feedback</a>
-                  <a class="dropdown-item" href="#">Customer Service</a>
-                  <a class="dropdown-item" href="#">Product Review</a>
+                  <!-- 1: customer service 2: Feedback 3: Review -->
+                  <a ng-click="filterCamps('All','goal')" class="dropdown-item" href="#">All Goals</a>
+                  <a ng-click="filterCamps('2','goal')" class="dropdown-item" href="#">Seller Feedback</a>
+                  <a ng-click="filterCamps('1','goal')" class="dropdown-item" href="#">Customer Service</a>
+                  <a ng-click="filterCamps('3','goal')" class="dropdown-item" href="#">Product Review</a>
                 </div>
               </div>
             </div>
@@ -1338,6 +1340,7 @@
       $scope.selectedProduct = [];
       $scope.product_list = [];
       $scope.checkStatus = 'N';
+      $scope.tempCampList = [];
       $scope.togggle_view = function()
       {
         if ($scope.show_dash == 0)
@@ -1354,6 +1357,35 @@
       }
       $scope.changeStatus = function(val,val2) {
         console.log(val.id, val2.campaign_id);
+      }
+      $scope.filterCamps = function(val, type) {
+        $scope.campList = $scope.tempCampList;
+        if(type === 'status') {
+          if(val === 'All') {
+            $scope.campList = $scope.tempCampList;
+          } else {
+            var arr = [];
+            $scope.campList.forEach( x=> {
+              if(x.camp_status === val) {
+                arr.push(x);
+              }
+            })
+            $scope.campList = arr;
+          }
+        }
+        if(type === 'goal') {
+          if(val === 'All') {
+            $scope.campList = $scope.tempCampList;
+          } else {
+            var arr = [];
+            $scope.campList.forEach( x=> {
+              if(x.camp_goaltype === val) {
+                arr.push(x);
+              }
+            })
+            $scope.campList = arr;
+          }
+        }
       }
       $scope.clear_campaign_data = function()
       {
@@ -1708,6 +1740,7 @@
             {
               $.unblockUI();
               $scope.campList = response.campaign_list;
+              $scope.tempCampList = response.campaign_list;
               $scope.brand_list = response.brand_list;
               $scope.recent_orders = response.recent_orders;
               $scope.country_list = response.country_list;
