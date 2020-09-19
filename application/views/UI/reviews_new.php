@@ -88,9 +88,9 @@ $base_url=base_url();
               <div class="row">
                 <div class="col-xl-12">
                   <div class="table-responsive">
-                    <table class="table table-stripped table-hover table-bordered table-centered mb-0">
-                      <thead class="thead-light">
-                        <tr>
+                    <table style="border: 1px solid #DEE2E6" class="table table-hover table-centered mb-0">
+                      <thead class="thead-color">
+                        <tr class="">
                           <th>Channel</th>
                           <th>SKU</th>
                           <th>Image</th>
@@ -100,7 +100,8 @@ $base_url=base_url();
                           <th>Last 7 days Reviews</th>
                           <th>Positive Reviews</th>
                           <th>Negative Reviews</th>
-						              <th>Total Reviews</th>
+                          <th>Total Reviews</th>
+                          <th>Expand</th>
                         </tr>
                       </thead>
                       <tbody ng-repeat="idx in reviews_data.reviews track by $index">
@@ -116,14 +117,15 @@ $base_url=base_url();
 								</div>
 							</td>
 							<td>{{idx.item_asin}}</td>
-							<td>{{idx.today_review_count}}</td>
-							<td>{{idx.seven_days_count}}</td>
-							<td>{{idx.positive_review_count}}</td>
-							<td>{{idx.negative_review_count}}</td>
-							<td>{{idx.item_total_reviews}}</td>
+							<td class="text-center">{{idx.today_review_count}}</td>
+							<td class="text-center">{{idx.seven_days_count}}</td>
+							<td class="text-center">{{idx.positive_review_count}}</td>
+							<td class="text-center">{{idx.negative_review_count}}</td>
+              <td class="text-center">{{idx.item_total_reviews}}</td>
+              <td ng-click="expand($index)" class="text-center"><i class=" fas fa-chevron-down"></i></td>
 						 </tr>
 						 <tr class="remove-hover" ng-if="idx.expanded">
-						 	<td colspan="10">
+						 	<td style="border-top: none;" colspan="11">
 							 <div class="row p-2">
 								<div class="col-xl-3 align-center">
 								<img src="{{idx.item_image}}" height="250" width="250" alt="">
@@ -243,7 +245,7 @@ $base_url=base_url();
 									</div>
 							 	</div>
 							 </div>
-						 		<table class="table table-stripped table-centered mb-0 mt-3">
+						 		<table class="table table-centered mb-0 mt-3">
 						 			<thead class="thead-light">
 						 				<tr>
 						 					<th>Date</th>

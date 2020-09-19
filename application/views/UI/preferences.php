@@ -3,7 +3,7 @@ $baseurl=base_url();
 $base_url=base_url();
 ?>
 
-<div class="wrapper">
+<div class="wrapper" ng-controller='prefCtrl'>
   <div class="content">
     <div class="container-fluid">
       <div class="row">
@@ -84,7 +84,7 @@ $base_url=base_url();
                 </div>
                 <div class="input-group mb-3 mt-3" style="width:310px">
                   <div class="custom-file">
-                    <input type="file" class="custom-file-input" id="inputGroupFile02">
+                    <input type="file" onchange="uploadFile(this.files)" class="custom-file-input" id="inputGroupFile02">
                     <label class="custom-file-label" for="inputGroupFile02" aria-describedby="inputGroupFileAddon02">Choose file</label>
                   </div>
                 </div>
@@ -101,15 +101,20 @@ $base_url=base_url();
                 <div class="form-group" style="width:50%">
                   You will need to enter your top approved email address from your amazon account to 
                   allow us to send verified emails to buyers.
-                  <input type="email" class="form-control mt-1" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-                  <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                  <div class="d-flex">
+                    <input type="email" ng-model="approvedEmail" class="form-control mt-1" aria-describedby="emailHelp" placeholder="Enter email">
+                  </div>
+                  <small ng-if="!approvedError" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                  <small ng-if="approvedError" class="form-text red">Please enter valid Email address</small>
                 </div>
                 <div class="form-group" style="width:50%">
                   <div class="h5">
                     Default Email Address for Test Messages
                   </div>
-                  <input type="email" class="form-control mt-1" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-                  <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                  <div class="d-flex">
+                    <input type="email" ng-model="testEmail" class="form-control mt-1" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                  </div>
+                  <small ng-if="testError" class="form-text red">Please enter valid Email address</small>
                 </div>
               </div>
               <hr>
@@ -121,8 +126,9 @@ $base_url=base_url();
                   <div class="h5">
                     Email Address(es)
                   </div>
-                  <input type="email" class="form-control mt-1" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-                  <small id="emailHelp" class="form-text text-muted">separate each email with a comma.</small>
+                  <input type="text" ng-model="negativeEmails" class="form-control mt-1" aria-describedby="emailHelp" placeholder="Enter email">
+                  <small ng-if="!negError" id="emailHelp" class="form-text text-muted">separate each email with a comma.</small>
+                  <small ng-if="negError" class="form-text red">Please enter valid Email address</small>
                 </div>
               </div>
               <hr>
@@ -131,14 +137,14 @@ $base_url=base_url();
                   Negative feedback on blacklist
                 </div>
                 <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                  <input ng-model="blackListNotif" class="form-check-input" type="radio" name="blacklistCheck" value="val1">
                   <label class="form-check-label" for="inlineRadio1">Automatically add buyers to the blacklist who submit negative feedback.</label>
                 </div>
               </div>
               <hr>
             </div>
             <div>
-              <button type="button" class="btn btn-primary">Save my preferences</button>
+              <button ng-click="validateData()" type="button" class="btn btn-primary">Save my preferences</button>
             </div>
           </div>
         </div>
@@ -146,3 +152,61 @@ $base_url=base_url();
     </div>
   </div>
 </div>
+
+<script type="text/javascript">
+ 		crawlApp.factory("acFactory", function ($http, $q) {
+      var save_data = function (app_email,test_email,neg_emails,black_val) {
+      var dataset_path="<?php echo $baseurl.'preferences/save_preferences'?>";
+      var deferred = $q.defer();
+      var path = dataset_path+'/'+app_email+'/'+test_email+'/'+neg_emails+'/'+black_val;
+      $http.get(path)
+      .success(function(data,status,headers,config){deferred.resolve(data);})
+      .error(function(data, status, headers, config) { deferred.reject(status);});
+      return deferred.promise;
+      };
+ 			return {
+        save_data: save_data
+ 			};
+ 		});
+ 		crawlApp.controller("prefCtrl", function prefCtrl($window, $scope, acFactory, $sce, $q, $timeout, Upload) {
+      $scope.testEmail = "";
+      $scope.approvedEmail = "";
+      $scope.negativeEmails = "";
+      $scope.blackListNotif = "";
+      $scope.approvedError = false;
+      $scope.testError = false;
+      $scope.negError = false;
+
+      $scope.validateData =  function() {
+        if($scope.approvedEmail === undefined) {
+          $scope.approvedError = true
+        } else {
+          $scope.approvedError = false;
+        }
+        if($scope.testEmail === undefined) {
+          $scope.testError = true
+        } else {
+          $scope.testError = false;
+        }
+        var str = $scope.negativeEmails.replace(/\s/g, "");
+        var negEmails = str.split(',');
+        for(var i = 0; i<negEmails.length; i++) {
+          if(validateEmail(negEmails[i])) {
+            $scope.negError = false;
+          } else {
+            $scope.negError = true;
+            break;
+          }
+          if(!$scope.approvedError && !$scope.testError && !$scope.negError) {
+            save_data($scope.approvedEmail, $scope.testEmail, negEmails, $scope.blackListNotif)
+          }
+        }
+
+      }
+      function validateEmail(email) {
+        var re = /\S+@\S+\.\S+/;
+        return re.test(email);
+      }
+ 		});
+
+ 	</script>

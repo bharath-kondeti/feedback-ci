@@ -31,4 +31,7 @@ class Preferences extends CI_Controller {
     $this->load->view('UI/preferences');
     $this->load->view('UI/footer');
   }
+  function save_preferences($app_email,$test_email,$neg_emails,$black_val) {
+    
+  }
 }

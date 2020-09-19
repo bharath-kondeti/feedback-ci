@@ -31,4 +31,10 @@ class Cancel extends CI_Controller {
     $this->load->view('UI/cancel');
     $this->load->view('UI/footer');
   }
+  function hold_account () {
+
+  }
+  function cancel_account () {
+    
+  }
 }
