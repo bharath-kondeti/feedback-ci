@@ -222,7 +222,21 @@
                 </div>
               </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-2">
+              <div class="dropdown">
+                <a class="btn btn-secondary btn-block dropdown-toggle" href="" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Actions<i class="mdi mdi-chevron-down"></i>
+                </a>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 35px, 0px);">
+                  <!-- 1: customer service 2: Feedback 3: Review -->
+                  <a ng-click="performAction('archive')" class="dropdown-item" href="#"><i class="fa fa-archive mr-2" aria-hidden="true"></i>Archive</a>
+                  <a ng-click="performAction('delete')" class="dropdown-item" href="#"><i class="fa fa-trash mr-2" aria-hidden="true"></i>Delete</a>
+                  <a ng-click="performAction('pause')" class="dropdown-item" href="#"><i class="fa fa-pause mr-2" aria-hidden="true"></i>Pause</a>
+                  <a ng-click="performAction('start')" class="dropdown-item" href="#"><i class="fa fa-play mr-2" aria-hidden="true"></i>Start</a>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
               <?php if ($store_count[0]['ttl'] > 0) { ?>
               <a href='#' class="btn btn-info pull-right" ng-click='clear_campaign_data();togggle_view()'>Create Campaign</a>
               <?php }?>
@@ -327,7 +341,7 @@
                       <tr>
                         <th style="width: 20px;">
                           <div class="custom-control custom-checkbox">
-                            <input type="checkbox" class="custom-control-input" id="customCheck1" ng-model="checkStatus" ng-change="statusCheck()" ng-true-value="'Y'" ng-false-value="'N'" />
+                            <input type="checkbox" class="custom-control-input" id="customCheck1" ng-model="checkStatusCamp" ng-change="statusCheckCamp()" ng-true-value="'Y'" ng-false-value="'N'" />
                             <label class="custom-control-label" for="customCheck1">&nbsp;</label>
                           </div>
                         </th>
@@ -345,8 +359,8 @@
                       <tr ng-repeat="idx in campList track by $index">
                         <td>
                           <div class="custom-control custom-checkbox">
-                            <input type="checkbox" checklist-value="tnx" checklist-model="selectedOrder" class="custom-control-input" id="customCheck2-{{$index+1}}">
-                            <label class="custom-control-label" for="customCheck2-{{$index+1}}">&nbsp;</label>
+                            <input type="checkbox" checklist-value="idx.campaign_id" checklist-model="selectedCampaign.ids" ng-change="campStatusCheck()" class="custom-control-input" id="customCheck3-{{$index+1}}">
+                            <label class="custom-control-label" for="customCheck3-{{$index+1}}">&nbsp;</label>
                           </div>
                         </td>
                         <td ng-if="store_country=='IN'"><img width="20" height="20" src="<?php echo $base_url . 'assets/img/amazon_logo.png' ?> "><span style="color:#a3afb7;font-weight:300">.in</span></td>
@@ -1269,6 +1283,21 @@
       });
     };
 
+    var perform_action = function(action_name, campaign_ids)
+    {
+      var search_path = "<?php echo $baseurl . 'manage_campaign/perform_action/'; ?>";
+      console.log(action_name, campaign_ids)
+      return $http({
+        method: "post",
+        url: search_path,
+        data:
+        {
+          campaign_ids: campaign_ids,
+          action_name: action_name
+        }
+      });
+    };
+
     var test_email = function(template_id, order_id, email)
     {
       var search_path = "<?php echo $baseurl . 'manage_campaign/test_email/'; ?>";
@@ -1293,7 +1322,8 @@
       test_email: test_email,
       change_status: change_status,
       change_state: change_state,
-      get_brands: get_brands
+      get_brands: get_brands,
+      perform_action: perform_action
     };
 
   });
@@ -1372,6 +1402,13 @@
       $scope.tempCampList = [];
       $scope.selectedFilterStatus = 'All Campaigns';
       $scope.selectedFilterGoal = 'All Goals'
+      $scope.checkStatusCamp = 'N';
+      $scope.checkedAll = false;
+      $scope.campList = [];
+      // $scope.selectedCampaign = [];
+      $scope.selectedCampaign = {
+        ids: []
+      };
       $scope.togggle_view = function()
       {
         if ($scope.show_dash == 0)
@@ -1386,9 +1423,28 @@
       $scope.show_camp_drop = function(val) {
         $scope.showCampDrop[val] = !$scope.showCampDrop[val];
       }
-      $scope.changeStatus = function(val,val2) {
-        console.log(val.id, val2.campaign_id);
+      $scope.$watch("selectedCampaign.ids.length", function(newValue, oldValue) {
+        if($scope.campList.length > 0) {
+          if(newValue === $scope.campList.length) {
+            $scope.checkStatusCamp = 'Y'
+          } else {
+            $scope.checkStatusCamp = 'N'
+          }
+        }
+      });
+      $scope.statusCheckCamp = function() {
+        if($scope.checkStatusCamp === 'Y') {
+          $scope.selectedCampaign.ids = $scope.campList.map(function(item) { return item.campaign_id; });
+        } else {
+          $scope.selectedCampaign.ids = [];
+        }
       }
+      $scope.campStatusCheck = function () {
+        console.log('here3', $scope.selectedCampaign.ids)
+      }
+      $scope.performAction = function (val) {
+        campaignFactory.perform_action(val, $scope.selectedCampaign.ids)
+      } 
       $scope.filterCamps = function(val, type) {
         $scope.campList = $scope.tempCampList;
         if(type === 'status') {
