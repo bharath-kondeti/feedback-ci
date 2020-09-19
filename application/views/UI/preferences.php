@@ -80,16 +80,18 @@ $base_url=base_url();
                   Your store logo
                 </div>
                 <div style="width:310px; height:110px; background-color:gray;">
-                  <img src="{{idx.item_image}}" alt="store-logo" height="100px" width="300px">
+                  <img ng-src="{{logo_Image}}" id="logoImg" alt="store-logo" height="110px" width="310px">
                 </div>
                 <div class="input-group mb-3 mt-3" style="width:310px">
                   <div class="custom-file">
-                    <input type="file" onchange="uploadFile(this.files)" class="custom-file-input" id="inputGroupFile02">
-                    <label class="custom-file-label" for="inputGroupFile02" aria-describedby="inputGroupFileAddon02">Choose file</label>
+                    <input type="file" class="custom-file-input" id="logoImage">
+                    <label id="logoImageName" class="custom-file-label" for="logoImage" aria-describedby="logoImage">Choose File
+                      <span></span>
+                    </label>
                   </div>
                 </div>
                 <div>
-                  <button type="button" class="btn btn-primary">Upload your logo</button>
+                  <button ng-click="uploadLogo()" type="button" class="btn btn-primary">Upload your logo</button>
                 </div>
               </div>
               <hr>
@@ -164,8 +166,20 @@ $base_url=base_url();
       .error(function(data, status, headers, config) { deferred.reject(status);});
       return deferred.promise;
       };
+      var save_logo = function(img_file) {
+        var dataset_path="<?php echo $baseurl.'preferences/save_logo'?>";
+        return $http({
+          method: "post",
+          url: search_path,
+          data:
+          {
+            img_file : img_file,
+          }
+        });
+      }
  			return {
-        save_data: save_data
+        save_data: save_data,
+        save_logo: save_logo
  			};
  		});
  		crawlApp.controller("prefCtrl", function prefCtrl($window, $scope, acFactory, $sce, $q, $timeout, Upload) {
@@ -176,6 +190,9 @@ $base_url=base_url();
       $scope.approvedError = false;
       $scope.testError = false;
       $scope.negError = false;
+      $scope.logo_Image = "";
+      $scope.imageUploaded =  false;
+      $scope.notYetUploaded = false;
 
       $scope.validateData =  function() {
         if($scope.approvedEmail === undefined) {
@@ -203,9 +220,53 @@ $base_url=base_url();
         }
 
       }
+      $scope.uploadLogo = function () {
+        if($scope.imageUploaded) {
+          $scope.notYetUploaded = false;
+        } else {
+          $scope.notYetUploaded = true;
+        }
+      }
       function validateEmail(email) {
         var re = /\S+@\S+\.\S+/;
         return re.test(email);
+      }
+      document.querySelector('#logoImage').addEventListener('change', event => {
+        handleImageUpload(event)
+      })
+      const handleImageUpload = event => {
+        if(event.target.files.length > 0) {
+          const files = event.target.files[0];
+          var filename = files.name;
+          var format = filename.substring(filename.lastIndexOf('.')+1, filename.length)
+          if (format=="jpg" || format=="jpeg" || format=="png"){
+            $scope.logo_Image = URL.createObjectURL(files);
+            document.getElementById('logoImg').src = $scope.logo_Image;
+            document.getElementById('logoImageName').innerText = filename;
+            $scope.imageUploaded =  true;
+          }else{
+            $scope.imageUploaded =  false;
+            swal({
+              title: 'Error',
+              text: "Only Images of format jpg/jpeg and png are allowed",
+              type: "error",
+            });
+          } 
+        }
+        // const formData = new FormData()
+        // formData.append('myFile', files[0])
+
+        // fetch('/saveImage', {
+        //   method: 'POST',
+        //   body: formData
+        // })
+        // .then(response => response.json())
+        // .then(data => {
+        //   console.log(data.path)
+        // })
+        // .catch(error => {
+        //   console.error(error)
+        // })
       }
  		});
 
