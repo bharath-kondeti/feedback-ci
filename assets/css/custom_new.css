@@ -504,6 +504,13 @@
 .camp-status {
   padding: 5px;
 }
+.thead-color > tr {
+  background-color: #6c7ae0;
+  color: white;
+}
+.red {
+  color: red;
+}
 .camp-opts {
   padding: 5px 10px; 
 }
