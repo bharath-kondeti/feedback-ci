@@ -219,12 +219,41 @@ class Manage_campaign extends CI_Controller
 
 
 
-	public function change_status()
+	public function change_state()
   {
     if(isset($_POST['w_status']) && ((int)$_POST['w_status']==1 ||(int)$_POST['w_status']==0) )
     {
 		$status=(int)$_POST['w_status']==1?'1':'0';
        $ufql="UPDATE campaign_manager set is_active=".$status." where cpgn_id=".$this->db->escape($_POST['campaign_id'])." AND created_by=".$this->store_id;
+
+        if($this->db->query($ufql))
+        {
+          $data['status_text']="Campaign Successfully updated";
+          $data['status_code']=1;
+          $data['campaign_list']=$this->campaign_model->get_campaign_list();
+        }
+        else
+        {
+          $data['status_text']="Something went wrong please try agin after sometime";
+          $data['status_code']=0;
+          $data['campaign_list']=$this->campaign_model->get_campaign_list();
+
+        }
+        echo json_encode($data);
+    }
+    else
+    {
+      echo '{"status_code":"0","status_text":"Input Error"}';
+    }
+  }
+
+
+  public function change_status()
+  {
+    if(isset($_POST['w_status']))
+    {
+    $status=(int)$_POST['w_status'];
+       $ufql="UPDATE campaign_manager set cpgn_status=".$status." where cpgn_id=".$this->db->escape($_POST['campaign_id'])." AND created_by=".$this->store_id;
 
         if($this->db->query($ufql))
         {

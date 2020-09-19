@@ -376,7 +376,7 @@
                             <i ng-click='edit_campaign(idx.campaign_id)' style="font-size:20px;margin-left: 10px" class="fe-edit text-info"></i>
                             <i ng-click='delete_campaign(idx.campaign_id)' style="font-size:20px;margin-left: 10px;" class="fe-trash-2 text-danger"></i>
                             <label class="switch" style="margin-left: 10px">
-                            <input type="checkbox" name='enable_addon' ng-model="idx.is_active" ng-true-value="'1'" ng-false-value="'0'" ng-change='change_status(idx.is_active,idx.campaign_id)'>
+                            <input type="checkbox" name='enable_addon' ng-model="idx.is_active" ng-true-value="'1'" ng-false-value="'0'" ng-change='change_state(idx.is_active,idx.campaign_id)'>
                             <span class="slider round"></span>
                             </label>
                           </div>
@@ -1241,6 +1241,21 @@
         }
       });
     };
+
+    var change_state = function(status_id, campaign_id)
+    {
+      var search_path = "<?php echo $baseurl . 'manage_campaign/change_state/'; ?>";
+      return $http({
+        method: "post",
+        url: search_path,
+        data:
+        {
+          w_status: status_id,
+          campaign_id: campaign_id,
+        }
+      });
+    };
+
     var test_email = function(template_id, order_id, email)
     {
       var search_path = "<?php echo $baseurl . 'manage_campaign/test_email/'; ?>";
@@ -1264,6 +1279,7 @@
       preview_email: preview_email,
       test_email: test_email,
       change_status: change_status,
+      change_state: change_state,
       get_brands: get_brands
     };
 
@@ -1669,13 +1685,6 @@
       }
       $scope.change_status = function(status, campaign_id)
       {
-        // if (is_active == 1)
-        // {
-        //   var sts = 'Activate';
-        // } else
-        // {
-        //   var sts = 'Deactivate';
-        // }
         var msg = "Are you sure to change campaign status to" + " " + status.name;
         swal({
             title: msg,
@@ -1691,6 +1700,52 @@
           function(isConfirm) {
             if (isConfirm) {
               campaignFactory.change_status(status.id, campaign_id)
+                .success(
+                  function(html)
+                  {
+                    if (html.status_code == '0')
+                    {
+                      swal('Error!', html.status_text, 'error');
+
+                    }
+                    if (html.status_code == '1')
+                    {
+                      swal('Success!', html.status_text, 'success');
+                      $scope.campList = html.campaign_list;
+                    }
+                  }
+                );
+            } else {
+              swal("Cancelled", "cancelled:)", "error");
+              $scope.campList = html.campaign_list;
+            }
+          });
+      }
+
+      $scope.change_state = function(is_active, campaign_id)
+      {
+        if (is_active == 1)
+        {
+          var sts = 'Activate';
+        } else
+        {
+          var sts = 'Deactivate';
+        }
+        var msg = "Are you sure to " + sts + " campaign?";
+        swal({
+            title: msg,
+            text: "!",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: '#DD6B55',
+            confirmButtonText: 'Yes, I am sure!',
+            cancelButtonText: "No, cancel it!",
+            closeOnConfirm: false,
+            closeOnCancel: false
+          },
+          function(isConfirm) {
+            if (isConfirm) {
+              campaignFactory.change_state(is_active, campaign_id)
                 .success(
                   function(html)
                   {
@@ -1872,7 +1927,7 @@
         });
 
 
-        
+
       $scope.statusCheck = function()
 
       {
@@ -1895,60 +1950,28 @@
 
       }
 
-
-
-
-
-
-
-
-
       $(document).ready(function() {
-
         CKEDITOR.instances.editor.on('change', function() {
-
           $scope.tmplt.template_content_html = $sce.trustAsHtml(CKEDITOR.instances.editor.getData());
-
           //alert("TEST");
-
         });
-
       });
-
-
-
     });
 
-
-
   crawlApp.factory("templateFactory", function($http, $q, Upload) {
-
-
-
     var get_data = function() {
+    var dataset_path = "<?php echo $baseurl . 'template/get_pre_data' ?>";
+    var deferred = $q.defer();
+    var path = dataset_path;
+    $http.get(path)
+      .success(function(data, status, headers, config) {
+        deferred.resolve(data);
+      })
 
-      var dataset_path = "<?php echo $baseurl . 'template/get_pre_data' ?>";
-
-      var deferred = $q.defer();
-
-      var path = dataset_path;
-
-
-
-      $http.get(path)
-
-        .success(function(data, status, headers, config) {
-          deferred.resolve(data);
-        })
-
-        .error(function(data, status, headers, config) {
-          deferred.reject(status);
-        });
-
-
-
+      .error(function(data, status, headers, config) {
+        deferred.reject(status);
+      });
       return deferred.promise;
-
     };
 
 
@@ -2868,9 +2891,9 @@
 
     };
 
-    
 
-    
+
+
 
     $scope.nextPage = function()
 
