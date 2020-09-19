@@ -43,7 +43,7 @@ $base_url=base_url();
 									<a class="nav-link" href="#">Invoices</a>
 								</li>
 								<!-- <li class="nav-item hover-nav">
-                  <a class="nav-link" href="#">My Plan</a>                  
+                  <a class="nav-link" href="#">My Plan</a>
                 </li> -->
 								<li class="nav-item hover-nav">
 									<a class="nav-link" href="<?php echo $baseurl.'cancel'?>">Cancel</a>
@@ -133,7 +133,8 @@ $base_url=base_url();
 			return deferred.promise;
 		};
 		return {
-      hold_account: hold_account
+      hold_account: hold_account,
+      cancel_account: cancel_account,
 		};
 	});
 	crawlApp.controller("canCtrl", function canCtrl($window, $scope, acFactory, $sce, $q, $timeout, Upload) {
@@ -155,7 +156,7 @@ $base_url=base_url();
 							.success(
 								function (html)
 								{
-									console.log(html);
+									console.log(html.status_code);
 									if (html.status_code == 0)
 									{
 										swal('Error!', html.status_text, 'error');
@@ -164,11 +165,6 @@ $base_url=base_url();
 										$scope.get_predata();
 										swal('Success!', html.status_text, 'success');
 									}
-								}
-							)
-							.error(
-								function (data, status, headers, config)
-								{
 								}
 							);
 					} else {
@@ -204,11 +200,6 @@ $base_url=base_url();
 										swal('Success!', html.status_text, 'success');
 									}
 								}
-							)
-							.error(
-								function (data, status, headers, config)
-								{
-								}
 							);
 					} else {
 						swal("Cancelled", "Delete cancelled:)", "error");
@@ -216,5 +207,4 @@ $base_url=base_url();
 				});
 		}
 	});
-
 </script>

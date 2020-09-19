@@ -65,3 +65,17 @@ VIEW `buyer_camp_data` AS
 
 GRANT ALL PRIVILEGES ON * . * TO 'root'@'%';
 FLUSH PRIVILEGES;
+
+======================================================================================================================
+
+Sept 19th 2020:
+
+CREATE TABLE `scr_user_requests` (
+  `scr_uid` int NOT NULL,
+  `user_hold` tinyint NOT NULL,
+  `user_cancel` tinyint NOT NULL,
+  `user_hold_request` tinyint NOT NULL,
+  `user_cancel_request` tinyint NOT NULL,
+  `requested_on` datetime NOT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `modified_on` datetime NOT NULL
+) ENGINE='InnoDB' COLLATE 'latin1_swedish_ci';
