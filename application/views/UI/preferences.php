@@ -80,7 +80,7 @@ $base_url=base_url();
                   Your store logo
                 </div>
                 <div style="width:310px; height:110px; background-color:gray;">
-                  <img ng-src="{{logo_Image}}" id="logoImg" alt="store-logo" height="110px" width="310px">
+                  <img ng-src="{{logo_Image_url}}" id="logoImg" alt="store-logo" height="110px" width="310px">
                 </div>
                 <div class="input-group mb-3 mt-3" style="width:310px">
                   <div class="custom-file">
@@ -190,6 +190,7 @@ $base_url=base_url();
       $scope.approvedError = false;
       $scope.testError = false;
       $scope.negError = false;
+      $scope.logo_Image_url = "";
       $scope.logo_Image = "";
       $scope.imageUploaded =  false;
       $scope.notYetUploaded = false;
@@ -215,7 +216,7 @@ $base_url=base_url();
             break;
           }
           if(!$scope.approvedError && !$scope.testError && !$scope.negError) {
-            save_data($scope.approvedEmail, $scope.testEmail, negEmails, $scope.blackListNotif)
+            acFactory.save_data($scope.approvedEmail, $scope.testEmail, negEmails, $scope.blackListNotif)
           }
         }
 
@@ -223,6 +224,7 @@ $base_url=base_url();
       $scope.uploadLogo = function () {
         if($scope.imageUploaded) {
           $scope.notYetUploaded = false;
+          acFactory.save_logo($scope.logo_Image)
         } else {
           $scope.notYetUploaded = true;
         }
@@ -240,8 +242,9 @@ $base_url=base_url();
           var filename = files.name;
           var format = filename.substring(filename.lastIndexOf('.')+1, filename.length)
           if (format=="jpg" || format=="jpeg" || format=="png"){
-            $scope.logo_Image = URL.createObjectURL(files);
-            document.getElementById('logoImg').src = $scope.logo_Image;
+            $scope.logo_Image_url = URL.createObjectURL(files);
+            $scope.logo_Image = files;
+            document.getElementById('logoImg').src = $scope.logo_Image_url;
             document.getElementById('logoImageName').innerText = filename;
             $scope.imageUploaded =  true;
           }else{
