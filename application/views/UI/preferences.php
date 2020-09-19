@@ -170,7 +170,8 @@ $base_url=base_url();
         var dataset_path="<?php echo $baseurl.'preferences/save_logo'?>";
         return $http({
           method: "post",
-          url: search_path,
+          url: dataset_path,
+          transformRequest: angular.identity,
           data:
           {
             img_file : img_file,
@@ -224,7 +225,9 @@ $base_url=base_url();
       $scope.uploadLogo = function () {
         if($scope.imageUploaded) {
           $scope.notYetUploaded = false;
-          acFactory.save_logo($scope.logo_Image)
+          var data = new FormData();
+          data.append('logo_image', $scope.logo_Image)
+          acFactory.save_logo(data)
         } else {
           $scope.notYetUploaded = true;
         }

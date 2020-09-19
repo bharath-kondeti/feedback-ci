@@ -180,11 +180,11 @@
             <div class="col-md-2">
               <div class="dropdown">
                 <a class="btn btn-success btn-block dropdown-toggle" href="" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                All campaigns<i class="mdi mdi-chevron-down"></i>
+                {{selectedFilterStatus}}<i class="mdi mdi-chevron-down"></i>
                 </a>
                 <!-- [{name: 'Live', id: 3}, {name: 'Draft', id: 1}, {name: 'Test', id: 2}, {name: 'Paused', id: 4}] -->
                 <div class="dropdown-menu icon_menu_size" aria-labelledby="dropdownMenuLink" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 35px, 0px);">
-                  <a ng-click="filterCamps('All','status')" class="dropdown-item" href="javascript:void(0);"> <i class="fe-check text-success"></i> All (0)</a>
+                  <a ng-click="filterCamps('All','status')" class="dropdown-item" href="javascript:void(0);"> <i class="fe-check text-success"></i> All campaigns(0)</a>
                   <a ng-click="filterCamps('3','status')" class="dropdown-item" href="javascript:void(0);"> <i class="fe-check-circle text-success"></i> Live (0)</a>
                   <a ng-click="filterCamps('1','status')" class="dropdown-item" href="javascript:void(0);"> <i class="fe-minus-circle text-info"></i> Draft (0)</a>
                   <a ng-click="filterCamps('2','status')" class="dropdown-item" href="javascript:void(0);"> <i class="fe-play-circle text-primary"></i> Test (0)</a>
@@ -211,7 +211,7 @@
             <div class="col-md-2">
               <div class="dropdown">
                 <a class="btn btn-warning btn-block dropdown-toggle" href="" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                All Goals<i class="mdi mdi-chevron-down"></i>
+                {{selectedFilterGoal}}<i class="mdi mdi-chevron-down"></i>
                 </a>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuLink" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 35px, 0px);">
                   <!-- 1: customer service 2: Feedback 3: Review -->
@@ -325,6 +325,12 @@
                   <table class="text-center table-bordered table-striped table table-hover">
                     <thead class="">
                       <tr>
+                        <th style="width: 20px;">
+                          <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="customCheck1" ng-model="checkStatus" ng-change="statusCheck()" ng-true-value="'Y'" ng-false-value="'N'" />
+                            <label class="custom-control-label" for="customCheck1">&nbsp;</label>
+                          </div>
+                        </th>
                         <th>MarketPlace</th>
                         <th>Name</th>
                         <th>Scheduled </th>
@@ -337,6 +343,12 @@
                     </thead>
                     <tbody>
                       <tr ng-repeat="idx in campList track by $index">
+                        <td>
+                          <div class="custom-control custom-checkbox">
+                            <input type="checkbox" checklist-value="tnx" checklist-model="selectedOrder" class="custom-control-input" id="customCheck2-{{$index+1}}">
+                            <label class="custom-control-label" for="customCheck2-{{$index+1}}">&nbsp;</label>
+                          </div>
+                        </td>
                         <td ng-if="store_country=='IN'"><img width="20" height="20" src="<?php echo $base_url . 'assets/img/amazon_logo.png' ?> "><span style="color:#a3afb7;font-weight:300">.in</span></td>
                         <td ng-if="store_country=='US'"><img width="20" height="20" src="<?php echo $base_url . 'assets/img/amazon_logo.png' ?> "><span style="color:#a3afb7;font-weight:300">.com</span></td>
                         <td ng-if="store_country=='UK'"><img width="20" height="20" src="<?php echo $base_url . 'assets/img/amazon_logo.png' ?> "><span style="color:#a3afb7;font-weight:300">.co.uk</span></td>
@@ -839,6 +851,7 @@
                                           <label class="custom-control-label" for="customCheck1">&nbsp;</label>
                                         </div>
                                       </th>
+
                                       <th>Order #</th>
                                       <th>PO Date</th>
                                       <th>Date to Send</th>
@@ -1357,6 +1370,8 @@
       $scope.product_list = [];
       $scope.checkStatus = 'N';
       $scope.tempCampList = [];
+      $scope.selectedFilterStatus = 'All Campaigns';
+      $scope.selectedFilterGoal = 'All Goals'
       $scope.togggle_view = function()
       {
         if ($scope.show_dash == 0)
@@ -1379,7 +1394,18 @@
         if(type === 'status') {
           if(val === 'All') {
             $scope.campList = $scope.tempCampList;
+            $scope.selectedFilterStatus = 'All Campaigns';
           } else {
+            // [{name: 'Live', id: 3}, {name: 'Draft', id: 1}, {name: 'Test', id: 2}, {name: 'Paused', id: 4}]
+            if(val == 1) {
+              $scope.selectedFilterStatus = 'Draft'
+            } else if(val == 2) {
+              $scope.selectedFilterStatus = 'Test'
+            } else if(val == 3) {
+              $scope.selectedFilterStatus = 'Live'
+            } else if(val == 4) {
+              $scope.selectedFilterStatus = 'Paused'
+            }
             var arr = [];
             $scope.campList.forEach( x=> {
               if(x.camp_status === val) {
@@ -1392,7 +1418,16 @@
         if(type === 'goal') {
           if(val === 'All') {
             $scope.campList = $scope.tempCampList;
+            $scope.selectedFilterGoal = 'All Goals'
           } else {
+            // 1: customer service 2: Feedback 3: Review
+            if(val == 1) {
+              $scope.selectedFilterGoal = 'Customer Service'
+            } else if(val == 2) {
+              $scope.selectedFilterGoal = 'Seller Feedback'
+            } else if(val == 3) {
+              $scope.selectedFilterGoal = 'Product Review'
+            }
             var arr = [];
             $scope.campList.forEach( x=> {
               if(x.camp_goaltype === val) {
