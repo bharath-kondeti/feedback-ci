@@ -55,7 +55,7 @@ class Cancel extends CI_Controller {
     else {
       $data['status_code'] = 1;
     }
-    return json_encode($data);
+    echo json_encode($data);
   }
 
   /**
@@ -81,6 +81,6 @@ class Cancel extends CI_Controller {
     else {
       $data['status_code'] = 1;
     }
-    return json_encode($data);
+    echo json_encode($data);
   }
 }

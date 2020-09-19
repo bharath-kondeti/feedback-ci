@@ -147,26 +147,24 @@ $base_url=base_url();
 					confirmButtonColor: '#DD6B55',
 					confirmButtonText: 'Yes, I am sure!',
 					cancelButtonText: "No, cancel it!",
-					closeOnConfirm: false,
+					closeOnConfirm: true,
 					closeOnCancel: true
 				},
 				function (isConfirm) {
 					if (isConfirm) {
-						acFactory.hold_account()
-							.success(
-								function (html)
-								{
-									console.log(html.status_code);
-									if (html.status_code == 0)
-									{
-										swal('Error!', html.status_text, 'error');
-									} else if (html.status_code == 1)
-									{
-										$scope.get_predata();
-										swal('Success!', html.status_text, 'success');
-									}
+						var promise = acFactory.hold_account();
+						promise.then(
+							function(response) {
+								if (response.status_code == '1') {
+
+								} else {
+									swal('Error!', response.status_text, 'error');
 								}
-							);
+							},
+							function(reason) {
+								$scope.serverErrorHandler(reason);
+							}
+						);
 					} else {
 						swal("Cancelled", "Delete cancelled:)", "error");
 					}
@@ -181,26 +179,24 @@ $base_url=base_url();
 					confirmButtonColor: '#DD6B55',
 					confirmButtonText: 'Yes, I am sure!',
 					cancelButtonText: "No, cancel it!",
-					closeOnConfirm: false,
+					closeOnConfirm: true,
 					closeOnCancel: true
 				},
 				function (isConfirm) {
 					if (isConfirm) {
-						acFactory.cancel_account()
-							.success(
-								function (html)
-								{
-									console.log(html);
-									if (html.status_code == 0)
-									{
-										swal('Error!', html.status_text, 'error');
-									} else if (html.status_code == 1)
-									{
-										$scope.get_predata();
-										swal('Success!', html.status_text, 'success');
-									}
+						var promise = acFactory.cancel_account()
+						promise.then(
+							function(response) {
+								if (response.status_code == '1') {
+
+								} else {
+									swal('Error!', response.status_text, 'error');
 								}
-							);
+							},
+							function(reason) {
+								$scope.serverErrorHandler(reason);
+							}
+						);
 					} else {
 						swal("Cancelled", "Delete cancelled:)", "error");
 					}
