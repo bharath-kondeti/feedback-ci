@@ -190,470 +190,231 @@
 <!-- content -->
 <script type="text/javascript">
   function cb(start, end) {
-
     $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
-
   }
-
   cb(moment().subtract(29, 'days'), moment());
 
-
-
   $('#reportrange').daterangepicker({
-
     ranges: {
-
       'Today': [moment(), moment()],
-
       'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-
       'Last 7 Days': [moment().subtract(6, 'days'), moment()],
-
       'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-
       'This Month': [moment().startOf('month'), moment().endOf('month')],
-
       'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
-
     }
-
   }, cb);
 </script>
 
 <script type="text/javascript">
 
   crawlApp.factory('dashFactory', function($http,$q,limitToFilter) {
-
-
-
-
-
-     var get_data = function (frm_date,to_date,order_id,buyer_email) {
-
-          var dataset_path="<?php echo $baseurl.'dashboard/get_feedbacks'?>";
-
-          var deferred = $q.defer();
-
-          var path =dataset_path+'/'+frm_date+'/'+to_date+'/'+order_id+'/'+buyer_email;
-
-
-
-          $http.get(path)
-
-          .success(function(data,status,headers,config){deferred.resolve(data);})
-
-          .error(function(data, status, headers, config) { deferred.reject(status);});
-
-
-
-          return deferred.promise;
-
-      };
-
-    var inv_list_url        =   "<?php echo $baseurl."dashboard/get_top_product/"?>";
-
-      var get_transaction_list = function (orderby,direction,offset,limit,search)
-
-      {
-
-            var deferred = $q.defer();
-
-            var path =inv_list_url+orderby+'/'+direction+'/'+offset+'/'+limit+'/'+search;
-
-            $http.get(path)
-
-            .success(function(data,status,headers,config){deferred.resolve(data);})
-
-            .error(function(data, status, headers, config) { deferred.reject(status);});
-
-            return deferred.promise;
-
-      };
-
-
-
-
-
-    return {
-
-      get_data:get_data,
-
-      get_transaction_list:get_transaction_list,
-
+    var get_data = function (frm_date,to_date,order_id,buyer_email,offset,limit) {
+      var dataset_path="<?php echo $baseurl.'dashboard/get_feedbacks'?>";
+      var deferred = $q.defer();
+      var path = dataset_path+'/'+frm_date+'/'+to_date+'/'+order_id+'/'+buyer_email+'/'+offset+'/'+limit;
+      $http.get(path)
+      .success(function(data,status,headers,config){deferred.resolve(data);})
+      .error(function(data, status, headers, config) { deferred.reject(status);});
+      return deferred.promise;
     };
 
+    var inv_list_url        =   "<?php echo $baseurl."dashboard/get_top_product/"?>";
+    var get_transaction_list = function (orderby,direction,offset,limit,search) {
+      var deferred = $q.defer();
+      var path =inv_list_url+orderby+'/'+direction+'/'+offset+'/'+limit+'/'+search;
+      $http.get(path)
+      .success(function(data,status,headers,config){deferred.resolve(data);})
+      .error(function(data, status, headers, config) { deferred.reject(status);});
+      return deferred.promise;
+    };
+
+    return {
+      get_data:get_data,
+      get_transaction_list:get_transaction_list,
+    };
   });
 
   crawlApp.controller('dashCtrl',function($scope,$parse,$window,dashFactory,$http,$sce,$q,$timeout,Upload,limitToFilter) {
-
-       $scope.date_filter_tmpl="date_filter_tmpl.html";
-
-     $scope.transactionList=[];
-
-       $scope.cpn={};
-
-       $scope.cpn.frm_date='';
-
-     $scope.filter={};
-
-       $scope.filter.search='';
-
-       $scope.cpn.to_date='';
-
-       $scope.top_10=[];
-
-       $scope.revenue_graph=1;
-
-       $scope.sale_graph=0;
-
-       $scope.campaign_graph=1;
-      $scope.feedback_all = [];
-      $scope.feedback_negative = [];
-      $scope.feedback_positive = [];
-      $scope.feedback_neutral = [];
-      $scope.feedback_temp = [];
-      $scope.feedback_search = '';
-
-
-        $scope.block_site=function()
-
-          {
-
-              $.blockUI({ css: {
-
-                  border: 'none',
-
-                  padding: '3px',
-
-                  backgroundColor: '#000',
-
-                  '-webkit-border-radius': '10px',
-
-                  '-moz-border-radius': '10px',
-
-                  opacity: .5,
-
-                  color: '#fff'
-
-              }});
-
-
-
-          }
-
-
-
-    $scope.itemsPerPage = 10;
-
-      $scope.currentPage = 0;
-
-    $scope.itm_per='10';
-
-      $scope.sortorder='GEN';
-
-      $scope.direction='DESC';
-
-      $scope.searchJSON=[];
-
-      $scope.filterquery=[];
-
-      $scope.selectedCamp=[];
-
-      $scope.checkStatus='N';
-
-      $scope.campList=[];
-
-
-
-      $scope.range = function()
-
-      {
-
-          var rangeSize = 4;
-
-          var ret = [];
-
-          var start;
-
-
-
-          start = $scope.currentPage;
-
-
-
-          if ( start > $scope.pageCount()-rangeSize ) {
-
-            start = $scope.pageCount()-rangeSize;
-
-          }
-
-
-
-          for (var i=start; i<start+rangeSize; i++) {
-
-            if(i>0)
-
-            ret.push(i);
-
-          }
-
-          return ret;
-
-     };
-
-     $scope.filter = function(n) {
-      if(n === 'all') {
-        $scope.feedback_all = $scope.feedback_temp;
-      } else if (n=== 'pos') {
-        $scope.feedback_all = $scope.feedback_positive;
-      } else if (n === 'neg') {
-        $scope.feedback_all = $scope.feedback_negative;
-      } else if (n === 'neut') {
-        $scope.feedback_all = $scope.feedback_neutral;
-      } else if (n === 'bad') {
-        var arr = [];
-        var arr  = arr.concat($scope.feedback_neutral, $scope.feedback_negative);
-        $scope.feedback_all = arr;
+   $scope.date_filter_tmpl="date_filter_tmpl.html";
+   $scope.transactionList=[];
+   $scope.cpn={};
+   $scope.cpn.frm_date='';
+   $scope.filter={};
+   $scope.filter.search='';
+   $scope.cpn.to_date='';
+   $scope.top_10=[];
+   $scope.revenue_graph=1;
+   $scope.sale_graph=0;
+   $scope.campaign_graph=1;
+   $scope.feedback_all = [];
+   $scope.feedback_negative = [];
+   $scope.feedback_positive = [];
+   $scope.feedback_neutral = [];
+   $scope.feedback_temp = [];
+   $scope.feedback_search = '';
+   $scope.block_site=function() {
+    $.blockUI({ css: {
+        border: 'none',
+        padding: '3px',
+        backgroundColor: '#000',
+        '-webkit-border-radius': '10px',
+        '-moz-border-radius': '10px',
+        opacity: .5,
+        color: '#fff'
       }
-     };
-     $scope.setRound = function(n) {
-        return new Array(parseInt(n));
-      };
-
-
-     $scope.prevPage = function()
-
-     {
-
-          if ($scope.currentPage > 0)
-
-          {
-
-            $scope.currentPage--;
-
+    });
+  }
+  $scope.itemsPerPage = 15;
+  $scope.currentPage = 0;
+  $scope.itm_per = '15';
+  $scope.sortorder='GEN';
+  $scope.direction='DESC';
+  $scope.searchJSON=[];
+  $scope.filterquery=[];
+  $scope.selectedCamp=[];
+  $scope.checkStatus='N';
+  $scope.campList=[];
+  $scope.range = function() {
+    var rangeSize = 4;
+    var ret = [];
+    var start;
+    start = $scope.currentPage;
+    if ( start > $scope.pageCount()-rangeSize ) {
+      start = $scope.pageCount()-rangeSize;
+    }
+    for (var i=start; i<start+rangeSize; i++) {
+      if(i>0)
+        ret.push(i);
+    }
+    return ret;
+  };
+  $scope.filter = function(n) {
+    if(n === 'all') {
+      $scope.feedback_all = $scope.feedback_temp;
+    } else if (n=== 'pos') {
+      $scope.feedback_all = $scope.feedback_positive;
+    } else if (n === 'neg') {
+      $scope.feedback_all = $scope.feedback_negative;
+    } else if (n === 'neut') {
+      $scope.feedback_all = $scope.feedback_neutral;
+    } else if (n === 'bad') {
+      var arr = [];
+      var arr  = arr.concat($scope.feedback_neutral, $scope.feedback_negative);
+      $scope.feedback_all = arr;
+    }
+  };
+  $scope.setRound = function(n) {
+    return new Array(parseInt(n));
+  };
+  $scope.prevPage = function() {
+    if ($scope.currentPage > 0) {
+      $scope.currentPage--;
+    }
+  };
+  $scope.prevPageDisabled = function() {
+    return $scope.currentPage === 0 ? "disabled" : "";
+  };
+  $scope.nextPage = function() {
+    if ($scope.currentPage < $scope.pageCount() - 1) {
+      $scope.currentPage++;
+    }
+  };
+  $scope.nextPageDisabled = function() {
+    return $scope.currentPage === $scope.pageCount() - 1 ? "disabled" : "";
+  };
+  $scope.pageCount = function() {
+    return Math.ceil($scope.total/$scope.itemsPerPage);
+  };
+  $scope.setPage = function(n) {
+    if (n > 0 && n < $scope.pageCount()) {
+      $scope.currentPage = n;
+    }
+  };
+  $scope.$watch("currentPage",function(newValue, oldValue) {
+    $scope.get_transaction_list(newValue);
+  });
+  $scope.get_transaction_list=function(currentPage) {
+    $scope.block_site();
+    var promise= dashFactory.get_transaction_list($scope.sortorder,$scope.direction,currentPage*$scope.itemsPerPage,$scope.itemsPerPage,$scope.searchJSON);
+    promise.then(function(value) {
+      if(value.status_code==1) {
+        $scope.transactionList=value.datalist;
+        $scope.total=value.total;
+        $scope.outstanding=value.outstanding;
+      }
+      else {
+        $scope.transactionList=[];
+        $scope.total=0;
+        $scope.outstanding=value.outstanding;
+      }
+    },
+    function(reason) {
+      console.log("Reason"+reason);
+    });
+  }
+  $scope.get_predata = function() {
+    $scope.block_site();
+    var ele,text,dates,date1,date2,search_var,search_param,isOrder;
+    ele = document.getElementById('calendar-date');
+    text = ele.innerHTML;
+    dates = text.split("-");
+    date1 = moment(dates[0], 'MMMM DD, YYYY').format('YYYY-MM-DD');
+    date2 = moment(dates[1], 'MMMM DD, YYYY').format('YYYY-MM-DD');
+    search_term = $scope.feedback_search;
+    if(search_term != '') {
+      isOrder = /^\d+\-\d+\-\d+$/.test(search_term);
+      if(isOrder) {
+        search_var = search_term;
+        search_param = "order";
+      } else {
+        search_var = search_term;
+        search_param = "email";
+      }
+    } else {
+      search_var = "";
+      search_param = "";
+    }
+    var promise=dashFactory.get_data(date1,date2,search_var,search_param);
+    promise.then(
+      function(response) {
+        if(response.status_code == '1') {
+          var resp = response;
+          var negOb = [], posOb = [], neuOb = [], all = [], pos = [], neg = [], neut = [];
+          if ('positive' in response.fbks) {
+            posOb = Object.entries(response.fbks.positive);
+            pos = posOb.map((item) => {
+              return item['1']
+            })
+            $scope.feedback_positive = pos;
           }
-
-     };
-
-
-
-     $scope.prevPageDisabled = function()
-
-     {
-
-          return $scope.currentPage === 0 ? "disabled" : "";
-
-     };
-
-
-
-     $scope.nextPage = function()
-
-     {
-
-          if ($scope.currentPage < $scope.pageCount() - 1)
-
-          {
-
-            $scope.currentPage++;
-
+          if('negative' in response.fbks) {
+            negOb = Object.entries(response.fbks.negative);
+            neg = negOb.map((item) => {
+              return item['1']
+            })
+            $scope.feedback_negative = neg;
           }
-
-     };
-
-
-
-     $scope.nextPageDisabled = function()
-
-     {
-
-          return $scope.currentPage === $scope.pageCount() - 1 ? "disabled" : "";
-
-     };
-
-
-
-     $scope.pageCount = function()
-
-     {
-
-          return Math.ceil($scope.total/$scope.itemsPerPage);
-
-     };
-
-
-
-     $scope.setPage = function(n)
-
-     {
-
-          if (n > 0 && n < $scope.pageCount())
-
-          {
-
-            $scope.currentPage = n;
-
+          if('neutral' in response.fbks) {
+            neuOb = Object.entries(response.fbks.neutral);
+            neut = neuOb.map((item) => {
+              return item['1']
+            })
+            $scope.feedback_neutral = neut;
           }
-
-     };
-
-     $scope.$watch("currentPage",function(newValue, oldValue)
-
-     {
-
-       $scope.get_transaction_list(newValue);
-
-     });
-
-
-
-
-     $scope.get_transaction_list=function(currentPage)
-
-     {
-
-        $scope.block_site();
-
-        var promise= dashFactory.get_transaction_list($scope.sortorder,$scope.direction,currentPage*$scope.itemsPerPage,$scope.itemsPerPage,$scope.searchJSON);
-
-           promise.then(function(value){
-
-
-
-           if(value.status_code==1)
-
-           {
-
-
-
-                $scope.transactionList=value.datalist;
-
-          $scope.total=value.total;
-
-          $scope.outstanding=value.outstanding;
-
-
-
-           }
-
-           else
-
-           {
-
-              $scope.transactionList=[];
-
-              $scope.total=0;
-
-              $scope.outstanding=value.outstanding;
-
-
-
-           }
-
-         },
-
-        function(reason)
-
-        {
-
-          console.log("Reason"+reason);
-
-        });
-
-     }
-
-
-
-           $scope.get_predata = function()
-
-           {
-            $scope.block_site();
-              var ele,text,dates,date1,date2,search_var,search_param,isOrder;
-              ele = document.getElementById('calendar-date');
-              text = ele.innerHTML;
-              dates = text.split("-");
-              date1 = moment(dates[0], 'MMMM DD, YYYY').format('YYYY-MM-DD');
-              date2 = moment(dates[1], 'MMMM DD, YYYY').format('YYYY-MM-DD');
-              search_term = $scope.feedback_search;
-              if(search_term != '') {
-                isOrder = /^\d+\-\d+\-\d+$/.test(search_term);
-                if(isOrder) {
-                  search_var = search_term;
-                  search_param = "order";
-                } else {
-                  search_var = search_term;
-                  search_param = "email";
-                }
-              } else {
-                search_var = "";
-                search_param = "";
-              }
-              var promise=dashFactory.get_data(date1,date2,search_var,search_param);
-
-                promise.then(
-
-                               function(response)
-
-                               {
-
-                                  if(response.status_code == '1')
-
-                                  {
-                                    var resp = response;
-                                    var negOb = [], posOb = [], neuOb = [], all = [], pos = [], neg = [], neut = [];
-                                    if ('positive' in response.fbks) {
-                                      posOb = Object.entries(response.fbks.positive);
-                                      pos = posOb.map((item) => {
-                                        return item['1']
-                                      })
-                                      $scope.feedback_positive = pos;
-                                    }
-                                    if('negative' in response.fbks) {
-                                      negOb = Object.entries(response.fbks.negative);
-                                      neg = negOb.map((item) => {
-                                        return item['1']
-                                      })
-                                      $scope.feedback_negative = neg;
-                                    }
-                                    if('neutral' in response.fbks) {
-                                      neuOb = Object.entries(response.fbks.neutral);
-                                      neut = neuOb.map((item) => {
-                                        return item['1']
-                                      })
-                                      $scope.feedback_neutral = neut;
-                                    }
-
-                                    all = all.concat(pos,neg,neut);
-                                    $scope.feedback_all = all;
-                                    $scope.feedback_temp = all;
-
-                                    $.unblockUI();
-
-                                  }
-
-                                  else
-
-                                  {
-
-                                   swal('Error!',response.status_text,'error');
-
-                                  }
-
-                               },
-
-                               function(reason)
-
-                               {
-
-
-
-                               }
-
-                            );
-
-          }
-
-          $scope.get_predata();
+          all = all.concat(pos,neg,neut);
+          $scope.feedback_all = all;
+          $scope.feedback_temp = all;
+          $.unblockUI();
+        }
+        else {
+          swal('Error!',response.status_text,'error');
+        }
+      },
+      function(reason) {}
+      );
+    }
+    $scope.get_predata();
   });
 </script>
 
