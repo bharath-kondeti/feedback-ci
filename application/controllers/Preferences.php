@@ -94,7 +94,7 @@ class Preferences extends CI_Controller {
     $data['status_text'] = 'Success';
     $data['status_code'] = '1';
     $data['user_pref'] = $this->preferences_model->getUserPref();
-    $data['uploads_dir'] = 'uploads/';
+    $data['uploads_dir'] = base_url().'uploads/';
     echo json_encode($data);
   }
 
