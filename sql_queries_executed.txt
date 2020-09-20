@@ -90,3 +90,6 @@ ADD `email_negative_fb` varchar(100) COLLATE 'latin1_swedish_ci' NULL AFTER `sen
 
 ALTER TABLE `campaign_manager`
 ADD `is_archieve` tinyint NULL;
+
+ALTER TABLE `customer_product`
+ADD `prod_id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY FIRST;
