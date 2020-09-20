@@ -1444,7 +1444,7 @@
       }
       $scope.performAction = function (val) {
         campaignFactory.perform_action(val, $scope.selectedCampaign.ids)
-      } 
+      }
       $scope.filterCamps = function(val, type) {
         $scope.campList = $scope.tempCampList;
         if(type === 'status') {
