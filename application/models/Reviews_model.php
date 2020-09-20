@@ -20,10 +20,10 @@ class Reviews_model extends CI_Model
 
      public function get_reviews($user_id)
      {
-        $qry=$this->db->query("SELECT cr.item_SKU, COUNT(*) as total_reviews, cp.prod_asin, cp.prod_image, REPLACE(REPLACE(cp.prod_title,'&nbsp;&ndash;&nbsp;','-'),'&nbsp;',' ') AS prod_title FROM customer_product cp
-            INNER JOIN fd_amazon_cust_reviews cr ON cp.prod_sku = cr.item_SKU
+        $qry = $this->db->query("SELECT cr.item_SKU, COUNT(*) as total_reviews, cp.prod_asin, cp.prod_image, REPLACE(REPLACE(cp.prod_title,'&nbsp;&ndash;&nbsp;','-'),'&nbsp;',' ') AS prod_title, cr.item_id AS review_id FROM customer_product cp
+            INNER JOIN fd_amazon_cust_reviews cr ON cp.prod_id = cr.item_id
             WHERE cp.store_id = {$this->store_id} AND cr.user_id = " . $this->db->escape($user_id) . " GROUP BY cr.item_SKU");
-        $res=$qry->result_array();
+        $res = $qry->result_array();
         return $res;
      }
      public function get_all_reviews($item_sku, $user_id) {
