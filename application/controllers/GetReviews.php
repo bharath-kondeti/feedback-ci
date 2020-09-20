@@ -32,9 +32,6 @@ class GetReviews extends CI_Controller
   {
     $data = $this->inventory_model->getTrackedReviews();
 
-    echo "<pre>";
-    print_r($data);
-
     $result_table = "<table border='1'>
     <thead>
       <tr>
@@ -51,6 +48,25 @@ class GetReviews extends CI_Controller
         <th>Customer Name</th>
       </tr>
     </thead>";
+    $result = '';
+    foreach ($data as $key => $value) {
+      $key++;
+      $result .= "
+        <tr>
+          <td>" . $key . "</td>
+          <td>" . $value['prod_title'] . "</td>
+          <td>" . $value['prod_asin'] . "</td>
+          <td>" . $value['prod_sku'] . "</td>
+          <td>" . $value['prod_country'] . "</td>
+          <td>" . $value['itm_price'] . "</td>
+          <td>" . $value['review_title'] . "</td>
+          <td>" . $value['review_desc'] . "</td>
+          <td>" . $value['review_date'] . "</td>
+          <td>" . $value['review_rating'] . "</td>
+          <td>" . $value['cust_name'] . "</td>
+        </tr>";
+      }
 
-  }
+      $output = $result_table.$result."</table>";
+    }
 }
