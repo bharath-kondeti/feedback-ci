@@ -26,7 +26,7 @@ $base_url=base_url();
                   <a class="nav-link" href="#">Blacklist</a>
                 </li>
                 <li class="nav-item hover-nav">
-                  <a class="nav-link active" href="<?php echo $baseurl.'preferences'?>">Preferences</a>                  
+                  <a class="nav-link active" href="<?php echo $baseurl.'preferences'?>">Preferences</a>
                 </li>
               </ul>
             </div>
@@ -39,13 +39,13 @@ $base_url=base_url();
                   <a class="nav-link" href="<?php echo $baseurl . 'billing' ?>">Billing Info</a>
                 </li>
                 <li class="nav-item hover-nav">
-                  <a class="nav-link" href="#">Invoices</a>                  
+                  <a class="nav-link" href="#">Invoices</a>
                 </li>
                 <!-- <li class="nav-item hover-nav">
-                  <a class="nav-link" href="#">My Plan</a>                  
+                  <a class="nav-link" href="#">My Plan</a>
                 </li> -->
                 <li class="nav-item hover-nav">
-                  <a class="nav-link" href="<?php echo $baseurl.'cancel'?>">Cancel</a>                  
+                  <a class="nav-link" href="<?php echo $baseurl.'cancel'?>">Cancel</a>
                 </li>
               </ul>
             </div>
@@ -99,9 +99,9 @@ $base_url=base_url();
                 <div class="h4">
                   Amazon Approved Sender Email Addres
                 </div>
-                
+
                 <div class="form-group" style="width:50%">
-                  You will need to enter your top approved email address from your amazon account to 
+                  You will need to enter your top approved email address from your amazon account to
                   allow us to send verified emails to buyers.
                   <div class="d-flex">
                     <input type="email" ng-model="approvedEmail" class="form-control mt-1" aria-describedby="emailHelp" placeholder="Enter email">
@@ -139,7 +139,7 @@ $base_url=base_url();
                   Negative feedback on blacklist
                 </div>
                 <div class="form-check form-check-inline">
-                  <input ng-model="blackListNotif" class="form-check-input" type="radio" name="blacklistCheck" value="val1">
+                  <input ng-model="blackListNotif" class="form-check-input" type="radio" name="blacklistCheck" value="1">
                   <label class="form-check-label" for="inlineRadio1">Automatically add buyers to the blacklist who submit negative feedback.</label>
                 </div>
               </div>
@@ -166,15 +166,15 @@ $base_url=base_url();
       .error(function(data, status, headers, config) { deferred.reject(status);});
       return deferred.promise;
       };
-      var save_logo = function(img_file) {
+      var save_logo = function(logo_image) {
         var dataset_path="<?php echo $baseurl.'preferences/save_logo'?>";
         return $http({
           method: "post",
           url: dataset_path,
           transformRequest: angular.identity,
-          data:
-          {
-            img_file : img_file,
+          data: logo_image,
+          headers: {
+            'Content-Type': undefined
           }
         });
       }
@@ -226,7 +226,10 @@ $base_url=base_url();
         if($scope.imageUploaded) {
           $scope.notYetUploaded = false;
           var data = new FormData();
+          console.log($scope.logo_Image);
           data.append('logo_image', $scope.logo_Image)
+          console.log(data);
+          console.log(data.logo_image);
           acFactory.save_logo(data)
         } else {
           $scope.notYetUploaded = true;
@@ -244,20 +247,20 @@ $base_url=base_url();
           const files = event.target.files[0];
           var filename = files.name;
           var format = filename.substring(filename.lastIndexOf('.')+1, filename.length)
-          if (format=="jpg" || format=="jpeg" || format=="png"){
+          if (format == "jpg" || format == "jpeg" || format == "png") {
             $scope.logo_Image_url = URL.createObjectURL(files);
             $scope.logo_Image = files;
             document.getElementById('logoImg').src = $scope.logo_Image_url;
             document.getElementById('logoImageName').innerText = filename;
             $scope.imageUploaded =  true;
-          }else{
+          } else {
             $scope.imageUploaded =  false;
             swal({
               title: 'Error',
               text: "Only Images of format jpg/jpeg and png are allowed",
               type: "error",
             });
-          } 
+          }
         }
         // const formData = new FormData()
         // formData.append('myFile', files[0])
