@@ -9,63 +9,6 @@ ALTER TABLE `campaign_manager`
 CHANGE `cpgn_goal_type` `cpgn_goal_type` int(11) NULL AFTER `cpgn_country`,
 CHANGE `cpgn_status` `cpgn_status` int(11) NULL AFTER `cpgn_goal_type`;
 
-
-Execute Today:
-
-CREATE
-    ALGORITHM = UNDEFINED
-    DEFINER = `root`@`%`
-    SQL SECURITY DEFINER
-VIEW `buyer_orders` AS
-    (SELECT
-        COUNT(0) AS `c`,
-        `amz_order_info`.`buyer_email` AS `buyer_email`,
-        `amz_order_info`.`order_no` AS `order_no`,
-        `amz_order_info`.`seller_sku` AS `seller_sku`,
-        `amz_order_info`.`store_id` AS `store_id`
-    FROM
-        `amz_order_info`
-    WHERE
-        (`amz_order_info`.`buyer_email` <> '')
-    GROUP BY `amz_order_info`.`buyer_email`)
-
-
-CREATE
-VIEW `buyer_camp_data` AS
-    (SELECT
-        `c`.`buyer_email` AS `buyer_email`,
-        `c`.`order_no` AS `order_no`,
-        `c`.`seller_sku` AS `seller_sku`,
-        `c`.`store_id` AS `store_id`,
-        SUM(IF((`campaign_order_list`.`is_sent` = 1),
-            1,
-            0)) AS `sent_count`,
-        SUM(IF((`campaign_order_list`.`is_read` > 0),
-            1,
-            0)) AS `read_count`,
-        COUNT(`campaign_order_list`.`camp_order_no`) AS `scd_count`
-    FROM
-        ((`campaign_manager`
-        JOIN `campaign_order_list` ON (((`campaign_manager`.`cpgn_id` = `campaign_order_list`.`camp_id`)
-            AND (`campaign_order_list`.`dns_status` = 0)
-            AND (`campaign_manager`.`is_active` = '1')
-            AND (`campaign_manager`.`is_deleted` = '0'))))
-        JOIN `amz_order_info` `c` ON (((`campaign_order_list`.`camp_order_no` = `c`.`order_no`)
-            AND (NOT (`campaign_order_list`.`camp_order_no` IN (SELECT
-                `amz_feedback_data`.`order_id`
-            FROM
-                `amz_feedback_data`
-            WHERE
-                (`amz_feedback_data`.`fbk_rating` IN (1 , 2)))))
-            AND (`c`.`order_tfmstatus` <> 'Rejected by Buyer')
-            AND (`c`.`order_tfmstatus` <> 'Returned to Seller')
-            AND (`c`.`order_tfmstatus` <> 'Returning to Seller'))))
-    GROUP BY `c`.`buyer_email` , `c`.`store_id`)
-
-
-GRANT ALL PRIVILEGES ON * . * TO 'root'@'%';
-FLUSH PRIVILEGES;
-
 ======================================================================================================================
 
 Sept 19th 2020:
@@ -93,3 +36,15 @@ ADD `is_archieve` tinyint NULL;
 
 ALTER TABLE `customer_product`
 ADD `prod_id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY FIRST
+
+CREATE TABLE `scr_user_c_folders` (
+  `fol_id` int(11) NULL,
+  `user_id` int(11) NULL,
+  `folder_name` varchar(100) NULL
+) ENGINE='InnoDB' COLLATE 'latin1_swedish_ci';
+
+ALTER TABLE `campaign_manager`
+ADD `folder_id` tinyint(4) NULL;
+
+ALTER TABLE `scr_user_c_folders`
+CHANGE `fol_id` `fol_id` int(11) NULL AUTO_INCREMENT PRIMARY KEY FIRST;

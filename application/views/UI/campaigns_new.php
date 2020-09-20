@@ -184,27 +184,11 @@
                 </a>
                 <!-- [{name: 'Live', id: 3}, {name: 'Draft', id: 1}, {name: 'Test', id: 2}, {name: 'Paused', id: 4}] -->
                 <div class="dropdown-menu icon_menu_size" aria-labelledby="dropdownMenuLink" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 35px, 0px);">
-                  <a ng-click="filterCamps('All','status')" class="dropdown-item" href="javascript:void(0);"> <i class="fe-check text-success"></i> All campaigns(0)</a>
-                  <a ng-click="filterCamps('3','status')" class="dropdown-item" href="javascript:void(0);"> <i class="fe-check-circle text-success"></i> Live (0)</a>
-                  <a ng-click="filterCamps('1','status')" class="dropdown-item" href="javascript:void(0);"> <i class="fe-minus-circle text-info"></i> Draft (0)</a>
-                  <a ng-click="filterCamps('2','status')" class="dropdown-item" href="javascript:void(0);"> <i class="fe-play-circle text-primary"></i> Test (0)</a>
-                  <a ng-click="filterCamps('4','status')" class="dropdown-item" href="javascript:void(0);"> <i class="fe-pause-circle text-warning"></i> Paused (0)</a>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-2">
-              <div class="dropdown">
-                <a class="btn btn-primary btn-block dropdown-toggle" href="" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                All Folders<i class="mdi mdi-chevron-down"></i>
-                </a>
-                <div class="dropdown-menu icon_menu_size" aria-labelledby="dropdownMenuLink" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 35px, 0px);">
-                  <a class="dropdown-item" href="#">All (0)</a>
-                  <a class="dropdown-item" href="#">Default (0)</a>
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="#">Trash (0)</a>
-                  <a class="dropdown-item" href="#">Archive (0)</a>
-                  <div class="dropdown-divider"></div>
-                  <a ng-click="addNewFolder()" class="dropdown-item" href="#"> <i class="fe-folder text-primary"></i> Add New Folder</a>
+                  <a ng-click="filterCamps('All','status')" class="dropdown-item" href="javascript:void(0);"> <i class="fe-check text-success"></i> All campaigns({{metrics.total_cmp}})</a>
+                  <a ng-click="filterCamps('3','status')" class="dropdown-item" href="javascript:void(0);"> <i class="fe-check-circle text-success"></i> Live ({{metrics.live}})</a>
+                  <a ng-click="filterCamps('1','status')" class="dropdown-item" href="javascript:void(0);"> <i class="fe-minus-circle text-info"></i> Draft ({{metrics.draft}})</a>
+                  <a ng-click="filterCamps('2','status')" class="dropdown-item" href="javascript:void(0);"> <i class="fe-play-circle text-primary"></i> Test ({{metrics.test}})</a>
+                  <a ng-click="filterCamps('4','status')" class="dropdown-item" href="javascript:void(0);"> <i class="fe-pause-circle text-warning"></i> Paused ({{metrics.paused}})</a>
                 </div>
               </div>
             </div>
@@ -235,6 +219,22 @@
                   <a ng-click="performAction('start')" class="dropdown-item" href="#"><i class="fa fa-play mr-2" aria-hidden="true"></i>Start</a>
                   <h6 class="dropdown-header">Move to Folder...</h6>
                   <a ng-repeat="fd in folders track by $index" ng-click="performAction(fd.folder_id)" class="dropdown-item" href="#"><i class="fa fa-folder-o mr-2" aria-hidden="true"></i></i>{{fd.folder_name}}</a>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-2">
+              <div class="dropdown">
+                <a class="btn btn-primary btn-block dropdown-toggle" href="" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                All Folders<i class="mdi mdi-chevron-down"></i>
+                </a>
+                <div class="dropdown-menu icon_menu_size" aria-labelledby="dropdownMenuLink" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 35px, 0px);">
+                  <a class="dropdown-item" href="#">All ({{metrics.total}})</a>
+                  <a class="dropdown-item" href="#">Default ({{metrics.total_cmp}})</a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="#">Trash ({{metrics.trash}})</a>
+                  <a class="dropdown-item" href="#">Archive ({{metrics.archive}})</a>
+                  <div class="dropdown-divider"></div>
+                  <a ng-click="addNewFolder()" class="dropdown-item" href="#"> <i class="fe-folder text-primary"></i> Add New Folder</a>
                 </div>
               </div>
             </div>
@@ -1340,6 +1340,7 @@
       change_state: change_state,
       get_brands: get_brands,
       perform_action: perform_action,
+      create_folder: create_folder,
     };
 
   });
@@ -1421,7 +1422,7 @@
       $scope.checkStatusCamp = 'N';
       $scope.checkedAll = false;
       $scope.campList = [];
-      $scope.folders = [{folder_name: 'folder-1', folder_id: 1},{folder_name: 'folder-2', folder_id: 2}, {folder_name: 'folder-3', folder_id: 3}]
+      $scope.folders = [{folder_name: 'TEsting', folder_id: 1},{folder_name: 'OneMoreTest', folder_id: 2}]
       // $scope.selectedCampaign = [];
       $scope.selectedCampaign = {
         ids: []
@@ -1468,6 +1469,8 @@
               return false
             }
             swal("Nice!", "You wrote: " + inputValue, "success");
+            console.log(inputValue);
+            console.log(campaignFactory);
             campaignFactory.create_folder(inputValue);
           }
         );

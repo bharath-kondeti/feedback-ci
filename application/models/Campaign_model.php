@@ -355,38 +355,74 @@ class Campaign_model extends CI_Model
 
    public function get_campaign_metrics($frm_date='',$to_date='')
     {
-      $sql="SELECT count(*) as ttl_cmp FROM campaign_manager WHERE created_by={$this->store_id}  AND is_deleted='0' ";
-      $sql1="SELECT COUNT(*) AS sent_count FROM campaign_order_list WHERE camp_id IN (SELECT cpgn_id FROM campaign_manager WHERE created_by={$this->store_id} AND is_deleted=0 AND is_active=1) AND is_sent=1";
-      $sql2="SELECT COUNT(*) AS pending_count FROM campaign_order_list WHERE camp_id IN (SELECT cpgn_id FROM campaign_manager WHERE created_by={$this->store_id} AND is_deleted=0 AND is_active=1) AND is_sent=0 AND trigger_on > NOW() AND dns_status=0";
-      $sql3="SELECT count(*) as ttl_inac FROM campaign_manager WHERE created_by={$this->store_id} AND is_active=0 and is_deleted=0";
-	   $sql4="SELECT COUNT(*)+3  AS ttl_temp FROM `email_template` WHERE created_by={$this->store_id} AND is_deleted='0'";
+      $sql = "SELECT count(*) as ttl_cmp FROM campaign_manager WHERE created_by={$this->store_id}  AND is_deleted='0' ";
+      $sql1 = "SELECT COUNT(*) AS sent_count FROM campaign_order_list WHERE camp_id IN (SELECT cpgn_id FROM campaign_manager WHERE created_by={$this->store_id} AND is_deleted=0 AND is_active=1) AND is_sent=1";
+      $sql2 = "SELECT COUNT(*) AS pending_count FROM campaign_order_list WHERE camp_id IN (SELECT cpgn_id FROM campaign_manager WHERE created_by={$this->store_id} AND is_deleted=0 AND is_active=1) AND is_sent=0 AND trigger_on > NOW() AND dns_status=0";
+      $sql3 = "SELECT count(*) as ttl_inac FROM campaign_manager WHERE created_by={$this->store_id} AND is_active=0 and is_deleted=0";
+	    $sql4 = "SELECT COUNT(*)+3  AS ttl_temp FROM `email_template` WHERE created_by={$this->store_id} AND is_deleted='0'";
+      $sql5 = "SELECT COUNT(*)  AS deleted FROM campaign_manager WHERE created_by={$this->store_id} AND is_deleted='1'";
+      $sql6 = "SELECT COUNT(*)  AS archive FROM campaign_manager WHERE created_by={$this->store_id} AND is_archieve='1'";
+      $sql7 = "SELECT COUNT(*) as cmps FROM campaign_manager WHERE created_by={$this->store_id}";
+      $sql8 = "SELECT COUNT(*)  AS draft FROM campaign_manager WHERE created_by={$this->store_id} AND cpgn_status ='1'";
+      $sql9 = "SELECT COUNT(*)  AS test FROM campaign_manager WHERE created_by={$this->store_id} AND cpgn_status ='2'";
+      $sql10 = "SELECT COUNT(*)  AS live FROM campaign_manager WHERE created_by={$this->store_id} AND cpgn_status ='3'";
+      $sql11 = "SELECT COUNT(*)  AS paused FROM campaign_manager WHERE created_by={$this->store_id} AND cpgn_status ='4'";
+
       $qry=$this->db->query($sql);
       $res=$qry->result_array();
       $data['total_cmp']=$res[0]['ttl_cmp'];
+
       $qry=$this->db->query($sql1);
       $res=$qry->result_array();
       $data['sent_count']=$res[0]['sent_count'];
+
       $qry=$this->db->query($sql2);
       $res=$qry->result_array();
       $data['pending_count']=$res[0]['pending_count'];
+
       $qry=$this->db->query($sql3);
       $res=$qry->result_array();
       $data['inactive']=$res[0]['ttl_inac'];
-	   $qry=$this->db->query($sql4);
+
+      $qry=$this->db->query($sql4);
       $res=$qry->result_array();
       $data['ttl_temp']=$res[0]['ttl_temp'];
+
+      $qry = $this->db->query($sql5);
+      $res = $qry->result_array();
+      $data['trash'] = $res[0]['deleted'];
+
+      $qry = $this->db->query($sql6);
+      $res = $qry->result_array();
+      $data['archive'] = $res[0]['archive'];
+
+      $qry = $this->db->query($sql7);
+      $res = $qry->result_array();
+      $data['total'] = $res[0]['cmps'];
+
+      $qry = $this->db->query($sql8);
+      $res = $qry->result_array();
+      $data['draft'] = $res[0]['draft'];
+
+      $qry = $this->db->query($sql9);
+      $res = $qry->result_array();
+      $data['test'] = $res[0]['test'];
+
+      $qry = $this->db->query($sql10);
+      $res = $qry->result_array();
+      $data['live'] = $res[0]['live'];
+
+      $qry = $this->db->query($sql11);
+      $res = $qry->result_array();
+      $data['paused'] = $res[0]['paused'];
+
       return $data;
     }
+
     public function get_feedback_data($frm_date='',$to_date='')
     {
       $sql="SELECT IFNULL(SUM(IF(fbk_rating >= 4,1,0 )),0) as positive_count ,IFNULL(SUM(IF(fbk_rating <= 2,1,0 )),0) as negative_count, IFNULL(SUM(IF(fbk_rating = 3,1,0 )),0) as neutral_count, count(order_id) as feedback_count, ROUND(AVG(fbk_rating),2) as avg_feedback, IFNULL(SUM(IF(fbk_rating = 1,1,0 )),0) as one_star, IFNULL(SUM(IF(fbk_rating = 2,1,0 )),0) as two_star, IFNULL(SUM(IF(fbk_rating = 3,1,0 )),0) as three_star, IFNULL(SUM(IF(fbk_rating = 4,1,0 )),0) as four_star, IFNULL(SUM(IF(fbk_rating = 5,1,0 )),0) as five_star FROM amz_feedback_data as tx
             WHERE fbk_for={$this->store_id}";
-       // if(!empty($frm_date) && !empty($to_date))
-       // {
-       //  $frm_date=$frm_date." 00:00:00";
-       //  $to_date=$to_date." 23:59:59";
-       //  $sql.=" AND fbk_date >= ".$this->db->escape($frm_date)." AND fbk_date <= ".$this->db->escape($to_date);
-       // }
        $query=$this->db->query($sql);
        return $query->result_array();
     }
@@ -460,6 +496,13 @@ class Campaign_model extends CI_Model
 
   public function get_reviews_breakdown() {
     $qry=$this->db->query("SELECT review_rating FROM customer_product cp INNER JOIN fd_amazon_cust_reviews cr ON cp.prod_sku = cr.item_SKU WHERE cp.store_id = {$this->store_id} AND cr.user_id = " . $this->db->escape($this->user_id));
+    $res=$qry->result_array();
+    return $res;
+  }
+
+  public function get_user_folders()
+  {
+    $qry=$this->db->query("SELECT * FROM scr_user_c_folders WHERE user_id = " . $this->db->escape($this->user_id));
     $res=$qry->result_array();
     return $res;
   }

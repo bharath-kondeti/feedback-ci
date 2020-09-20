@@ -47,6 +47,7 @@ class Manage_campaign extends CI_Controller
     $data['template_list']=$this->campaign_model->get_template_list();
     $data['recent_orders']=$this->campaign_model->get_recent_orders();
     $data['metrics']=$this->campaign_model->get_campaign_metrics();
+    $data['user_folders']=$this->campaign_model->get_user_folders();
     echo json_encode($data);
   }
 
@@ -522,6 +523,35 @@ else
       $data['campaign_list'] = $this->campaign_model->get_campaign_list();
     }
 
+    //Move to Folder
+    if(is_numeric($action)) {
+      foreach ($camps as $camp) {
+        $uqry = "UPDATE campaign_manager SET folder_id =" . $action . " WHERE cpgn_id = " . $camp;
+        $this->db->query($uqry);
+      }
+      $data['status_text'] = "Campaign(s) moved successfully";
+      $data['status_code'] = 1;
+      $data['campaign_list'] = $this->campaign_model->get_campaign_list();
+    }
+    echo json_encode($data);
+  }
+
+  public function new_folder() {
+    $folder_name = $_POST['folder_name'];
+    $this->db->trans_start();
+    $insq = "INSERT INTO scr_user_c_folders (user_id, folder_name) VALUES (".$this->user_id.", '".$folder_name."')";
+    $this->db->query($insq);
+    $this->db->trans_complete();
+    if ($this->db->trans_status() === FALSE) {
+      $data['status_text'] = "Something wrong. Please check.";
+      $data['status_code'] = 0;
+      $data['campaign_list'] = $this->campaign_model->get_campaign_list();
+    }
+    else {
+      $data['status_text'] = "Folder added successfully";
+      $data['status_code'] = 1;
+      $data['campaign_list'] = $this->campaign_model->get_campaign_list();
+    }
     echo json_encode($data);
   }
 }
