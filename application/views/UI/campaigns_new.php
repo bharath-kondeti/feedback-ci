@@ -204,7 +204,7 @@
                   <a class="dropdown-item" href="#">Trash (0)</a>
                   <a class="dropdown-item" href="#">Archive (0)</a>
                   <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="#"> <i class="fe-folder text-primary"></i> Add New Folder</a>
+                  <a ng-click="addNewFolder()" class="dropdown-item" href="#"> <i class="fe-folder text-primary"></i> Add New Folder</a>
                 </div>
               </div>
             </div>
@@ -233,6 +233,8 @@
                   <a ng-click="performAction('delete')" class="dropdown-item" href="#"><i class="fa fa-trash mr-2" aria-hidden="true"></i>Delete</a>
                   <a ng-click="performAction('pause')" class="dropdown-item" href="#"><i class="fa fa-pause mr-2" aria-hidden="true"></i>Pause</a>
                   <a ng-click="performAction('start')" class="dropdown-item" href="#"><i class="fa fa-play mr-2" aria-hidden="true"></i>Start</a>
+                  <h6 class="dropdown-header">Move to Folder...</h6>
+                  <a ng-repeat="fd in folders track by $index" ng-click="performAction(fd.folder_id)" class="dropdown-item" href="#"><i class="fa fa-folder-o mr-2" aria-hidden="true"></i></i>{{fd.folder_name}}</a>
                 </div>
               </div>
             </div>
@@ -1312,6 +1314,20 @@
         }
       });
     };
+
+    var create_folder = function(folder_name)
+    {
+      var search_path = "<?php echo $baseurl . 'manage_campaign/new_folder/'; ?>";
+      return $http({
+        method: "post",
+        url: search_path,
+        data:
+        {
+          folder_name: folder_name
+        }
+      });
+    };
+
     return {
       get_customer_status: get_customer_status,
       get_data: get_data,
@@ -1323,7 +1339,7 @@
       change_status: change_status,
       change_state: change_state,
       get_brands: get_brands,
-      perform_action: perform_action
+      perform_action: perform_action,
     };
 
   });
@@ -1405,6 +1421,7 @@
       $scope.checkStatusCamp = 'N';
       $scope.checkedAll = false;
       $scope.campList = [];
+      $scope.folders = [{folder_name: 'folder-1', folder_id: 1},{folder_name: 'folder-2', folder_id: 2}, {folder_name: 'folder-3', folder_id: 3}]
       // $scope.selectedCampaign = [];
       $scope.selectedCampaign = {
         ids: []
@@ -1432,6 +1449,29 @@
           }
         }
       });
+      $scope.addNewFolder = function () {
+        swal({
+          title: 'New Folder',
+          type: "input",
+          showCancelButton: true,
+          closeOnConfirm: false,
+        }, function(inputValue) {
+          if (inputValue.length === false) return false;
+            if (inputValue.length === 0) {
+              swal({
+                title: 'Error',
+                type: "error",
+                text: 'Please enter a valid folder name',
+                showCancelButton: true,
+                closeOnConfirm: true,
+              })
+              return false
+            }
+            swal("Nice!", "You wrote: " + inputValue, "success");
+            campaignFactory.create_folder(inputValue);
+          }
+        );
+      }
       $scope.statusCheckCamp = function() {
         if($scope.checkStatusCamp === 'Y') {
           $scope.selectedCampaign.ids = $scope.campList.map(function(item) { return item.campaign_id; });
