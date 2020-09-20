@@ -209,10 +209,10 @@
 <script type="text/javascript">
 
   crawlApp.factory('dashFactory', function($http,$q,limitToFilter) {
-    var get_data = function (frm_date,to_date,order_id,buyer_email,offset,limit) {
+    var get_data = function (frm_date,to_date,order_id,buyer_email) {
       var dataset_path="<?php echo $baseurl.'dashboard/get_feedbacks'?>";
       var deferred = $q.defer();
-      var path = dataset_path+'/'+frm_date+'/'+to_date+'/'+order_id+'/'+buyer_email+'/'+offset+'/'+limit;
+      var path = dataset_path+'/'+frm_date+'/'+to_date+'/'+order_id+'/'+buyer_email;
       $http.get(path)
       .success(function(data,status,headers,config){deferred.resolve(data);})
       .error(function(data, status, headers, config) { deferred.reject(status);});
