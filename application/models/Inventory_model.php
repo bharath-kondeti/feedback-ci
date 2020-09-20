@@ -147,5 +147,13 @@ class Inventory_model extends CI_Model
       return $res;
     }
 
+
+    public function getTrackedReviews()
+    {
+      $qry=$this->db->query("SELECT * FROM customer_product WHERE review_tracking = 1");
+      $res=$qry->result_array();
+      return $res;
+    }
+
   }
 ?>
