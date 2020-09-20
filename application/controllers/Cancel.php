@@ -10,6 +10,7 @@ class Cancel extends CI_Controller {
   {
     parent::__construct();
     $this->load->model('login_model');
+    $this->load->model('preferences_model');
     if(!$this->login_model->userLoginCheck())
     {
       redirect('user_auth');
@@ -81,6 +82,19 @@ class Cancel extends CI_Controller {
     else {
       $data['status_code'] = 1;
     }
+    echo json_encode($data);
+  }
+
+  /**
+   * getRequestExists: Get users hold and cancel requests
+   * @return json
+   */
+  public function getUserRequests()
+  {
+    $data = array();
+    $data['status_text'] = 'Success';
+    $data['status_code'] = '1';
+    $user_requests = $this->preferences_model->getUserRequests();
     echo json_encode($data);
   }
 }
