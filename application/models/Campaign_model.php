@@ -426,7 +426,7 @@ class Campaign_model extends CI_Model
     }
 
 
-  public function get_feedbacks($frm_date='', $to_date='', $order_or_email = '', $search_term = '')
+  public function get_feedbacks($frm_date='', $to_date='', $order_or_email = '', $search_term = '', $offet = '', $limit = '')
   {
     $sql = "SELECT tx.fbk_date, tx.order_id, tx.fbk_rating, tx.rater_email, tx.fbk_comment, ao.asin, REPLACE(REPLACE(cp.prod_title,'&nbsp;&ndash;&nbsp;','-'),'&nbsp;',' ') AS itm_title, ao.seller_sku, cp.prod_country, tx.fbk_country, cp.prod_image
       FROM amz_feedback_data as tx
@@ -442,6 +442,11 @@ class Campaign_model extends CI_Model
     }
     if(!empty($order_or_email) && $search_term == 'email') {
       $sql.=" AND rater_email = '".$order_or_email."'";
+    }
+    if(!empty($offet) && !empty($limit)) {
+      $sql.=" LIMIT ".$offet.",".$limit;
+    } else {
+      $sql.=" LIMIT 0, 15";
     }
     $query=$this->db->query($sql);
     return $query->result_array();
