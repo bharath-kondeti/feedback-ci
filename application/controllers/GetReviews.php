@@ -31,5 +31,26 @@ class GetReviews extends CI_Controller
   public function getTrackedReviews()
   {
     $data = $this->inventory_model->getTrackedReviews();
+
+    echo "<pre>";
+    print_r($data);
+
+    $result_table = "<table border='1'>
+    <thead>
+      <tr>
+        <th>S No</th>
+        <th>Product Title</th>
+        <th>Product Asin</th>
+        <th>Product SKU</th>
+        <th>Product Country</th>
+        <th>Price</th>
+        <th>Review Title</th>
+        <th>Review Description</th>
+        <th>Review Rating</th>
+        <th>Review Date</th>
+        <th>Customer Name</th>
+      </tr>
+    </thead>";
+
   }
 }
