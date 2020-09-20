@@ -79,3 +79,14 @@ CREATE TABLE `scr_user_requests` (
   `requested_on` datetime NOT NULL ON UPDATE CURRENT_TIMESTAMP,
   `modified_on` datetime NOT NULL
 ) ENGINE='InnoDB' COLLATE 'latin1_swedish_ci';
+
+
+ALTER TABLE `scr_user`
+ADD `store_logo_path` varchar(100) COLLATE 'latin1_swedish_ci' NULL,
+ADD `fb_bl` tinyint NULL AFTER `store_logo_path`,
+ADD `test_emails` longtext COLLATE 'latin1_swedish_ci' NULL AFTER `fb_bl`,
+ADD `sender_email` varchar(100) COLLATE 'latin1_swedish_ci' NULL AFTER `test_emails`,
+ADD `email_negative_fb` varchar(100) COLLATE 'latin1_swedish_ci' NULL AFTER `sender_email`;
+
+ALTER TABLE `campaign_manager`
+ADD `is_archieve` tinyint NULL;

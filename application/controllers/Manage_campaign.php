@@ -38,7 +38,6 @@ class Manage_campaign extends CI_Controller
   {
     $to_date=date('Y-m-d');
     $frm_date = date('Y-m-d',strtotime("-30 days"));
-  	$country='IN';
     $data['status_text']='Success';
     $data['status_code']='1';
     $data['campaign_list']=$this->campaign_model->get_campaign_list();
@@ -467,17 +466,62 @@ INNER JOIN supported_country ON store_id=".$this->store_id." AND country_code=".
   {
     echo '{"status_code":"0","status_text":"Not able to send mail "}';
   }
-
-
+}
+else
+{
+  echo '{"status_code":"0","status_text":"Somedata missing"}';
+}
 }
 
-      else
-      {
-        echo '{"status_code":"0","status_text":"Somedata missing"}';
+
+  public function perform_action() {
+    $action = $_POST['action_name'];
+    $camps = $_POST['campaign_ids'];
+
+    //Archive
+    if($action == 'archive') {
+      foreach ($camps as $camp) {
+        $uqry = "UPDATE campaign_manager SET is_archieve = 1 WHERE cpgn_id = " . $camp;
+        $this->db->query($uqry);
       }
+      $data['status_text'] = "Campaign(s) archived successfully";
+      $data['status_code'] = 1;
+      $data['campaign_list'] = $this->campaign_model->get_campaign_list();
     }
 
+    //Delete
+    if($action == 'delete') {
+      foreach ($camps as $camp) {
+        $uqry = "UPDATE campaign_manager SET is_deleted = 1 WHERE cpgn_id = " . $camp;
+        $this->db->query($uqry);
+      }
+      $data['status_text'] = "Campaign(s) deleted successfully";
+      $data['status_code'] = 1;
+      $data['campaign_list'] = $this->campaign_model->get_campaign_list();
+    }
 
+    //Pause
+    if($action == 'pause') {
+      foreach ($camps as $camp) {
+        $uqry = "UPDATE campaign_manager SET cpgn_status = 4 WHERE cpgn_id = " . $camp;
+        $this->db->query($uqry);
+      }
+      $data['status_text'] = "Campaign(s) paused successfully";
+      $data['status_code'] = 1;
+      $data['campaign_list'] = $this->campaign_model->get_campaign_list();
+    }
+
+    //Draft
+    if($action == 'start') {
+      foreach ($camps as $camp) {
+        $uqry = "UPDATE campaign_manager SET cpgn_status = 1 WHERE cpgn_id = " . $camp;
+        $this->db->query($uqry);
+      }
+      $data['status_text'] = "Campaign(s) started successfully";
+      $data['status_code'] = 1;
+      $data['campaign_list'] = $this->campaign_model->get_campaign_list();
+    }
+
+    echo json_encode($data);
+  }
 }
-
-

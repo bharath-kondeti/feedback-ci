@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Campaigns_new extends CI_Controller 
+class Campaigns_new extends CI_Controller
 {
   private $user_id;
   public function  __construct()
@@ -14,13 +14,13 @@ class Campaigns_new extends CI_Controller
 	 else
      {
 		$this->load->model('campaign_model');
-		$user=$this->session->userdata('user_logged_in');  
+		$user=$this->session->userdata('user_logged_in');
 		$this->user_id=$user['id'];
-		$store=$this->session->userdata('store_info');  
+		$store=$this->session->userdata('store_info');
 		$this->store_id=$store['store_id'];
 		$this->store_country=$store['store_country'];
-	 }  
-     
+	 }
+
   }
   public function index()
 	{
@@ -42,7 +42,7 @@ class Campaigns_new extends CI_Controller
 		$this->load->view('UI/campaigns_rk',$data);
 		$this->load->view('UI/footer');
 	}
- 
+
    public function get_pre_data()
   {
     $to_date=date('Y-m-d');
@@ -59,8 +59,8 @@ class Campaigns_new extends CI_Controller
     $data['metrics']=$this->campaign_model->get_campaign_metrics();
     echo json_encode($data);
   }
-  
-   
+
+
   public function get_campaign_data()
   {
     $qry=$this->db->query('SELECT cpgn_id,cpgn_name FROM campaign_manager WHERE created_by='.$this->store_id." AND is_deleted=0");
@@ -78,7 +78,7 @@ class Campaigns_new extends CI_Controller
        $data['payload']=$this->campaign_model->get_campaign_users($this->input->post('campaign_id'));
        $data['status_text']='Success';
        $data['status_code']='1';
-       echo json_encode($data);    
+       echo json_encode($data);
     }
   }
   public function get_products()
@@ -88,12 +88,12 @@ class Campaigns_new extends CI_Controller
        $data['payload']=$this->campaign_model->get_product_list($this->input->post('country'),$this->input->post('brand'),$this->input->post('key_word'),$this->input->post('fc_code'));
        $data['status_text']='Success';
        $data['status_code']='1';
-       echo json_encode($data);    
+       echo json_encode($data);
     }
   }
-  
-  
- 
+
+
+
   public function create_campaign()
   {
     if(isset($_POST['camp_data']) && isset($_POST['asin']))
@@ -102,86 +102,86 @@ class Campaigns_new extends CI_Controller
         $asin=json_decode($_POST['asin']);
         if(!isset($post->camp_name) || empty($post->camp_name))
         {
-          echo '{"status_code":"0","status_text":"Campaign Name is not provided"}';             
+          echo '{"status_code":"0","status_text":"Campaign Name is not provided"}';
           die();
         }
          elseif(!isset($post->camp_country) || empty($post->camp_country))
         {
-          echo '{"status_code":"0","status_text":"Campaign country is empty"}';             
+          echo '{"status_code":"0","status_text":"Campaign country is empty"}';
           die();
         }
         elseif(!isset($post->camp_brand) || empty($post->camp_brand))
         {
-          echo '{"status_code":"0","status_text":"Campaign brand is empty"}';             
+          echo '{"status_code":"0","status_text":"Campaign brand is empty"}';
           die();
         }
         elseif(count($asin) <= 0)
         {
-          echo '{"status_code":"0","status_text":"Please choose atleast one product for campaign"}';             
+          echo '{"status_code":"0","status_text":"Please choose atleast one product for campaign"}';
           die();
         }
         elseif(!isset($post->camp_type) || empty($post->camp_type))
         {
-          echo '{"status_code":"0","status_text":"Campaign customer type is empty"}';             
+          echo '{"status_code":"0","status_text":"Campaign customer type is empty"}';
           die();
         }
         elseif(!isset($post->camp_fulfill) || empty($post->camp_fulfill))
         {
-          echo '{"status_code":"0","status_text":"Campaign fullfillment channel type is empty"}';             
+          echo '{"status_code":"0","status_text":"Campaign fullfillment channel type is empty"}';
           die();
         }
         elseif(!isset($post->camp_fulfill) || empty($post->camp_fulfill))
         {
-          echo '{"status_code":"0","status_text":"Campaign fullfillment channel type is empty"}';             
+          echo '{"status_code":"0","status_text":"Campaign fullfillment channel type is empty"}';
           die();
         }
         elseif(!isset($post->camp_trigger) || empty($post->camp_trigger))
         {
-          echo '{"status_code":"0","status_text":"Campaign trigger event not selected"}';             
+          echo '{"status_code":"0","status_text":"Campaign trigger event not selected"}';
           die();
         }
         elseif(!isset($post->camp_days)  && $post->camp_ord_in!='1' || $post->camp_days < 0 )
         {
-		  echo '{"status_code":"0","status_text":"Campaign trigger days should be positive number"}';             
+		  echo '{"status_code":"0","status_text":"Campaign trigger days should be positive number"}';
           die();
         }
         elseif(!isset($post->camp_hour) && $post->camp_ord_in!='1'  || $post->camp_hour < 0 || $post->camp_hour >12)
         {
-	      echo '{"status_code":"0","status_text":"Campaign trigger hour not in range [0-12]"}';             
+	      echo '{"status_code":"0","status_text":"Campaign trigger hour not in range [0-12]"}';
           die();
         }
         elseif(!isset($post->camp_am_pm) &&  $post->camp_ord_in!='1' || ($post->camp_am_pm!='1' && $post->camp_am_pm!='2') )
         {
-          echo '{"status_code":"0","status_text":"Please select AM/PM on campaign sceduler"}';             
+          echo '{"status_code":"0","status_text":"Please select AM/PM on campaign sceduler"}';
           die();
         }
         elseif(!isset($post->camp_am_pm) && $post->camp_ord_in!='1'  || ($post->camp_am_pm!='1' && $post->camp_am_pm!='2') )
         {
-          echo '{"status_code":"0","status_text":"Please select AM/PM on campaign scheduler properly "}';             
+          echo '{"status_code":"0","status_text":"Please select AM/PM on campaign scheduler properly "}';
           die();
         }
-		
+
         elseif(!isset($post->feedback_status) || $post->feedback_status < 0 || $post->feedback_status >3)
         {
-          echo '{"status_code":"0","status_text":"Please select feedback option in campaign scheduler properly "}';             
+          echo '{"status_code":"0","status_text":"Please select feedback option in campaign scheduler properly "}';
           die();
         }
         elseif(!isset($post->feedback_status) || $post->feedback_status < 0 || $post->feedback_status >3)
         {
-          echo '{"status_code":"0","status_text":"Please select feedback option in campaign scheduler properly "}';             
+          echo '{"status_code":"0","status_text":"Please select feedback option in campaign scheduler properly "}';
           die();
         }
         elseif(!isset($post->template_id) || empty($post->template_id))
         {
-          echo '{"status_code":"0","status_text":"Please select email template for campaign"}';             
+          echo '{"status_code":"0","status_text":"Please select email template for campaign"}';
           die();
         }
         elseif((int)$post->camp_trigger==1  && (int)$post->feedback_status==2)
         {
-          echo '{"status_code":"0","status_text":"To send Feedback received order campaign trigger should not be after shipped"}';             
+          echo '{"status_code":"0","status_text":"To send Feedback received order campaign trigger should not be after shipped"}';
           die();
         }
-		
+
         else
         {
              if(!empty($post->cpgn_id))
@@ -195,7 +195,7 @@ class Campaigns_new extends CI_Controller
               }
               else
               {
-                echo '{"status_code":"0","status_text":"Not able to update campaign please try again later"}';             
+                echo '{"status_code":"0","status_text":"Not able to update campaign please try again later"}';
               }
             }
             else
@@ -209,32 +209,32 @@ class Campaigns_new extends CI_Controller
                  }
                  else
                  {
-                  echo '{"status_code":"0","status_text":"Not able to create campaign please try again later"}';             
+                  echo '{"status_code":"0","status_text":"Not able to create campaign please try again later"}';
                  }
             }
         }
-      
-     
-    } 
+
+
+    }
     else
     {
-      echo '{"status_code":"0","status_text":"Data corrupted on transit please refresh and resubmit the data"}';             
+      echo '{"status_code":"0","status_text":"Data corrupted on transit please refresh and resubmit the data"}';
       die();
     }
   }
-  
-  
-  
- 
-	
-    
+
+
+
+
+
+
 	public function change_status()
   {
     if(isset($_POST['w_status']) && ((int)$_POST['w_status']==1 ||(int)$_POST['w_status']==0) )
     {
 		$status=(int)$_POST['w_status']==1?'1':'0';
-       $ufql="UPDATE campaign_manager set is_active=".$status." where cpgn_id=".$this->db->escape($_POST['campaign_id'])." AND created_by=".$this->store_id;          
-        
+       $ufql="UPDATE campaign_manager set is_active=".$status." where cpgn_id=".$this->db->escape($_POST['campaign_id'])." AND created_by=".$this->store_id;
+
         if($this->db->query($ufql))
         {
           $data['status_text']="Campaign Successfully updated";
@@ -246,16 +246,16 @@ class Campaigns_new extends CI_Controller
           $data['status_text']="Something went wrong please try agin after sometime";
           $data['status_code']=0;
           $data['campaign_list']=$this->campaign_model->get_campaign_list();
-          
+
         }
         echo json_encode($data);
     }
     else
     {
-      echo '{"status_code":"0","status_text":"Input Error"}';               
+      echo '{"status_code":"0","status_text":"Input Error"}';
     }
   }
-  
+
   public function delete_campaign()
     {
       if(isset($_POST['campaign_id']) && !empty($_POST['campaign_id']))
@@ -272,7 +272,7 @@ class Campaigns_new extends CI_Controller
           $data['status_text']="Something went wrong please try agin after sometime";
           $data['status_code']=0;
           $data['campaign_list']=$this->campaign_model->get_campaign_list();
-          
+
         }
         echo json_encode($data);
       }
@@ -311,7 +311,7 @@ cpgn_am_pm AS camp_am_pm,cpgn_day AS camp_trigger_day,cpgn_days AS camp_days,cpg
         echo '{"status_code":"0","status_text":"Input error"}';
       }
     }
-	
+
    public function preview_email()
   {
 	  if(empty($_POST['order_id']))
@@ -328,7 +328,7 @@ cpgn_am_pm AS camp_am_pm,cpgn_day AS camp_trigger_day,cpgn_days AS camp_days,cpg
     {
       $five_star_img=base_url()."asset/img/fivestar_icon.png";
       $sql="SELECT template_content,subject,itm_title as product_name,order_no as order_number,DATE_FORMAT(purchase_date,'%Y-%m-%d')  as order_date,buyer_name as customer_fullname,SUBSTRING_INDEX(buyer_name, ' ', 1) as customer_firstname,SUBSTRING_INDEX(buyer_name, ' ', 1) as customer_lastname,buyer_email,asin ,itm_title,prod_image,sales_country
-            FROM email_template 
+            FROM email_template
             INNER JOIN amz_order_info AS tnx ON order_no=".$this->db->escape($_POST['order_id'])." AND template_id=".$this->db->escape($_POST['template_id'])." AND tnx.store_id=".$this->store_id."
             INNER JOIN customer_product ON tnx.seller_sku=prod_sku AND tnx.store_id=".$this->store_id;
       $query=$this->db->query($sql);
@@ -339,12 +339,12 @@ cpgn_am_pm AS camp_am_pm,cpgn_day AS camp_trigger_day,cpgn_days AS camp_days,cpg
         die();
       }
 
-  
+
   $str_sql="SELECT store_id,amz_code as marketplaceID,vendor_name,amz_domain,company_name,CONCAT(\"<a style='color: #fff;background-color: #4fc6e1;border:5px solid #4fc6e1;font-size:15px'  href='http://www.\",amz_domain,\"/s?ie=UTF8&me=\",seller_id,\"'>Store Front URL</a>\") AS store_url,
   CONCAT(\"<a style='color: #fff;background-color: #4fc6e1;border:5px solid #4fc6e1;font-size:15px'  href='https://www.\",amz_domain,\"/gp/feedback/leave-consolidated-feedback.html?ie=UTF8&isCBA=&marketplaceID=\",amz_code,\"&mode=eligibility&orderID=\",\"".$res[0]['order_number']."\",\"&ref_=fb_multi_cfb&'>Leave us feedback</a>\") AS feedback_url,
-  CONCAT(\"<a style='color: #fff;background-color: #4fc6e1;border:5px solid #4fc6e1;font-size:15px'  href='https://www.\",amz_domain,\"/review/create-review/ref=oss_rev?_encoding=UTF8&asin=\",\"{$res[0]['asin']}\",\"'>Leave us review</a>\") AS review_url 
-  FROM amazon_profile 
-INNER JOIN supported_country ON store_id=".$this->store_id." AND country_code=".$this->db->escape($res[0]['sales_country'])." 
+  CONCAT(\"<a style='color: #fff;background-color: #4fc6e1;border:5px solid #4fc6e1;font-size:15px'  href='https://www.\",amz_domain,\"/review/create-review/ref=oss_rev?_encoding=UTF8&asin=\",\"{$res[0]['asin']}\",\"'>Leave us review</a>\") AS review_url
+  FROM amazon_profile
+INNER JOIN supported_country ON store_id=".$this->store_id." AND country_code=".$this->db->escape($res[0]['sales_country'])."
 ";
   $str=$this->db->query($str_sql);
   $store_info=$str->result_array();
@@ -358,9 +358,9 @@ INNER JOIN supported_country ON store_id=".$this->store_id." AND country_code=".
   $data['status_text']="Success";
   $data['email_content']=$msg;
   echo json_encode($data);
-  
+
 }
-  
+
 else
 {
   echo '{"status_code":"0","status_text":"Somedata missing"}';
@@ -393,7 +393,7 @@ public function test_email()
     {
       $five_star_img=base_url()."asset/img/fivestar_icon.png";
       $sql="SELECT template_content,subject,itm_title as product_name,order_no as order_number,DATE_FORMAT(purchase_date,'%Y-%m-%d')  as order_date,buyer_name as customer_fullname,SUBSTRING_INDEX(buyer_name, ' ', 1) as customer_firstname,SUBSTRING_INDEX(buyer_name, ' ', 1) as customer_lastname,buyer_email,asin ,itm_title,prod_image,sales_country
-            FROM email_template 
+            FROM email_template
             INNER JOIN amz_order_info AS tnx ON order_no=".$this->db->escape($_POST['order_id'])." AND template_id=".$this->db->escape($_POST['template_id'])." AND tnx.store_id=".$this->store_id."
             INNER JOIN customer_product ON tnx.seller_sku=prod_sku AND tnx.store_id=".$this->store_id;
 $query=$this->db->query($sql);
@@ -403,26 +403,26 @@ if(empty($res))
   echo '{"status_code":"0","status_text":"Order ID not found "}';
   die();
 }
- 
+
   $str_sql="SELECT store_id,amz_code as marketplaceID,vendor_name,amz_domain,company_name,CONCAT(\"<a style='color: #fff;background-color: #4fc6e1;border:5px solid #4fc6e1;font-size:15px'  href='http://www.\",amz_domain,\"/s?ie=UTF8&me=\",seller_id,\"'>Store Front URL</a>\") AS store_url,
   CONCAT(\"<a style='color: #fff;background-color: #4fc6e1;border:5px solid #4fc6e1;font-size:15px'  href='https://www.\",amz_domain,\"/gp/feedback/leave-consolidated-feedback.html?ie=UTF8&isCBA=&marketplaceID=\",amz_code,\"&mode=eligibility&orderID=\",\"".$res[0]['order_number']."\",\"&ref_=fb_multi_cfb&'>Leave us feedback</a>\") AS feedback_url,
   CONCAT(\"<a style='color: #fff;background-color: #4fc6e1;border:5px solid #4fc6e1;font-size:15px'  href='https://www.\",amz_domain,\"/review/create-review/ref=oss_rev?_encoding=UTF8&asin=\",\"{$res[0]['asin']}\",\"'>Leave us review</a>\") AS review_url
-  
-FROM amazon_profile 
+
+FROM amazon_profile
 INNER JOIN supported_country ON store_id=".$this->store_id." AND country_code=".$this->db->escape($res[0]['sales_country'])."  ";
   $str=$this->db->query($str_sql);
   $store_info=$str->result_array();
   $store_info[0]['review_url_with_product_img']='<br><br><table class="divProductReviewTable" cellpadding="4"><tbody><tr><td width="30%"><a href="https://www.'.$store_info[0]['amz_domain'].'/gp/customer-reviews/review-your-purchases?asins='.$res[0]['asin'].'" target="_blank" title="Leave Product Review"><img src="'.$res[0]['prod_image'].'" alt="'.$res[0]['asin'].'"></a></td><td width="70%">'.$res[0]['itm_title'].'<br>&nbsp;<br><a href="https://www.'.$store_info[0]['amz_domain'].'/gp/customer-reviews/review-your-purchases?asins='.$res[0]['asin'].'" target="_blank" title="Leave Product Review">Leave Product Review</a><br><a href="https://www.'.$store_info[0]['amz_domain'].'/gp/customer-reviews/review-your-purchases?asins='.$res[0]['asin'].'" target="_blank" title="Leave Product Review"><img src="'.$five_star_img.'"></a></td></tr></tbody></table><br><br>';
-  
+
   $this->load->library('parser');
   $this->parser->set_delimiters('{{','}}');
   $msg=$res[0]['template_content'];
   $subject=$res[0]['subject'];
   $dt=array_merge($res[0],$store_info[0]);
   $msg=$this->parser->parse_string($msg,$dt,TRUE);
-  
+
    $this->load->library('email');
-  
+
 
     $this->load->library('email');
     $config['protocol'] = 'smtp';
@@ -440,7 +440,7 @@ INNER JOIN supported_country ON store_id=".$this->store_id." AND country_code=".
     $this->email->to($_POST['email']);
     $this->email->subject($subject);
     $this->email->message($msg);
-   if ($this->email->send()) 
+   if ($this->email->send())
   {
     echo '{"status_code":"1","status_text":"Test mail has been sent"}';
   }
@@ -448,14 +448,14 @@ INNER JOIN supported_country ON store_id=".$this->store_id." AND country_code=".
   {
     echo '{"status_code":"0","status_text":"Not able to send mail "}';
   }
-  
-  
+
+
 }
-  
+
       else
       {
         echo '{"status_code":"0","status_text":"Somedata missing"}';
       }
     }
-  
+
  }

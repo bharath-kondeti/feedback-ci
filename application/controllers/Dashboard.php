@@ -75,7 +75,7 @@ class Dashboard extends CI_Controller
     echo json_encode($data);
   }
 
-  public function get_feedbacks($frm_date = '', $to_date = '', $order_or_email = '', $search_term = '') {
+  public function get_feedbacks($frm_date = '', $to_date = '', $order_or_email = '', $search_term = '',$offet = '', $limit = '') {
     $data['status_text']='Success';
     $data['status_code']='1';
     $fbk = array();
@@ -85,8 +85,10 @@ class Dashboard extends CI_Controller
     if($frm_date == '') {
       $frm_date = date('Y-m-d',strtotime("-30 days"));
     }
-    $feedbacks = $this->campaign_model->get_feedbacks($frm_date, $to_date, $order_or_email, $search_term);
+    $feedbacks = $this->campaign_model->get_feedbacks($frm_date, $to_date, $order_or_email, $search_term, $offet, $limit);
+    $count = 0;
     foreach ($feedbacks as $feedback => $fbk_value) {
+      $count++;
       if($fbk_value['fbk_rating'] >= 4) {
         $fbk['positive'][$feedback] = $fbk_value;
       } else if($fbk_value['fbk_rating'] <= 2) {
@@ -96,6 +98,7 @@ class Dashboard extends CI_Controller
       }
     }
     $data['fbks'] = $fbk;
+    $data['count'] = $count;
     echo json_encode($data);
   }
 
