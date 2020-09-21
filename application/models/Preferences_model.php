@@ -58,6 +58,13 @@ class Preferences_model extends CI_Model
 
   public function getUserRequests()
   {
-    return 'Test';
+    $data = array();
+    $sql = "SELECT hold_req, cancel_req FROM scr_user WHERE scr_u_id = " . $this->user_id;
+    $query = $this->db->query($sql);
+    $res = $query->result_array();
+    $data['hold'] = $res[0]['hold_req'];
+    $data['cancel'] = $res[0]['cancel_req'];
+
+    return $data;
   }
 }
