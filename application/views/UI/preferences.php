@@ -29,7 +29,7 @@ else {
             <div class="ml-2">
               <ul class="nav flex-column">
                 <li class="nav-item  hover-nav">
-                  <a class="nav-link" href="#">Blacklist</a>
+                  <a class="nav-link" href="<?php echo $baseurl.'blacklist'?>">Blacklist</a>
                 </li>
                 <li class="nav-item hover-nav">
                   <a class="nav-link active" href="<?php echo $baseurl.'preferences'?>">Preferences</a>
