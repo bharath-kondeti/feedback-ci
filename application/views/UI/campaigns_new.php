@@ -218,7 +218,7 @@
                   <a ng-click="performAction('pause')" class="dropdown-item" href="#"><i class="fa fa-pause mr-2" aria-hidden="true"></i>Pause</a>
                   <a ng-click="performAction('start')" class="dropdown-item" href="#"><i class="fa fa-play mr-2" aria-hidden="true"></i>Start</a>
                   <h6 class="dropdown-header">Move to Folder...</h6>
-                  <a ng-repeat="fd in folders track by $index" ng-click="performAction(fd.folder_id)" class="dropdown-item" href="#"><i class="fa fa-folder-o mr-2" aria-hidden="true"></i></i>{{fd.folder_name}}</a>
+                  <a ng-if="folders.length > 0" ng-repeat="fd in folders track by $index" ng-click="performAction(fd.folder_id)" class="dropdown-item" href="#"><i class="fa fa-folder-o mr-2" aria-hidden="true"></i></i>{{fd.folder_name}}</a>
                 </div>
               </div>
             </div>
@@ -233,6 +233,8 @@
                   <div class="dropdown-divider"></div>
                   <a class="dropdown-item" href="#">Trash ({{metrics.trash}})</a>
                   <a class="dropdown-item" href="#">Archive ({{metrics.archive}})</a>
+                  <div class="dropdown-divider"></div>
+                  <a ng-repeat="fd in folders track by $index" class="dropdown-item" href="#">{{fd.folder_name}} ({{fd.fol_id}})</a>
                   <div class="dropdown-divider"></div>
                   <a ng-click="addNewFolder()" class="dropdown-item" href="#"> <i class="fe-folder text-primary"></i> Add New Folder</a>
                 </div>
@@ -1422,7 +1424,7 @@
       $scope.checkStatusCamp = 'N';
       $scope.checkedAll = false;
       $scope.campList = [];
-      $scope.folders = [{folder_name: 'TEsting', folder_id: 1},{folder_name: 'OneMoreTest', folder_id: 2}]
+      $scope.folders = []
       // $scope.selectedCampaign = [];
       $scope.selectedCampaign = {
         ids: []
@@ -1486,7 +1488,10 @@
         console.log('here3', $scope.selectedCampaign.ids)
       }
       $scope.performAction = function (val) {
-        campaignFactory.perform_action(val, $scope.selectedCampaign.ids)
+        if($scope.selectedCampaign.ids.lenght > 0) {
+          campaignFactory.perform_action(val, $scope.selectedCampaign.ids);
+          $scope.get_predata();
+        }
       }
       $scope.filterCamps = function(val, type) {
         $scope.campList = $scope.tempCampList;
@@ -1936,6 +1941,7 @@
               $scope.template_list = response.template_list;
               $scope.metrics = response.metrics;
               $scope.product_list = response.product_list;
+              $scope.folders = response.user_folders;
               console.log('here', $scope.product_list)
             } else
             {
@@ -2214,7 +2220,7 @@
 
   });
 
-  crawlApp.controller("templateCtrl", function templateCtrl($window, $scope, templateFactory, $sce, $q, $timeout, Upload)
+  crawlApp.controller("templateCtrl", function templateCtrl($window,$interval, $scope, templateFactory, $sce, $q, $timeout, Upload)
 
     {
 
@@ -2237,6 +2243,7 @@
       $scope.tmplt.template_name = '';
 
       $scope.tmplt.template_content_html = '';
+      $scope.activateSave = false;
 
       $scope.block_site = function()
 
@@ -2447,6 +2454,35 @@
 
         CKEDITOR.instances.editor.setData('');
 
+      }
+      
+      $scope.$watch("tmplt.template_name",function(newValue, oldValue) {
+        console.log(newValue)
+        if(newValue.length > 3) {
+          // $scope.auto_save();
+          $scope.activateSave = true;
+        }        
+      });
+
+      // $scope.$watch("activateSave",function(newValue, oldValue) {
+      //   if(newValue ==  true) {
+      //     // $scope.auto_save();
+      //     $interval($scope.auto_save, 2000);
+      //   }        
+      // });
+
+      $scope.auto_save = function () {
+        if ($scope.tmplt.is_default == '1') {
+          console.log('herer')
+        } else {
+          $scope.tmplt.template_ui = CKEDITOR.instances.editor.getData();
+          templateFactory.save_template($scope.tmplt)
+          .success(
+            function(html) {
+              console.log('here')
+            }
+          )
+        }
       }
 
       $scope.save_template = function()
