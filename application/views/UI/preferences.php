@@ -1,6 +1,12 @@
 <?php
 $baseurl=base_url();
 $base_url=base_url();
+if($blacklistCheck == 1) {
+  $check = "ng-checked='true'";
+}
+else {
+  $check = "";
+}
 ?>
 
 <div class="wrapper" ng-controller='prefCtrl'>
@@ -80,7 +86,7 @@ $base_url=base_url();
                   Your store logo
                 </div>
                 <div style="width:310px; height:110px; background-color:gray;">
-                  <img ng-src="{{logo_Image_url}}" id="logoImg" alt="store-logo" height="110px" width="310px">
+                  <img src="<?php echo $logoPath; ?>" ng-src="{{logo_Image_url}}" id="logoImg" alt="store-logo" height="110px" width="310px">
                 </div>
                 <div class="input-group mb-3 mt-3" style="width:310px">
                   <div class="custom-file">
@@ -104,7 +110,7 @@ $base_url=base_url();
                   You will need to enter your top approved email address from your amazon account to
                   allow us to send verified emails to buyers.
                   <div class="d-flex">
-                    <input type="email" ng-model="approvedEmail" class="form-control mt-1" aria-describedby="emailHelp" placeholder="Enter email">
+                    <input type="email" ng-init="approvedEmail = '<?php echo $senderEmail; ?>'" ng-model="approvedEmail" class="form-control mt-1" aria-describedby="emailHelp" placeholder="Enter email" value="<?php echo $senderEmail; ?>">
                   </div>
                   <small ng-if="!approvedError" class="form-text text-muted">We'll never share your email with anyone else.</small>
                   <small ng-if="approvedError" class="form-text red">Please enter valid Email address</small>
@@ -114,7 +120,7 @@ $base_url=base_url();
                     Default Email Address for Test Messages
                   </div>
                   <div class="d-flex">
-                    <input type="email" ng-model="testEmail" class="form-control mt-1" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                    <input type="email" ng-init="testEmail = '<?php echo $testEmail; ?>'" ng-model="testEmail" class="form-control mt-1" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" value="<?php echo $testEmail; ?>">
                   </div>
                   <small ng-if="testError" class="form-text red">Please enter valid Email address</small>
                 </div>
@@ -128,7 +134,7 @@ $base_url=base_url();
                   <div class="h5">
                     Email Address(es)
                   </div>
-                  <input type="text" ng-model="negativeEmails" class="form-control mt-1" aria-describedby="emailHelp" placeholder="Enter email">
+                  <input type="text" ng-init="negativeEmails = '<?php echo $negEmail; ?>'" ng-model="negativeEmails" class="form-control mt-1" aria-describedby="emailHelp" placeholder="Enter email" value="<?php echo $negEmail; ?>">
                   <small ng-if="!negError" id="emailHelp" class="form-text text-muted">separate each email with a comma.</small>
                   <small ng-if="negError" class="form-text red">Please enter valid Email address</small>
                 </div>
@@ -139,7 +145,7 @@ $base_url=base_url();
                   Negative feedback on blacklist
                 </div>
                 <div class="form-check form-check-inline">
-                  <input ng-model="blackListNotif" class="form-check-input" type="radio" name="blacklistCheck" value="1">
+                  <input ng-model="blackListNotif" class="form-check-input" type="radio" name="blacklistCheck" value="1" <?php echo $check; ?>>
                   <label class="form-check-label" for="inlineRadio1">Automatically add buyers to the blacklist who submit negative feedback.</label>
                 </div>
               </div>

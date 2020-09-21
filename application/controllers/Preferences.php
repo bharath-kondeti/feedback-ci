@@ -26,10 +26,11 @@ class Preferences extends CI_Controller {
    */
   public function index($value='')
   {
+    $data = $this->preferences_model->getUserPrefs();
     $this->load->view('UI/header');
     $this->load->view('UI/sidepanel');
     $this->load->view('UI/navigation');
-    $this->load->view('UI/preferences');
+    $this->load->view('UI/preferences', $data);
     $this->load->view('UI/footer');
   }
 
