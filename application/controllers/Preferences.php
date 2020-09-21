@@ -26,10 +26,11 @@ class Preferences extends CI_Controller {
    */
   public function index($value='')
   {
+    $data = $this->preferences_model->getUserPrefs();
     $this->load->view('UI/header');
     $this->load->view('UI/sidepanel');
     $this->load->view('UI/navigation');
-    $this->load->view('UI/preferences');
+    $this->load->view('UI/preferences', $data);
     $this->load->view('UI/footer');
   }
 
@@ -41,7 +42,7 @@ class Preferences extends CI_Controller {
    * @param $black_val
    * @return json
    */
-  public function save_preferences($app_email, $test_email, $neg_emails, $black_val)
+  public function save_preferences($app_email = '', $test_email  = '', $neg_emails  = '', $black_val  = '')
   {
     $upref = "UPDATE scr_user SET email_negative_fb = '".$neg_emails."', test_emails = '".$test_email."', sender_email = '".$app_email."', fb_bl = '".$black_val."' where scr_u_id = " . $this->user_id;
     if($this->db->query($upref))

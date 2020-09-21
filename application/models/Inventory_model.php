@@ -150,7 +150,7 @@ class Inventory_model extends CI_Model
 
     public function getTrackedReviews()
     {
-      $qry=$this->db->query("SELECT * FROM customer_product cp INNER JOIN fd_amazon_cust_reviews cr ON cp.prod_id = cr.item_id WHERE cp.review_tracking = 1");
+      $qry=$this->db->query("SELECT REPLACE(REPLACE(cp.prod_title,'&nbsp;&ndash;&nbsp;','-'),'&nbsp;',' ')  AS prod_title, cp.prod_asin, cp.prod_country, cp.itm_price, cp.prod_sku, cr.review_title, cr.review_desc, cr.review_date, cr.review_rating, cr.cust_name  FROM customer_product cp INNER JOIN fd_amazon_cust_reviews cr ON cp.prod_id = cr.item_id WHERE cp.review_tracking = 1");
       $res=$qry->result_array();
       return $res;
     }

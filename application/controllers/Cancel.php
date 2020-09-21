@@ -26,10 +26,11 @@ class Cancel extends CI_Controller {
    */
   public function index($value='')
   {
+    $data = $this->preferences_model->getUserRequests();
     $this->load->view('UI/header');
     $this->load->view('UI/sidepanel');
     $this->load->view('UI/navigation');
-    $this->load->view('UI/cancel');
+    $this->load->view('UI/cancel', $data);
     $this->load->view('UI/footer');
   }
 
@@ -38,23 +39,16 @@ class Cancel extends CI_Controller {
    * @return bool
    */
   function hold_account () {
-    $this->db->trans_start();
-    $insert_hold_request = array(
-      'scr_uid' => $this->user_id,
-      'user_hold' => 0,
-      'user_cancel' => 0,
-      'user_hold_request' => 1,
-      'user_cancel_request' => 0,
-      'requested_on' => date('Y-m-d H:s:i'),
-      'modified_on' => date('Y-m-d H:s:i')
-    );
-    $this->db->insert('scr_user_requests', $insert_hold_request);
-    $this->db->trans_complete();
-    if ($this->db->trans_status() === FALSE) {
-      $data['status_code'] = 0;
-    }
-    else {
+    $upq = "UPDATE scr_user SET hold_req = 1 where scr_u_id = " . $this->user_id;
+    if($this->db->query($upq))
+    {
+      $data['status_text'] = "User Hold Request Sent.";
       $data['status_code'] = 1;
+    }
+    else
+    {
+      $data['status_text'] = "Something went wrong please try agin after sometime";
+      $data['status_code'] = 0;
     }
     echo json_encode($data);
   }
@@ -64,37 +58,17 @@ class Cancel extends CI_Controller {
    * @return bool
    */
   function cancel_account () {
-    $this->db->trans_start();
-    $insert_cancel_request = array(
-      'scr_uid' => $this->user_id,
-      'user_hold' => 0,
-      'user_cancel' => 0,
-      'user_hold_request' => 0,
-      'user_cancel_request' => 1,
-      'requested_on' => date('Y-m-d H:s:i'),
-      'modified_on' => date('Y-m-d H:s:i')
-    );
-    $this->db->insert('scr_user_requests', $insert_cancel_request);
-    $this->db->trans_complete();
-    if ($this->db->trans_status() === FALSE) {
-      $data['status_code'] = 0;
-    }
-    else {
+    $upq = "UPDATE scr_user SET cancel_req = 1 where scr_u_id = " . $this->user_id;
+    if($this->db->query($upq))
+    {
+      $data['status_text'] = "User Cancellation Request Sent.";
       $data['status_code'] = 1;
     }
-    echo json_encode($data);
-  }
-
-  /**
-   * getRequestExists: Get users hold and cancel requests
-   * @return json
-   */
-  public function getUserRequests()
-  {
-    $data = array();
-    $data['status_text'] = 'Success';
-    $data['status_code'] = '1';
-    $user_requests = $this->preferences_model->getUserRequests();
+    else
+    {
+      $data['status_text'] = "Something went wrong please try agin after sometime";
+      $data['status_code'] = 0;
+    }
     echo json_encode($data);
   }
 }

@@ -28,7 +28,7 @@ $baseurl = $base_url;
 							<div class="ml-2">
 								<ul class="nav flex-column">
 									<li class="nav-item  hover-nav">
-										<a class="nav-link" href="#">Blacklist</a>
+										<a class="nav-link" href="<?php echo $baseurl.'blacklist'?>">Blacklist</a>
 									</li>
 									<li class="nav-item hover-nav">
 										<a class="nav-link active" href="<?php echo $baseurl.'preferences'?>">Preferences</a>
@@ -47,7 +47,7 @@ $baseurl = $base_url;
 										<a class="nav-link" href="#">Invoices</a>
 									</li>
 									<!-- <li class="nav-item hover-nav">
-                  <a class="nav-link" href="#">My Plan</a>                  
+                  <a class="nav-link" href="#">My Plan</a>
                 </li> -->
 									<li class="nav-item hover-nav">
 										<a class="nav-link" href="<?php echo $baseurl.'cancel'?>">Cancel</a>

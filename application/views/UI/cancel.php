@@ -24,7 +24,7 @@ $base_url=base_url();
 						<div class="ml-2">
 							<ul class="nav flex-column">
 								<li class="nav-item  hover-nav">
-									<a class="nav-link" href="#">Blacklist</a>
+									<a class="nav-link" href="<?php echo $baseurl.'blacklist'?>">Blacklist</a>
 								</li>
 								<li class="nav-item hover-nav">
 									<a class="nav-link active" href="<?php echo $baseurl.'preferences'?>">Preferences</a>
@@ -82,7 +82,15 @@ $base_url=base_url();
 						<hr>
 						<form name="hold-account" class="hold-account" id="hold-account">
 							<div class="col-sm-2 mg-top-10">
-								<button ng-click="holdAccount()" class="btn btn-block btn-info" name="hold">Hold Account</button>
+								<?php if($hold == 0) { ?>
+									<button ng-click="holdAccount()" class="btn btn-block btn-info" name="hold">Hold Account</button>
+								<?php } ?>
+								<?php if($hold == 1) { ?>
+									<button class="btn btn-block btn-info" name="hold-sent" disabled>Hold Request Sent</button>
+								<?php } ?>
+								<?php if($hold == 2) { ?>
+									<button class="btn btn-block btn-info" name="hold-active" disabled>Account on hold</button>
+								<?php } ?>
 							</div>
 						</form>
 						<div class="col-12">
@@ -95,7 +103,15 @@ $base_url=base_url();
 						<hr>
 						<form name="cancel-account" class="cancel-account" id="cancel-account">
 							<div class="col-sm-2 mg-top-10">
-								<button ng-click="cancelAccount()" class="btn btn-block btn-info" name="cancel">Cancel Account</button>
+								<?php if($cancel == 0) { ?>
+									<button ng-click="cancelAccount()" class="btn btn-block btn-info" name="cancel">Cancel Account</button>
+								<?php } ?>
+								<?php if($cancel == 1) { ?>
+									<button class="btn btn-block btn-info" name="cancel-sent" disabled>Cancel Request Sent</button>
+								<?php } ?>
+								<?php if($cancel == 2) { ?>
+									<button class="btn btn-block btn-info" name="cancel-active" disabled>Account Cancelled</button>
+								<?php } ?>
 							</div>
 						</form>
 					</div>
