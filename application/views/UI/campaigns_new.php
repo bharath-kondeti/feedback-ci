@@ -228,13 +228,13 @@
                 All Folders<i class="mdi mdi-chevron-down"></i>
                 </a>
                 <div class="dropdown-menu icon_menu_size" aria-labelledby="dropdownMenuLink" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 35px, 0px);">
-                  <a class="dropdown-item" href="#">All ({{metrics.total}})</a>
-                  <a class="dropdown-item" href="#">Default ({{metrics.total_cmp}})</a>
+                  <a ng-click="filterCamps('All','folder')" class="dropdown-item" href="#">All ({{metrics.total}})</a>
+                  <!-- <a class="dropdown-item" href="#">Default ({{metrics.total_cmp}})</a> -->
                   <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="#">Trash ({{metrics.trash}})</a>
-                  <a class="dropdown-item" href="#">Archive ({{metrics.archive}})</a>
+                  <a ng-click="filterCamps('trash','folder')" class="dropdown-item" href="#">Trash ({{metrics.trash}})</a>
+                  <a ng-click="filterCamps('archive','folder')" class="dropdown-item" href="#">Archive ({{metrics.archive}})</a>
                   <div class="dropdown-divider"></div>
-                  <a ng-repeat="fd in folders track by $index" class="dropdown-item" href="#">{{fd.folder_name}} ({{fd.fol_id}})</a>
+                  <a ng-click="filterCamps(fd,'folder')" ng-repeat="fd in folders track by $index" class="dropdown-item" href="#">{{fd.folder_name}} ({{fd.camp_count}})</a>
                   <div class="dropdown-divider"></div>
                   <a ng-click="addNewFolder()" class="dropdown-item" href="#"> <i class="fe-folder text-primary"></i> Add New Folder</a>
                 </div>
@@ -1424,7 +1424,8 @@
       $scope.checkStatusCamp = 'N';
       $scope.checkedAll = false;
       $scope.campList = [];
-      $scope.folders = []
+      $scope.folders = [];
+      $scope.selectedFolder = 'All Folders';
       // $scope.selectedCampaign = [];
       $scope.selectedCampaign = {
         ids: []
@@ -1488,12 +1489,13 @@
         console.log('here3', $scope.selectedCampaign.ids)
       }
       $scope.performAction = function (val) {
-        if($scope.selectedCampaign.ids.lenght > 0) {
+        if($scope.selectedCampaign.ids.length > 0) {
           campaignFactory.perform_action(val, $scope.selectedCampaign.ids);
           $scope.get_predata();
         }
       }
       $scope.filterCamps = function(val, type) {
+        console.log(val,type)
         $scope.campList = $scope.tempCampList;
         if(type === 'status') {
           if(val === 'All') {
@@ -1536,6 +1538,54 @@
             $scope.campList.forEach( x=> {
               if(x.camp_goaltype === val) {
                 arr.push(x);
+              }
+            })
+            $scope.campList = arr;
+          }
+        }
+        if(type === 'folder') {
+          if(val === 'All') {
+            $scope.campList = $scope.tempCampList;
+            var arr = [];
+            $scope.campList.forEach( x=> {
+              console.log(x.is_deleted, x.is_archieve)
+              if(x.is_deleted == 1 || x.is_archieve == 1) {
+                
+              } else {
+                arr.push(x);
+              }
+            })
+            $scope.campList = arr;
+            $scope.selectedFolder = 'All Folders'
+          } else if (val === 'trash') {
+            $scope.campList = $scope.tempCampList;
+            var arr = [];
+            $scope.campList.forEach( x=> {
+              if(x.is_deleted == 1) {
+                arr.push(x);
+              }
+            })
+            $scope.campList = arr;
+            $scope.selectedFolder = 'Trash'
+          } else if (val === 'archive') {
+            $scope.campList = $scope.tempCampList;
+            var arr = [];
+            $scope.campList.forEach( x=> {
+              if(x.is_archieve == 1) {
+                arr.push(x);
+              }
+            })
+            $scope.campList = arr;
+            $scope.selectedFolder = 'Trash'
+          } else {
+            $scope.selectedFolder = val.folder_name;
+            $scope.campList = $scope.tempCampList;
+            var arr = [];
+            $scope.campList.forEach( x=> {
+              if(x.is_archieve != 1 || x.is_deleted != 1) {
+                if(x.folder_id == val.fol_id) {
+                  arr.push(x);
+                }
               }
             })
             $scope.campList = arr;
@@ -1942,6 +1992,7 @@
               $scope.metrics = response.metrics;
               $scope.product_list = response.product_list;
               $scope.folders = response.user_folders;
+              $scope.filterCamps('All','folder');
               console.log('here', $scope.product_list)
             } else
             {
@@ -2244,6 +2295,7 @@
 
       $scope.tmplt.template_content_html = '';
       $scope.activateSave = false;
+      $scope.watchTemp = false;
 
       $scope.block_site = function()
 
@@ -2281,11 +2333,10 @@
       $scope.togggle_view_email = function()
 
       {
-
+        $scope.watchPage();
         if ($scope.show_dash_email == 0)
 
         {
-
           $scope.show_dash_email = 1;
 
 
@@ -2456,14 +2507,26 @@
 
       }
       
-      $scope.$watch("tmplt.template_name",function(newValue, oldValue) {
+      $scope.$watch("watchTemp",function(newValue, oldValue) {
         console.log(newValue)
-        if(newValue.length > 3) {
+        if(newValue == true) {
           // $scope.auto_save();
-          $scope.activateSave = true;
+          $scope.watchPage();
         }        
       });
 
+      $scope.watchPage = function () {
+        console.log('watch')
+        window.addEventListener("beforeunload", function(event) {
+          swal({
+              title: 'Error',
+              type: "error",
+              text: 'Please enter a valid folder name',
+              showCancelButton: true,
+              closeOnConfirm: true,
+            })
+        });
+      }
       // $scope.$watch("activateSave",function(newValue, oldValue) {
       //   if(newValue ==  true) {
       //     // $scope.auto_save();
