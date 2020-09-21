@@ -68,5 +68,17 @@ class GetReviews extends CI_Controller
       }
 
       $output = $result_table.$result."</table>";
+
+      $date = time();
+
+      $dirname = 'reviews-downloads';
+
+      if (!is_dir($dirname)) {
+        mkdir($dirname, 0777, true);
+      }
+
+      $filename = $dirname.'/export'.$date.'.xls';
+
+      file_put_contents($filename, $output);
     }
 }
