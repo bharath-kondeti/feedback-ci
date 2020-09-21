@@ -184,9 +184,21 @@ else {
           }
         });
       }
+
+      var get_pref_data = function ()
+      {
+        var inv_list_url  =   "<?php echo $baseurl ."preferences/getUserPref"?>";
+        var deferred = $q.defer();
+        var path = inv_list_url;
+        $http.get(path)
+        .success(function(data,status,headers,config){deferred.resolve(data);})
+        .error(function(data, status, headers, config) { deferred.reject(status);});
+        return deferred.promise;
+      };
  			return {
         save_data: save_data,
-        save_logo: save_logo
+        save_logo: save_logo,
+        get_pref_data: get_pref_data,
  			};
  		});
  		crawlApp.controller("prefCtrl", function prefCtrl($window, $scope, acFactory, $sce, $q, $timeout, Upload) {
@@ -202,6 +214,13 @@ else {
       $scope.imageUploaded =  false;
       $scope.notYetUploaded = false;
 
+      $scope.get_data = function () {
+        var promise= acFactory.get_pref_data()
+         promise.then(function(value){
+          console.log(value);
+         })
+      }
+      $scope.get_data();
       $scope.validateData =  function() {
         if($scope.approvedEmail === undefined) {
           $scope.approvedError = true
