@@ -22,6 +22,8 @@ class Preferences_model extends CI_Model
     {
       $user = $this->session->userdata('user_logged_in');
       $this->user_id = $user['id'];
+      $store = $this->session->userdata('store_info');
+      $this->store_id = $store['store_id'];
     }
   }
 
@@ -55,7 +57,10 @@ class Preferences_model extends CI_Model
     return $data;
   }
 
-
+  /**
+   * getUserRequests: Getting user requests
+   * @return array
+   */
   public function getUserRequests()
   {
     $data = array();
@@ -66,5 +71,18 @@ class Preferences_model extends CI_Model
     $data['cancel'] = $res[0]['cancel_req'];
 
     return $data;
+  }
+
+  /**
+   * getblacklist Blacklist users
+   * @return array
+   */
+  public function getblacklist()
+  {
+    $sql = "SELECT * FROM buyer_blacklist WHERE bid_store_id = " . $this->store_id;
+    $query = $this->db->query($sql);
+    $res = $query->result_array();
+
+    return $res;
   }
 }
