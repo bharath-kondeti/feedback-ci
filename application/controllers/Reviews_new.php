@@ -35,28 +35,32 @@ class Reviews_new extends CI_Controller
 
   public function get_pre_data()
   {
-      $to_date=date('Y-m-d');
-      $frm_date = date('Y-m-d',strtotime("-30 days"));
-	  $data['status_text']='Success';
-      $data['status_code']='1';
-      $data['revenue']=$this->reviews_model->get_revenue($frm_date,$to_date);
-      $data['graph_data']=$this->reviews_model->get_graph_data($frm_date,$to_date);
-	  $data['recent_ten_orders']=$this->reviews_model->get_recent_ten_orders();
-      $data['cmp_info']=$this->reviews_model->get_consolidated_campaign_details($frm_date,$to_date);
-      $data['metrics']=$this->campaign_model->get_campaign_metrics($frm_date,$to_date);
-      $data['fbk_data']=$this->campaign_model->get_feedback_data($frm_date,$to_date);
-      echo json_encode($data);
+    $to_date=date('Y-m-d');
+    $frm_date = date('Y-m-d',strtotime("-30 days"));
+    $data['status_text']='Success';
+    $data['status_code']='1';
+    $data['revenue']=$this->reviews_model->get_revenue($frm_date,$to_date);
+    $data['graph_data']=$this->reviews_model->get_graph_data($frm_date,$to_date);
+    $data['recent_ten_orders']=$this->reviews_model->get_recent_ten_orders();
+    $data['cmp_info']=$this->reviews_model->get_consolidated_campaign_details($frm_date,$to_date);
+    $data['metrics']=$this->campaign_model->get_campaign_metrics($frm_date,$to_date);
+    $data['fbk_data']=$this->campaign_model->get_feedback_data($frm_date,$to_date);
+    echo json_encode($data);
   }
 
-  function get_reviews() {
+  function get_reviews($offset = '', $limit = '') {
     $data['status_text']='Success';
     $data['status_code']='1';
     $reviewContent = array();
-    $reviews = $this->reviews_model->get_reviews($this->user_id);
+    $reviews = $this->reviews_model->get_reviews($this->user_id, $offset, $limit);
+    $review_count = $this->reviews_model->get_reviews_count($this->user_id);
+    $total_records = sizeof($review_count);
     $i = 0;
     $today = date('Y-m-d');
     $sevendaysDate = date('Y-m-d', strtotime('-7 days'));
+    $page_count = 0;
     foreach ($reviews as $review => $reviewValue) {
+      $page_count++;
       $reviewContent[$i]['item_sku'] = $reviewValue['item_SKU'];
       $reviewContent[$i]['item_asin'] = $reviewValue['prod_asin'];
       $reviewContent[$i]['item_title'] = $reviewValue['prod_title'];
@@ -106,6 +110,8 @@ class Reviews_new extends CI_Controller
         $reviewContent[$i]['review_data'][$j] = $value;
         $j++;
       }
+      $reviewContent['page_count'] = $page_count;
+      $reviewContent['total_records'] = $total_records;
       $reviewContent[$i]['one_star'] = $one_star;
       $reviewContent[$i]['two_star'] = $two_star;
       $reviewContent[$i]['three_star'] = $three_star;

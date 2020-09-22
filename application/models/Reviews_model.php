@@ -18,14 +18,32 @@ class Reviews_model extends CI_Model
      	return $res;
      }
 
-     public function get_reviews($user_id)
+     public function get_reviews($user_id, $offset = '', $limit = '')
      {
+        if(!empty($offset) && !empty($limit)) {
+            $limit = " LIMIT ".$offet.",".$limit;
+        } else {
+            $limit = " LIMIT 0, 15";
+        }
+
         $qry = $this->db->query("SELECT cr.item_SKU, COUNT(*) as total_reviews, cp.prod_asin, cp.prod_image, REPLACE(REPLACE(cp.prod_title,'&nbsp;&ndash;&nbsp;','-'),'&nbsp;',' ') AS prod_title, cr.item_id AS review_id FROM customer_product cp
             INNER JOIN fd_amazon_cust_reviews cr ON cp.prod_id = cr.item_id
-            WHERE cp.store_id = {$this->store_id} AND cr.user_id = " . $this->db->escape($user_id) . " GROUP BY cr.item_SKU");
+            WHERE cp.store_id = {$this->store_id} AND cr.user_id = " . $this->db->escape($user_id) . " GROUP BY cr.item_SKU ".$limit );
+
         $res = $qry->result_array();
         return $res;
      }
+
+     public function get_reviews_count($user_id)
+     {
+        $qry = $this->db->query("SELECT COUNT(*) as count FROM customer_product cp
+            INNER JOIN fd_amazon_cust_reviews cr ON cp.prod_id = cr.item_id
+            WHERE cp.store_id = {$this->store_id} AND cr.user_id = " . $this->db->escape($user_id) . " GROUP BY cr.item_SKU " );
+
+        $res = $qry->result_array();
+        return $res;
+     }
+
      public function get_all_reviews($item_sku, $user_id) {
         $qry = $this->db->query("SELECT cust_name, review_title, review_desc, date(review_date) as review_date, review_rating from fd_amazon_cust_reviews WHERE item_SKU = '".$item_sku."' AND user_id = ".$this->db->escape($user_id));
         $res=$qry->result_array();
