@@ -87,22 +87,22 @@
             <div class="col-md-10">
               <ul class="nav nav-tabs nav-bordered nav-justified">
                 <li class="nav-item">
-                  <a href="#my_campaigns" data-toggle="tab" aria-expanded="false" class="nav-link active">
+                  <a href="#my_campaigns" data-toggle="tab" aria-expanded="false" class="nav-link active stop-nav">
                   My Campaigns
                   </a>
                 </li>
-                <li class="nav-item">
-                  <a href="#templates" data-toggle="tab" aria-expanded="true" class="nav-link">
+                <li class="nav-item stop-nav">
+                  <a href="#templates" data-toggle="tab" aria-expanded="true" class="nav-link stop-nav">
                   Templates
                   </a>
                 </li>
-                <li class="nav-item">
-                  <a href="#sent_messages" data-toggle="tab" aria-expanded="true" class="nav-link">
+                <li class="nav-item stop-nav">
+                  <a href="#sent_messages" data-toggle="tab" aria-expanded="true" class="nav-link stop-nav">
                   Email Junction
                   </a>
                 </li>
-                <li class="nav-item">
-                  <a href="#pending" data-toggle="tab" aria-expanded="true" class="nav-link">
+                <li class="nav-item stop-nav">
+                  <a href="#pending" data-toggle="tab" aria-expanded="true" class="nav-link stop-nav">
                   Pending
                   </a>
                 </li>
@@ -2330,25 +2330,12 @@
 
 
 
-      $scope.togggle_view_email = function()
-
-      {
-        $scope.watchPage();
-        if ($scope.show_dash_email == 0)
-
-        {
+      $scope.togggle_view_email = function() {
+        if ($scope.show_dash_email == 0) {
           $scope.show_dash_email = 1;
-
-
-
-        } else
-
-        {
-
+        } else {
           $scope.show_dash_email = 0;
-
         }
-
       }
 
 
@@ -2490,7 +2477,6 @@
 
 
       $scope.clear_template = function()
-
       {
 
         $scope.tmplt.tmp_id = '';
@@ -2508,44 +2494,48 @@
       }
       
       $scope.$watch("watchTemp",function(newValue, oldValue) {
-        console.log(newValue)
         if(newValue == true) {
-          // $scope.auto_save();
           $scope.watchPage();
         }        
       });
-
-      $scope.watchPage = function () {
-        console.log('watch')
-        window.addEventListener("beforeunload", function(event) {
-          swal({
+      $scope.$watch("tmplt.subject",function(newValue, oldValue) {
+        if(newValue.length > 5) {
+          $scope.watchTemp =  true;
+        }        
+      });
+      function cancelNav(ev) {
+        ev.preventDefault();
+        ev.stopPropagation();
+        swal({
               title: 'Error',
               type: "error",
-              text: 'Please enter a valid folder name',
+              text: 'Changes to the template are not saved',
               showCancelButton: true,
               closeOnConfirm: true,
-            })
-        });
-      }
-      // $scope.$watch("activateSave",function(newValue, oldValue) {
-      //   if(newValue ==  true) {
-      //     // $scope.auto_save();
-      //     $interval($scope.auto_save, 2000);
-      //   }        
-      // });
+              confirmButtonColor: '#DD6B55',
+              confirmButtonText: 'Stay',
+              cancelButtonText: "Discard Template",
+              closeOnConfirm: true,
+              closeOnCancel: true
+            },
+            function(isConfirm) {
+              if(isConfirm) { 
 
-      $scope.auto_save = function () {
-        if ($scope.tmplt.is_default == '1') {
-          console.log('herer')
-        } else {
-          $scope.tmplt.template_ui = CKEDITOR.instances.editor.getData();
-          templateFactory.save_template($scope.tmplt)
-          .success(
-            function(html) {
-              console.log('here')
+              } else {
+                var ele = $(".stop-nav");
+                for ( var i = 0; i < ele.length; ++i ) {
+                  ele[i].removeEventListener("click", cancelNav);
+                }
+              }
             }
-          )
-        }
+            )
+      }
+      $scope.watchPage = function () {
+        var ele = $(".stop-nav");
+        console.log(ele)
+        for ( var i = 0; i < ele.length; ++i ) {
+          ele[i].addEventListener("click", cancelNav, false);
+        } 
       }
 
       $scope.save_template = function()
