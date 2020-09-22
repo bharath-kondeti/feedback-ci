@@ -488,6 +488,27 @@ class Campaign_model extends CI_Model
     return $query->result_array();
   }
 
+  public function get_fb_count($frm_date='', $to_date='', $order_or_email = '', $search_term = '', $offet = '', $limit = '')
+  {
+    $sql = "SELECT COUNT(*) as count
+      FROM amz_feedback_data as tx
+      INNER JOIN amz_order_info as ao ON tx.order_id = ao.order_no
+      INNER JOIN customer_product cp ON cp.store_id = {$this->store_id} and ao.seller_sku = cp.prod_sku and cp.prod_country = tx.fbk_country and ao.asin = cp.prod_asin WHERE tx.fbk_for = {$this->store_id} AND cp.is_active >= 0 ";
+    if(!empty($frm_date) && !empty($to_date)) {
+      $frm_date=$frm_date." 00:00:00";
+      $to_date=$to_date." 23:59:59";
+      $sql.=" AND fbk_date >= ".$this->db->escape($frm_date)." AND fbk_date <= ".$this->db->escape($to_date);
+    }
+    if(!empty($order_or_email) && $search_term == 'order') {
+      $sql.=" AND order_id = '".$order_or_email."'";
+    }
+    if(!empty($order_or_email) && $search_term == 'email') {
+      $sql.=" AND rater_email = '".$order_or_email."'";
+    }
+    $query=$this->db->query($sql);
+    return $query->result_array();
+  }
+
   public function get_reviews_overview() {
     $qry=$this->db->query("SELECT IFNULL(SUM(IF(review_rating >= 4,1,0 )),0) as positive_count ,IFNULL(SUM(IF(review_rating <= 2,1,0 )),0) as negative_count, IFNULL(SUM(IF(review_rating = 3,1,0 )),0) as neutral_count, COUNT(review_rating) as total_review_count, ROUND(AVG(review_rating),2) as avg_review FROM customer_product cp INNER JOIN fd_amazon_cust_reviews cr ON cp.prod_sku = cr.item_SKU WHERE cp.store_id = {$this->store_id} AND cr.user_id = " . $this->db->escape($this->user_id));
     $res=$qry->result_array();
