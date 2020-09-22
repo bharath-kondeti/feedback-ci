@@ -24,7 +24,7 @@ class Dashboard extends CI_Controller
   }
   public function index()
 	{
-        $this->load->view('UI/header');
+    $this->load->view('UI/header');
 		$this->load->view('UI/sidepanel');
 		$this->load->view('UI/navigation');
 		$this->load->view('UI/dashboard');
@@ -86,6 +86,7 @@ class Dashboard extends CI_Controller
       $frm_date = date('Y-m-d',strtotime("-30 days"));
     }
     $feedbacks = $this->campaign_model->get_feedbacks($frm_date, $to_date, $order_or_email, $search_term, $offet, $limit);
+    $fb_count = $this->campaign_model->get_fb_count($frm_date, $to_date, $order_or_email, $search_term, $offet, $limit);
     $count = 0;
     foreach ($feedbacks as $feedback => $fbk_value) {
       $count++;
@@ -97,8 +98,9 @@ class Dashboard extends CI_Controller
         $fbk['neutral'][$feedback] = $fbk_value;
       }
     }
+    $data['total_records'] = (int)$fb_count[0]['count'];
+    $data['page_count'] = $count;
     $data['fbks'] = $fbk;
-    $data['count'] = $count;
     echo json_encode($data);
   }
 
