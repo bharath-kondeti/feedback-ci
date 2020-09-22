@@ -209,10 +209,10 @@
 <script type="text/javascript">
 
   crawlApp.factory('dashFactory', function($http,$q,limitToFilter) {
-    var get_data = function (frm_date,to_date,order_id,buyer_email) {
+    var get_data = function (frm_date,to_date,search_var,search_param, offset_val, count_limit) {
       var dataset_path="<?php echo $baseurl.'dashboard/get_feedbacks'?>";
       var deferred = $q.defer();
-      var path = dataset_path+'/'+frm_date+'/'+to_date+'/'+order_id+'/'+buyer_email;
+      var path = dataset_path+'/'+frm_date+'/'+to_date+'/'+search_var+'/'+search_param+'/'+offset_val+'/'+count_limit;
       $http.get(path)
       .success(function(data,status,headers,config){deferred.resolve(data);})
       .error(function(data, status, headers, config) { deferred.reject(status);});
@@ -265,12 +265,8 @@
       }
     });
   }
-  $scope.itemsPerPage = 15;
+  $scope.itemsPerPage = 5;
   $scope.currentPage = 0;
-  $scope.itm_per = '15';
-  $scope.sortorder='GEN';
-  $scope.direction='DESC';
-  $scope.searchJSON=[];
   $scope.filterquery=[];
   $scope.selectedCamp=[];
   $scope.checkStatus='N';
@@ -332,28 +328,10 @@
     }
   };
   $scope.$watch("currentPage",function(newValue, oldValue) {
-    $scope.get_transaction_list(newValue);
+    $scope.get_predata(newValue);
   });
-  $scope.get_transaction_list=function(currentPage) {
-    $scope.block_site();
-    var promise= dashFactory.get_transaction_list($scope.sortorder,$scope.direction,currentPage*$scope.itemsPerPage,$scope.itemsPerPage,$scope.searchJSON);
-    promise.then(function(value) {
-      if(value.status_code==1) {
-        $scope.transactionList=value.datalist;
-        $scope.total=value.total;
-        $scope.outstanding=value.outstanding;
-      }
-      else {
-        $scope.transactionList=[];
-        $scope.total=0;
-        $scope.outstanding=value.outstanding;
-      }
-    },
-    function(reason) {
-      console.log("Reason"+reason);
-    });
-  }
-  $scope.get_predata = function() {
+  
+  $scope.get_predata = function(currentPage) {
     $scope.block_site();
     var ele,text,dates,date1,date2,search_var,search_param,isOrder;
     ele = document.getElementById('calendar-date');
@@ -375,10 +353,11 @@
       search_var = "";
       search_param = "";
     }
-    var promise=dashFactory.get_data(date1,date2,search_var,search_param);
+    var promise=dashFactory.get_data(date1,date2,search_var,search_param,currentPage*$scope.itemsPerPage,$scope.itemsPerPage);
     promise.then(
       function(response) {
         if(response.status_code == '1') {
+          $scope.total = response.count;
           var resp = response;
           var negOb = [], posOb = [], neuOb = [], all = [], pos = [], neg = [], neut = [];
           if ('positive' in response.fbks) {
@@ -414,7 +393,7 @@
       function(reason) {}
       );
     }
-    $scope.get_predata();
+    // $scope.get_predata();
   });
 </script>
 
