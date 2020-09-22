@@ -265,7 +265,7 @@
       }
     });
   }
-  $scope.itemsPerPage = 5;
+  $scope.itemsPerPage = 15;
   $scope.currentPage = 0;
   $scope.filterquery=[];
   $scope.selectedCamp=[];
@@ -330,7 +330,7 @@
   $scope.$watch("currentPage",function(newValue, oldValue) {
     $scope.get_predata(newValue);
   });
-  
+
   $scope.get_predata = function(currentPage) {
     $scope.block_site();
     var ele,text,dates,date1,date2,search_var,search_param,isOrder;
@@ -350,14 +350,14 @@
         search_param = "email";
       }
     } else {
-      search_var = "";
-      search_param = "";
+      search_var = "empty";
+      search_param = "empty";
     }
     var promise=dashFactory.get_data(date1,date2,search_var,search_param,currentPage*$scope.itemsPerPage,$scope.itemsPerPage);
     promise.then(
       function(response) {
         if(response.status_code == '1') {
-          $scope.total = response.count;
+          $scope.total = response.total_records;
           var resp = response;
           var negOb = [], posOb = [], neuOb = [], all = [], pos = [], neg = [], neut = [];
           if ('positive' in response.fbks) {
