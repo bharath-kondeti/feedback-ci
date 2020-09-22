@@ -8,27 +8,27 @@
 				<!-- Navigation Menu-->
 				<ul class="navigation-menu">
 					<li>
-						<a href="<?php echo $baseurl.'dashboard_new'?>">
+						<a class="stop-nav" href="<?php echo $baseurl.'dashboard_new'?>">
 							<i class="fe-airplay mr-1"></i>
 							<span> Dashboard </span>
 						</a>
 					</li>
 					<!-----------------General Menu-------------------->
 					<li>
-						<a href="<?php echo $baseurl.'Campaigns_new'?>">
+						<a class="stop-nav" href="<?php echo $baseurl.'Campaigns_new'?>">
 							<i class="fe-activity mr-1"></i>
 							<span> Campaigns </span>
 						</a>
 					</li>
 					<li>
-						<a href="<?php echo $baseurl.'Feedback_new'?>">
+						<a class="stop-nav" href="<?php echo $baseurl.'Feedback_new'?>">
 							<i class="fe-check-square"></i>
 							<span> Feedback </span>
 						</a>
 					</li>
 
 					<li>
-						<a href="<?php echo $baseurl.'Reviews_new'?>">
+						<a class="stop-nav" href="<?php echo $baseurl.'Reviews_new'?>">
 							<i class="fe-star"></i>
 							<span> Reviews </span>
 						</a>
@@ -72,7 +72,7 @@
 					</li>
 					<!-----------------Stores Data-------------------->
 					<li class="has-submenu">
-						<a href="#"><i class="fe-file-text"></i>Channels<div class="arrow-down"></div></a>
+						<a class="stop-nav" href="#"><i class="fe-file-text"></i>Channels<div class="arrow-down"></div></a>
 						<ul class="submenu">
 							<li>
 								<a href="<?php echo $baseurl.'manage_stores'?>">
