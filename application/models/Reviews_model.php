@@ -21,7 +21,7 @@ class Reviews_model extends CI_Model
      public function get_reviews($user_id, $offset = '', $limit = '')
      {
         if(!empty($offset) && !empty($limit)) {
-            $limit = " LIMIT ".$offet.",".$limit;
+            $limit = " LIMIT ".$offset.",".$limit;
         } else {
             $limit = " LIMIT 0, 15";
         }
