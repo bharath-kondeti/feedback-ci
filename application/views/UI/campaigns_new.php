@@ -242,7 +242,7 @@
             </div>
             <div class="col-md-4">
               <?php if ($store_count[0]['ttl'] > 0) { ?>
-              <a href='#' class="btn btn-info pull-right" ng-click='clear_campaign_data();togggle_view()'>Create Campaign</a>
+              <a href='#' class="btn btn-info pull-right" ng-click='clear_campaign_data();togggle_view(); load_product()'>Create Campaign</a>
               <?php }?>
             </div>
           </div>
@@ -345,8 +345,8 @@
                       <tr>
                         <th style="width: 20px;">
                           <div class="custom-control custom-checkbox">
-                            <input type="checkbox" class="custom-control-input" id="customCheck1" ng-model="checkStatusCamp" ng-change="statusCheckCamp()" ng-true-value="'Y'" ng-false-value="'N'" />
-                            <label class="custom-control-label" for="customCheck1">&nbsp;</label>
+                            <input type="checkbox" class="custom-control-input" id="customCheck2" ng-model="checkStatusCamp" ng-change="statusCheckCamp()" ng-true-value="'Y'" ng-false-value="'N'" />
+                            <label class="custom-control-label" for="customCheck2">&nbsp;</label>
                           </div>
                         </th>
                         <th>MarketPlace</th>
@@ -1727,11 +1727,7 @@
               }
               if (html.status_code == '1')
               {
-                console.log("LOAD PRODUCT");
-                console.log($scope.selectedProduct);
                 $scope.product_list = html.payload;
-                console.log($scope.selectedProduct);
-                console.log("LOAD PRODUCT ENDs");
               }
             }
           )

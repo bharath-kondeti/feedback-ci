@@ -371,7 +371,7 @@ crawlApp.controller('invCtrl', ['$scope','$parse','$window','invFactory','$http'
     $scope.searchJSON=[];
     $scope.filterquery=[];
     $scope.order={};
-
+    $scope.total = 0;
 
     $scope.range = function()
     {
@@ -436,7 +436,8 @@ crawlApp.controller('invCtrl', ['$scope','$parse','$window','invFactory','$http'
      $scope.get_transaction_list(newValue);
    });
    $scope.expand = function(id) {
-	$scope.reviews_data.reviews[id].expanded = !$scope.reviews_data.reviews[id].expanded;
+     console.log(id)
+	  $scope.reviews_data.reviews[id].expanded = !$scope.reviews_data.reviews[id].expanded;
    }
    $scope.get_transaction_list=function(currentPage)
    {
@@ -444,23 +445,15 @@ crawlApp.controller('invCtrl', ['$scope','$parse','$window','invFactory','$http'
       var promise= invFactory.get_transaction_list(currentPage*$scope.itemsPerPage,$scope.itemsPerPage);
          promise.then(function(value){
 		  $.unblockUI();
-		//   console.log(value)
          if(value.status_text === "Success")
          {
-
-            //   $scope.transactionList=value.datalist;
-            //   $scope.total=value.total;
-			//   $scope.outstanding=value.outstanding;
 			    $scope.reviews_data = value;
-
+          $scope.total = value.total_records;
          }
          else
          {
             $scope.transactionList=[];
             $scope.total=0;
-			$scope.outstanding=value.outstanding;
-            // console.log(value);
-
          }
        },
       function(reason)
