@@ -286,6 +286,14 @@ $base_url=base_url();
                       </tbody>
                     </table>
                   </div>
+                  <ul class="pagination pagination-rounded justify-content-end my-2">
+                    <li ng-class="prevPageDisabled()" class="page-item">  <a href="javascript:void(0)" ng-click="prevPage()" class="page-link">Previous</a>
+                    </li>
+                    <li ng-repeat="n in range()" ng-class="{active: n == currentPage}" ng-click="setPage(n)" class="page-item"> <a href="javascript:void(0)" class="page-link">{{n+1}}</a>
+                    </li>
+                    <li ng-class="nextPageDisabled()" class="page-item">  <a href="javascript:void(0)" ng-click="nextPage()" class="page-link">Next</a>
+                    </li>
+                </ul>
                 </div>
               </div>
             </div>
@@ -304,11 +312,11 @@ crawlApp.factory('invFactory', ['$http', '$q','limitToFilter', 'Upload',function
     var inv_list_url  =   "<?php echo $baseurl ."reviews_new/get_reviews"?>";
 
 
-    var get_transaction_list = function (orderby,direction,offset,limit,search)
+    var get_transaction_list = function (offset,limit)
     {
           var deferred = $q.defer();
           var path = inv_list_url;
-          $http.get(path)
+          $http.get(path+'/'+offset+'/'+limit)
           .success(function(data,status,headers,config){deferred.resolve(data);})
           .error(function(data, status, headers, config) { deferred.reject(status);});
           return deferred.promise;
@@ -355,15 +363,15 @@ crawlApp.controller('invCtrl', ['$scope','$parse','$window','invFactory','$http'
 
         }
 
-    $scope.itemsPerPage = 25;
-  $scope.itm_per ='25';
+    $scope.itemsPerPage = 15;
+    $scope.itm_per ='25';
     $scope.currentPage = 0;
     $scope.sortorder='open_date';
     $scope.direction='DESC';
     $scope.searchJSON=[];
     $scope.filterquery=[];
     $scope.order={};
-
+    $scope.total = 0;
 
     $scope.range = function()
     {
@@ -428,31 +436,24 @@ crawlApp.controller('invCtrl', ['$scope','$parse','$window','invFactory','$http'
      $scope.get_transaction_list(newValue);
    });
    $scope.expand = function(id) {
-	$scope.reviews_data.reviews[id].expanded = !$scope.reviews_data.reviews[id].expanded;
+     console.log(id)
+	  $scope.reviews_data.reviews[id].expanded = !$scope.reviews_data.reviews[id].expanded;
    }
    $scope.get_transaction_list=function(currentPage)
    {
       $scope.block_site();
-      var promise= invFactory.get_transaction_list();
+      var promise= invFactory.get_transaction_list(currentPage*$scope.itemsPerPage,$scope.itemsPerPage);
          promise.then(function(value){
 		  $.unblockUI();
-		//   console.log(value)
          if(value.status_text === "Success")
          {
-
-            //   $scope.transactionList=value.datalist;
-            //   $scope.total=value.total;
-			//   $scope.outstanding=value.outstanding;
-			$scope.reviews_data = value;
-
+			    $scope.reviews_data = value;
+          $scope.total = value.total_records;
          }
          else
          {
             $scope.transactionList=[];
             $scope.total=0;
-			$scope.outstanding=value.outstanding;
-            // console.log(value);
-
          }
        },
       function(reason)

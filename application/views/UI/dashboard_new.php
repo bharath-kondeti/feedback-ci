@@ -140,6 +140,8 @@
               </div>
             </div>
           </div>
+
+
           <div class="tab-content" ng-show="selectedTab == 1" id="feedback">
             <hr>
             <div class="row">
@@ -335,7 +337,7 @@
                 <div class="card-box">
                   <h4 class="header-title mb-3">Positive Feedback</h4>
                   <!--<div id="chartBig1" class="flot-chart mt-4 pt-1" style="height: 375px;"></div> --->
-                  <canvas id="chartBig1" style="display: block;width:100%;height: 160px;"></canvas>
+                  <canvas class="chartBig1" style="display: block;width:100%;height: 160px;"></canvas>
                 </div>
                 <!-- end card-box -->
               </div>
@@ -346,7 +348,7 @@
                 <div class="card-box">
                   <h4 class="header-title mb-3">Sales Analytics</h4>
                   <!--<div id="chartBig1" class="flot-chart mt-4 pt-1" style="height: 375px;"></div> --->
-                  <canvas id="chartBig1" style="display: block;width:100%;height: 160px;"></canvas>
+                  <canvas class="chartBig1" style="display: block;width:100%;height: 160px;"></canvas>
                 </div>
                 <!-- end card-box -->
               </div>
@@ -354,7 +356,7 @@
                 <div class="card-box">
                   <h4 class="header-title mb-3">Orders</h4>
                   <!--<div id="chartBig1" class="flot-chart mt-4 pt-1" style="height: 375px;"></div> --->
-                  <canvas id="chartBig1" style="display: block;width:100%;height: 160px;"></canvas>
+                  <canvas class="chartBig1" style="display: block;width:100%;height: 160px;"></canvas>
                 </div>
                 <!-- end card-box -->
               </div>
@@ -362,7 +364,7 @@
                 <div class="card-box">
                   <h4 class="header-title mb-3">Messages</h4>
                   <!--<div id="chartBig1" class="flot-chart mt-4 pt-1" style="height: 375px;"></div> --->
-                  <canvas id="chartBig1" style="display: block;width:100%;height: 160px;"></canvas>
+                  <canvas class="chartBig1" style="display: block;width:100%;height: 160px;"></canvas>
                 </div>
                 <!-- end card-box -->
               </div>
@@ -443,6 +445,9 @@
             <!-------Recent Orders--------------->
             <!-- end row-->
           </div>
+
+          <!-- Reviews Tab Starts -->
+
           <div class="tab-content" ng-show="selectedTab == 2" id="reviews">
             <hr>
             <div class="row">
@@ -638,7 +643,7 @@
                 <div class="card-box">
                   <h4 class="header-title mb-3">Positive Review</h4>
                   <!--<div id="chartBig1" class="flot-chart mt-4 pt-1" style="height: 375px;"></div> --->
-                  <canvas id="chartBig1" style="display: block;width:100%;height: 160px;"></canvas>
+                  <canvas class="chartBig1" style="display: block;width:100%;height: 160px;"></canvas>
                 </div>
                 <!-- end card-box -->
               </div>
@@ -649,7 +654,7 @@
                 <div class="card-box">
                   <h4 class="header-title mb-3">Sales Analytics</h4>
                   <!--<div id="chartBig1" class="flot-chart mt-4 pt-1" style="height: 375px;"></div> --->
-                  <canvas id="chartBig1" style="display: block;width:100%;height: 160px;"></canvas>
+                  <canvas class="chartBig1" style="display: block;width:100%;height: 160px;"></canvas>
                 </div>
                 <!-- end card-box -->
               </div>
@@ -657,7 +662,7 @@
                 <div class="card-box">
                   <h4 class="header-title mb-3">Orders</h4>
                   <!--<div id="chartBig1" class="flot-chart mt-4 pt-1" style="height: 375px;"></div> --->
-                  <canvas id="chartBig1" style="display: block;width:100%;height: 160px;"></canvas>
+                  <canvas class="chartBig1" style="display: block;width:100%;height: 160px;"></canvas>
                 </div>
                 <!-- end card-box -->
               </div>
@@ -665,7 +670,7 @@
                 <div class="card-box">
                   <h4 class="header-title mb-3">Messages</h4>
                   <!--<div id="chartBig1" class="flot-chart mt-4 pt-1" style="height: 375px;"></div> --->
-                  <canvas id="chartBig1" style="display: block;width:100%;height: 160px;"></canvas>
+                  <canvas class="chartBig1" style="display: block;width:100%;height: 160px;"></canvas>
                 </div>
                 <!-- end card-box -->
               </div>
@@ -773,7 +778,7 @@
 
           return deferred.promise;
       };
-  	var inv_list_url        =   "<?php echo $baseurl."dashboard/get_top_product/"?>";
+  	var inv_list_url = "<?php echo $baseurl."dashboard/get_top_product/"?>";
       var get_transaction_list = function (orderby,direction,offset,limit,search)
       {
             var deferred = $q.defer();
@@ -793,10 +798,10 @@
   });
   crawlApp.controller('dashCtrl',function($scope,$parse,$window,dashFactory,$http,$sce,$q,$timeout,Upload,limitToFilter) {
        $scope.date_filter_tmpl="date_filter_tmpl.html";
-   	 $scope.transactionList=[];
+   	   $scope.transactionList=[];
        $scope.cpn={};
        $scope.cpn.frm_date='';
-  	 $scope.filter={};
+  	   $scope.filter={};
        $scope.filter.search='';
        $scope.cpn.to_date='';
        $scope.top_10=[];
@@ -818,9 +823,9 @@
 
           }
 
-  	$scope.itemsPerPage = 10;
+  	  $scope.itemsPerPage = 10;
       $scope.currentPage = 0;
-  	$scope.itm_per='10';
+  	  $scope.itm_per='10';
       $scope.sortorder='GEN';
       $scope.direction='DESC';
       $scope.searchJSON=[];
@@ -898,13 +903,10 @@
         var promise= dashFactory.get_transaction_list($scope.sortorder,$scope.direction,currentPage*$scope.itemsPerPage,$scope.itemsPerPage,$scope.searchJSON);
            promise.then(function(value){
             $.unblockUI();
-           if(value.status_code==1)
-           {
-
-                $scope.transactionList=value.datalist;
-  			  $scope.total=value.total;
-  			  $scope.outstanding=value.outstanding;
-
+           if(value.status_code==1) {
+              $scope.transactionList=value.datalist;
+              $scope.total=value.total;
+              $scope.outstanding=value.outstanding;
            }
            else
            {
@@ -957,90 +959,94 @@
 
         $scope.visualise_data=function()
         {
-          var ctx = document.getElementById("chartBig1").getContext('2d');
-          var gradientStroke = ctx.createLinearGradient(0, 230, 0, 50);
-          gradientStroke.addColorStop(1, 'rgba(72,72,176,0.1)');
-          gradientStroke.addColorStop(0.4, 'rgba(72,72,176,0.0)');
-          gradientStroke.addColorStop(0, 'rgba(119,52,169,0)'); //purple colors
-          var config = {
-                        type: 'line',
-                        data: {
-                          labels: [],
-                          datasets: [{
-                           label: "Graph Data",
-                            fill: true,
-                            backgroundColor: gradientStroke,
-                            borderColor: '#0e76bd',
-                            borderWidth: 2,
-                            borderDash: [],
-                            borderDashOffset: 0.0,
-                            pointBackgroundColor: '#00acc1',
-                            pointBorderColor: 'rgba(255,255,255,0)',
-                            pointHoverBackgroundColor: '#00acc1',
-                            pointBorderWidth: 20,
-                            pointHoverRadius: 4,
-                            pointHoverBorderWidth: 15,
-                            pointRadius: 4,
-                            data: [],
-                          }]
-                        },
-                       options: {
-          scales: {
-                xAxes: [{
-              gridLines: {
-                  color: "rgba(0, 0, 0, 0)",
-              },
-  			 offset: true,
-  			stacked: true,
-  			ticks: {
-                      beginAtZero:true
+           //purple colors
+           var config = {
+            type: 'line',
+              data: {
+                labels: [],
+                datasets: [
+                    {
+                      label: "Graph Data",
+                      fill: true,
+                      backgroundColor: gradientStroke,
+                      borderColor: '#0e76bd',
+                      borderWidth: 2,
+                      borderDash: [],
+                      borderDashOffset: 0.0,
+                      pointBackgroundColor: '#00acc1',
+                      pointBorderColor: 'rgba(255,255,255,0)',
+                      pointHoverBackgroundColor: '#00acc1',
+                      pointBorderWidth: 20,
+                      pointHoverRadius: 4,
+                      pointHoverBorderWidth: 15,
+                      pointRadius: 4,
+                      data: [],
                   }
-          }],
-          yAxes: [{
-              gridLines: {
-                  color: "rgba(0, 0, 0, 0)",
-
+                ]
               },
-  			stacked: true,
-  			 offset: true,
-              gridThickness: 1,
-
-               ticks: {
+            options: {
+              scales: {
+                xAxes: [
+                  {
+                    gridLines: {
+                      color: "rgba(0, 0, 0, 0)",
+                    },
+                    offset: true,
+                    stacked: true,
+                    ticks: {
                       beginAtZero:true
+                    }
                   }
-  		}],
-  	}
-
-      }
-                      };
-          $scope.myChartData = new Chart(ctx,config);
-
+                ],
+                yAxes: [
+                  {
+                    gridLines: {
+                      color: "rgba(0, 0, 0, 0)",
+                    },
+                    stacked: true,
+                    offset: true,
+                    gridThickness: 1,
+                    ticks: {
+                      beginAtZero:true
+                    }
+                  }
+                ],
+              }
+            }
+          };
+          var ctx = document.getElementsByClassName("chartBig1");
+          console.log(ctx);
+          for(var i = 0; i<ctx.length; i++) {
+            var gradientStroke = ctx[i].getContext('2d').createLinearGradient(0, 230, 0, 50);
+            gradientStroke.addColorStop(1, 'rgba(72,72,176,0.1)');
+            gradientStroke.addColorStop(0.4, 'rgba(72,72,176,0.0)');
+            gradientStroke.addColorStop(0, 'rgba(119,52,169,0)');
+            $scope.myChartData = new Chart(ctx[i],config);
+          }
         }
-
         $scope.visualise_data();
-        $scope.show_revenue_graph=function()
-        {
-  		   $scope.myChartData.config.data.datasets.length > 1?$scope.myChartData.config.data.datasets.pop():'';
-  		    $scope.myChartData.config.data.datasets.length > 2?$scope.myChartData.config.data.datasets.pop():'';
-           $scope.revenue_graph=1;
-           $scope.sale_graph=0;
-           $scope.campaing_graph=0;
-           var lnth=$scope.graph_data.length;
-           var chart_data=[];
-           var chart_labels=[];
-           for(var i=0;i<lnth;i++)
-           {
-            chart_data[i] =$scope.graph_data[i].total_amt ;
-            chart_labels[i] =$scope.graph_data[i].order_date ;
-           }
-           $scope.chart_for="Revenue";
-           $scope.chart_desc="Total Revenue";
-  		  $scope.myChartData.config.type='line';
-           $scope.myChartData.config.data.datasets[0].label="Revenue";
-           $scope.myChartData.config.data.labels=chart_labels;
-           $scope.myChartData.config.data.datasets[0].data = chart_data;
-           $scope.myChartData.config.data.datasets.length > 1?$scope.myChartData.config.data.datasets.pop():'';
-           $scope.myChartData.update();
+
+        $scope.show_revenue_graph=function() {
+          $scope.myChartData.config.data.datasets.length > 1?$scope.myChartData.config.data.datasets.pop():'';
+          $scope.myChartData.config.data.datasets.length > 2?$scope.myChartData.config.data.datasets.pop():'';
+          $scope.revenue_graph=1;
+          $scope.sale_graph=0;
+          $scope.campaing_graph=0;
+          var lnth=$scope.graph_data.length;
+          var chart_data=[];
+          var chart_labels=[];
+          for (var i=0; i<lnth; i++) { 
+            chart_data[i]=$scope.graph_data[i].total_amt;
+            chart_labels[i]=$scope.graph_data[i].order_date; 
+          } 
+          $scope.chart_for="Revenue" ;
+        	$scope.chart_desc="Total Revenue"; 
+          $scope.myChartData.config.type='line' ;
+        	$scope.myChartData.config.data.datasets[0].label="Revenue";
+        	$scope.myChartData.config.data.labels=chart_labels;
+        	$scope.myChartData.config.data.datasets[0].data=chart_data; 
+          $scope.myChartData.config.data.datasets.length > 1 ? $scope.myChartData.config.data.datasets.pop() : '';
+        	$scope.myChartData.update();
         }
 
 

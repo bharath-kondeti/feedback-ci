@@ -271,6 +271,7 @@
   $scope.selectedCamp=[];
   $scope.checkStatus='N';
   $scope.campList=[];
+  $scope.total = 0;
   $scope.range = function() {
     var rangeSize = 4;
     var ret = [];

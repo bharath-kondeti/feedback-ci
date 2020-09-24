@@ -218,7 +218,7 @@
                   <a ng-click="performAction('pause')" class="dropdown-item" href="#"><i class="fa fa-pause mr-2" aria-hidden="true"></i>Pause</a>
                   <a ng-click="performAction('start')" class="dropdown-item" href="#"><i class="fa fa-play mr-2" aria-hidden="true"></i>Start</a>
                   <h6 class="dropdown-header">Move to Folder...</h6>
-                  <a ng-if="folders.length > 0" ng-repeat="fd in folders track by $index" ng-click="performAction(fd.folder_id)" class="dropdown-item" href="#"><i class="fa fa-folder-o mr-2" aria-hidden="true"></i></i>{{fd.folder_name}}</a>
+                  <a ng-if="folders.length > 0" ng-repeat="fd in folders track by $index" ng-click="performAction(fd.fol_id)" class="dropdown-item" href="#"><i class="fa fa-folder-o mr-2" aria-hidden="true"></i></i>{{fd.folder_name}}</a>
                 </div>
               </div>
             </div>
@@ -242,7 +242,7 @@
             </div>
             <div class="col-md-4">
               <?php if ($store_count[0]['ttl'] > 0) { ?>
-              <a href='#' class="btn btn-info pull-right" ng-click='clear_campaign_data();togggle_view()'>Create Campaign</a>
+              <a href='#' class="btn btn-info pull-right" ng-click='clear_campaign_data();togggle_view(); load_product(0)'>Create Campaign</a>
               <?php }?>
             </div>
           </div>
@@ -345,8 +345,8 @@
                       <tr>
                         <th style="width: 20px;">
                           <div class="custom-control custom-checkbox">
-                            <input type="checkbox" class="custom-control-input" id="customCheck1" ng-model="checkStatusCamp" ng-change="statusCheckCamp()" ng-true-value="'Y'" ng-false-value="'N'" />
-                            <label class="custom-control-label" for="customCheck1">&nbsp;</label>
+                            <input type="checkbox" class="custom-control-input" id="customCheck2" ng-model="checkStatusCamp" ng-change="statusCheckCamp()" ng-true-value="'Y'" ng-false-value="'N'" />
+                            <label class="custom-control-label" for="customCheck2">&nbsp;</label>
                           </div>
                         </th>
                         <th>MarketPlace</th>
@@ -415,6 +415,14 @@
                     </tbody>
                   </table>
                 </div>
+                <ul class="pagination pagination-rounded justify-content-end my-2">
+                  <li ng-class="prevPageDisabled()" class="page-item">  <a href="javascript:void(0)" ng-click="prevPage()" class="page-link">Previous</a>
+                  </li>
+                  <li ng-repeat="n in range()" ng-class="{active: n == currentPage}" ng-click="setPage(n)" class="page-item"> <a href="javascript:void(0)" class="page-link">{{n+1}}</a>
+                  </li>
+                  <li ng-class="nextPageDisabled()" class="page-item">  <a href="javascript:void(0)" ng-click="nextPage()" class="page-link">Next</a>
+                  </li>
+                </ul>
               </div>
             </div>
             <div class="row" ng-show='show_dash==0'>
@@ -504,13 +512,13 @@
                         <div class="form-group">
                           <div class="row">
                             <div class="col-sm-3 no-padding">
-                              <select class="form-control" ng-model='cmp.camp_brand' ng-change='load_product()'>
+                              <select class="form-control" ng-model='cmp.camp_brand' ng-change='load_product(0)'>
                                 <option value="ALL">ALL</option>
                                 <option ng-repeat="x in brand_list" value='{{x.prod_brand}}'>{{x.prod_brand}}</option>
                               </select>
                             </div>
                             <div class="col-sm-3 no-padding">
-                              <select class="form-control" ng-model='cmp.fc_code' ng-change='load_product()'>
+                              <select class="form-control" ng-model='cmp.fc_code' ng-change='load_product(0)'>
                                 <option value="ALL">ALL</option>
                                 <option value='FBA'>FBA</option>
                                 <option value='FBM'>FBM</option>
@@ -523,7 +531,7 @@
                                 <!-- /btn-group -->
                                 <input type="text" ng-model='cmp.prod_search' class="form-control" aria-label="...">
                                 <span class="input-group-btn">
-                                <button style="margin-left:5px;" class="btn btn-info" ng-click='load_product()' type="button">Filter</button>
+                                <button style="margin-left:5px;" class="btn btn-info" ng-click='load_product(0)' type="button">Filter</button>
                                 </span>
                               </div>
                               <!-- /input-group -->
@@ -567,6 +575,14 @@
                               </table>
                             </div>
                           </div>
+                          <ul class="pagination pagination-rounded justify-content-end my-2">
+                            <li ng-class="prevPageDisabledProduct()" class="page-item">  <a href="javascript:void(0)" ng-click="prevPageProduct()" class="page-link">Previous</a>
+                            </li>
+                            <li ng-repeat="n in rangeProduct()" ng-class="{active: n == currentPageProduct}" ng-click="setPageProduct(n)" class="page-item"> <a href="javascript:void(0)" class="page-link">{{n+1}}</a>
+                            </li>
+                            <li ng-class="nextPageDisabledProduct()" class="page-item">  <a href="javascript:void(0)" ng-click="nextPageProduct()" class="page-link">Next</a>
+                            </li>
+                          </ul>
                         </div>
                         <br>
                       </div>
@@ -1169,10 +1185,10 @@
 <!-- content -->
 <script type="text/javascript">
   crawlApp.factory("campaignFactory", function($http, $q, Upload) {
-    var get_data = function() {
+    var get_data = function(offset_val, count_limit) {
       var dataset_path = "<?php echo $baseurl . 'manage_campaign/get_pre_data' ?>";
       var deferred = $q.defer();
-      var path = dataset_path;
+      var path = dataset_path+'/'+offset_val+'/'+count_limit;
       $http.get(path)
         .success(function(data, status, headers, config) {
          deferred.resolve(data);
@@ -1430,6 +1446,53 @@
       $scope.selectedCampaign = {
         ids: []
       };
+      $scope.itemsPerPage = 15;
+      $scope.currentPage = 0;
+      $scope.total = 0;
+      $scope.range = function() {
+        var rangeSize = 4;
+        var ret = [];
+        var start;
+        start = $scope.currentPage;
+        if ( start > $scope.pageCount()-rangeSize ) {
+          start = $scope.pageCount()-rangeSize;
+        }
+        for (var i=start; i<start+rangeSize; i++) {
+          if(i>0)
+            ret.push(i);
+        }
+        return ret;
+      };
+      $scope.setRound = function(n) {
+        return new Array(parseInt(n));
+      };
+      $scope.prevPage = function() {
+        if ($scope.currentPage > 0) {
+          $scope.currentPage--;
+        }
+      };
+      $scope.prevPageDisabled = function() {
+        return $scope.currentPage === 0 ? "disabled" : "";
+      };
+      $scope.nextPage = function() {
+        if ($scope.currentPage < $scope.pageCount() - 1) {
+          $scope.currentPage++;
+        }
+      };
+      $scope.nextPageDisabled = function() {
+        return $scope.currentPage === $scope.pageCount() - 1 ? "disabled" : "";
+      };
+      $scope.pageCount = function() {
+        return Math.ceil($scope.total/$scope.itemsPerPage);
+      };
+      $scope.setPage = function(n) {
+        if (n > 0 && n < $scope.pageCount()) {
+          $scope.currentPage = n;
+        }
+      };
+      $scope.$watch("currentPage",function(newValue, oldValue) {
+        $scope.get_predata(newValue);
+      });
       $scope.togggle_view = function()
       {
         if ($scope.show_dash == 0)
@@ -1707,7 +1770,58 @@
           swal("Error!", "No product has been selected ", 'error');
         }
       }
-      $scope.load_product = function()
+
+
+      $scope.itemsPerPageProduct = 15;
+      $scope.currentPageProduct = 0;
+      $scope.totalProduct = 0;
+      $scope.rangeProduct = function() {
+        var rangeSize = 4;
+        var ret = [];
+        var start;
+        start = $scope.currentPageProduct;
+        if ( start > $scope.pageCountProduct()-rangeSize ) {
+          start = $scope.pageCountProduct()-rangeSize;
+        }
+        for (var i=start; i<start+rangeSize; i++) {
+          if(i>0)
+            ret.push(i);
+        }
+        return ret;
+      };
+      $scope.setRoundProduct = function(n) {
+        return new Array(parseInt(n));
+      };
+      $scope.prevPageProduct = function() {
+        if ($scope.currentPageProduct > 0) {
+          $scope.currentPageProduct--;
+        }
+      };
+      $scope.prevPageDisabledProduct = function() {
+        return $scope.currentPageProduct === 0 ? "disabled" : "";
+      };
+      $scope.nextPageProduct = function() {
+        if ($scope.currentPageProduct < $scope.pageCountProduct() - 1) {
+          $scope.currentPageProduct++;
+        }
+      };
+      $scope.nextPageDisabledProduct = function() {
+        return $scope.currentPageProduct === $scope.pageCountProduct() - 1 ? "disabled" : "";
+      };
+      $scope.pageCountProduct = function() {
+        return Math.ceil($scope.total/$scope.itemsPerPageProduct);
+      };
+      $scope.setPageProduct = function(n) {
+        if (n > 0 && n < $scope.pageCountProduct()) {
+          $scope.currentPageProduct = n;
+        }
+      };
+      $scope.$watch("currentPageProduct",function(newValue, oldValue) {
+        $scope.load_product(newValue);
+      });
+
+
+      $scope.load_product = function(currentPageProduct)
       {
         var blk = '#product_list';
         $(blk).block({
@@ -1716,7 +1830,7 @@
         // $scope.clear_all();
         // $scope.selectedProduct=[];
         $scope.cmp.camp_country = '<?php echo $store_country ?>';
-        campaignFactory.get_products($scope.cmp.camp_country, $scope.cmp.camp_brand, $scope.cmp.prod_search, $scope.cmp.fc_code)
+        campaignFactory.get_products($scope.cmp.camp_country, $scope.cmp.camp_brand, $scope.cmp.prod_search, $scope.cmp.fc_code, currentPageProduct*$scope.itemsPerPageProduct,$scope.itemsPerPageProduct)
           .success(
             function(html)
             {
@@ -1727,11 +1841,8 @@
               }
               if (html.status_code == '1')
               {
-                console.log("LOAD PRODUCT");
-                console.log($scope.selectedProduct);
                 $scope.product_list = html.payload;
-                console.log($scope.selectedProduct);
-                console.log("LOAD PRODUCT ENDs");
+                $scope.totalProduct = 0;
               }
             }
           )
@@ -1973,10 +2084,10 @@
         });
       }
 
-      $scope.get_predata = function()
+      $scope.get_predata = function(currentPage)
       {
         $scope.block_site();
-        var promise = campaignFactory.get_data();
+        var promise = campaignFactory.get_data(currentPage*$scope.itemsPerPage,$scope.itemsPerPage);
         promise.then(
           function(response)
           {
@@ -1992,8 +2103,8 @@
               $scope.metrics = response.metrics;
               $scope.product_list = response.product_list;
               $scope.folders = response.user_folders;
+              $scope.total = response.total_records;
               $scope.filterCamps('All','folder');
-              console.log('here', $scope.product_list)
             } else
             {
               swal('Error!', response.status_text, 'error');
@@ -2006,7 +2117,6 @@
           }
         );
       }
-      $scope.get_predata();
       $scope.select_all = function()
       {
         for (i = 0; i < $scope.product_list.length; i++)
@@ -2541,7 +2651,10 @@
       $scope.save_template = function()
 
       {
-
+        var ele = $(".stop-nav");
+        for ( var i = 0; i < ele.length; ++i ) {
+          ele[i].removeEventListener("click", cancelNav);
+        }
         if ($scope.tmplt.is_default == '1')
 
         {

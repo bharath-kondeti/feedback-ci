@@ -110,8 +110,6 @@ class Reviews_new extends CI_Controller
         $reviewContent[$i]['review_data'][$j] = $value;
         $j++;
       }
-      $reviewContent['page_count'] = $page_count;
-      $reviewContent['total_records'] = $total_records;
       $reviewContent[$i]['one_star'] = $one_star;
       $reviewContent[$i]['two_star'] = $two_star;
       $reviewContent[$i]['three_star'] = $three_star;
@@ -124,7 +122,8 @@ class Reviews_new extends CI_Controller
       $reviewContent[$i]['avg_count'] = round(($totalRating/$reviewValue['total_reviews']),2);
       $i++;
     }
-
+    $data['page_count'] = $page_count;
+    $data['total_records'] = $total_records;
     $data['reviews'] = $reviewContent;
 
     echo json_encode($data);
