@@ -54,9 +54,12 @@ class Manage_campaign extends CI_Controller
     echo json_encode($data);
   }
 
-  public function get_product_list() {
+  public function get_product_list($offset='',$limit='') {
     $data = array();
-    $data['product_list']=$this->campaign_model->get_product_list($this->store_country);
+    $data['product_list'] = $this->campaign_model->get_product_list($this->store_country,$offset,$limit);
+    $count = $this->campaign_model->get_product_count($this->store_country,$offset,$limit);
+    $data['total_records'] = $count[0]['total_count'];
+    $data['page_count'] = sizeof($data['product_list']);
     echo json_encode($data);
   }
 
