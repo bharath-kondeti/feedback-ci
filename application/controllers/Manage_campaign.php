@@ -46,7 +46,6 @@ class Manage_campaign extends CI_Controller
     $data['total_records'] = sizeof($countdata);
     $data['brand_list']=$this->campaign_model->get_brand_list($this->store_country);
   	$data['country_list']=$this->campaign_model->get_country_list();
-    //$data['product_list']=$this->campaign_model->get_product_list($this->store_country);
     $data['template_list']=$this->campaign_model->get_template_list();
     $data['recent_orders']=$this->campaign_model->get_recent_orders();
     $data['metrics']=$this->campaign_model->get_campaign_metrics();
@@ -84,11 +83,14 @@ class Manage_campaign extends CI_Controller
        echo json_encode($data);
     }
   }
-  public function get_products()
+  public function get_products($offset='',$limit='')
   {
     if(!empty($_POST['brand']))
     {
-       $data['payload']=$this->campaign_model->get_product_list($this->input->post('country'),$this->input->post('brand'),$this->input->post('key_word'),$this->input->post('fc_code'));
+       $data['payload']=$this->campaign_model->get_product_list($this->input->post('country'),$this->input->post('brand'),$this->input->post('key_word'),$this->input->post('fc_code'),$offset,$limit);
+       $data['page_count'] = sizeof($data['payload']);
+       $countdata =$this->campaign_model->get_campaign_count($this->input->post('country'),$this->input->post('brand'),$this->input->post('key_word'),$this->input->post('fc_code'));
+       $data['total_records'] = sizeof($countdata);
        $data['status_text']='Success';
        $data['status_code']='1';
        echo json_encode($data);
