@@ -44,6 +44,7 @@ class Manage_campaign extends CI_Controller
     $countdata =$this->campaign_model->get_campaign_count();
     $data['page_count'] = sizeof($data['campaign_list']);
     $data['total_records'] = sizeof($countdata);
+    $data['brand_list']=$this->campaign_model->get_brand_list($this->store_country);
   	$data['country_list']=$this->campaign_model->get_country_list();
     //$data['product_list']=$this->campaign_model->get_product_list($this->store_country);
     $data['template_list']=$this->campaign_model->get_template_list();
@@ -59,7 +60,6 @@ class Manage_campaign extends CI_Controller
     $count = $this->campaign_model->get_product_count($this->store_country,$offset,$limit);
     $data['total_records'] = $count[0]['total_count'];
     $data['page_count'] = sizeof($data['product_list']);
-    $data['brand_list']=$this->campaign_model->get_brand_list($this->store_country);
     echo json_encode($data);
   }
 
