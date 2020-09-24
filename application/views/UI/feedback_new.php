@@ -330,7 +330,7 @@
   $scope.$watch("currentPage",function(newValue, oldValue) {
     $scope.get_predata(newValue);
   });
-  
+
   $scope.get_predata = function(currentPage) {
     $scope.block_site();
     var ele,text,dates,date1,date2,search_var,search_param,isOrder;
@@ -350,8 +350,8 @@
         search_param = "email";
       }
     } else {
-      search_var = "";
-      search_param = "";
+      search_var = "empty";
+      search_param = "empty";
     }
     var promise=dashFactory.get_data(date1,date2,search_var,search_param,currentPage*$scope.itemsPerPage,$scope.itemsPerPage);
     promise.then(

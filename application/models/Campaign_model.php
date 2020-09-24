@@ -149,7 +149,7 @@ class Campaign_model extends CI_Model
         return $result_set;
     }
 
-  public function get_campaign_list($frm_date='',$to_date='',$cmp_status='',$sort_order='cpgn_id',$dir='ASC')
+  public function get_campaign_list($frm_date='',$to_date='',$cmp_status='',$sort_order='cpgn_id',$dir='ASC',$offet='',$limit='')
   {
 	  //print_r($sort);
 	  $sql="SELECT cpgn_id as campaign_id,fbk_order as feedback_status,cpgn_desc as campaign_desc,is_active,cpgn_name as campaign_name,sum(IF(is_sent=1,1,0)) as sent_count,count(camp_order_no) as total_mail, cpgn_goal_type as camp_goaltype, cpgn_status as camp_status, is_deleted, is_archieve, folder_id from campaign_manager left join campaign_order_list on camp_id=cpgn_id where created_by =".$this->store_id;
@@ -182,9 +182,52 @@ class Campaign_model extends CI_Model
        {
       $sql.=" Group by cpgn_id ORDER BY cpgn_id ".$dir."  ";
 	   }
+     if(!empty($offet) && !empty($limit)) {
+        $sql.=" LIMIT ".$offet.",".$limit;
+      } else {
+        $sql.=" LIMIT 0, 15";
+      }
        //die($sql);
       $query=$this->db->query($sql);
 	  return $query->result_array();
+  }
+
+
+  public function get_campaign_count($frm_date='',$to_date='',$cmp_status='',$sort_order='cpgn_id',$dir='ASC')
+  {
+    //print_r($sort);
+    $sql="SELECT cpgn_id as campaign_id,fbk_order as feedback_status,cpgn_desc as campaign_desc,is_active,cpgn_name as campaign_name,sum(IF(is_sent=1,1,0)) as sent_count,count(camp_order_no) as total_mail, cpgn_goal_type as camp_goaltype, cpgn_status as camp_status, is_deleted, is_archieve, folder_id from campaign_manager left join campaign_order_list on camp_id=cpgn_id where created_by =".$this->store_id;
+      if(!empty($frm_date) && !empty($to_date))
+       {
+        $frm_date=$frm_date." 00:00:00";
+        $to_date=$to_date." 23:59:59";
+        $sql.=" AND trigger_on >= ".$this->db->escape($frm_date)." AND trigger_on <= ".$this->db->escape($to_date);
+       }
+      if($cmp_status!='ALL' && $cmp_status=='ACT')
+       {
+
+        $sql.=" AND is_active='1' AND is_deleted='0'";
+       }
+      if($cmp_status!='ALL' && $cmp_status=='IACT')
+       {
+
+        $sql.=" AND is_active='0' AND is_deleted='0'";
+       }
+     if($cmp_status!='ALL' && $cmp_status=='DEL')
+       {
+
+        $sql.=" AND is_deleted='1'";
+       }
+     if(!empty($sort_order))
+       {
+      $sql.=" Group by cpgn_id ORDER BY ".$sort_order." ".$dir."  ";
+     }
+     if(empty($sort_order))
+       {
+      $sql.=" Group by cpgn_id ORDER BY cpgn_id ".$dir."  ";
+     }
+      $query=$this->db->query($sql);
+      return $query->result_array();
   }
 
     public function get_template_list()
@@ -362,7 +405,7 @@ class Campaign_model extends CI_Model
 	    $sql4 = "SELECT COUNT(*)+3  AS ttl_temp FROM `email_template` WHERE created_by={$this->store_id} AND is_deleted='0'";
       $sql5 = "SELECT COUNT(*)  AS deleted FROM campaign_manager WHERE created_by={$this->store_id} AND is_deleted='1'";
       $sql6 = "SELECT COUNT(*)  AS archive FROM campaign_manager WHERE created_by={$this->store_id} AND is_archieve='1'";
-      $sql7 = "SELECT COUNT(*) as cmps FROM campaign_manager WHERE created_by={$this->store_id}";
+      $sql7 = "SELECT COUNT(*) as cmps FROM campaign_manager WHERE created_by={$this->store_id} AND is_deleted = '0' AND is_archieve='0'";
       $sql8 = "SELECT COUNT(*)  AS draft FROM campaign_manager WHERE created_by={$this->store_id} AND cpgn_status ='1'";
       $sql9 = "SELECT COUNT(*)  AS test FROM campaign_manager WHERE created_by={$this->store_id} AND cpgn_status ='2'";
       $sql10 = "SELECT COUNT(*)  AS live FROM campaign_manager WHERE created_by={$this->store_id} AND cpgn_status ='3'";
@@ -523,7 +566,7 @@ class Campaign_model extends CI_Model
 
   public function get_user_folders()
   {
-    $qry=$this->db->query("SELECT COUNT(*) as camp_count, sf.fol_id , sf.folder_name, sf.user_id FROM scr_user_c_folders sf INNER JOIN campaign_manager cm ON sf.fol_id = cm.folder_id WHERE sf.user_id = " . $this->db->escape($this->user_id) . " GROUP BY sf.fol_id");
+    $qry=$this->db->query("SELECT COUNT(cm.folder_id) as camp_count, sf.fol_id , sf.folder_name, sf.user_id FROM scr_user_c_folders sf LEFT JOIN campaign_manager cm ON sf.fol_id = cm.folder_id WHERE sf.user_id = " . $this->db->escape($this->user_id) . " GROUP BY sf.fol_id");
     $res=$qry->result_array();
     return $res;
   }

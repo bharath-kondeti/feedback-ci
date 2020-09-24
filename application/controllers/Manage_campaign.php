@@ -34,20 +34,29 @@ class Manage_campaign extends CI_Controller
   }
 
 
-   public function get_pre_data()
+   public function get_pre_data($offset='',$limit='')
   {
     $to_date=date('Y-m-d');
     $frm_date = date('Y-m-d',strtotime("-30 days"));
     $data['status_text']='Success';
     $data['status_code']='1';
-    $data['campaign_list']=$this->campaign_model->get_campaign_list();
+    $data['campaign_list'] = $this->campaign_model->get_campaign_list($offset,$limit);
+    $countdata =$this->campaign_model->get_campaign_count();
+    $data['page_count'] = sizeof($data['campaign_list']);
+    $data['total_records'] = sizeof($countdata);
     $data['brand_list']=$this->campaign_model->get_brand_list($this->store_country);
   	$data['country_list']=$this->campaign_model->get_country_list();
-    $data['product_list']=$this->campaign_model->get_product_list($this->store_country);
+    //$data['product_list']=$this->campaign_model->get_product_list($this->store_country);
     $data['template_list']=$this->campaign_model->get_template_list();
     $data['recent_orders']=$this->campaign_model->get_recent_orders();
     $data['metrics']=$this->campaign_model->get_campaign_metrics();
     $data['user_folders']=$this->campaign_model->get_user_folders();
+    echo json_encode($data);
+  }
+
+  public function get_product_list() {
+    $data = array();
+    $data['product_list']=$this->campaign_model->get_product_list($this->store_country);
     echo json_encode($data);
   }
 
@@ -479,10 +488,12 @@ else
     $action = $_POST['action_name'];
     $camps = $_POST['campaign_ids'];
 
+    $data  = array();
+
     //Archive
     if($action == 'archive') {
       foreach ($camps as $camp) {
-        $uqry = "UPDATE campaign_manager SET is_archieve = 1 WHERE cpgn_id = " . $camp;
+        $uqry = "UPDATE campaign_manager SET is_archieve = 1, is_deleted = 0 WHERE cpgn_id = " . $camp;
         $this->db->query($uqry);
       }
       $data['status_text'] = "Campaign(s) archived successfully";
@@ -493,7 +504,7 @@ else
     //Delete
     if($action == 'delete') {
       foreach ($camps as $camp) {
-        $uqry = "UPDATE campaign_manager SET is_deleted = 1 WHERE cpgn_id = " . $camp;
+        $uqry = "UPDATE campaign_manager SET is_deleted = 1, is_archieve = 0 WHERE cpgn_id = " . $camp;
         $this->db->query($uqry);
       }
       $data['status_text'] = "Campaign(s) deleted successfully";
