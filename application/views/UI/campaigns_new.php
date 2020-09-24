@@ -363,7 +363,8 @@
                       <tr ng-repeat="idx in campList track by $index">
                         <td>
                           <div class="custom-control custom-checkbox">
-                            <input type="checkbox" checklist-value="idx.campaign_id" checklist-model="selectedCampaign.ids" ng-change="campStatusCheck()" class="custom-control-input" id="customCheck3-{{$index+1}}">
+                          <!-- ng-change="campStatusCheck()" -->
+                            <input type="checkbox" checklist-value="idx.campaign_id" checklist-model="selectedCampaign.ids"  class="custom-control-input" id="customCheck3-{{$index+1}}">
                             <label class="custom-control-label" for="customCheck3-{{$index+1}}">&nbsp;</label>
                           </div>
                         </td>
@@ -1534,10 +1535,12 @@
               })
               return false
             }
-            swal("Nice!", "You wrote: " + inputValue, "success");
-            console.log(inputValue);
-            console.log(campaignFactory);
-            campaignFactory.create_folder(inputValue);
+            var promise = campaignFactory.create_folder(inputValue);
+            $scope.block_site();
+            promise.then( resp => {
+              swal("Nice!", "Folder Name: " + inputValue, "success");
+              $.unblockUI();
+            })
           }
         );
       }
@@ -1548,17 +1551,20 @@
           $scope.selectedCampaign.ids = [];
         }
       }
-      $scope.campStatusCheck = function () {
-        console.log('here3', $scope.selectedCampaign.ids)
-      }
+      // $scope.campStatusCheck = function () {
+      //   console.log('here3', $scope.selectedCampaign.ids)
+      // }
       $scope.performAction = function (val) {
         if($scope.selectedCampaign.ids.length > 0) {
-          campaignFactory.perform_action(val, $scope.selectedCampaign.ids);
-          $scope.get_predata();
+          var promise = campaignFactory.perform_action(val, $scope.selectedCampaign.ids);
+          promise.then( x=> {
+            $scope.selectedCampaign.ids = [];
+            $scope.get_predata(0);
+            swal('Success!', x.data.status_text , 'success');
+          })
         }
       }
       $scope.filterCamps = function(val, type) {
-        console.log(val,type)
         $scope.campList = $scope.tempCampList;
         if(type === 'status') {
           if(val === 'All') {
@@ -1611,7 +1617,6 @@
             $scope.campList = $scope.tempCampList;
             var arr = [];
             $scope.campList.forEach( x=> {
-              console.log(x.is_deleted, x.is_archieve)
               if(x.is_deleted == 1 || x.is_archieve == 1) {
                 
               } else {
@@ -2221,11 +2226,11 @@
 
         });
 
-        $scope.$watch("checkCampaigns.length",
+        // $scope.$watch("checkCampaigns.length",
 
-        function(newValue, oldValue) {
-          console.log('here', $scope.checkCampaigns)
-        });
+        // function(newValue, oldValue) {
+        //   console.log('here', $scope.checkCampaigns)
+        // });
 
 
 
