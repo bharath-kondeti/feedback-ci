@@ -51,11 +51,11 @@ class Campaigns_new extends CI_Controller
     $data['status_text']='Success';
     $data['status_code']='1';
     $data['campaign_list']=$this->campaign_model->get_campaign_list();
-	$data['brand_list']=$this->campaign_model->get_brand_list($this->store_country);
+    $data['brand_list']=$this->campaign_model->get_brand_list($this->store_country);
   	$data['country_list']=$this->campaign_model->get_country_list();
     $data['product_list']=$this->campaign_model->get_product_list($this->store_country);
     $data['template_list']=$this->campaign_model->get_template_list();
-	$data['recent_orders']=$this->campaign_model->get_recent_orders();
+    $data['recent_orders']=$this->campaign_model->get_recent_orders();
     $data['metrics']=$this->campaign_model->get_campaign_metrics();
     echo json_encode($data);
   }
