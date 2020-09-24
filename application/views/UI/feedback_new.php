@@ -265,7 +265,7 @@
       }
     });
   }
-  $scope.itemsPerPage = 5;
+  $scope.itemsPerPage = 15;
   $scope.currentPage = 0;
   $scope.filterquery=[];
   $scope.selectedCamp=[];
@@ -357,7 +357,7 @@
     promise.then(
       function(response) {
         if(response.status_code == '1') {
-          $scope.total = response.count;
+          $scope.total = response.total_records;
           var resp = response;
           var negOb = [], posOb = [], neuOb = [], all = [], pos = [], neg = [], neut = [];
           if ('positive' in response.fbks) {

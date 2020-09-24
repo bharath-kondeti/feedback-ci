@@ -218,7 +218,7 @@
                   <a ng-click="performAction('pause')" class="dropdown-item" href="#"><i class="fa fa-pause mr-2" aria-hidden="true"></i>Pause</a>
                   <a ng-click="performAction('start')" class="dropdown-item" href="#"><i class="fa fa-play mr-2" aria-hidden="true"></i>Start</a>
                   <h6 class="dropdown-header">Move to Folder...</h6>
-                  <a ng-if="folders.length > 0" ng-repeat="fd in folders track by $index" ng-click="performAction(fd.folder_id)" class="dropdown-item" href="#"><i class="fa fa-folder-o mr-2" aria-hidden="true"></i></i>{{fd.folder_name}}</a>
+                  <a ng-if="folders.length > 0" ng-repeat="fd in folders track by $index" ng-click="performAction(fd.fol_id)" class="dropdown-item" href="#"><i class="fa fa-folder-o mr-2" aria-hidden="true"></i></i>{{fd.folder_name}}</a>
                 </div>
               </div>
             </div>
@@ -2541,7 +2541,10 @@
       $scope.save_template = function()
 
       {
-
+        var ele = $(".stop-nav");
+        for ( var i = 0; i < ele.length; ++i ) {
+          ele[i].removeEventListener("click", cancelNav);
+        }
         if ($scope.tmplt.is_default == '1')
 
         {
