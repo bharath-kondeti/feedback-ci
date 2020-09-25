@@ -34,7 +34,7 @@ class Manage_campaign extends CI_Controller
   }
 
 
-   public function get_pre_data($offset='',$limit='')
+   public function get_pre_data($offset, $limit)
   {
     $to_date=date('Y-m-d');
     $frm_date = date('Y-m-d',strtotime("-30 days"));
@@ -87,10 +87,11 @@ class Manage_campaign extends CI_Controller
   {
     if(!empty($_POST['brand']))
     {
+      $countdata = array();
        $data['payload']=$this->campaign_model->get_product_list($this->input->post('country'),$this->input->post('brand'),$this->input->post('key_word'),$this->input->post('fc_code'),$offset,$limit);
        $data['page_count'] = sizeof($data['payload']);
-       $countdata =$this->campaign_model->get_campaign_count($this->input->post('country'),$this->input->post('brand'),$this->input->post('key_word'),$this->input->post('fc_code'));
-       $data['total_records'] = sizeof($countdata);
+       $countdata =$this->campaign_model->get_product_count($this->input->post('country'),$this->input->post('brand'),$this->input->post('key_word'),$this->input->post('fc_code'));
+       $data['total_records'] = $countdata[0]['total_count'];
        $data['status_text']='Success';
        $data['status_code']='1';
        echo json_encode($data);

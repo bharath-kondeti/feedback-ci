@@ -149,7 +149,7 @@ class Campaign_model extends CI_Model
         return $result_set;
     }
 
-  public function get_campaign_list($frm_date='',$to_date='',$cmp_status='',$sort_order='cpgn_id',$dir='ASC',$offet='',$limit='')
+  public function get_campaign_list($offet='',$limit='',$frm_date='',$to_date='',$cmp_status='',$sort_order='cpgn_id',$dir='ASC')
   {
 	  //print_r($sort);
 	  $sql="SELECT cpgn_id as campaign_id,fbk_order as feedback_status,cpgn_desc as campaign_desc,is_active,cpgn_name as campaign_name,sum(IF(is_sent=1,1,0)) as sent_count,count(camp_order_no) as total_mail, cpgn_goal_type as camp_goaltype, cpgn_status as camp_status, is_deleted, is_archieve, folder_id from campaign_manager left join campaign_order_list on camp_id=cpgn_id where created_by =".$this->store_id;
@@ -187,7 +187,6 @@ class Campaign_model extends CI_Model
       } else {
         $sql.=" LIMIT 0, 15";
       }
-       //die($sql);
       $query=$this->db->query($sql);
 	  return $query->result_array();
   }
