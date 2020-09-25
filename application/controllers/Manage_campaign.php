@@ -34,7 +34,7 @@ class Manage_campaign extends CI_Controller
   }
 
 
-   public function get_pre_data($offset='',$limit='')
+   public function get_pre_data($offset, $limit)
   {
     $to_date=date('Y-m-d');
     $frm_date = date('Y-m-d',strtotime("-30 days"));
