@@ -1779,7 +1779,7 @@
       }
 
 
-      $scope.itemsPerPageProduct = 15;
+      $scope.itemsPerPageProduct = 25;
       $scope.currentPageProduct = 0;
       $scope.totalProduct = 0;
       $scope.rangeProduct = function() {
@@ -1816,7 +1816,7 @@
         return $scope.currentPageProduct === $scope.pageCountProduct() - 1 ? "disabled" : "";
       };
       $scope.pageCountProduct = function() {
-        return Math.ceil($scope.total/$scope.itemsPerPageProduct);
+        return Math.ceil($scope.totalProduct/$scope.itemsPerPageProduct);
       };
       $scope.setPageProduct = function(n) {
         if (n > 0 && n < $scope.pageCountProduct()) {
@@ -1849,7 +1849,7 @@
               if (html.status_code == '1')
               {
                 $scope.product_list = html.payload;
-                $scope.totalProduct = 0;
+                $scope.totalProduct = html.total_records;
               }
             }
           )
