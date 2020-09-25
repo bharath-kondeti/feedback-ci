@@ -1211,7 +1211,7 @@
         }
       });
     };
-    var get_products = function(country, brand, key_word, fc_code)
+    var get_products = function(country, brand, key_word, fc_code, offset_val, count_limit)
     {
       var search_path = "<?php echo $baseurl . 'manage_campaign/get_products/'; ?>";
       return $http({
@@ -1222,7 +1222,9 @@
           country: country,
           brand: brand,
           key_word: key_word,
-          fc_code: fc_code
+          fc_code: fc_code,
+          offset_val: offset_val,
+          count_limit: count_limit,
         }
       });
     };
