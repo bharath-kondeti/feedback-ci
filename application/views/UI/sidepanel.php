@@ -97,10 +97,10 @@ else if ($str['country_code']=='FR') { echo "<img class='mr-1' src='http://synde
 else if ($str['country_code']=='IT') { echo "<img class='mr-1' src='http://syndemos.com/app/assets/img/store_icons/Marketplace_IT.png' width='16' height='16'>";}
 else { echo "<img class='mr-1' src='http://syndemos.com/app/assets/img/store_icons/Marketplace_UK.png' width='16' height='16'>";}
 echo $str['country_code'];
-echo "</a>";                       
+echo "</a>";
                     }
                     ?>
-					
+
 				</div>
 			</li>
 
@@ -130,7 +130,7 @@ echo "</a>";
 
                     //    foreach($stores as $str)
                     //    {
-                    //        echo "<a class='dropdown-item notify-item'  href='".$base_url."stores/change_store/".$str['store_id']."'>".$str['country_code']."(".$str['seller_id'].")</a>"; 
+                    //        echo "<a class='dropdown-item notify-item'  href='".$base_url."stores/change_store/".$str['store_id']."'>".$str['country_code']."(".$str['seller_id'].")</a>";
                     //    }
 
                     ?>
@@ -196,13 +196,13 @@ echo "</a>";
 
         <!-- LOGO -->
         <div class="logo-box">
-            <a href="<?php echo $base_url . 'dashboard' ?>" class="logo text-center">
+            <a href="<?php echo $base_url . 'dashboard_new' ?>" class="logo text-center">
                 <span class="logo-lg">
                     <img src="<?php echo $baseurl . 'assets/img/feedback_logo_violet.png' ?>" alt="" height="35">
                 </span>
                 <span class="logo-sm">
                     <img src="<?php echo $baseurl . 'assets/img/logo_small.png' ?>" alt="" height="24">
-                    <!--<a href="<?php echo $base_url . 'dashboard' ?>" style="font-weight:600;color:#fff;font-size:18px;margin-bottom:-20px;margin-left:5px;"> FeedbackGrid</a>-->
+                    <!--<a href="<?php echo $base_url . 'dashboard_new' ?>" style="font-weight:600;color:#fff;font-size:18px;margin-bottom:-20px;margin-left:5px;"> FeedbackGrid</a>-->
                 </span>
             </a>
         </div>

@@ -4,68 +4,68 @@ class Dash_model extends CI_Model
 	  public function  __construct()
 	  {
 	   	 parent::__construct();
-       $user=$this->session->userdata('user_logged_in');  
+       $user=$this->session->userdata('user_logged_in');
        $this->store_id=$user['id'];
-	    $store=$this->session->userdata('store_info');  
+	    $store=$this->session->userdata('store_info');
         $this->store_id=$store['store_id'];
 		$this->store_country=$store['store_country'];
     }
-    
-    
+
+
     public function get_revenue($frm_date='',$to_date='')
     {
-       $sql="SELECT sum(itm_price) as revenue_total ,count(order_no) as order_count FROM `amz_order_info`  
+       $sql="SELECT sum(itm_price) as revenue_total ,count(order_no) as order_count FROM `amz_order_info`
         WHERE 1 ";
         if(!empty($frm_date) && !empty($to_date))
         {
           $frm_date=$frm_date." 00:00:00";
           $to_date=$to_date." 23:59:59";
-          
+
         }
-       $sql.=" AND purchase_date >= ".$this->db->escape($frm_date)." AND purchase_date <= ".$this->db->escape($to_date);   
+       $sql.=" AND purchase_date >= ".$this->db->escape($frm_date)." AND purchase_date <= ".$this->db->escape($to_date);
        $sql.=" and store_id={$this->store_id}  and order_status='Shipped'";
        $query=$this->db->query($sql);
        return $query->result_array();
     }
 
-    
-    
-    
+
+
+
     public function get_graph_data($frm_date='',$to_date='')
     {
        $sql="SELECT DATE_FORMAT(purchase_date,'%b-%d') AS order_date,count(order_no) as order_count,sum(itm_qty) as ord_qty,sum(itm_price) as total_amt FROM amz_order_info WHERE store_id= ".$this->store_id;
-       if(!empty($frm_date) && !empty($to_date))
-       {
-           $frm_date=$frm_date." 00:00:00";
-           $to_date=$to_date." 23:59:59";
-           $sql.=" AND purchase_date >= ".$this->db->escape($frm_date)." AND purchase_date <= ".$this->db->escape($to_date);
-           $sql.=" AND order_status='Shipped' ";
-       }
+       // if(!empty($frm_date) && !empty($to_date))
+       // {
+       //     $frm_date=$frm_date." 00:00:00";
+       //     $to_date=$to_date." 23:59:59";
+       //     $sql.=" AND purchase_date >= ".$this->db->escape($frm_date)." AND purchase_date <= ".$this->db->escape($to_date);
+       //     $sql.=" AND order_status='Shipped' ";
+       // }
        $sql.=" GROUP BY order_date ORDER BY purchase_date ASC";
-       
+
        $query=$this->db->query($sql);
        return $query->result_array();
     }
-    
+
     public function get_top_10_product($frm_date='',$to_date='')
     {
       $sql= "SELECT prod_title,prod_asin,prod_sku,prd.itm_price,prd.itm_qty,open_date,act_price,profit,SUM(tx.itm_qty) AS sold_qty,profit*SUM(tx.itm_qty) AS total_profit
                       FROM customer_product as prd
                       INNER JOIN amz_order_info AS tx ON  store_id= {$this->store_id} AND store_id=store_id AND seller_sku=prod_sku AND order_status='Shipped' ";
 
-                      
+
                       // "-- WHERE store_id={$this->store_id} ";
       if(!empty($frm_date) && !empty($to_date))
        {
           $frm_date=$frm_date." 00:00:00";
           $to_date=$to_date." 23:59:59";
           $sql.=" AND purchase_date >= ".$this->db->escape($frm_date)." AND purchase_date <= ".$this->db->escape($to_date);
-       }  
+       }
       $sql.=" GROUP BY prod_sku HAVING sold_qty > 0 ORDER BY sold_qty DESC limit 0,10 " ;
       $query=$this->db->query($sql);
-      return $query->result_array();                
+      return $query->result_array();
     }
-    
+
     public function get_consolidated_campaign_details($frm_date='',$to_date='')
     {
       $sql="SELECT IFNULL(count(*),0) as ttl_cmp FROM campaign_manager WHERE created_by=".$this->store_id." AND is_deleted=0 AND is_active=1";
@@ -96,12 +96,12 @@ class Dash_model extends CI_Model
       $res=$qry->result_array();
       $data['pending_count']=$res[0]['pending_count'];
       return $data;
-      
+
     }
-	
-	
-	
-	
+
+
+
+
 
 public function get_top_product($orderby,$direction,$offet,$limit,$searchterm='')
     {
@@ -153,8 +153,8 @@ public function get_top_product($orderby,$direction,$offet,$limit,$searchterm=''
                  INNER JOIN amz_order_info AS tx ON  prd.store_id= {$this->store_id} AND tx.store_id=prd.store_id AND seller_sku=prod_sku AND order_status='Shipped' GROUP BY prod_sku HAVING sold_qty > 0 ORDER BY sold_qty DESC  LIMIT 0,10) AS a ";
          $sqlquery= "SELECT REPLACE(REPLACE(prod_title,'&nbsp;&ndash;&nbsp;','-'),'&nbsp;',' ')  AS prod_title,prod_asin,prod_sku,sales_rank,ROUND(SUM(tx.itm_price)/SUM(tx.itm_qty),'2') as itm_price,prd.itm_qty,open_date,act_price,profit,SUM(tx.itm_qty) AS sold_qty,profit*SUM(tx.itm_qty) AS total_profit,ROUND(prd.itm_qty/SUM(tx.itm_qty)*30,'2') AS dos
                  FROM customer_product as prd
-                 INNER JOIN amz_order_info AS tx ON  prd.store_id= {$this->store_id} AND tx.store_id=prd.store_id AND seller_sku=prod_sku AND order_status='Shipped' AND prod_title <> '' ";         
-				 
+                 INNER JOIN amz_order_info AS tx ON  prd.store_id= {$this->store_id} AND tx.store_id=prd.store_id AND seller_sku=prod_sku AND order_status='Shipped' AND prod_title <> '' ";
+
 		 $to_date=date('Y-m-d');
          $frm_date = date('Y-m-d',strtotime("-31 days"));
          if(!empty($frm_date) && !empty($to_date))
@@ -162,15 +162,15 @@ public function get_top_product($orderby,$direction,$offet,$limit,$searchterm=''
              $frm_date=$frm_date." 00:00:00";
              $to_date=$to_date." 23:59:59";
              $sqlquery.=" AND purchase_date >= ".$this->db->escape($frm_date)." AND purchase_date <= ".$this->db->escape($to_date);
-          }  
+          }
          $sqlquery.=" GROUP BY prod_sku HAVING sold_qty > 0 ORDER BY ".$sort_order." ".$direction." " ;
-       
-      
+
+
         $sqlquery.=" LIMIT ".$offet.",".$limit;
         $query=$this->db->query($sqlquery) ;
         $data= $query->result_array();
         $countquery=$this->db->query($sqlcount);
-        
+
         $numrows= $countquery->result_array();
         if(count($data) > 0)
         {
@@ -178,11 +178,11 @@ public function get_top_product($orderby,$direction,$offet,$limit,$searchterm=''
         }
         else
         {
-         $result_set=array('status_code'=>'0','status_text'=>'No data found'); 
+         $result_set=array('status_code'=>'0','status_text'=>'No data found');
         }
         return $result_set;
     }
-	
+
 	public function get_recent_ten_orders()
 	{
 		$sql="SELECT *,DATE_FORMAT(`purchase_date`,'%Y-%m-%d') AS po_date,REPLACE(REPLACE(itm_title,'&nbsp;&ndash;&nbsp;','-'),'&nbsp;',' ')  AS itm_title  FROM amz_order_info WHERE store_id='".$this->store_id."' ORDER BY purchase_date DESC limit 10";
@@ -190,6 +190,6 @@ public function get_top_product($orderby,$direction,$offet,$limit,$searchterm=''
 		return $qry->result_array();
 	}
 
-    
- 
+
+
 }

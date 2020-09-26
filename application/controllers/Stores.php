@@ -9,10 +9,10 @@ class Stores extends CI_Controller {
      {
       redirect('user_auth');
      }
-     $user=$this->session->userdata('user_logged_in');  
+     $user=$this->session->userdata('user_logged_in');
      $this->user_id=$user['id'];
      // $this->load->model('store_model');
-     
+
   }
   // public function index()
   // {
@@ -25,9 +25,9 @@ public function change_store($store_id)
 {
   $sql="SELECT * FROM store_access AS acs
   INNER JOIN  store_manager AS mgr ON mgr.store_id=acs.store_id AND acs.store_id=".$this->db->escape($store_id)." AND user_id=".$this->user_id;
-  $sql.=" INNER JOIN supported_country AS spt ON spt.country_code=mgr.country_code ";                    
+  $sql.=" INNER JOIN supported_country AS spt ON spt.country_code=mgr.country_code ";
   $qry=$this->db->query($sql);
-  
+
 
   $res=$qry->result_array();//print_r($res);
   //die();
@@ -41,13 +41,13 @@ public function change_store($store_id)
     $this->session->set_userdata('store_info', $store_info);
     // print_r($this->session->all_userdata());
     // die();
-    redirect('dashboard');
+    redirect('dashboard_new');
   }
   else
   {
     show_404();
   }
 }
-  
-  
+
+
 }
