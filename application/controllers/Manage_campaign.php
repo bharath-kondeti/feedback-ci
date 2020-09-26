@@ -83,10 +83,12 @@ class Manage_campaign extends CI_Controller
        echo json_encode($data);
     }
   }
-  public function get_products($offset='',$limit='')
+  public function get_products()
   {
     if(!empty($_POST['brand']))
     {
+      $offset = $_POST['offset_val'];
+      $limit = $_POST['count_limit'];
       $countdata = array();
        $data['payload']=$this->campaign_model->get_product_list($this->input->post('country'),$this->input->post('brand'),$this->input->post('key_word'),$this->input->post('fc_code'),$offset,$limit);
        $data['page_count'] = sizeof($data['payload']);
