@@ -31,7 +31,7 @@
               let’s create your first email campaign with our 40 second setup wizard.
             </p>
             <div class="text-center">
-              <a href="<?php echo $baseurl.'manage_campaign'?>" class="btn btn-md btn-primary waves-effect waves-light">Add your first email campaign</a>
+              <a href="<?php echo $baseurl.'Campaigns_new'?>" class="btn btn-md btn-primary waves-effect waves-light">Add your first email campaign</a>
             </div>
           </div>
         </div>
@@ -1035,16 +1035,16 @@
           var lnth=$scope.graph_data.length;
           var chart_data=[];
           var chart_labels=[];
-          for (var i=0; i<lnth; i++) { 
+          for (var i=0; i<lnth; i++) {
             chart_data[i]=$scope.graph_data[i].total_amt;
-            chart_labels[i]=$scope.graph_data[i].order_date; 
-          } 
+            chart_labels[i]=$scope.graph_data[i].order_date;
+          }
           $scope.chart_for="Revenue" ;
-        	$scope.chart_desc="Total Revenue"; 
+        	$scope.chart_desc="Total Revenue";
           $scope.myChartData.config.type='line' ;
         	$scope.myChartData.config.data.datasets[0].label="Revenue";
         	$scope.myChartData.config.data.labels=chart_labels;
-        	$scope.myChartData.config.data.datasets[0].data=chart_data; 
+        	$scope.myChartData.config.data.datasets[0].data=chart_data;
           $scope.myChartData.config.data.datasets.length > 1 ? $scope.myChartData.config.data.datasets.pop() : '';
         	$scope.myChartData.update();
         }
