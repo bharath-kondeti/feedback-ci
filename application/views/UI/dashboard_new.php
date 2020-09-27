@@ -337,7 +337,7 @@
                 <div class="card-box">
                   <h4 class="header-title mb-3">Positive Feedback</h4>
                   <!--<div id="chartBig1" class="flot-chart mt-4 pt-1" style="height: 375px;"></div> --->
-                  <canvas class="chartBig1" style="display: block;width:100%;height: 160px;"></canvas>
+                  <canvas id="chartBig1" class="chartBig1" style="display: block;width:100%;height: 160px;"></canvas>
                 </div>
                 <!-- end card-box -->
               </div>
@@ -962,6 +962,7 @@
            //purple colors
            var config = {
             type: 'line',
+            height: '150px',
               data: {
                 labels: [],
                 datasets: [
@@ -1014,15 +1015,20 @@
               }
             }
           };
-          var ctx = document.getElementsByClassName("chartBig1");
-          console.log(ctx);
-          for(var i = 0; i<ctx.length; i++) {
-            var gradientStroke = ctx[i].getContext('2d').createLinearGradient(0, 230, 0, 50);
-            gradientStroke.addColorStop(1, 'rgba(72,72,176,0.1)');
-            gradientStroke.addColorStop(0.4, 'rgba(72,72,176,0.0)');
-            gradientStroke.addColorStop(0, 'rgba(119,52,169,0)');
-            $scope.myChartData = new Chart(ctx[i],config);
-          }
+          // var ctx = document.getElementsByClassName("chartBig1");
+          var ctx = document.getElementById('chartBig1');
+          // for(var i = 0; i<ctx.length; i++) {
+          //   var gradientStroke = ctx[i].getContext('2d').createLinearGradient(0, 230, 0, 50);
+          //   gradientStroke.addColorStop(1, 'rgba(72,72,176,0.1)');
+          //   gradientStroke.addColorStop(0.4, 'rgba(72,72,176,0.0)');
+          //   gradientStroke.addColorStop(0, 'rgba(119,52,169,0)');
+          //   $scope.myChartData = new Chart(ctx[i],config);
+          // }
+          var gradientStroke = ctx.getContext('2d').createLinearGradient(0, 230, 0, 50);
+          gradientStroke.addColorStop(1, 'rgba(72,72,176,0.1)');
+          gradientStroke.addColorStop(0.4, 'rgba(72,72,176,0.0)');
+          gradientStroke.addColorStop(0, 'rgba(119,52,169,0)');
+          $scope.myChartData = new Chart(ctx,config);
         }
         $scope.visualise_data();
 
