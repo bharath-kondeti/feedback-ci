@@ -222,7 +222,7 @@
                 </div>
               </div>
             </div>
-            <div class="col-md-2">
+            <div ng-click="block_site()" class="col-md-2">
               <div class="dropdown">
                 <a class="btn btn-primary btn-block dropdown-toggle" href="" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 All Folders<i class="mdi mdi-chevron-down"></i>
@@ -1452,6 +1452,19 @@
       $scope.itemsPerPage = 15;
       $scope.currentPage = 0;
       $scope.total = 0;
+
+      $scope.block_site = function() {
+        $.blockUI({ css: {
+            border: 'none',
+            padding: '3px',
+            backgroundColor: '#000',
+            '-webkit-border-radius': '10px',
+            '-moz-border-radius': '10px',
+            opacity: .5,
+            color: '#fff'
+        },baseZ:9999});
+      }
+      $scope.block_site();
       $scope.range = function() {
         var rangeSize = 4;
         var ret = [];
@@ -2872,7 +2885,7 @@
 
                         $scope.get_predata();
 
-                        swal('Success!', html.status_text, 'success');
+                        swal('Success!', 'Template Deleted`', 'success');
 
                       }
 

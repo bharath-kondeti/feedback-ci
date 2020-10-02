@@ -14,11 +14,10 @@ $baseurl = $base_url;
 
 								</ol>
 							</div>
-							<h4 class="page-title">Change Password</h4>
+							<h4 class="page-title settings-border">Settings</h4>
 						</div>
 					</div>
 				</div>
-
 				<div class="row" id="country_selection">
 					<div class="col-sm-2">
 						<div class="card-box">
@@ -59,7 +58,7 @@ $baseurl = $base_url;
 							</div>
 							<div class="ml-2">
 								<ul class="nav flex-column">
-									<li class="nav-item hover-nav">
+									<li class="nav-item hover-nav settings-active">
 										<a class="nav-link" href="<?php echo $base_url . 'change_password' ?>">Change Password</a>
 									</li>
 								</ul>
@@ -76,10 +75,10 @@ $baseurl = $base_url;
 							</div>
 						</div>
 					</div>
-					<div class="col-6">
+					<div class="col-10">
 						<div class="">
 							<div class="card-box">
-								<div class="col-sm-12">
+								<div class="col-sm-6">
 									<form novalidate="" name="pwdForm" ng-submit="update_password()"
 										class="ng-pristine ng-valid ng-valid-required">
 										<div class="col-md-12">

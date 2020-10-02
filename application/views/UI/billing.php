@@ -163,7 +163,7 @@ $base_url=base_url();
  						<div class="page-title-right">
  							<!-- <button style="float:right;margin-right:13px" data-toggle="modal" data-target="#load_money" class="btn btn-primary waves-effect waves-light mt-4 mb-2 width-sm">Pay</button>   -->
  						</div>
- 						<h4 class="page-title">Billing</h4>
+ 						<h4 class="page-title settings-border">Settings</h4>
  					</div>
  				</div>
  			</div>
@@ -190,7 +190,7 @@ $base_url=base_url();
  						</div>
  						<div class="ml-2">
  							<ul class="nav flex-column">
- 								<li class="nav-item hover-nav">
+ 								<li class="nav-item hover-nav settings-active">
  									<a class="nav-link" href="<?php echo $baseurl . 'billing' ?>">Billing Info</a>
  								</li>
  								<li class="nav-item hover-nav">

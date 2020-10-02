@@ -10,7 +10,7 @@ $base_url=base_url();
         <div class="col-12">
           <div class="page-title-box">
             <div class="page-title-right"></div>
-            <h4 class="page-title">Account Preferences</h4>
+            <h4 class="page-title settings-border">Settings</h4>
           </div>
         </div>
       </div>
@@ -22,7 +22,7 @@ $base_url=base_url();
             </div>
             <div class="ml-2">
               <ul class="nav flex-column">
-                <li class="nav-item  hover-nav">
+                <li class="nav-item  hover-nav settings-active">
                   <a class="nav-link" href="<?php echo $baseurl.'blacklist'?>">Blacklist</a>
                 </li>
                 <li class="nav-item hover-nav">

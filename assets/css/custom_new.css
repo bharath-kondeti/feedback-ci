@@ -495,11 +495,24 @@
   /* #
   f1f5f7; */
 }
+.settings-border {
+  border-bottom: 1px solid #dddddd;
+  margin-bottom: 20px !important;
+}
+.settings-active {
+  /* background-color: rgb(96 108 122 / 20%); */
+  border-radius: 8px;
+  border: 1px solid #7e57c2;
+}
+.settings-active:hover {
+  background-color: white !important;
+}
 .range_inputs > button {
   padding: 5px 15px;
 }
 .hover-nav:hover {
-  background-color: rgba(0,104,224,.2);
+  background-color: rgb(96 108 122 / 20%);
+  border-radius: 8px;
 }
 .camp-status {
   padding: 5px;

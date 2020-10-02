@@ -353,7 +353,7 @@ crawlApp.controller('invCtrl', ['$scope','$parse','$window','invFactory','$http'
             $.blockUI({ css: {
                 border: 'none',
                 padding: '3px',
-                backgroundColor: '#000',
+                backgroundColor: 'white',
                 '-webkit-border-radius': '10px',
                 '-moz-border-radius': '10px',
                 opacity: .5,
