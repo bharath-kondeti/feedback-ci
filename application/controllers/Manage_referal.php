@@ -24,15 +24,16 @@ class Manage_referal extends CI_Controller {
   }
   public function index()
   {
-      $this->load->view('UI/header');
+      
       
       $query=$this->db->query("SELECT refered_fname,refered_mail,is_signup,is_credited,DATE_FORMAT(refered_on,'%Y-%m-%d') as ref_on,DATE_FORMAT(credited_on,'%Y-%m-%d') as credited_on FROM referal_hub where ref_by_user_id=".$this->user_id."  ORDER BY refered_on DESC");
       $data['referals']=$query->result_array();
       $query=$this->db->query("SELECT referal_key FROM scr_user WHERE scr_u_id=".$this->user_id);
       $ref=$query->result_array();
       $data['ref_key']=$ref[0]['referal_key'];
+      $this->load->view('UI/header');
+      $this->load->view('UI/sidepanel');
 	    $this->load->view('UI/navigation');
-	    $this->load->view('UI/sidepanel');
       $this->load->view('UI/manage_referal',$data);
       $this->load->view('UI/footer');
   }

@@ -16,7 +16,7 @@ else {
         <div class="col-12">
           <div class="page-title-box">
             <div class="page-title-right"></div>
-            <h4 class="page-title">Account Preferences</h4>
+            <h4 class="page-title settings-border">Settings</h4>
           </div>
         </div>
       </div>
@@ -31,7 +31,7 @@ else {
                 <li class="nav-item  hover-nav">
                   <a class="nav-link" href="<?php echo $baseurl.'blacklist'?>">Blacklist</a>
                 </li>
-                <li class="nav-item hover-nav">
+                <li class="nav-item hover-nav settings-active">
                   <a class="nav-link active" href="<?php echo $baseurl.'preferences'?>">Preferences</a>
                 </li>
               </ul>
@@ -214,10 +214,26 @@ else {
       $scope.imageUploaded =  false;
       $scope.notYetUploaded = false;
 
+      $scope.block_site = function () {
+				$.blockUI({
+					css: {
+						border: 'none',
+						padding: '3px',
+						backgroundColor: '#000',
+						'-webkit-border-radius': '10px',
+						'-moz-border-radius': '10px',
+						opacity: .5,
+						color: '#fff'
+					}
+				});
+
+			}
+      $scope.block_site();
       $scope.get_data = function () {
         var promise= acFactory.get_pref_data()
          promise.then(function(value){
           console.log(value);
+          $.unblockUI();
          })
       }
       $scope.get_data();
@@ -242,20 +258,35 @@ else {
             break;
           }
           if(!$scope.approvedError && !$scope.testError && !$scope.negError) {
-            acFactory.save_data($scope.approvedEmail, $scope.testEmail, negEmails, $scope.blackListNotif)
+            $scope.block_site();
+            var promise = acFactory.save_data($scope.approvedEmail, $scope.testEmail, negEmails, $scope.blackListNotif)
+            promise.then(()=> {
+              $.unblockUI();
+              swal({
+              title: 'Preferences updates successfully',
+              type: "success",
+            });
+            })
           }
         }
 
       }
       $scope.uploadLogo = function () {
+        $scope.block_site();
         if($scope.imageUploaded) {
           $scope.notYetUploaded = false;
           var data = new FormData();
-          console.log($scope.logo_Image);
           data.append('logo_image', $scope.logo_Image)
           console.log(data);
           console.log(data.logo_image);
-          acFactory.save_logo(data)
+          var promise = acFactory.save_logo(data);
+          promise.then( ()=> {
+            $.unblockUI();
+            swal({
+              title: 'Logo Uploaded',
+              type: "success",
+            });
+          })
         } else {
           $scope.notYetUploaded = true;
         }

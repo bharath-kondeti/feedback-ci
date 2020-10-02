@@ -10,7 +10,7 @@ $base_url=base_url();
 				<div class="col-12">
 					<div class="page-title-box">
 						<div class="page-title-right"></div>
-						<h4 class="page-title">Cancel Your Account ?</h4>
+						<h4 class="page-title settings-border">Settings</h4>
 					</div>
 				</div>
 			</div>
@@ -45,7 +45,7 @@ $base_url=base_url();
 								<!-- <li class="nav-item hover-nav">
                   <a class="nav-link" href="#">My Plan</a>
                 </li> -->
-								<li class="nav-item hover-nav">
+								<li class="nav-item hover-nav settings-active">
 									<a class="nav-link" href="<?php echo $baseurl.'cancel'?>">Cancel</a>
 								</li>
 							</ul>

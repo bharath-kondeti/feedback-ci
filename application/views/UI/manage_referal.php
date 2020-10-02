@@ -10,7 +10,7 @@ $base_url=base_url();
         <div class="col-12">
           <div class="page-title-box">
             <div class="page-title-right"></div>
-            <h4 class="page-title">Manage Referrals</h4>
+            <h4 class="page-title settings-border">Settings</h4>
           </div>
         </div>
       </div>
@@ -63,7 +63,7 @@ $base_url=base_url();
             </div>
             <div class="ml-2">
               <ul class="nav flex-column">
-                <li class="nav-item hover hover-nav">
+                <li class="nav-item hover hover-nav settings-active">
                   <a class="nav-link" href="<?php echo $base_url . 'manage_referal' ?>">Refer a friend</a>
                 </li>
               </ul>
@@ -72,7 +72,7 @@ $base_url=base_url();
         </div>
 				<div class="col-10">
 					<div class='row'>
-						<div class="col-sm-10">
+						<div class="col-sm-12">
 							<div class="alert alert-info alert-dismissable">
 								<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
 								<!-- Refer your friends and get free 5 credits when they sign up and paid -->
@@ -84,7 +84,7 @@ $base_url=base_url();
 					</div>
 					<div class="row">
 
-						<div class="col-sm-10">
+						<div class="col-sm-12">
 
 							<div class="card panel ">
 								<div class="panel-heading ml-3">
@@ -128,7 +128,7 @@ $base_url=base_url();
 							</div>
 						</div>
 
-						<div class="col-sm-10">
+						<div class="col-sm-12">
 
 							<div class="card panel ">
 								<div class="panel-heading">
