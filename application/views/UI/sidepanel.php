@@ -16,69 +16,27 @@ $base_url = base_url();
                 </a>
                 <!-- End mobile menu toggle-->
             </li>
-   <?php /* ?> <li class="dropdown notification-list">
-                <a class="nav-link dropdown-toggle  waves-effect waves-light">
-                    <?php
-					//print_r($this->session->userdata());
-					$store_info = $this->session->userdata('store_info');
-					$store_country = $store_info['store_country'];
-					//echo $store_country;
-                    if ($store_country=='UK') { echo "UK<img src='http://syndemos.com/app/assets/img/store_icons/Marketplace_UK.png' width='16' height='16'>";}
-				else if ($store_country=='IN') { echo "<img src='http://syndemos.com/app/assets/img/store_icons/Marketplace_IN.png' width='16' height='16'>";}
-				else if ($store_country=='US') { echo "<img src='http://syndemos.com/app/assets/img/store_icons/Marketplace_US.png' width='16' height='16'>";}
-				else if ($store_country=='DE') { echo "<img src='http://syndemos.com/app/assets/img/store_icons/Marketplace_DE.jpg' width='16' height='16'>";}
-				else if ($store_country=='ES') { echo "<img src='http://syndemos.com/app/assets/img/store_icons/Marketplace_ES.jpg' width='16' height='16'>";}
-				else if ($store_country=='FR') { echo "<img src='http://syndemos.com/app/assets/img/store_icons/Marketplace_FR.png' width='16' height='16'>";}
-				else if ($store_country=='IT') { echo "<img src='http://syndemos.com/app/assets/img/store_icons/Marketplace_IT.png' width='16' height='16'>";}
-				else { echo "<img src='http://syndemos.com/app/assets/img/store_icons/Marketplace_UK.png' width='16' height='16'>";}
-					echo " - ".$store_info['store_name'];
-                    ?>
-                </a>
+            <?php
+            $store_info = $this->session->userdata('store_info');
+            $store_country = $store_info['store_country'];
+            ?>
 
-            </li>
-            <li class="dropdown notification-list">
-                <a class="nav-link dropdown-toggle  waves-effect waves-light" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
-                    <i class="fe-shopping-bag"></i> Stores
-                </a>
-                <div class="dropdown-menu dropdown-menu-right profile-dropdown" style="width: 200px">
-                    <?php
-                    $user = $this->session->userdata('user_logged_in');
-                    $stores = $this->common_model->get_users_stores($user['id']);
-					//echo "<pre>"; print_r($stores);exit;
-                    foreach ($stores as $str) {
-if ($str['country_code']=='UK') { echo "<img src='http://syndemos.com/app/assets/img/store_icons/Marketplace_UK.png' width='16' height='16'>";}
-else if ($str['country_code']=='IN') { echo "<img src='http://syndemos.com/app/assets/img/store_icons/Marketplace_IN.png' width='16' height='16'>";}
-else if ($str['country_code']=='US') { echo "<img src='http://syndemos.com/app/assets/img/store_icons/Marketplace_US.png' width='16' height='16'>";}
-else if ($str['country_code']=='DE') { echo "<img src='http://syndemos.com/app/assets/img/store_icons/Marketplace_DE.jpg' width='16' height='16'>";}
-else if ($str['country_code']=='ES') { echo "<img src='http://syndemos.com/app/assets/img/store_icons/Marketplace_ES.jpg' width='16' height='16'>";}
-else if ($str['country_code']=='FR') { echo "<img src='http://syndemos.com/app/assets/img/store_icons/Marketplace_FR.png' width='16' height='16'>";}
-else if ($str['country_code']=='IT') { echo "<img src='http://syndemos.com/app/assets/img/store_icons/Marketplace_IT.png' width='16' height='16'>";}
-else { echo "<img src='http://syndemos.com/app/assets/img/store_icons/Marketplace_UK.png' width='16' height='16'>";}
-
-                        echo "<a class='dropdown-item text-left notify-item notify-all'  href='" . $base_url . "stores/change_store/" . $str['store_id'] . "'>" . $str['store_name'] . "-" . $str['country_code'] . "</a>";
-                    }
-                    ?>
-                </div>
-            </li>
-<?php */ ?>
 			<li class="dropdown d-none d-lg-inline-block topbar-dropdown">
-				<a class="nav-link dropdown-toggle arrow-none waves-effect waves-light" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
-				<?php
-					//print_r($this->session->userdata());
-					$store_info = $this->session->userdata('store_info');
-					$store_country = $store_info['store_country'];
-					//echo $store_country;
-                    if ($store_country=='UK') { echo "<img src='http://syndemos.com/app/assets/img/store_icons/Marketplace_UK.png' width='16' height='16'>";}
-				else if ($store_country=='IN') { echo "<img src='http://syndemos.com/app/assets/img/store_icons/Marketplace_IN.png' width='16' height='16'>";}
-				else if ($store_country=='US') { echo "<img src='http://syndemos.com/app/assets/img/store_icons/Marketplace_US.png' width='16' height='16'>";}
-				else if ($store_country=='DE') { echo "<img src='http://syndemos.com/app/assets/img/store_icons/Marketplace_DE.jpg' width='16' height='16'>";}
-				else if ($store_country=='ES') { echo "<img src='http://syndemos.com/app/assets/img/store_icons/Marketplace_ES.jpg' width='16' height='16'>";}
-				else if ($store_country=='FR') { echo "<img src='http://syndemos.com/app/assets/img/store_icons/Marketplace_FR.png' width='16' height='16'>";}
-				else if ($store_country=='IT') { echo "<img src='http://syndemos.com/app/assets/img/store_icons/Marketplace_IT.png' width='16' height='16'>";}
-				else { echo "<img src='http://syndemos.com/app/assets/img/store_icons/Marketplace_UK.png' width='16' height='16'>";}
-					echo " - ".$store_info['store_country'];
-                    ?>
-                </a>
+				<?php if($store_country != '') { ?>
+                    <a class="nav-link dropdown-toggle arrow-none waves-effect waves-light" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+    				<?php
+                    if ($store_country == 'UK') { echo "<img src='http://syndemos.com/app/assets/img/store_icons/Marketplace_UK.png' width='16' height='16'>";}
+    				else if ($store_country=='IN') { echo "<img src='http://syndemos.com/app/assets/img/store_icons/Marketplace_IN.png' width='16' height='16'>";}
+    				else if ($store_country=='US') { echo "<img src='http://syndemos.com/app/assets/img/store_icons/Marketplace_US.png' width='16' height='16'>";}
+    				else if ($store_country=='DE') { echo "<img src='http://syndemos.com/app/assets/img/store_icons/Marketplace_DE.jpg' width='16' height='16'>";}
+    				else if ($store_country=='ES') { echo "<img src='http://syndemos.com/app/assets/img/store_icons/Marketplace_ES.jpg' width='16' height='16'>";}
+    				else if ($store_country=='FR') { echo "<img src='http://syndemos.com/app/assets/img/store_icons/Marketplace_FR.png' width='16' height='16'>";}
+    				else if ($store_country=='IT') { echo "<img src='http://syndemos.com/app/assets/img/store_icons/Marketplace_IT.png' width='16' height='16'>";}
+    				else { echo "<img src='http://syndemos.com/app/assets/img/store_icons/Marketplace_UK.png' width='16' height='16'>";}
+    					echo " - ".$store_info['store_country'];
+                        ?>
+                    </a>
+                <?php } ?>
 				<div class="dropdown-menu dropdown-menu-right">
 
 					<!-- item-->

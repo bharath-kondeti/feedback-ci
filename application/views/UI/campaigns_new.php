@@ -702,7 +702,7 @@
               </div>
             </div>
             <div class="col-md-6">
-              <a href='#'class="btn btn-info pull-right" ng-click='clear_template();togggle_view_email()'>Create New Template</a>
+              <a class="btn btn-info pull-right" ng-click='clear_template();togggle_view_email()'>Create New Template</a>
             </div>
           </div>
           <br>
