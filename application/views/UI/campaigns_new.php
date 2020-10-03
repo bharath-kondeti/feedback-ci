@@ -101,11 +101,6 @@
                   Email Junction
                   </a>
                 </li>
-                <li class="nav-item stop-nav">
-                  <a href="#pending" data-toggle="tab" aria-expanded="true" class="nav-link stop-nav">
-                  Pending
-                  </a>
-                </li>
               </ul>
             </div>
             <div class="col-md-2 text-right">
@@ -242,7 +237,7 @@
             </div>
             <div class="col-md-4">
               <?php if ($store_count[0]['ttl'] > 0) { ?>
-              <a href='#' class="btn btn-info pull-right" ng-click='clear_campaign_data();togggle_view(); load_product(0)'>Create Campaign</a>
+              <a href='' class="btn btn-info pull-right" ng-click='clear_campaign_data();togggle_view(); load_product(0)'>Create Campaign</a>
               <?php }?>
             </div>
           </div>
@@ -339,7 +334,7 @@
               ?>
             <div class="" ng-show='show_dash==1'>
               <div class="col-12 card-box">
-                <div class="table-responsive">
+                <div class="table-responsive"><h4>My Campaigns</h4>
                   <table class="text-center table-bordered table-striped table table-hover">
                     <thead class="">
                       <tr>
@@ -431,16 +426,16 @@
                 <div class="card">
                   <div class="card-body">
                     <h4 class="page-title">Campaign Details</h4>
-                    <a href="" id="menuToggle" style="margin-top:-15px;" class="pull-right  dropdown-toggle waves-effect waves-light" data-toggle="dropdown" aria-expanded="true" ng-click='togggle_view()'>Close</a>
+                    <a href="" id="menuToggle" style="margin-top:-15px;" class="pull-right  dropdown-toggle waves-effect waves-light close-template" data-toggle="dropdown" aria-expanded="true" ng-click='togggle_view()'>Close</a>
                     <div class="col-sm-12">
                       <div class="form-inline">
                         <div class="col-sm-12">
                           <div class="form-group mx-sm-12 mb-12">
                             <div class="col-sm-3">
-                              <label for="status-select" class="mr-2 justify-start">Enter Campaign name</label>
+                              <label for="status-select" class="mr-2 justify-start">Enter Campaign Name</label>
                             </div>
                             <div class="col-sm-8">
-                              <input type="text" style="width:100%" id="camp_name" name="" class="form-control mr-10" ng-model='cmp.camp_name' placeholder="Enter Campaign name">
+                              <input type="text" style="width:100%" id="camp_name" name="" class="form-control mr-10" ng-model='cmp.camp_name' placeholder="Enter Campaign Name">
                             </div>
                           </div>
                           <br>
@@ -712,9 +707,9 @@
           </div>
           <br>
           <div class="col-md-12 card-box">
-            <div class="" ng-show='show_dash_email==1'>
+            <div class="" ng-show='show_dash_email==1' id="myid">
               <!----------------------------------->
-              <div class="table-responsive">
+              <div class="table-responsive"><h4>Templates</h4>
                 <table class="table-bordered table table-hover table-striped">
                   <thead>
                     <tr>
@@ -737,7 +732,7 @@
                 </table>
               </div>
             </div>
-            <div class="row" ng-show='show_dash_email==0'>
+            <div class="row" ng-show='show_dash_email==0' id="myid1">
               <div class="col-12">
                 <div class="card">
                   <div class="card-body">
@@ -876,7 +871,7 @@
                                   <a class='btn btn-info' ng-click='filtergrid()'>Search</a>
                                 </div>
                               </div>
-                              <div class="table-responsive">
+                              <div class="table-responsive"><h4>Email Junction</h4>
                                 <table class="table table-centered mb-0">
                                   <thead class="thead-light">
                                     <tr>
@@ -1132,46 +1127,6 @@
             <!-----------------------------------------------email Junction Data--------------->
           </div>
           <!-----------------------------sent_messages----------------------------->
-        </div>
-        <!-----------------------------Pending----------------------------->
-        <div class="tab-pane" id="pending">
-          <div class="row">
-            <div class="col-md-6">
-              <form class="form-inline">
-                <div class="form-group mx-sm-3">
-                  <label for="search" class="sr-only">Search</label>
-                  <input type="password" class="form-control" id="inputPassword2" placeholder="Search Order ID or Buyer Email">
-                </div>
-                <div class="dropdown">
-                  <a class="btn btn-primary btn-block dropdown-toggle" href="" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  Select a campaign<i class="mdi mdi-chevron-down"></i>
-                  </a>
-                  <div class="dropdown-menu icon_menu_size" aria-labelledby="dropdownMenuLink" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 35px, 0px);">
-                    <a class="dropdown-item" href="#">All Campaigns</a>
-                    <a class="dropdown-item" href="#">Live Campaigns</a>
-                    <a class="dropdown-item" href="#">Paused Campaigns</a>
-                    <a class="dropdown-item" href="#">Test Campaigns</a>
-                    <a class="dropdown-item" href="#">Activity Campaigns</a>
-                    <a class="dropdown-item" href="#">Feedback Rating</a>
-                  </div>
-                </div>
-                <!----------------------------------------->
-                <div id="navigation">
-                  <!-- Navigation Menu-->
-                </div>
-                <!----------------------------------------->
-              </form>
-            </div>
-            <div class="col-md-2 offset-4">
-              <a class="btn btn-primary btn-block text-light"> Filter </a>
-            </div>
-          </div>
-          <br>
-          <hr>
-          <div class="row">
-            <div class="col-md-12">
-            </div>
-          </div>
         </div>
         <!-----------------------------sent_messages----------------------------->
       </div>
@@ -1633,7 +1588,7 @@
             var arr = [];
             $scope.campList.forEach( x=> {
               if(x.is_deleted == 1 || x.is_archieve == 1) {
-                
+
               } else {
                 arr.push(x);
               }
@@ -2270,13 +2225,6 @@
         }
 
       }
-
-      $(document).ready(function() {
-        CKEDITOR.instances.editor.on('change', function() {
-          $scope.tmplt.template_content_html = $sce.trustAsHtml(CKEDITOR.instances.editor.getData());
-          //alert("TEST");
-        });
-      });
     });
 
   crawlApp.factory("templateFactory", function($http, $q, Upload) {
@@ -2402,64 +2350,33 @@
   });
 
   crawlApp.controller("templateCtrl", function templateCtrl($window,$interval, $scope, templateFactory, $sce, $q, $timeout, Upload)
-
     {
-
-
-
       $scope.tmp = {};
-
       $scope.tmplt = {};
-
       $scope.tmp.test_html = CKEDITOR.instances.editor.getData();
-
       $scope.show_dash_email = 1;
-
       $scope.tmplt.tmp_id = '';
-
       $scope.tmplt.is_default = '0';
-
       $scope.tmplt.subject = '';
-
       $scope.tmplt.template_name = '';
-
       $scope.tmplt.template_content_html = '';
       $scope.activateSave = false;
       $scope.watchTemp = false;
-
       $scope.block_site = function()
-
       {
-
         $.blockUI({
           css: {
-
             border: 'none',
-
             padding: '3px',
-
             backgroundColor: '#000',
-
             '-webkit-border-radius': '10px',
-
             '-moz-border-radius': '10px',
-
             opacity: .5,
-
             color: '#fff'
-
-
-
           },
           baseZ: 9999
         });
-
-
-
       }
-
-
-
       $scope.togggle_view_email = function() {
         if ($scope.show_dash_email == 0) {
           $scope.show_dash_email = 1;
@@ -2467,154 +2384,74 @@
           $scope.show_dash_email = 0;
         }
       }
-
-
-
-
-
       $scope.open_campaign_ui = function()
-
       {
-
         $('#menuToggle').addClass('active');
-
         $('body').addClass(' body-push-toleft');
-
         $('#theMenu').addClass('menu-open');
-
       }
-
-
-
       $scope.load_template = function(template_id)
-
       {
-
         if (template_id != '0')
-
         {
-
           $scope.cmp.template_id = template_id;
-
           $scope.adhoc_cmp.template_id = template_id;
-
           for (i = 0; i < $scope.template_list.length; i++)
-
           {
-
             if ($scope.template_list[i].template_id == template_id)
-
             {
-
               $scope.template_content = $sce.trustAsHtml($scope.template_list[i].template_content);
-
             }
-
           }
-
         }
-
       }
-
       $scope.get_template_data = function()
-
       {
-
         if (angular.isDefined($scope.tmp) && $scope.tmp.length > 0 && parseInt($scope.tmp) != 0)
-
         {
-
           for (i = 0; i < $scope.template_list.length; i++)
-
           {
-
             if ($scope.template_list[i].template_id == $scope.tmp)
-
             {
-
               $scope.tst.email_content = $sce.trustAsHtml($scope.template_list[i].template_content);
-
               $scope.tst.template_id = $scope.tmp;
-
               $scope.tst.subject = $scope.template_list[i].subject;
-
               $("#Preview_email_box").modal('show');
-
             }
-
           }
-
         } else
-
         {
-
           swal('Error!', 'Please select any template', 'error');
-
         }
-
       }
-
-
-
       $scope.get_predata = function()
-
       {
-
         $scope.block_site();
-
         var promise = templateFactory.get_data();
-
         promise.then(
-
           function(response)
-
           {
-
             if (response.status_code == '1')
-
             {
-
               $.unblockUI();
-
               $scope.template_list = response.template_list;
-
             } else
-
             {
-
               swal('Error!', response.status_text, 'error');
-
             }
-
           },
-
           function(reason)
-
           {
-
             $scope.serverErrorHandler(reason);
-
           }
-
         );
-
       }
-
       $scope.get_predata();
-
-
-
-
-
       $scope.clear_template = function()
       {
-
         $scope.tmplt.tmp_id = '';
-
         $scope.tmplt.is_default = '0';
-
         $scope.tmplt.subject = '';
-
         $scope.tmplt.template_name = '';
 
         $scope.tmplt.template_content_html = '';
@@ -2622,16 +2459,16 @@
         CKEDITOR.instances.editor.setData('');
 
       }
-      
+
       $scope.$watch("watchTemp",function(newValue, oldValue) {
         if(newValue == true) {
           $scope.watchPage();
-        }        
+        }
       });
       $scope.$watch("tmplt.subject",function(newValue, oldValue) {
         if(newValue.length > 5) {
           $scope.watchTemp =  true;
-        }        
+        }
       });
       function cancelNav(ev) {
         ev.preventDefault();
@@ -2649,7 +2486,7 @@
               closeOnCancel: true
             },
             function(isConfirm) {
-              if(isConfirm) { 
+              if(isConfirm) {
 
               } else {
                 var ele = $(".stop-nav");
@@ -2665,7 +2502,7 @@
         console.log(ele)
         for ( var i = 0; i < ele.length; ++i ) {
           ele[i].addEventListener("click", cancelNav, false);
-        } 
+        }
       }
 
       $scope.save_template = function()
@@ -2720,6 +2557,14 @@
                   // $scope.template_list=html.payload;
 
                   $scope.get_predata();
+
+                  $(document).ready(function () {
+                    $('button.confirm').on('click', function() {
+                      $("#myid1").addClass('ng-hide');
+                      $("#myid").removeClass('ng-hide');
+                      $("#myid").addClass('row');
+                    });
+                  });
 
                 }
 
@@ -2885,7 +2730,7 @@
 
                         $scope.get_predata();
 
-                        swal('Success!', 'Template Deleted`', 'success');
+                        swal('Success!', 'Template Successfully Deleted', 'success');
 
                       }
 

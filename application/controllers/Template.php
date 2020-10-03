@@ -15,13 +15,13 @@ class Template extends CI_Controller {
      }
       else
      {
-        $this->load->model("campaign_model");   
-        $user=$this->session->userdata('user_logged_in');  
+        $this->load->model("campaign_model");
+        $user=$this->session->userdata('user_logged_in');
         $this->user_id=$user['id'];
-		$store=$this->session->userdata('store_info');  
+		$store=$this->session->userdata('store_info');
 	    $this->store_id=$store['store_id'];
 	    $this->store_country=$store['store_country'];
-       
+
      }
   }
 	public function index()
@@ -32,8 +32,8 @@ class Template extends CI_Controller {
 		$this->load->view('UI/template');
 		$this->load->view('UI/footer');
 	}
-	
-	
+
+
 	 public function get_pre_data()
   {
     $data['status_text']='Success';
@@ -41,8 +41,8 @@ class Template extends CI_Controller {
     $data['template_list']=$this->campaign_model->get_template_list();
 	echo json_encode($data);
   }
-  
-  
+
+
   public function edit_template()
     {
       if(isset($_POST['template_id']) && !empty($_POST['template_id']))
@@ -55,7 +55,7 @@ class Template extends CI_Controller {
           $data['status_text']="Retrived";
           $data['status_code']=1;
           $data['template_detail']=$res;
-          
+
         }
         else
         {
@@ -69,7 +69,7 @@ class Template extends CI_Controller {
         echo '{"status_code":"0","status_text":"Input error"}';
       }
     }
-	
+
 	 public function delete_template()
   {
     if(isset($_POST['template_id']) && !empty($_POST['template_id']))
@@ -81,12 +81,12 @@ class Template extends CI_Controller {
       if ($this->db->trans_status() === FALSE)
       {
         echo '{"status_code":"0","status_text":"Something went wrong"}';
-      } 
+      }
       else
       {
         echo '{"status_code":"1","status_text":"Templated deleted"}';
       }
-      
+
 
     }
     else
@@ -94,73 +94,47 @@ class Template extends CI_Controller {
       echo '{"status_code":"0","status_text":"Mantatory data missing"}';
     }
   }
-	public function save_template()
-  {
-	  if(isset($_POST['template_data']))
-    {
+	public function save_template() {
+	  if(isset($_POST['template_data'])) {
       $post=json_decode($_POST['template_data']);
-	  if( isset($post->subject) && isset($post->template_ui) && isset($post->template_name))
-      {
-        if( !empty($post->subject) && !empty($post->template_ui) && !empty($post->template_name))
-        {
+      if( isset($post->subject) && isset($post->template_ui) && isset($post->template_name)) {
+        if( !empty($post->subject) && !empty($post->template_ui) && !empty($post->template_name)) {
           $sql="SELECT count(*) ttl from email_template where created_by={$this->user_id} AND template_name=".$this->db->escape($post->template_name);
-          if(isset($post->tmp_id) && !empty($post->tmp_id) && $post->tmp_id > 0)
-            {
-              $sql.=" AND template_id <> ".$this->db->escape($post->tmp_id);
-            }
-           
+          if(isset($post->tmp_id) && !empty($post->tmp_id) && $post->tmp_id > 0) {
+            $sql.=" AND template_id <> ".$this->db->escape($post->tmp_id);
+          }
           $qry=$this->db->query($sql);
           $res=$qry->result_array();
-          if(!empty($res) && $res[0]['ttl'] > 0)
-          {
-            echo '{"status_code":"0","status_text":"Template name already exist"}';         
+          if(!empty($res) && $res[0]['ttl'] > 0) {
+            echo '{"status_code":"0","status_text":"Template name already exist"}';
             die();
           }
           $this->db->trans_start();
-          if(isset($post->tmp_id) && !empty($post->tmp_id) && $post->tmp_id > 0)
-            {
-                $this->db->query("UPDATE email_template SET template_name=".$this->db->escape($post->template_name).",subject=".$this->db->escape($post->subject).",template_content=".$this->db->escape($post->template_ui)." WHERE template_id=".$this->db->escape($post->tmp_id)." AND created_by=".$this->user_id);
-            }
-            else
-            {
-
-              $insert_template=array('subject'=>$post->subject,'template_name'=>$post->template_name,'template_content'=>$post->template_ui,'created_on'=>date('Y-m-d H:i:s'),'created_by'=>$this->user_id);
+          if(isset($post->tmp_id) && !empty($post->tmp_id) && $post->tmp_id > 0) {
+            $this->db->query("UPDATE email_template SET template_name=".$this->db->escape($post->template_name).",subject=".$this->db->escape($post->subject).",template_content=".$this->db->escape($post->template_ui)." WHERE template_id=".$this->db->escape($post->tmp_id)." AND created_by=".$this->user_id);
+            $post_msg = "Template successfully updated";
+          } else {
+            $insert_template=array('subject'=>$post->subject,'template_name'=>$post->template_name,'template_content'=>$post->template_ui,'created_on'=>date('Y-m-d H:i:s'),'created_by'=>$this->user_id);
               $this->db->insert('email_template',$insert_template);
+              $post_msg = "Template successfully created";
             }
            $this->db->trans_complete();
-           if ($this->db->trans_status() === FALSE)
-           {
-                echo '{"status_code":"0","status_text":"Duplicate template Entry / Something went wrong try again later "}';         
-           }
-           else
-           {
-                   $data['status_code']=1;
-                   $data['status_text']=1;
-                   $data['payload']=$this->campaign_model->get_template_list();
-                     echo '{"status_code":"1","status_text":"Successfully updated"}';         
-           }
-            
-            
+           if ($this->db->trans_status() === FALSE) {
+            echo '{"status_code":"0","status_text":"Duplicate template Entry / Something went wrong try again later "}';
+          } else {
+            $data['status_code'] = 1;
+            $data['status_text'] = 1;
+            $data['payload'] = $this->campaign_model->get_template_list();
+            echo '{"status_code":"1","status_text":"'.$post_msg.'"}';
+          }
+        } else {
+          echo '{"status_code":"0","status_text":"Mandatory data missing 1"}';
         }
-        else
-        {
-          echo '{"status_code":"0","status_text":"Mandatory data missing 1"}';         
-        }
+      } else {
+        echo '{"status_code":"0","status_text":"Mandatory data missing 2"}';
       }
-      else
-      {
-        echo '{"status_code":"0","status_text":"Mandatory data missing 2"}';         
-      }
-    }
-    else
-    {
-      echo '{"status_code":"0","status_text":"Mandatory data missing 3 "}';         
+    } else {
+      echo '{"status_code":"0","status_text":"Mandatory data missing 3 "}';
     }
   }
-  
-	
-	
-	
-	
-	
 }

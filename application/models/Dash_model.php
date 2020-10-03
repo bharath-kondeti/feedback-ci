@@ -16,13 +16,6 @@ class Dash_model extends CI_Model
     {
        $sql="SELECT sum(itm_price) as revenue_total ,count(order_no) as order_count FROM `amz_order_info`
         WHERE 1 ";
-        if(!empty($frm_date) && !empty($to_date))
-        {
-          $frm_date=$frm_date." 00:00:00";
-          $to_date=$to_date." 23:59:59";
-
-        }
-       $sql.=" AND purchase_date >= ".$this->db->escape($frm_date)." AND purchase_date <= ".$this->db->escape($to_date);
        $sql.=" and store_id={$this->store_id}  and order_status='Shipped'";
        $query=$this->db->query($sql);
        return $query->result_array();
@@ -70,21 +63,21 @@ class Dash_model extends CI_Model
     {
       $sql="SELECT IFNULL(count(*),0) as ttl_cmp FROM campaign_manager WHERE created_by=".$this->store_id." AND is_deleted=0 AND is_active=1";
       $sql1="SELECT IFNULL(COUNT(*),0) AS sent_count FROM campaign_order_list WHERE camp_id IN (SELECT cpgn_id FROM campaign_manager WHERE created_by=".$this->store_id." AND is_deleted=0 AND is_active=1) AND is_sent=1 ";
-      if(!empty($frm_date) && !empty($to_date))
-       {
-         $frm_date=$frm_date." 00:00:00";
-      $to_date=$to_date." 23:59:59";
+      // if(!empty($frm_date) && !empty($to_date))
+      //  {
+      //    $frm_date=$frm_date." 00:00:00";
+      // $to_date=$to_date." 23:59:59";
 
-          $sql1.=" AND trigger_on >= ".$this->db->escape($frm_date)." AND trigger_on <= ".$this->db->escape($to_date);
-       }
+      //     $sql1.=" AND trigger_on >= ".$this->db->escape($frm_date)." AND trigger_on <= ".$this->db->escape($to_date);
+      //  }
       $sql2="SELECT IFNULL(COUNT(*),0) AS pending_count FROM campaign_order_list WHERE camp_id IN (SELECT cpgn_id FROM campaign_manager WHERE created_by=".$this->store_id." AND is_deleted=0 AND is_active=1) AND is_sent=0  AND dns_status=0";
-      if(!empty($frm_date) && !empty($to_date))
-       {
-         $frm_date=$frm_date." 00:00:00";
-      $to_date=$to_date." 23:59:59";
+      // if(!empty($frm_date) && !empty($to_date))
+      //  {
+      //    $frm_date=$frm_date." 00:00:00";
+      // $to_date=$to_date." 23:59:59";
 
-          $sql2.=" AND trigger_on >= ".$this->db->escape($frm_date)." AND trigger_on <= ".$this->db->escape($to_date);
-       }
+      //     $sql2.=" AND trigger_on >= ".$this->db->escape($frm_date)." AND trigger_on <= ".$this->db->escape($to_date);
+      //  }
 
       $qry=$this->db->query($sql);
       $res=$qry->result_array();
@@ -98,9 +91,6 @@ class Dash_model extends CI_Model
       return $data;
 
     }
-
-
-
 
 
 public function get_top_product($orderby,$direction,$offet,$limit,$searchterm='')

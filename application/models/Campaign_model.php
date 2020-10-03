@@ -153,12 +153,12 @@ class Campaign_model extends CI_Model
   {
 	  //print_r($sort);
 	  $sql="SELECT cpgn_id as campaign_id,fbk_order as feedback_status,cpgn_desc as campaign_desc,is_active,cpgn_name as campaign_name,sum(IF(is_sent=1,1,0)) as sent_count,count(camp_order_no) as total_mail, cpgn_goal_type as camp_goaltype, cpgn_status as camp_status, is_deleted, is_archieve, folder_id from campaign_manager left join campaign_order_list on camp_id=cpgn_id where created_by =".$this->store_id;
-      if(!empty($frm_date) && !empty($to_date))
-       {
-        $frm_date=$frm_date." 00:00:00";
-        $to_date=$to_date." 23:59:59";
-        $sql.=" AND trigger_on >= ".$this->db->escape($frm_date)." AND trigger_on <= ".$this->db->escape($to_date);
-       }
+      // if(!empty($frm_date) && !empty($to_date))
+      //  {
+      //   $frm_date=$frm_date." 00:00:00";
+      //   $to_date=$to_date." 23:59:59";
+      //   $sql.=" AND trigger_on >= ".$this->db->escape($frm_date)." AND trigger_on <= ".$this->db->escape($to_date);
+      //  }
 	    if($cmp_status!='ALL' && $cmp_status=='ACT')
        {
 

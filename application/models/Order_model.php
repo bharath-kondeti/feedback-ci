@@ -4,14 +4,14 @@ class Order_model extends CI_Model
 	  public function  __construct()
 	  {
 	   	 parent::__construct();
-       $user=$this->session->userdata('user_logged_in');  
+       $user=$this->session->userdata('user_logged_in');
        $this->user_id=$user['id'];
-	    $store=$this->session->userdata('store_info');  
+	    $store=$this->session->userdata('store_info');
        $this->store_id=$store['store_id'];
       }
-   
 
-	  
+
+
     public function get_order_list($orderby='purchase_date',$direction='DESC',$offet,$limit,$searchterm='')
     {
          $srterm='';
@@ -23,7 +23,7 @@ class Order_model extends CI_Model
 
 
             $srterm=urldecode($str[0]->searchtext);
-         } 
+         }
          if(isset($str[1]->order_status))
          {
            if($str[1]->order_status == 'SHI')
@@ -31,9 +31,9 @@ class Order_model extends CI_Model
            elseif($str[1]->order_status == 'UNS')
            $status='Unshipped';
            elseif($str[1]->order_status == 'CAN')
-           $status='Canceled'; 
+           $status='Canceled';
            elseif($str[1]->order_status == 'PEN')
-           $status='Pending'; 
+           $status='Pending';
          }
          if(isset($str[4]->tfm_status))
          {
@@ -41,7 +41,7 @@ class Order_model extends CI_Model
            $tf_status='PickedUp';
          if($str[4]->tfm_status == 'PNP')
            $tf_status='PendingPickUp';
-           
+
        	   elseif($str[4]->tfm_status == 'DLI')
            $tf_status='Delivered';
        	   elseif($str[4]->tfm_status == 'OUT')
@@ -61,22 +61,22 @@ class Order_model extends CI_Model
          if(isset($str[2]->from_date) && !empty($str[2]->from_date))
          {
             $test_arr  = explode('-', $str[2]->from_date);
-            
-            if (checkdate($test_arr[1], $test_arr[2], $test_arr[0])) 
+
+            if (checkdate($test_arr[1], $test_arr[2], $test_arr[0]))
             {
-              
+
                 $from_date=$str[2]->from_date;
             }
          }
          if(isset($str[3]->to_date) && !empty($str[2]->to_date))
          {
             $test_arr  = explode('-', $str[3]->to_date);
-            if (checkdate($test_arr[1], $test_arr[2], $test_arr[0])) 
+            if (checkdate($test_arr[1], $test_arr[2], $test_arr[0]))
             {
                 $to_date=$str[3]->to_date;
             }
          }
-		
+
          if(isset($str[5]->date_rng) && !empty($str[5]->date_rng))
          {
             if($str[5]->date_rng=='today')
@@ -105,7 +105,7 @@ class Order_model extends CI_Model
               $from_date =  date('Y-m-d', strtotime('first day of last month'));
             }
          }
-		 
+
           $sort_order='purchase_date';
          if($orderby=='purchase_date')
          {
@@ -157,35 +157,35 @@ class Order_model extends CI_Model
 
         if(!empty($status))
         {
-          $sqlquery.= " AND order_status = '".$status."'"; 
-          $sqlcount.= " AND order_status = '".$status."'"; 
+          $sqlquery.= " AND order_status = '".$status."'";
+          $sqlcount.= " AND order_status = '".$status."'";
         }
         if(!empty($tf_status))
         {
-          $sqlquery.= " AND order_tfmstatus LIKE '%".$tf_status."%'"; 
-          $sqlcount.= " AND order_tfmstatus LIKE '%".$tf_status."%'"; 
+          $sqlquery.= " AND order_tfmstatus LIKE '%".$tf_status."%'";
+          $sqlcount.= " AND order_tfmstatus LIKE '%".$tf_status."%'";
         }
         if(!empty($srterm) || $srterm !='')
         {
-          $sqlquery.=" AND (tx.seller_sku LIKE '%".$srterm."%'  OR `asin` LIKE '%".$srterm."%' OR order_no LIKE '%".$srterm."%' OR buyer_name LIKE '%".$srterm."%' OR tx.itm_title LIKE '%".$srterm."%'   ) "; 
-          $sqlcount.=" AND (trx.seller_sku LIKE '%".$srterm."%' OR `asin` LIKE '%".$srterm."%' OR order_no LIKE '%".$srterm."%' OR buyer_name LIKE '%".$srterm."%' OR trx.itm_title LIKE '%".$srterm."%'   ) "; 
+          $sqlquery.=" AND (tx.seller_sku LIKE '%".$srterm."%'  OR `asin` LIKE '%".$srterm."%' OR order_no LIKE '%".$srterm."%' OR buyer_name LIKE '%".$srterm."%' OR tx.itm_title LIKE '%".$srterm."%'   ) ";
+          $sqlcount.=" AND (trx.seller_sku LIKE '%".$srterm."%' OR `asin` LIKE '%".$srterm."%' OR order_no LIKE '%".$srterm."%' OR buyer_name LIKE '%".$srterm."%' OR trx.itm_title LIKE '%".$srterm."%'   ) ";
         }
-        if(!empty($from_date))
-        {
-          $from_date=$from_date." 00:00:00";
-          $to_date=$to_date." 23:59:59";
+        // if(!empty($from_date))
+        // {
+        //   $from_date=$from_date." 00:00:00";
+        //   $to_date=$to_date." 23:59:59";
 
-          $sqlquery.=" AND  purchase_date >= ".$this->db->escape($from_date.' 00:00:00')." AND purchase_date <=".$this->db->escape($to_date.' 23:59:00');
-          $sqlcount.=" AND  purchase_date >= ".$this->db->escape($from_date.' 00:00:00')." AND purchase_date <=".$this->db->escape($to_date.' 23:59:00');
-        }
+        //   $sqlquery.=" AND  purchase_date >= ".$this->db->escape($from_date.' 00:00:00')." AND purchase_date <=".$this->db->escape($to_date.' 23:59:00');
+        //   $sqlcount.=" AND  purchase_date >= ".$this->db->escape($from_date.' 00:00:00')." AND purchase_date <=".$this->db->escape($to_date.' 23:59:00');
+        // }
 
         $sqlquery.=" ORDER BY ".$sort_order." ".$direction." LIMIT ".$offet.",".$limit;
-        
+
        //die($sqlquery);
         $query=$this->db->query($sqlquery) ;
         $data= $query->result_array();
         $countquery=$this->db->query($sqlcount);
-        
+
         $numrows= $countquery->result_array();
         if(count($data) > 0)
         {
@@ -193,15 +193,8 @@ class Order_model extends CI_Model
         }
         else
         {
-         $result_set=array('status_code'=>'0','status_text'=>'No data found'); 
+         $result_set=array('status_code'=>'0','status_text'=>'No data found');
         }
         return $result_set;
     }
-	
-	
-	
- 
-    
-
- 
 }

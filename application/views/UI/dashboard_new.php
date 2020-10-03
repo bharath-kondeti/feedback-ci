@@ -150,7 +150,7 @@
                   <div class="row">
                     <div class="col-12">
                       <div class="text-center">
-                        <h3 class="text-dark mt-1">{{revenue.order_count}}</h3>
+                        <h3 class="text-dark mt-1">{{revenue.revenue_total}}</h3>
                         <p class="text-muted mb-1 text-truncate">Total Revenue</p>
                       </div>
                     </div>
@@ -180,7 +180,7 @@
                   <div class="row">
                     <div class="col-12">
                       <div class="text-center">
-                        <h3 class="text-dark mt-1"><span>{{metrics.total_cmp}}</span></h3>
+                        <h3 class="text-dark mt-1"><span>{{metrics.sent_count}}</span></h3>
                         <p class="text-muted mb-1 text-truncate">Messages Sent</p>
                       </div>
                     </div>
@@ -211,7 +211,7 @@
                     <div class="col-12">
                       <div class="text-center">
                         <h3 class="mt-1 text-primary"><span >{{fbk_data.neutral_count}}</span></h3>
-                        <p class="text-muted mb-1 text-truncate">Netural Feeback</p>
+                        <p class="text-muted mb-1 text-truncate">Neutral Feeback</p>
                       </div>
                     </div>
                   </div>
@@ -385,7 +385,7 @@
                           <!--<th style="width:100px">PO Date</th>	 -->
                           <th style="width:300px">Title</th>
                           <!--<th>Price</th>     -->
-                          <th>Qty</th>
+                          <th style="text-align: center;">Qty</th>
                           <th>Status</th>
                         </tr>
                       </thead>
@@ -397,7 +397,7 @@
                           <!-- <td>{{ord.po_date}} </td>	-->
                           <td>{{ord.itm_title | limitTo:50}}</td>
                           <!-- <td>{{ord.itm_price}}</td> -->
-                          <td>{{ord.itm_qty}}</td>
+                          <td style="text-align: center;">{{ord.itm_qty}}</td>
                           <td><span ng-if="ord.order_status=='Shipped'" class="badge badge-success">{{ord.order_status}}</span>
                             <span ng-if="ord.order_status=='Canceled'"  class="badge badge-danger">{{ord.order_status}}</span>
                             <span ng-if="ord.order_status=='Pending'"  class="badge badge-info">{{ord.order_status}}</span>
@@ -456,7 +456,7 @@
                   <div class="row">
                     <div class="col-12">
                       <div class="text-center">
-                        <h3 class="text-dark mt-1">{{revenue.order_count}}</h3>
+                        <h3 class="text-dark mt-1">{{revenue.revenue_total}}</h3>
                         <p class="text-muted mb-1 text-truncate">Total Revenue</p>
                       </div>
                     </div>
@@ -486,7 +486,7 @@
                   <div class="row">
                     <div class="col-12">
                       <div class="text-center">
-                        <h3 class="text-dark mt-1"><span>{{metrics.total_cmp}}</span></h3>
+                        <h3 class="text-dark mt-1"><span>{{metrics.sent_count}}</span></h3>
                         <p class="text-muted mb-1 text-truncate">Messages Sent</p>
                       </div>
                     </div>
@@ -517,7 +517,7 @@
                     <div class="col-12">
                       <div class="text-center">
                         <h3 class="mt-1 text-primary"><span >{{reviews_data.neutral_count}}</span></h3>
-                        <p class="text-muted mb-1 text-truncate">Netural Reviews</p>
+                        <p class="text-muted mb-1 text-truncate">Neutral Reviews</p>
                       </div>
                     </div>
                   </div>
