@@ -2,13 +2,13 @@
 $baseurl=base_url();
 $base_url=base_url();
 ?>
- 
+
             <div class="wrapper" ng-controller='campaignCtrl'>
                 <div class="content">
 
                     <!-- Start Content-->
                     <div class="container-fluid">
-                        
+
                         <!-- start page title -->
                         <div class="row">
                             <div class="col-12">
@@ -21,64 +21,64 @@ $base_url=base_url();
                                     <h4 class="page-title">Template</h4>
                                 </div>
                             </div>
-                        </div>     
-                        <!-- end page title --> 
+                        </div>
+                        <!-- end page title -->
 
                         <div class="row" ng-show='show_dash_email==1'>
                             <div class="col-12">
                                 <div class="card">
                                     <div class="card-body">
-									
+
 									 <div class="col-sm-12">
                   <a href='#'   style="float:right" class="btn btn-info" ng-click='clear_template();togggle_view_email()' >Create  New Template</a>
                   </div><br> <br>
-				  
+
 				     <div class="panel-group" id="accordion" style="margin-top: 20px;">
         <div class="panel "  ng-class="'panel-default'" ng-repeat="idx in template_list track by $index">
             <div class="panel-heading" data-toggle="collapse" data-parent="#accordion"  href="#collapse{{$index}}" style="background:#fff;cursor: pointer; cursor: hand;">
-             
+
 			 <div class="row">
-                <div class="col-sm-8"> 
+                <div class="col-sm-8">
                       <div class="col-sm-12"><h3 style="margin-top: 2px;margin-bottom: 2px">{{idx.template_name}}</h3>
                 <p class="text-muted">{{idx.subject}}</p>
 
-                </div>  </div> 
+                </div>  </div>
                 <div class="col-sm-4" >
 			     <span  ng-click='edit_template(idx.template_id);togggle_view_email()' class="btn btn-xs btn-info" >Edit</span>
 			<span class="btn btn-xs btn-danger" style="margin-left:20px" ng-if="idx.is_default=='0'" ng-click='delete_template(idx.template_id,idx.is_default)' >Delete</span></div>
-              
-                
-                  
+
+
+
                   </div>
-				
+
                   </div>
                 </div>
-                
-              </div>  
 
-  
+              </div>
+
+
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-												  
-			  
+
+
 			  <div class="row" ng-show='show_dash_email==0'>
                             <div class="col-12">
                                 <div class="card">
                                     <div class="card-body">
 									 <div class="col-sm-12">
 			<a href="" style="margin-right:10px;font-size:15px;" id="menuToggle" class="pull-right  dropdown-toggle waves-effect waves-light" data-toggle="dropdown" aria-expanded="true" ng-click='togggle_view_email()'>Close</a>
-									
+
                       <p class="control-label col-sm-3" style="margin-top:5px;font-weight:700;margin-left:20px;" for="pwd">Template Name</p>
                      <div class="col-sm-9">
 			         <input type="text" class="form-control" style="margin-left:20px;" ng-model='tmplt.template_name' > </div>
-                         
-          <br> 
+
+          <br>
 		  <p class="control-label col-sm-3" style="margin-top:5px;font-weight:700;margin-left:20px;" for="pwd">Subject</p>
                      <div class="col-sm-9">
-           <input type='text' style="margin-left:20px;" class="form-control" ng-model='tmplt.subject'> </div>                            
-          <br> 
+           <input type='text' style="margin-left:20px;" class="form-control" ng-model='tmplt.subject'> </div>
+          <br>
 		   <div id='editor' ></div>  </div>
 		    <br>
 			 <br>
@@ -86,33 +86,33 @@ $base_url=base_url();
 			<div class="pull-right"> <br>
           <button class='btn btn-info'  style="float:right;margin:-40px 10px 10px 10px" ng-if="tmplt.is_default=='0'"  ng-click="save_template()">SAVE</button>
           </div>
-										
+
 								            	 </div>
                                             </div>
                                         </div>
                                     </div>
-									           
-									
-									
+
+
+
 									     </div>
                                       </div>
                                     </div>
-									
+
 <script type="text/javascript">
 
 crawlApp.factory("campaignFactory", function($http,$q,Upload) {
 //crawlApp.factory('campaignFactory', ['$http', '$q','limitToFilter', 'Upload',function($http,$q,limitToFilter,Upload) {
 
-   
+
    var get_data = function () {
         var dataset_path="<?php echo $baseurl.'manage_campaign/get_pre_data'?>";
         var deferred = $q.defer();
         var path =dataset_path;
-        
+
         $http.get(path)
         .success(function(data,status,headers,config){deferred.resolve(data);})
         .error(function(data, status, headers, config) { deferred.reject(status);});
-        
+
         return deferred.promise;
     };
 
@@ -122,13 +122,13 @@ crawlApp.factory("campaignFactory", function($http,$q,Upload) {
          return $http({
                       method: "post",
                       url: search_path,
-                      data: 
+                      data:
                       {
                         campaign_id:campaign_id
-                        
+
                       }
-                     }); 
-                   
+                     });
+
     };
      var get_products=function(country,brand,key_word,fc_code)
     {
@@ -136,32 +136,32 @@ crawlApp.factory("campaignFactory", function($http,$q,Upload) {
          return $http({
                       method: "post",
                       url: search_path,
-                      data: 
+                      data:
                       {
                         country:country,
                         brand:brand,
                         key_word:key_word,
 						fc_code:fc_code
                       }
-                     }); 
-                   
+                     });
+
     };
-	
+
 	var get_adhoc_products=function(country,brand,key_word,fc_code)
     {
        var search_path="<?php echo $baseurl.'manage_campaign/get_adhoc_products/';?>";
          return $http({
                       method: "post",
                       url: search_path,
-                      data: 
+                      data:
                       {
                         country:country,
                         brand:brand,
                         key_word:key_word,
 						fc_code:fc_code
                       }
-                     }); 
-                   
+                     });
+
     };
     var get_brands=function(country_code)
     {
@@ -169,26 +169,26 @@ crawlApp.factory("campaignFactory", function($http,$q,Upload) {
          return $http({
                       method: "post",
                       url: search_path,
-                      data: 
+                      data:
                       {
                         country_code:country_code
                       }
-                     }); 
-                   
+                     });
+
     };
-  
+
     var delete_campaign=function(campaign_id)
     {
        var search_path="<?php echo $baseurl.'manage_campaign/delete_campaign/';?>";
          return $http({
                       method: "post",
                       url: search_path,
-                      data: 
+                      data:
                       {
                         campaign_id:campaign_id
                       }
-                     }); 
-                   
+                     });
+
     };
     var edit_campaign=function(campaign_id)
     {
@@ -196,26 +196,26 @@ crawlApp.factory("campaignFactory", function($http,$q,Upload) {
          return $http({
                       method: "post",
                       url: search_path,
-                      data: 
+                      data:
                       {
                         campaign_id:campaign_id
                       }
-                     }); 
-                   
+                     });
+
     };
-	
+
 	var delete_adhoc_campaign=function(campaign_id)
     {
        var search_path="<?php echo $baseurl.'manage_campaign/delete_adhoc_campaign/';?>";
          return $http({
                       method: "post",
                       url: search_path,
-                      data: 
+                      data:
                       {
                         campaign_id:campaign_id
                       }
-                     }); 
-                   
+                     });
+
     };
     var edit_adhoc_campaign=function(campaign_id)
     {
@@ -223,27 +223,27 @@ crawlApp.factory("campaignFactory", function($http,$q,Upload) {
          return $http({
                       method: "post",
                       url: search_path,
-                      data: 
+                      data:
                       {
                         campaign_id:campaign_id
                       }
-                     }); 
-                   
+                     });
+
     };
-	
+
 	var change_adhoc_status=function(active,campaign_id)
     {
        var search_path="<?php echo $baseurl.'manage_campaign/change_adhoc_status/';?>";
          return $http({
                       method: "post",
                       url: search_path,
-                      data: 
+                      data:
                       {
                         w_status:active,
 						campaign_id:campaign_id,
                       }
-                     }); 
-                   
+                     });
+
     };
     var change_campaign_status=function(campaign_id,cur_sts)
     {
@@ -251,13 +251,13 @@ crawlApp.factory("campaignFactory", function($http,$q,Upload) {
          return $http({
                       method: "post",
                       url: search_path,
-                      data: 
+                      data:
                       {
                         campaign_id:campaign_id,
                         current_status:cur_sts
                       }
-                     }); 
-                   
+                     });
+
     };
     var preview_email=function(template_id,order_id)
     {
@@ -265,13 +265,13 @@ crawlApp.factory("campaignFactory", function($http,$q,Upload) {
          return $http({
                       method: "post",
                       url: search_path,
-                      data: 
+                      data:
                       {
                         template_id:template_id,
                         order_id:order_id
                       }
-                     }); 
-                   
+                     });
+
     };
 	var preview_email_new=function(template_id,order_id)
     {
@@ -279,13 +279,13 @@ crawlApp.factory("campaignFactory", function($http,$q,Upload) {
          return $http({
                       method: "post",
                       url: search_path,
-                      data: 
+                      data:
                       {
                         template_id:template_id,
                         order_id:order_id
                       }
-                     }); 
-                   
+                     });
+
     };
 	 var filter_data=function(frm_date,to_date,cmp_status)
     {
@@ -293,32 +293,32 @@ crawlApp.factory("campaignFactory", function($http,$q,Upload) {
          return $http({
                       method: "post",
                       url: search_path,
-                      data: 
+                      data:
                       {
                         from_date:frm_date,
                         to_date:to_date,
 						 cmp_status:cmp_status
-                        
+
                       }
-                     }); 
-                   
+                     });
+
     };
-	
+
 	var filter_adh_data=function(frm_date,to_date,cmp_status)
     {
        var search_path="<?php echo $baseurl.'manage_campaign/filter_adh_data/';?>";
          return $http({
                       method: "post",
                       url: search_path,
-                      data: 
+                      data:
                       {
                         from_date:frm_date,
                         to_date:to_date,
 						 cmp_status:cmp_status
-                        
+
                       }
-                     }); 
-                   
+                     });
+
     };
 	var change_status=function(active,campaign_id)
     {
@@ -326,13 +326,13 @@ crawlApp.factory("campaignFactory", function($http,$q,Upload) {
          return $http({
                       method: "post",
                       url: search_path,
-                      data: 
+                      data:
                       {
                         w_status:active,
 						campaign_id:campaign_id,
                       }
-                     }); 
-                   
+                     });
+
     };
 
     var test_email=function(template_id,order_id,email)
@@ -341,14 +341,14 @@ crawlApp.factory("campaignFactory", function($http,$q,Upload) {
          return $http({
                       method: "post",
                       url: search_path,
-                      data: 
+                      data:
                       {
                         template_id:template_id,
                         order_id:order_id,
                         email:email
                       }
-                     }); 
-                   
+                     });
+
     };
 
 var edit_template=function(template_id)
@@ -357,12 +357,12 @@ var edit_template=function(template_id)
          return $http({
                       method: "post",
                       url: search_path,
-                      data: 
+                      data:
                       {
                         template_id:template_id
                       }
-                     }); 
-                   
+                     });
+
     };
      var save_template=function(template_data)
     {
@@ -370,13 +370,13 @@ var edit_template=function(template_id)
          return $http({
                       method: "post",
                       url: search_path,
-                      data: 
+                      data:
                       {
-						
+
                         template_data:angular.toJson(template_data)
                       }
-                     }); 
-                   
+                     });
+
     };
     var delete_template=function(template_id)
     {
@@ -384,17 +384,17 @@ var edit_template=function(template_id)
          return $http({
                       method: "post",
                       url: search_path,
-                      data: 
+                      data:
                       {
                         template_id:template_id
                       }
-                     }); 
-                   
+                     });
+
     };
-	 
+
      var import_data=function(file,width,height,file2,width2,height2,file3,width3,height3,file4,width4,height4,file5,width5,height5)
     {
-	var p_path        =   "<?php echo $baseurl."manage_campaign/import_data/"?>";	
+	var p_path        =   "<?php echo $baseurl."manage_campaign/import_data/"?>";
        return Upload.upload({
           url: p_path,
           data: {
@@ -413,15 +413,15 @@ var edit_template=function(template_id)
 			  import_file5: file5,
 			  width5:width5,
 			  height5:height5
-			  
+
 			  }
          });
 
     }
-	
+
 	var import_data2=function(template_id,file,file2,file3,file4,file5)
     {
-	var p_path        =   "<?php echo $baseurl."manage_campaign/import_data2/"?>";	
+	var p_path        =   "<?php echo $baseurl."manage_campaign/import_data2/"?>";
        return Upload.upload({
           url: p_path,
           data: {
@@ -432,68 +432,68 @@ var edit_template=function(template_id)
 			  import_file3:file3,
 			  import_file4:file4,
 			  import_file5:file5
-			  
+
 			  }
          });
 
     }
-	
+
 	var import_data3=function(file,width,height)
     {
-	var p_path        =   "<?php echo $baseurl."manage_campaign/import_data3/"?>";	
+	var p_path        =   "<?php echo $baseurl."manage_campaign/import_data3/"?>";
        return Upload.upload({
           url: p_path,
           data: {
 			  import_file: file,
 			  width:width,
 			  height:height
-			  
+
 			  }
          });
 
     }
 	var import_data4=function(file,width,height)
     {
-	var p_path        =   "<?php echo $baseurl."manage_campaign/import_data4/"?>";	
+	var p_path        =   "<?php echo $baseurl."manage_campaign/import_data4/"?>";
        return Upload.upload({
           url: p_path,
           data: {
 			  import_file: file,
 			  width:width,
 			  height:height
-			  
+
 			  }
          });
 
     }
-	
+
 	var import_data5=function(file,width,height)
     {
-	var p_path        =   "<?php echo $baseurl."manage_campaign/import_data5/"?>";	
+	var p_path        =   "<?php echo $baseurl."manage_campaign/import_data5/"?>";
        return Upload.upload({
           url: p_path,
           data: {
 			  import_file: file,
 			  width:width,
 			  height:height
-			  
+
 			  }
          });
 
     }
-	
+
 		 var delete_attach_1=function(template_id)
     {
        var search_path="<?php echo $baseurl.'manage_campaign/delete_attach_1/';?>";
          return $http({
                       method: "post",
                       url: search_path,
-                      data: 
+                      data:
                       {
                         template_id:template_id
                       }
-                     }); 
-                   
+                     });
+
     };
 	var delete_attach_2=function(template_id)
     {
@@ -501,57 +501,57 @@ var edit_template=function(template_id)
          return $http({
                       method: "post",
                       url: search_path,
-                      data: 
+                      data:
                       {
                         template_id:template_id
                       }
-                     }); 
-                   
+                     });
+
     };
-	
+
 	var delete_attach_3=function(template_id)
     {
        var search_path="<?php echo $baseurl.'manage_campaign/delete_attach_3/';?>";
          return $http({
                       method: "post",
                       url: search_path,
-                      data: 
+                      data:
                       {
                         template_id:template_id
                       }
-                     }); 
-                   
+                     });
+
     };
-	
+
 	var delete_attach_4=function(template_id)
     {
        var search_path="<?php echo $baseurl.'manage_campaign/delete_attach_4/';?>";
          return $http({
                       method: "post",
                       url: search_path,
-                      data: 
+                      data:
                       {
                         template_id:template_id
                       }
-                     }); 
-                   
+                     });
+
     };
-	
+
 	var delete_attach_5=function(template_id)
     {
        var search_path="<?php echo $baseurl.'manage_campaign/delete_attach_5/';?>";
          return $http({
                       method: "post",
                       url: search_path,
-                      data: 
+                      data:
                       {
                         template_id:template_id
                       }
-                     }); 
-                   
+                     });
+
     };
-	
-	
+
+
 
 
   return {
@@ -587,7 +587,7 @@ var edit_template=function(template_id)
 	delete_attach_5 :delete_attach_5
   };
 });
-  crawlApp.controller("campaignCtrl",function campaignCtrl($window,$scope,campaignFactory,$sce,$q,$timeout,Upload) 
+  crawlApp.controller("campaignCtrl",function campaignCtrl($window,$scope,campaignFactory,$sce,$q,$timeout,Upload)
   {
        $scope.cmp={};
 	     $scope.cmp = {camp_trigger_day:'Y',camp_trigger_day_1 : 'N',camp_trigger_day_2 : 'N',camp_trigger_day_3 : 'N',camp_trigger_day_4 : 'N',camp_trigger_day_5 : 'N',camp_trigger_day_6 : 'N',camp_trigger_day_7 : 'N'};
@@ -597,7 +597,7 @@ var edit_template=function(template_id)
 	   $scope.tst2={};
        $scope.tb.currentTab='tab1';
 	   $scope.tmp.test_html=CKEDITOR.instances.editor.getData();
-	
+
 	   $scope.tst2.order_id='ALL';
 	   $scope.tst.order_id='ALL';
 	   $scope.img_width='200';
@@ -610,7 +610,7 @@ var edit_template=function(template_id)
 	   $scope.img_height4='100';
 	   $scope.img_width5='200';
 	   $scope.img_height5='100';
-	   
+
 	   $scope.cpn={};
        $scope.cpn.frm_date='';
        $scope.cpn.to_date='';
@@ -625,7 +625,7 @@ var edit_template=function(template_id)
 	   $scope.cmp.fc_code='ALL';
        $scope.cmp.prod_search='';
        $scope.cmp.camp_country='IN';
-     
+
        $scope.cmp.camp_sku='';
        $scope.cmp.camp_fulfill='ALL';
        $scope.cmp.camp_type='1';
@@ -661,13 +661,13 @@ var edit_template=function(template_id)
        $scope.selectedProduct=[];
        $scope.product_list=[];
        $scope.checkStatus='N';
-    
+
         $scope.togggle_view=function()
         {
           if($scope.show_dash==0)
           {
             $scope.show_dash=1;
-			 
+
 		}
           else
           {
@@ -675,14 +675,14 @@ var edit_template=function(template_id)
           }
           // console.log($scope.show_dash);
         }
-		
+
 		$scope.change_instant_value=function()
         {
           if($scope.cmp.camp_trigger==1)
           {
 			  console.log('works');
 			  console.log($scope.cmp.camp_ord_in);
-			   
+
             $scope.cmp.camp_ord_in='0';
 			console.log('after');
 			     console.log($scope.cmp.camp_ord_in);
@@ -694,91 +694,91 @@ var edit_template=function(template_id)
           }
           // console.log($scope.show_dash);
         }
-		
-		
+
+
 		$scope.togggle_tab2=function()
         {
           if($scope.cmp.camp_name == '' ){
-     
+
               swal("Please update Campaign Details");
 			   $scope.tb.currentTab='tab1';
-			    $(l2).addClass('disabled'); 
+			    $(l2).addClass('disabled');
 			    $(l3).addClass('disabled');
-                $(l4).addClass('disabled'); 
+                $(l4).addClass('disabled');
 			    $(l5).addClass('disabled');
-                $(l6).addClass('disabled'); 				
-			  
+                $(l6).addClass('disabled');
+
             }
 			 else if($scope.cmp.camp_desc == ''){
-     
+
               swal("Please update Campaign Details");
 			   $scope.tb.currentTab='tab1';
-			    $(l2).addClass('disabled'); 
+			    $(l2).addClass('disabled');
 			    $(l3).addClass('disabled');
-                $(l4).addClass('disabled'); 
+                $(l4).addClass('disabled');
 			    $(l5).addClass('disabled');
-                $(l6).addClass('disabled'); 				
-			  
+                $(l6).addClass('disabled');
+
             }
           else
           {
-          $scope.tb.currentTab='tab2'; 
+          $scope.tb.currentTab='tab2';
            $(l2).removeClass('disabled');
-           $(l3).removeClass('disabled'); 		   
+           $(l3).removeClass('disabled');
           }
-          
+
         }
 		$scope.togggle_tab3=function()
         {
 		if($scope.selectedProduct.length > 0)
 		{
-		$scope.tb.currentTab='tab4'; 
+		$scope.tb.currentTab='tab4';
 		   $(l3).removeClass('disabled');
-           $(l4).removeClass('disabled'); 		
+           $(l4).removeClass('disabled');
 		}
 		else
 		{
 			 swal("Please select some products");
 			   $scope.tb.currentTab='tab3';
 			    $(l3).addClass('disabled');
-			    $(l4).addClass('disabled'); 
+			    $(l4).addClass('disabled');
 			    $(l5).addClass('disabled');
 				$(l6).addClass('disabled');
 		}
-			
+
 		}
-		
+
 		$scope.togggle_tab4=function()
         {
-			 
-			 
-			$scope.tb.currentTab='tab5'; 
-			 $(l3).removeClass('disabled'); 
+
+
+			$scope.tb.currentTab='tab5';
+			 $(l3).removeClass('disabled');
              $(l4).removeClass('disabled');
-             $(l5).removeClass('disabled'); 			 
-			  
+             $(l5).removeClass('disabled');
+
 		}
-		
-		
+
+
 		$scope.togggle_tab5=function()
         {
 		if(parseInt($scope.tmp) == 0)
 		{
 	    swal("Please Select a template to proceed");
 			   $scope.tb.currentTab='tab5';
-			   
+
 			    $(l5).addClass('disabled');
-                $(l6).addClass('disabled');				
+                $(l6).addClass('disabled');
 		}
 		else
 		{
-		$scope.tb.currentTab='tab6'; 
+		$scope.tb.currentTab='tab6';
            $(l5).removeClass('disabled');
            $(l6).removeClass('disabled');
-		   
+
 		}
 		}
-		
+
 		$scope.statusCheck_new=function()
       {
            console.log("checkStatus");
@@ -786,7 +786,7 @@ var edit_template=function(template_id)
 
            if($scope.cmp.camp_trigger_day=='Y')
            {
-			
+
 			$scope.cmp = {camp_trigger_day:'Y',camp_trigger_day_1 : 'Y',camp_trigger_day_2 : 'Y',camp_trigger_day_3 : 'Y',camp_trigger_day_4 : 'Y',camp_trigger_day_5 : 'Y',camp_trigger_day_6: 'Y',camp_trigger_day_7 : 'Y',cpgn_id:$scope.cmp.cpgn_id,camp_name:$scope.cmp.camp_name,camp_desc:$scope.cmp.camp_desc,camp_brand:$scope.cmp.camp_brand,fc_code:$scope.cmp.fc_code,prod_search:$scope.cmp.prod_search,camp_country:$scope.cmp.camp_country,camp_fulfill:$scope.cmp.camp_fulfill,camp_type:$scope.cmp.camp_type,camp_template:$scope.cmp.camp_template,camp_trigger:$scope.cmp.camp_trigger,camp_days:$scope.cmp.camp_days,
 camp_ord_in:$scope.cmp.camp_ord_in,camp_hour:$scope.cmp.camp_hour,camp_min:$scope.cmp.camp_min,camp_am_pm:$scope.cmp.camp_am_pm,camp_coupon:$scope.cmp.camp_coupon,
 camp_review:$scope.cmp.camp_review,feedback_status:$scope.cmp.feedback_status,template_id:$scope.cmp.template_id,tmp:$scope.cmp.template_id,template_name:$scope.cmp.template_name,template_content:$scope.cmp.template_content,subject:$scope.cmp.subject};
@@ -794,14 +794,14 @@ camp_review:$scope.cmp.camp_review,feedback_status:$scope.cmp.feedback_status,te
 		  }
            else  if($scope.cmp.camp_trigger_day=='N')
            {
-			
+
 			$scope.cmp = {camp_trigger_day:'N',camp_trigger_day_1 : 'N',camp_trigger_day_2 : 'N',camp_trigger_day_3 : 'N',camp_trigger_day_4 : 'N',camp_trigger_day_5 : 'N',camp_trigger_day_6: 'N',camp_trigger_day_7 : 'N',cpgn_id:$scope.cmp.cpgn_id,camp_name:$scope.cmp.camp_name,camp_desc:$scope.cmp.camp_desc,camp_brand:$scope.cmp.camp_brand,fc_code:$scope.cmp.fc_code,prod_search:$scope.cmp.prod_search,camp_country:$scope.cmp.camp_country,camp_fulfill:$scope.cmp.camp_fulfill,camp_type:$scope.cmp.camp_type,camp_template:$scope.cmp.camp_template,camp_trigger:$scope.cmp.camp_trigger,camp_days:$scope.cmp.camp_days,
 camp_ord_in:$scope.cmp.camp_ord_in,camp_hour:$scope.cmp.camp_hour,camp_min:$scope.cmp.camp_min,camp_am_pm:$scope.cmp.camp_am_pm,camp_coupon:$scope.cmp.camp_coupon,
 camp_review:$scope.cmp.camp_review,feedback_status:$scope.cmp.feedback_status,template_id:$scope.cmp.template_id,tmp:$scope.cmp.template_id,template_name:$scope.cmp.template_name,template_content:$scope.cmp.template_content,subject:$scope.cmp.subject};
 	  //$scope.tmp=$scope.cmp.template_id;
                              // $scope.load_template($scope.cmp.template_id);
-		  }	
-         
+		  }
+
       }
             $scope.statusCheck_new2=function()
       {
@@ -810,7 +810,7 @@ camp_review:$scope.cmp.camp_review,feedback_status:$scope.cmp.feedback_status,te
 
           if($scope.cmp.camp_trigger_day_1=='N' || $scope.cmp.camp_trigger_day_2=='N' || $scope.cmp.camp_trigger_day_3=='N' || $scope.cmp.camp_trigger_day_4=='N' || $scope.cmp.camp_trigger_day_5=='N' || $scope.cmp.camp_trigger_day_6=='N' ||  $scope.cmp.camp_trigger_day_7=='N')
            {
-			
+
 			$scope.cmp = {camp_trigger_day:'N',camp_trigger_day_1:$scope.cmp.camp_trigger_day_1,camp_trigger_day_2:$scope.cmp.camp_trigger_day_2,camp_trigger_day_3:$scope.cmp.camp_trigger_day_3,camp_trigger_day_4:$scope.cmp.camp_trigger_day_4,camp_trigger_day_5:$scope.cmp.camp_trigger_day_5,camp_trigger_day_6:$scope.cmp.camp_trigger_day_6,camp_trigger_day_7:$scope.cmp.camp_trigger_day_7,cpgn_id:$scope.cmp.cpgn_id,camp_name:$scope.cmp.camp_name,camp_desc:$scope.cmp.camp_desc,camp_brand:$scope.cmp.camp_brand,fc_code:$scope.cmp.fc_code,prod_search:$scope.cmp.prod_search,camp_country:$scope.cmp.camp_country,camp_fulfill:$scope.cmp.camp_fulfill,camp_type:$scope.cmp.camp_type,camp_template:$scope.cmp.camp_template,camp_trigger:$scope.cmp.camp_trigger,camp_days:$scope.cmp.camp_days,
 camp_ord_in:$scope.cmp.camp_ord_in,camp_hour:$scope.cmp.camp_hour,camp_min:$scope.cmp.camp_min,camp_am_pm:$scope.cmp.camp_am_pm,camp_coupon:$scope.cmp.camp_coupon,
 camp_review:$scope.cmp.camp_review,feedback_status:$scope.cmp.feedback_status,template_id:$scope.cmp.template_id,tmp:$scope.cmp.template_id,template_name:$scope.cmp.template_name,template_content:$scope.cmp.template_content,subject:$scope.cmp.subject};
@@ -819,7 +819,7 @@ camp_review:$scope.cmp.camp_review,feedback_status:$scope.cmp.feedback_status,te
 		   }
 		   else if($scope.cmp.camp_trigger_day_1=='Y' && $scope.cmp.camp_trigger_day_2=='Y' && $scope.cmp.camp_trigger_day_3=='Y' && $scope.cmp.camp_trigger_day_4=='Y' && $scope.cmp.camp_trigger_day_5=='Y' && $scope.cmp.camp_trigger_day_6=='Y' &&  $scope.cmp.camp_trigger_day_7=='Y')
            {
-			
+
 			$scope.cmp = {camp_trigger_day:'Y',camp_trigger_day_1:$scope.cmp.camp_trigger_day_1,camp_trigger_day_2:$scope.cmp.camp_trigger_day_2,camp_trigger_day_3:$scope.cmp.camp_trigger_day_3,camp_trigger_day_4:$scope.cmp.camp_trigger_day_4,camp_trigger_day_5:$scope.cmp.camp_trigger_day_5,camp_trigger_day_6:$scope.cmp.camp_trigger_day_6,camp_trigger_day_7:$scope.cmp.camp_trigger_day_7,cpgn_id:$scope.cmp.cpgn_id,camp_name:$scope.cmp.camp_name,camp_desc:$scope.cmp.camp_desc,camp_brand:$scope.cmp.camp_brand,fc_code:$scope.cmp.fc_code,prod_search:$scope.cmp.prod_search,camp_country:$scope.cmp.camp_country,camp_fulfill:$scope.cmp.camp_fulfill,camp_type:$scope.cmp.camp_type,camp_template:$scope.cmp.camp_template,camp_trigger:$scope.cmp.camp_trigger,camp_days:$scope.cmp.camp_days,
 camp_ord_in:$scope.cmp.camp_ord_in,camp_hour:$scope.cmp.camp_hour,camp_min:$scope.cmp.camp_min,camp_am_pm:$scope.cmp.camp_am_pm,camp_coupon:$scope.cmp.camp_coupon,
 camp_review:$scope.cmp.camp_review,feedback_status:$scope.cmp.feedback_status,template_id:$scope.cmp.template_id,tmp:$scope.cmp.template_id,template_name:$scope.cmp.template_name,template_content:$scope.cmp.template_content,subject:$scope.cmp.subject};
@@ -828,7 +828,7 @@ camp_review:$scope.cmp.camp_review,feedback_status:$scope.cmp.feedback_status,te
 		   }
            else
            {
-			
+
 			$scope.cmp = {camp_trigger_day:$scope.cmp.camp_trigger_day,camp_trigger_day_1:$scope.cmp.camp_trigger_day_1,camp_trigger_day_2:$scope.cmp.camp_trigger_day_2,camp_trigger_day_3:$scope.cmp.camp_trigger_day_3,camp_trigger_day_4:$scope.cmp.camp_trigger_day_4,camp_trigger_day_5:$scope.cmp.camp_trigger_day_5,
 			camp_trigger_day_6:$scope.cmp.camp_trigger_day_6,camp_trigger_day_7:$scope.cmp.camp_trigger_day_7,cpgn_id:$scope.cmp.cpgn_id,camp_name:$scope.cmp.camp_name,camp_desc:$scope.cmp.camp_desc,camp_brand:$scope.cmp.camp_brand,fc_code:$scope.cmp.fc_code,prod_search:$scope.cmp.prod_search,camp_country:$scope.cmp.camp_country,camp_fulfill:$scope.cmp.camp_fulfill,camp_type:$scope.cmp.camp_type,camp_template:$scope.cmp.camp_template,camp_trigger:$scope.cmp.camp_trigger,camp_days:$scope.cmp.camp_days,
 camp_ord_in:$scope.cmp.camp_ord_in,camp_hour:$scope.cmp.camp_hour,camp_min:$scope.cmp.camp_min,camp_am_pm:$scope.cmp.camp_am_pm,camp_coupon:$scope.cmp.camp_coupon,
@@ -838,9 +838,9 @@ camp_review:$scope.cmp.camp_review,feedback_status:$scope.cmp.feedback_status,te
 			// $scope.tmp=$scope.cmp.template_id;
                             ;
            }
-		   
-      }	  
-	  
+
+      }
+
         $scope.clear_campaign_data=function()
         {
 		  $scope.clear_all();
@@ -850,12 +850,12 @@ camp_review:$scope.cmp.camp_review,feedback_status:$scope.cmp.feedback_status,te
 		  $scope.tmp='0';
           $scope.template_content='';
 		  $scope.tst.order_id='ALL';
-		  
-		  
+
+
 		  //$scope.cmp={};
           $scope.cmp = {camp_trigger_day:'Y',camp_trigger_day_1 : 'Y',camp_trigger_day_2 : 'Y',camp_trigger_day_3 : 'Y',camp_trigger_day_4 : 'Y',camp_trigger_day_5 : 'Y',camp_trigger_day_6 : 'Y',camp_trigger_day_7 : 'Y',cpgn_id:'',camp_days:'',camp_ord_in:'0'};
-		  
-          $scope.cmp.cpgn_id='';	
+
+          $scope.cmp.cpgn_id='';
           $scope.cmp.camp_name='';
           $scope.cmp.camp_desc='';
           $scope.cmp.camp_brand='ALL';
@@ -876,24 +876,24 @@ camp_review:$scope.cmp.camp_review,feedback_status:$scope.cmp.feedback_status,te
           $scope.cmp.camp_coupon='';
           $scope.cmp.camp_review='';
 		  $scope.cmp.feedback_status='1';
-		 
+
 		   $scope.tb.currentTab='tab1';
-		  
-		        $(l2).addClass('disabled'); 
+
+		        $(l2).addClass('disabled');
 			    $(l3).addClass('disabled');
-                $(l4).addClass('disabled'); 
+                $(l4).addClass('disabled');
 			    $(l5).addClass('disabled');
-                $(l6).addClass('disabled'); 				
+                $(l6).addClass('disabled');
         }
-		
-       
+
+
         $scope.open_campaign_ui=function()
         {
           $('#menuToggle').addClass('active');
                           $('body').addClass(' body-push-toleft');
                           $('#theMenu').addClass('menu-open');
         }
-		
+
         $scope.load_template=function(template_id)
         {
           if(template_id != '0')
@@ -904,9 +904,9 @@ camp_review:$scope.cmp.camp_review,feedback_status:$scope.cmp.feedback_status,te
             {
               if($scope.template_list[i].template_id==template_id)
               {
-                $scope.template_content=$sce.trustAsHtml($scope.template_list[i].template_content);   
+                $scope.template_content=$sce.trustAsHtml($scope.template_list[i].template_content);
               }
-            }  
+            }
           }
           //CKEDITOR.instances.editor.setData($scope.tmp);
         }
@@ -918,7 +918,7 @@ camp_review:$scope.cmp.camp_review,feedback_status:$scope.cmp.feedback_status,te
             {
               if($scope.template_list[i].template_id==$scope.tmp)
               {
-                $scope.tst.email_content=$sce.trustAsHtml($scope.template_list[i].template_content);   
+                $scope.tst.email_content=$sce.trustAsHtml($scope.template_list[i].template_content);
                 $scope.tst.template_id=$scope.tmp;
                 $scope.tst.subject=$scope.template_list[i].subject;
 			    $("#Preview_email_box").modal('show');
@@ -939,7 +939,7 @@ camp_review:$scope.cmp.camp_review,feedback_status:$scope.cmp.feedback_status,te
           if($scope.selectedProduct.length > 0)
           {
                $scope.block_site();
-    
+
                file=$scope.cmp.camp_attachment;
                   var upload = Upload.upload({
                   url: '<?php echo $baseurl.'manage_campaign/create_campaign/';?>',
@@ -958,7 +958,7 @@ camp_review:$scope.cmp.camp_review,feedback_status:$scope.cmp.feedback_status,te
                     file.result = response.data;
 
                     });
-                    
+
                   }
                   if(response.data.status_code == '1')
                    {
@@ -977,14 +977,14 @@ camp_review:$scope.cmp.camp_review,feedback_status:$scope.cmp.feedback_status,te
                   if(angular.isDefined(file))
                   file.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
                 });
-           } 
+           }
            else
            {
               swal("Error!","No product has been selected ",'error');
            }
 
         }
-		
+
 		//$scope.save_template=function()
         //{
         //  //$scope.cmp.camp_template=CKEDITOR.instances.editor.getData();
@@ -1006,7 +1006,7 @@ camp_review:$scope.cmp.camp_review,feedback_status:$scope.cmp.feedback_status,te
         //          data: {
         //                  attached_file: file,
         //                  template_data:angular.toJson($scope.tmplt)
-        //                  
+        //
         //                },
         //        });
         //
@@ -1018,12 +1018,12 @@ camp_review:$scope.cmp.camp_review,feedback_status:$scope.cmp.feedback_status,te
         //            file.result = response.data;
         //
         //            });
-        //            
+        //
         //          }
         //          if(response.data.status_code == '1')
         //           {
         //             swal('Success!',response.data.status_text,'success');
-        //            $scope.get_predata(); 
+        //            $scope.get_predata();
         //           }
         //           else
         //           {
@@ -1037,7 +1037,7 @@ camp_review:$scope.cmp.camp_review,feedback_status:$scope.cmp.feedback_status,te
         //          if(angular.isDefined(file))
         //          file.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
         //        });
-        //   } 
+        //   }
         // }
 
         $scope.fetch_user_details=function(idx,inx)
@@ -1045,31 +1045,31 @@ camp_review:$scope.cmp.camp_review,feedback_status:$scope.cmp.feedback_status,te
             $scope.history_index=inx;
             $scope.camp_cust_list=[];
             var blk='#collapse'+inx;
-            $(blk).block({message:null  }); 
+            $(blk).block({message:null  });
             campaignFactory.get_customer_status(idx.campaign_id)
               .success(
                       function( html )
                       {
-                           $(blk).unblock(); 
+                           $(blk).unblock();
                            if(html.status_code=='0')
                            {
                              swal('Error!',html.status_text,'error');
                            }
                            if(html.status_code == '1')
-                           { 
-                             $scope.camp_cust_list=html.payload; 
+                           {
+                             $scope.camp_cust_list=html.payload;
                              // console.log($scope.camp_cust_list);
                              $scope.processed_count=html.processed_count;
                              $scope.total_count=html.total_count;
                            }
                       }
                 )
-           
+
         }
         $scope.load_product=function()
         {
             var blk='#product_list';
-            $(blk).block({message:'Loading Product'  }); 
+            $(blk).block({message:'Loading Product'  });
             // $scope.clear_all();
             // $scope.selectedProduct=[];
             $scope.cmp.camp_country='IN';
@@ -1078,47 +1078,47 @@ camp_review:$scope.cmp.camp_review,feedback_status:$scope.cmp.feedback_status,te
               .success(
                       function( html )
                       {
-                           $(blk).unblock(); 
+                           $(blk).unblock();
                            if(html.status_code=='0')
                            {
                              swal('Error!',html.status_text,'error');
                            }
                            if(html.status_code == '1')
-                           { 
+                           {
                              console.log("LOAD PRODUCT");
                              console.log($scope.selectedProduct);
-                             $scope.product_list=html.payload; 
+                             $scope.product_list=html.payload;
                              console.log($scope.selectedProduct);
                              console.log("LOAD PRODUCT ENDs");
                            }
                       }
                 )
-           
+
         }
         $scope.load_country_wise_brand=function()
         {
           $scope.cmp.camp_country='IN';
             var blk='#product_list';
-            $(blk).block({message:'Loading Product'}); 
+            $(blk).block({message:'Loading Product'});
             campaignFactory.get_brands($scope.cmp.camp_country)
               .success(
                       function( html )
                       {
-                           $(blk).unblock(); 
+                           $(blk).unblock();
                            if(html.status_code=='0')
                            {
                              swal('Error!',html.status_text,'error');
                            }
                            if(html.status_code == '1')
-                           { 
-                             $scope.brand_list=html.brand_list; 
+                           {
+                             $scope.brand_list=html.brand_list;
                              $scope.product_list=html.product_list;
                            }
                       }
                 )
-           
+
         }
-    
+
         $scope.preview_email=function()
         {
             $scope.block_site();
@@ -1132,14 +1132,14 @@ camp_review:$scope.cmp.camp_review,feedback_status:$scope.cmp.feedback_status,te
                              swal('Error!',html.status_text,'error');
                            }
                            if(html.status_code == '1')
-                           { 
+                           {
                              $scope.tst.email_content=$sce.trustAsHtml(html.email_content);
                            }
                       }
                 )
-           
+
         }
-		
+
 		 $scope.preview_email_new=function()
         {
             $scope.block_site();
@@ -1154,16 +1154,16 @@ camp_review:$scope.cmp.camp_review,feedback_status:$scope.cmp.feedback_status,te
                              swal('Error!',html.status_text,'error');
                            }
                            if(html.status_code == '1')
-                           { 
+                           {
                              $scope.tmplt.template_content_html=$sce.trustAsHtml(html.email_content);
                            }
                       }
                 )
-           
+
         }
         $scope.test_email=function()
         {
-            
+
             $scope.block_site();
             campaignFactory.test_email($scope.tst.template_id,$scope.tst.order_id,$scope.tst.email)
               .success(
@@ -1174,27 +1174,27 @@ camp_review:$scope.cmp.camp_review,feedback_status:$scope.cmp.feedback_status,te
               // console.log(html);
                            if(html.status_code=='0')
                            {
-                // console.log("TRUE - 0 "); 
+                // console.log("TRUE - 0 ");
                              swal('Error!',html.status_text,'error');
                            }
                            if(html.status_code == '1')
-                           { 
-             // console.log("TRUE - 1 "); 
-                            swal('Success!',html.status_text,'success'); 
+                           {
+             // console.log("TRUE - 1 ");
+                            swal('Success!',html.status_text,'success');
                            }
                       }
                 )
-           
+
         }
        $scope.edit_campaign=function(campaign_id)
         {
-           $scope.block_site(); 
-		   $scope.tst.order_id='ALL'; 
-            $(l2).removeClass('disabled'); 
+           $scope.block_site();
+		   $scope.tst.order_id='ALL';
+            $(l2).removeClass('disabled');
 	                         $(l3).removeClass('disabled');
-                             $(l4).removeClass('disabled'); 
+                             $(l4).removeClass('disabled');
 	                         $(l5).removeClass('disabled');
-                             $(l6).removeClass('disabled'); 							 
+                             $(l6).removeClass('disabled');
             campaignFactory.edit_campaign(campaign_id)
               .success(
                       function( html )
@@ -1205,7 +1205,7 @@ camp_review:$scope.cmp.camp_review,feedback_status:$scope.cmp.feedback_status,te
                              swal('Error!',html.status_text,'error');
                            }
                            if(html.status_code == '1')
-                           { 
+                           {
                              $scope.cmp=html.campaign_detail[0];
                              $scope.cmp.camp_hour=parseInt($scope.cmp.camp_hour);
                              $scope.cmp.camp_days=parseInt($scope.cmp.camp_days);
@@ -1222,16 +1222,16 @@ camp_review:$scope.cmp.camp_review,feedback_status:$scope.cmp.feedback_status,te
                              {
                                for(i=0;i< html.selected_product.length;i++)
                                 {
-                                  $scope.addToArray($scope.selectedProduct,html.selected_product[i]);  
+                                  $scope.addToArray($scope.selectedProduct,html.selected_product[i]);
                                 }
-                             }   
-                            
+                             }
+
                              // console.log(html.selected_product);
                              $scope.show_dash=0;
                            }
                       }
                 )
-           
+
         }
  $scope.delete_campaign=function(campaign_id)
         {
@@ -1258,30 +1258,30 @@ camp_review:$scope.cmp.camp_review,feedback_status:$scope.cmp.feedback_status,te
                              $scope.campList=html.campaign_list;
                            }
                            if(html.status_code == '1')
-                           { 
+                           {
                             swal('Success!',html.status_text,'success');
                              $scope.campList=html.campaign_list;
                            }
                       }
-                );              
-                    
+                );
+
                 } else {
                     swal("Cancelled", "Delete cancelled:)", "error");
                 }
             });
-         
-           
+
+
         }
-		
-		
+
+
 		$scope.change_status=function(is_active,campaign_id)
         {
 			if(is_active==1)
 			{
-		    var sts='Activate';		
+		    var sts='Activate';
 			}else
 			{
-				 var sts='Deactivate';	
+				 var sts='Deactivate';
 			}
 			  var msg= "Are you sure to "+sts+" campaign?";
            swal({
@@ -1304,23 +1304,23 @@ camp_review:$scope.cmp.camp_review,feedback_status:$scope.cmp.feedback_status,te
                            if(html.status_code=='0')
                            {
                              swal('Error!',html.status_text,'error');
-                             
+
                            }
                            if(html.status_code == '1')
-                           { 
+                           {
                             swal('Success!',html.status_text,'success');
                             $scope.campList=html.campaign_list;
                            }
                       }
-                );              
-                    
+                );
+
                 } else {
                     swal("Cancelled", "cancelled:)", "error");
 					$scope.campList=html.campaign_list;
                 }
             });
-         
-           
+
+
         }
 
      $scope.change_campaign_status=function(campaign_id,cur_sts,sts)
@@ -1349,33 +1349,33 @@ camp_review:$scope.cmp.camp_review,feedback_status:$scope.cmp.feedback_status,te
                              // $scope.campList=html.campaign_list;
                            }
                            if(html.status_code == '1')
-                           { 
+                           {
                             swal('Success!',html.status_text,'success');
                              $scope.campList=html.campaign_list;
                            }
                       }
-                );              
-                    
+                );
+
                 } else {
                     swal("Cancelled", "cancelled:)", "error");
                 }
             });
-         
-           
-        }
-    
 
-       
+
+        }
+
+
+
       $scope.block_site=function()
         {
-            $.blockUI({ css: { 
-                border: 'none', 
-                padding: '3px', 
-                backgroundColor: '#000', 
-                '-webkit-border-radius': '10px', 
-                '-moz-border-radius': '10px', 
-                opacity: .5, 
-                color: '#fff' 
+            $.blockUI({ css: {
+                border: 'none',
+                padding: '3px',
+                backgroundColor: '#000',
+                '-webkit-border-radius': '10px',
+                '-moz-border-radius': '10px',
+                opacity: .9,
+                color: '#fff'
             },baseZ:9999});
 
         }
@@ -1390,12 +1390,12 @@ camp_review:$scope.cmp.camp_review,feedback_status:$scope.cmp.feedback_status,te
                                 {
 									 $.unblockUI();
                                     $scope.campList=response.campaign_list;
-                                    $scope.adhoccampList=response.adhoc_campaign_list; 									
+                                    $scope.adhoccampList=response.adhoc_campaign_list;
                                     $scope.brand_list=response.brand_list;
 									 $scope.recent_orders=response.recent_orders;
                                     $scope.country_list=response.country_list;
                                     $scope.template_list=response.template_list;
-                                    
+
 								 //console.log($scope.tmp);
                                     $scope.metrics=response.metrics;
                                     //$scope.fbk_data=response.fbk_data[0];
@@ -1404,60 +1404,60 @@ camp_review:$scope.cmp.camp_review,feedback_status:$scope.cmp.feedback_status,te
                                     // console.log('Product LIST');
                                     // console.log($scope.product_list);
                                     // console.log(response.product_list);
-                                    
+
                                     // if(response.product_list.length > 0)
                                     //  {
                                     //    for(i=0;i< response.product_list.length;i++)
                                     //     {
-                                    //       $scope.addToArray($scope.product_list,response.product_list[i]);  
+                                    //       $scope.addToArray($scope.product_list,response.product_list[i]);
                                     //     }
                                     //  }
                                     //  console.log('Product LIST');
                                     // console.log($scope.product_list);
                                     // console.log(response.product_list);
-                                    
 
- 
-                                    
+
+
+
                                     // console.log($scope.fbk_data);
                                     //$scope.graph_data=response.graph_data;
                                     // $scope.draw_graph(response.graph_data);
-			
-                                    
+
+
                                 }
                                 else
                                 {
                                  swal('Error!',response.status_text,'error');
                                 }
-                             }, 
+                             },
                              function(reason)
                              {
                                $scope.serverErrorHandler(reason);
                              }
                           );
-        }        
-        $scope.get_predata();     
+        }
+        $scope.get_predata();
 
   $scope.select_all=function()
    {
-      
-      
+
+
       for(i=0;i< $scope.product_list.length;i++)
       {
-        $scope.addToArray($scope.selectedProduct,$scope.product_list[i]);  
+        $scope.addToArray($scope.selectedProduct,$scope.product_list[i]);
       }
       $scope.selectcount=$scope.selectedProduct.length;
       $scope.totalcount=$scope.total;
-      
+
    }
 
    $scope.clear_all=function()
    {
       $scope.clearArray($scope.selectedProduct);
    }
-   
-  
-   
+
+
+
    $scope.checkExist=function(arr,item)
    {
       if (angular.isArray(arr)) {
@@ -1473,7 +1473,7 @@ camp_review:$scope.cmp.camp_review,feedback_status:$scope.cmp.feedback_status,te
    $scope.addToArray=function(arr,item)
    {
       arr = angular.isArray(arr) ? arr : [];
-      if(!$scope.checkExist(arr, item)) 
+      if(!$scope.checkExist(arr, item))
       {
           arr.push(item);
       }
@@ -1481,18 +1481,18 @@ camp_review:$scope.cmp.camp_review,feedback_status:$scope.cmp.feedback_status,te
    $scope.removeFromArray=function(arr,item)
    {
       arr = angular.isArray(arr) ? arr : [];
-      for (var i = arr.length; i--;) 
+      for (var i = arr.length; i--;)
       {
-        if (angular.equals(arr[i], item)) 
+        if (angular.equals(arr[i], item))
         {
-          arr.splice(i, 1); 
+          arr.splice(i, 1);
         }
       }
    }
 
    $scope.clearArray=function(arr)
    {
-     if (angular.isArray(arr)) 
+     if (angular.isArray(arr))
      {
        for (var i = arr.length; i--;)
         {
@@ -1502,7 +1502,7 @@ camp_review:$scope.cmp.camp_review,feedback_status:$scope.cmp.feedback_status,te
    }
 
    $scope.$watch("selectedProduct.length",
-           function(newValue, oldValue) 
+           function(newValue, oldValue)
            {
              if(newValue < $scope.product_list.length)
              {
@@ -1516,7 +1516,7 @@ camp_review:$scope.cmp.camp_review,feedback_status:$scope.cmp.feedback_status,te
        // }
        $scope.statusCheck=function()
       {
-       
+
            // console.log("checkStatus");
            // console.log($scope.checkStatus);
 
@@ -1528,7 +1528,7 @@ camp_review:$scope.cmp.camp_review,feedback_status:$scope.cmp.feedback_status,te
            {
             $scope.clear_all();
            }
-      }        
+      }
 
 
 
@@ -1539,7 +1539,7 @@ camp_review:$scope.cmp.camp_review,feedback_status:$scope.cmp.feedback_status,te
       if($scope.direction=='ASC')
         $scope.direction='DESC';
       else if($scope.direction=='DESC')
-        $scope.direction='ASC';  
+        $scope.direction='ASC';
              $scope.block_site();
                 campaignFactory.filter_data($scope.cpn.frm_date,$scope.cpn.to_date,$scope.cpn.cmp_status,$scope.sortorder,$scope.direction)
                           .success(
@@ -1550,10 +1550,10 @@ camp_review:$scope.cmp.camp_review,feedback_status:$scope.cmp.feedback_status,te
                                         if(html.status_code==0)
                                         {
                                            swal('Error!',html.status_text,'error');
-                                        }                    
+                                        }
                                         else if(html.status_code==1)
                                         {
-                                           $scope.campList=html.campaign_list; 
+                                           $scope.campList=html.campaign_list;
                                     $scope.brand_list=html.brand_list;
                                     $scope.country_list=html.country_list;
                                     $scope.template_list=html.template_list;
@@ -1561,22 +1561,22 @@ camp_review:$scope.cmp.camp_review,feedback_status:$scope.cmp.feedback_status,te
                                     //$scope.fbk_data=response.fbk_data[0];
                                     $scope.product_list=html.product_list;
                                     // console.log('Product LIST');
-                                    
+
                                         }
-                                        
+
                                     }
                           )
                           .error(
                                  function(data, status, headers, config)
                                       {
-                                           
+
                                        }
 
-                          );              
-            
+                          );
+
         }
-		
-		
+
+
 		$scope.filter_adh_data=function(col)
         {
            console.log('roder');
@@ -1584,7 +1584,7 @@ camp_review:$scope.cmp.camp_review,feedback_status:$scope.cmp.feedback_status,te
       if($scope.direction=='ASC')
         $scope.direction='DESC';
       else if($scope.direction=='DESC')
-        $scope.direction='ASC';  
+        $scope.direction='ASC';
              $scope.block_site();
                 campaignFactory.filter_adh_data($scope.adh_cpn.frm_date,$scope.adh_cpn.to_date,$scope.adh_cpn.cmp_status,$scope.sortorder,$scope.direction)
                           .success(
@@ -1595,10 +1595,10 @@ camp_review:$scope.cmp.camp_review,feedback_status:$scope.cmp.feedback_status,te
                                         if(html.status_code==0)
                                         {
                                            swal('Error!',html.status_text,'error');
-                                        }                    
+                                        }
                                         else if(html.status_code==1)
                                         {
-                                           $scope.adhoccampList=html.campaign_list; 
+                                           $scope.adhoccampList=html.campaign_list;
                                     $scope.brand_list=html.brand_list;
                                     $scope.country_list=html.country_list;
                                     $scope.template_list=html.template_list;
@@ -1606,19 +1606,19 @@ camp_review:$scope.cmp.camp_review,feedback_status:$scope.cmp.feedback_status,te
                                     //$scope.fbk_data=response.fbk_data[0];
                                     $scope.product_list=html.product_list;
                                     // console.log('Product LIST');
-                                    
+
                                         }
-                                        
+
                                     }
                           )
                           .error(
                                  function(data, status, headers, config)
                                       {
-                                           
+
                                        }
 
-                          );              
-            
+                          );
+
         }
 $scope.draw_graph=function(graph_data)
        {
@@ -1631,24 +1631,24 @@ $scope.draw_graph=function(graph_data)
         //       ykeys: ['sent_count'],
         //       labels: ['Mail Sent'],
         //     });
-            
+
 
         // if($('#area-example').find('svg').length > 1){
         //     $('#area-example svg:first').remove();
         //         $(".morris-hover:last").remove();
         // }
-        
+
       //       $('.js-loading').addClass('hidden');
       // },100);
        }
 
- 
- 
+
+
        $scope.cmp={};
        $scope.tmplt={};
        $scope.cmp.camp_template='';
 	    $scope.show_dash_email=1;
-        
+
 		$scope.togggle_view_email=function()
         {
           if($scope.show_dash_email==0)
@@ -1693,33 +1693,33 @@ $scope.clear_template=function()
                            }
                            if(html.status_code == '1')
                            {
-                             swal('Success!',html.status_text,'success'); 
-                             // $scope.template_list=html.payload; 
-                             $scope.get_predata(); 
+                             swal('Success!',html.status_text,'success');
+                             // $scope.template_list=html.payload;
+                             $scope.get_predata();
                            }
                       }
                 )
-           }   
-       
+           }
+
         }
-       
+
       $scope.block_site=function()
         {
-            $.blockUI({ css: { 
-                border: 'none', 
-                padding: '3px', 
-                backgroundColor: '#000', 
-                '-webkit-border-radius': '10px', 
-                '-moz-border-radius': '10px', 
-                opacity: .5, 
-                color: '#fff' 
+            $.blockUI({ css: {
+                border: 'none',
+                padding: '3px',
+                backgroundColor: '#000',
+                '-webkit-border-radius': '10px',
+                '-moz-border-radius': '10px',
+                opacity: .9,
+                color: '#fff'
             }});
 
         }
-		
+
 		$scope.edit_template=function(template_id)
         {
-           $scope.block_site();        
+           $scope.block_site();
             campaignFactory.edit_template(template_id)
               .success(
                       function( html )
@@ -1730,19 +1730,19 @@ $scope.clear_template=function()
                              swal('Error!',html.status_text,'error');
                            }
                            if(html.status_code == '1')
-                           { 
+                           {
                              $scope.tmplt=html.template_detail[0];
 							 CKEDITOR.instances.editor.setData($scope.tmplt.template_content);
 							 $scope.tmplt.template_content_html=$sce.trustAsHtml($scope.tmplt.template_content);
 							 $scope.tmplt.tmp_id=$scope.tmplt.template_id;
-                            
+
                              // console.log(html.selected_product);
                              $scope.show_dash_email=0;
                            }
                       }
                 )
-           
-        }		
+
+        }
     $scope.delete_template=function(template_id,is_default)
     {
 		//console.log(is_default);
@@ -1771,31 +1771,31 @@ $scope.clear_template=function()
                                     function( html )
                                     {
                                       console.log(html);
-                                      $.unblockUI(); 
+                                      $.unblockUI();
                                         if(html.status_code==0)
                                         {
                                            	swal('Error!',html.status_text,'error');
-                                        }                    
+                                        }
                                         else if(html.status_code==1)
                                         {
                                         	$scope.get_predata();
                                           	swal('Success!',html.status_text,'success');
                                         }
-                                        
+
                                     }
                           )
                           .error(
                                  function(data, status, headers, config)
                                       {
-                                           
+
                                        }
 
-                          );              
-                    
+                          );
+
                 } else {
                     swal("Cancelled", "Delete cancelled:)", "error");
                 }
-            }); 
+            });
 		}
     }
 
@@ -1811,7 +1811,7 @@ $scope.clear_template=function()
        $scope.tst={};
 	   $scope.adh_tb={};
        $scope.adh_tb.currentTab='tab1';
-	   
+
 	   $scope.adh_cpn={};
        $scope.adh_cpn.frm_date='';
        $scope.adh_cpn.to_date='';
@@ -1856,13 +1856,13 @@ $scope.clear_template=function()
        $scope.selectedProductadh=[];
        $scope.adhoc_product_list=[];
        $scope.checkStatusadh='N';
-    
+
         $scope.adhoc_togggle_view=function()
         {
           if($scope.adhoc_show_dash==0)
           {
             $scope.adhoc_show_dash=1;
-			 
+
 		}
           else
           {
@@ -1870,60 +1870,60 @@ $scope.clear_template=function()
           }
           // console.log($scope.show_dash);
         }
-		
-		
+
+
 		$scope.adhoc_togggle_tab2=function()
         {
           if($scope.adhoc_cmp.camp_name == '' ){
-     
+
               swal("Please update Campaign Details");
 			   $scope.adh_tb.currentTab='tab1';
-			    $(l12).addClass('disabled'); 
+			    $(l12).addClass('disabled');
 			    $(l13).addClass('disabled');
-                $(l14).addClass('disabled'); 
+                $(l14).addClass('disabled');
 			    $(l15).addClass('disabled');
-                $(l16).addClass('disabled'); 				
-			  
+                $(l16).addClass('disabled');
+
             }
 			 else if($scope.adhoc_cmp.camp_desc == ''){
-     
+
               swal("Please update Campaign Details");
 			   $scope.adh_tb.currentTab='tab1';
-			    $(l12).addClass('disabled'); 
+			    $(l12).addClass('disabled');
 			    $(l13).addClass('disabled');
-                $(l14).addClass('disabled'); 
+                $(l14).addClass('disabled');
 			    $(l15).addClass('disabled');
-                $(l16).addClass('disabled'); 				
-			  
+                $(l16).addClass('disabled');
+
             }
           else
           {
-          $scope.adh_tb.currentTab='tab2'; 
+          $scope.adh_tb.currentTab='tab2';
            $(l12).removeClass('disabled');
-           $(l13).removeClass('disabled'); 		   
+           $(l13).removeClass('disabled');
           }
-          
+
         }
 		$scope.adhoc_togggle_tab3=function()
         {
 		if($scope.selectedProductadh.length > 0)
 		{
-		$scope.adh_tb.currentTab='tab4'; 
+		$scope.adh_tb.currentTab='tab4';
 		   $(l13).removeClass('disabled');
-           $(l14).removeClass('disabled'); 		
+           $(l14).removeClass('disabled');
 		}
 		else
 		{
 			 swal("Please select some products");
 			   $scope.adh_tb.currentTab='tab3';
 			    $(l13).addClass('disabled');
-			    $(l14).addClass('disabled'); 
+			    $(l14).addClass('disabled');
 			    $(l15).addClass('disabled');
 				$(l16).addClass('disabled');
 		}
-			
+
 		}
-		
+
 	$(document).ready(function(){
    $("#next_4").click(function() {
    var from = $('#from').val();
@@ -1931,90 +1931,90 @@ $scope.clear_template=function()
 	if(from =='')
 	{
           swal("Please update From Date To Proceed");
-            $scope.adh_tb.currentTab='tab4'; 
-			 
-            $(l14).addClass('disabled');
-             $(l15).addClass('disabled');	
+            $scope.adh_tb.currentTab='tab4';
 
-	
+            $(l14).addClass('disabled');
+             $(l15).addClass('disabled');
+
+
 	}
 	if(to =='')
 	{
           swal("Please update To Date To Proceed");
-            $scope.adh_tb.currentTab='tab4'; 
-			 
-            $(l14).addClass('disabled');
-             $(l15).addClass('disabled');	
+            $scope.adh_tb.currentTab='tab4';
 
-	
+            $(l14).addClass('disabled');
+             $(l15).addClass('disabled');
+
+
 	}
 	else
 	{
-		$scope.adh_tb.currentTab='tab5'; 
-		$(l13).removeClass('disabled'); 
+		$scope.adh_tb.currentTab='tab5';
+		$(l13).removeClass('disabled');
         $(l14).removeClass('disabled');
-        $(l15).removeClass('disabled');	
-		
+        $(l15).removeClass('disabled');
+
 	}
   });
 });
 		$scope.adhoc_togggle_tab4=function()
         {
-		
+
 //		if($scope.adhoc_cmp.from_date !== '-1')
 //		{
 //			swal("Please update From Date To Proceed");
-//             $scope.adh_tb.currentTab='tab4'; 
-//			 
+//             $scope.adh_tb.currentTab='tab4';
+//
 //             $(l14).addClass('disabled');
 //             $(l15).addClass('disabled');
 //          if (angular.isDefined($scope.adhoc_cmp.from_date))
-//			  {			 
+//			  {
 //          console.log($scope.adhoc_cmp.from_date.length);
 //			  }
 //		  //console.log(parseInt($scope.adhoc_cmp.from_date));
 //		  //console.log($scope.adhoc_cmp.to_date);
-//          //console.log($scope.adhoc_cmp.from_date);			   
-//			
+//          //console.log($scope.adhoc_cmp.from_date);
+//
 //        }
 //		else if($scope.adhoc_cmp.to_date !== '-1')
 //		{
 //			swal("Please update To Date To Proceed");
-//             $scope.adh_tb.currentTab='tab4'; 
-//			 
+//             $scope.adh_tb.currentTab='tab4';
+//
 //             $(l14).addClass('disabled');
 //             $(l15).addClass('disabled');
 //         console.log($scope.adhoc_cmp.from_date);
-//		console.log($scope.adhoc_cmp.to_date);			 
-//			
+//		console.log($scope.adhoc_cmp.to_date);
+//
 //        }
- //     else	
-	 // {	
-			$scope.adh_tb.currentTab='tab5'; 
-			 $(l13).removeClass('disabled'); 
+ //     else
+	 // {
+			$scope.adh_tb.currentTab='tab5';
+			 $(l13).removeClass('disabled');
              $(l14).removeClass('disabled');
              $(l15).removeClass('disabled');
-      } 			 
-			  
+      }
+
 //		}
-		
-		
+
+
 		$scope.adhoc_togggle_tab5=function()
         {
 		if(parseInt($scope.tmp) == 0)
 		{
 	    swal("Please Select a template to proceed");
 			   $scope.adh_tb.currentTab='tab5';
-			   
+
 			    $(l15).addClass('disabled');
-                $(l16).addClass('disabled');				
+                $(l16).addClass('disabled');
 		}
 		else
 		{
-		$scope.adh_tb.currentTab='tab6'; 
+		$scope.adh_tb.currentTab='tab6';
            $(l15).removeClass('disabled');
            $(l16).removeClass('disabled');
-		   
+
 		}
 		}
         $scope.clear_adhoc_campaign_data=function()
@@ -2023,19 +2023,19 @@ $scope.clear_template=function()
        $scope.tmp={};
        $scope.tst={};
 	   $scope.adh_tb={};
-		    $scope.adhoc_cmp.cpgn_id='';	
+		    $scope.adhoc_cmp.cpgn_id='';
           $scope.adhoc_cmp.camp_name='';
           $scope.adhoc_cmp.camp_desc='';
           $scope.adhoc_cmp.camp_brand='ALL';
 		  $scope.adhoc_cmp.fc_code='ALL';
           $scope.adhoc_cmp.prod_search='';
           $scope.adhoc_cmp.camp_country='IN';
-          $scope.adhoc_cmp.cpgn_id='';	
+          $scope.adhoc_cmp.cpgn_id='';
           $scope.clear_all_adh();
           $scope.selectedProductadh=[];
 
           $scope.adhoc_product_list=[];
-          
+
           $scope.tmp='0';
           $scope.template_content='';
           $scope.adhoc_cmp.camp_sku='';
@@ -2054,39 +2054,39 @@ $scope.clear_template=function()
 		  $scope.adhoc_cmp.to_date='';
 		  $scope.adhoc_cmp.is_deleted='0';
 		  $scope.adh_tb.currentTab='tab1';
-		  
+
 		  console.log($scope.adhoc_cmp.is_deleted);
-		  
-		        $(l12).addClass('disabled'); 
+
+		        $(l12).addClass('disabled');
 			    $(l13).addClass('disabled');
-                $(l14).addClass('disabled'); 
+                $(l14).addClass('disabled');
 			    $(l15).addClass('disabled');
-                $(l16).addClass('disabled'); 				
+                $(l16).addClass('disabled');
         }
 
 
 $scope.select_all_adh=function()
    {
-      
-      
+
+
       for(i=0;i< $scope.adhoc_product_list.length;i++)
       {
         $scope.addToArray($scope.selectedProductadh,$scope.adhoc_product_list[i]);
-     	
+
       }
       $scope.selectcount=$scope.selectedProductadh.length;
-	   console.log($scope.selectcount);	
+	   console.log($scope.selectcount);
       $scope.totalcount=$scope.total;
-      
+
    }
 
    $scope.clear_all_adh=function()
    {
       $scope.clearArray($scope.selectedProductadh);
    }
-   
+
     $scope.$watch("selectedProductadh.length",
-           function(newValue, oldValue) 
+           function(newValue, oldValue)
            {
              if(newValue < $scope.adhoc_product_list.length)
              {
@@ -2100,7 +2100,7 @@ $scope.select_all_adh=function()
        // }
        $scope.statusCheckadh=function()
       {
-       
+
 	   console.log("Works");
            // console.log("checkStatus");
            // console.log($scope.checkStatus);
@@ -2113,7 +2113,7 @@ $scope.select_all_adh=function()
            {
             $scope.clear_all_adh();
            }
-      }        
+      }
 
       $scope.create_adhoc_campaign=function()
         {
@@ -2124,7 +2124,7 @@ $scope.select_all_adh=function()
           if($scope.selectedProductadh.length > 0)
           {
                $scope.block_site();
-    
+
                file=$scope.adhoc_cmp.camp_attachment;
                   var upload = Upload.upload({
                   url: '<?php echo $baseurl.'manage_campaign/create_adhoc_campaign/';?>',
@@ -2143,7 +2143,7 @@ $scope.select_all_adh=function()
                     file.result = response.data;
 
                     });
-                    
+
                   }
                   if(response.data.status_code == '1')
                    {
@@ -2162,7 +2162,7 @@ $scope.select_all_adh=function()
                   if(angular.isDefined(file))
                   file.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
                 });
-           } 
+           }
            else
            {
               swal("Error!","No product has been selected ",'error');
@@ -2174,7 +2174,7 @@ $scope.select_all_adh=function()
 $scope.load_adhoc_product=function()
         {
             var blk='#adhoc_product_list';
-            $(blk).block({message:'Loading Product'  }); 
+            $(blk).block({message:'Loading Product'  });
             // $scope.clear_all();
             // $scope.selectedProduct=[];
             $scope.adhoc_cmp.camp_country='IN';
@@ -2183,36 +2183,36 @@ $scope.load_adhoc_product=function()
               .success(
                       function( html )
                       {
-                           $(blk).unblock(); 
+                           $(blk).unblock();
                            if(html.status_code=='0')
                            {
                              swal('Error!',html.status_text,'error');
                            }
                            if(html.status_code == '1')
-                           { 
+                           {
                              console.log("LOAD PRODUCT");
                              console.log($scope.selectedProductadh);
-                             $scope.adhoc_product_list=html.adh_payload; 
+                             $scope.adhoc_product_list=html.adh_payload;
                              console.log($scope.selectedProductadh);
                              console.log("LOAD PRODUCT ENDs");
                            }
                       }
                 )
-           
+
         }
-		
-		
-		
-		
-		
+
+
+
+
+
 		$scope.edit_adhoc_campaign=function(campaign_id)
         {
-           $scope.block_site(); 
-                             $(l12).removeClass('disabled'); 
+           $scope.block_site();
+                             $(l12).removeClass('disabled');
 	                         $(l13).removeClass('disabled');
-                             $(l14).removeClass('disabled'); 
+                             $(l14).removeClass('disabled');
 	                         $(l15).removeClass('disabled');
-                             $(l16).removeClass('disabled'); 							 
+                             $(l16).removeClass('disabled');
             campaignFactory.edit_adhoc_campaign(campaign_id)
               .success(
                       function( html )
@@ -2223,7 +2223,7 @@ $scope.load_adhoc_product=function()
                              swal('Error!',html.status_text,'error');
                            }
                            if(html.status_code == '1')
-                           { 
+                           {
                              $scope.adhoc_cmp=html.adhoc_campaign_detail[0];
                              $scope.adhoc_cmp.camp_hour=parseInt($scope.adhoc_cmp.camp_hour);
                              $scope.adhoc_cmp.camp_days=$scope.adhoc_cmp.camp_days;
@@ -2239,16 +2239,16 @@ $scope.load_adhoc_product=function()
                              {
                                for(i=0;i< html.selected_product.length;i++)
                                 {
-                                  $scope.addToArray($scope.selectedProductadh,html.selected_product[i]);  
+                                  $scope.addToArray($scope.selectedProductadh,html.selected_product[i]);
                                 }
-                             }   
-                            
+                             }
+
                              console.log(html.selected_product);
                              $scope.adhoc_show_dash=0;
                            }
                       }
                 )
-           
+
         }
  $scope.delete_adhoc_campaign=function(campaign_id)
         {
@@ -2275,33 +2275,33 @@ $scope.load_adhoc_product=function()
                              $scope.adhoccampList=html.adhoc_campaign_list;
                            }
                            if(html.status_code == '1')
-                           { 
+                           {
                             swal('Success!',html.status_text,'success');
                              $scope.adhoccampList=html.adhoc_campaign_list;
                            }
                       }
-                );              
-                    
+                );
+
                 } else {
                     swal("Cancelled", "Delete cancelled:)", "error");
                 }
             });
-         
-           
+
+
         }
-		$scope.uploadImport = function(file,width,height,file2,width2,height2,file3,width3,height3,file4,width4,height4,file5,width5,height5) 
+		$scope.uploadImport = function(file,width,height,file2,width2,height2,file3,width3,height3,file4,width4,height4,file5,width5,height5)
      {
       $scope.block_site();
         campaignFactory.import_data(file,width,height,file2,width2,height2,file3,width3,height3,file4,width4,height4,file5,width5,height5)
          .then(function (response)
                {
-                $.unblockUI(); 
+                $.unblockUI();
                 if(angular.isDefined(file))
                   {
                     $timeout(function () {
                     file.result = response.data;
                     });
-                    
+
                   }
                 if(response.data.status_code == '1')
                  {
@@ -2312,7 +2312,7 @@ $scope.load_adhoc_product=function()
                    swal("Error!",response.data.status_text,'error');
                  }
                },
-             function (response) 
+             function (response)
              {
                 if (response.status > 0)
                   $scope.errorMsg = response.status + ': ' + response.data;
@@ -2335,35 +2335,35 @@ $scope.load_adhoc_product=function()
 		console.log($scope.cpn);
 		$('#import2').modal('show');
 
-      }	
-	  
-	  $scope.uploadImport_attach = function(file,file2,file3,file4,file5) 
+      }
+
+	  $scope.uploadImport_attach = function(file,file2,file3,file4,file5)
     {
      $scope.block_site();
        campaignFactory.import_data2($scope.cpn,file,file2,file3,file4,file5)
         .then(function (response)
               {
-               $.unblockUI(); 
+               $.unblockUI();
                if(angular.isDefined(file))
                  {
                    $timeout(function () {
                    file.result = response.data;
                    });
-                   
+
                  }
                if(response.data.status_code == '1')
                 {
                   swal('Success!',response.data.status_text,'success');
 				  $scope.get_predata();
 				  $('#import2').modal('hide');
-				  
+
                 }
                 else
                 {
                   swal("Error!",response.data.status_text,'error');
                 }
               },
-            function (response) 
+            function (response)
             {
                if (response.status > 0)
                  $scope.errorMsg = response.status + ': ' + response.data;
@@ -2374,8 +2374,8 @@ $scope.load_adhoc_product=function()
                file.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
              });
    }
-   
-   
+
+
    $scope.delete_attach_1=function(template_id)
         {
            swal({
@@ -2398,27 +2398,27 @@ $scope.load_adhoc_product=function()
                            if(html.status_code=='0')
                            {
                              swal('Error!',html.status_text,'error');
-							
+
 						}
                            if(html.status_code == '1')
-                           { 
+                           {
                             swal('Success!',html.status_text,'success');
                              //$scope.campList=html.campaign_list;
 							  $scope.get_predata();
 				             $('#import2').modal('hide');
                            }
                       }
-                );              
-                    
+                );
+
                 } else {
                     swal("Cancelled", "Delete cancelled:)", "error");
                 }
             });
-         
-           
+
+
         }
-		
-		
+
+
 		$scope.delete_attach_2=function(template_id)
         {
            swal({
@@ -2442,26 +2442,26 @@ $scope.load_adhoc_product=function()
                            {
                              swal('Error!',html.status_text,'error');
                              //$scope.get_pre_data=html.campaign_list;
-							
+
 						}
                            if(html.status_code == '1')
-                           { 
+                           {
                             swal('Success!',html.status_text,'success');
                              //$scope.campList=html.campaign_list;
 							  $scope.get_predata();
 				             $('#import2').modal('hide');
                            }
                       }
-                );              
-                    
+                );
+
                 } else {
                     swal("Cancelled", "Delete cancelled:)", "error");
                 }
             });
-         
-           
+
+
         }
-		
+
 		$scope.delete_attach_3=function(template_id)
         {
            swal({
@@ -2485,27 +2485,27 @@ $scope.load_adhoc_product=function()
                            {
                              swal('Error!',html.status_text,'error');
                              //$scope.get_pre_data=html.campaign_list;
-							 
+
 						}
                            if(html.status_code == '1')
-                           { 
+                           {
                             swal('Success!',html.status_text,'success');
                              //$scope.campList=html.campaign_list;
 							  $scope.get_predata();
 				              $('#import2').modal('hide');
                            }
                       }
-                );              
-                    
+                );
+
                 } else {
                     swal("Cancelled", "Delete cancelled:)", "error");
                 }
             });
-         
-           
+
+
         }
-		
-		
+
+
 		$scope.delete_attach_4=function(template_id)
         {
            swal({
@@ -2532,23 +2532,23 @@ $scope.load_adhoc_product=function()
 							 //$scope.filter_data();
 						}
                            if(html.status_code == '1')
-                           { 
+                           {
                             swal('Success!',html.status_text,'success');
                              //$scope.campList=html.campaign_list;
 							  $scope.get_predata();
 				              $('#import2').modal('hide');
                            }
                       }
-                );              
-                    
+                );
+
                 } else {
                     swal("Cancelled", "Delete cancelled:)", "error");
                 }
             });
-         
-           
+
+
         }
-		
+
 		$scope.delete_attach_5=function(template_id)
         {
            swal({
@@ -2575,37 +2575,37 @@ $scope.load_adhoc_product=function()
 							 //$scope.filter_data();
 						}
                            if(html.status_code == '1')
-                           { 
+                           {
                             swal('Success!',html.status_text,'success');
                              //$scope.campList=html.campaign_list;
 							  $scope.get_predate();
 				              $('#import2').modal('hide');
                            }
                       }
-                );              
-                    
+                );
+
                 } else {
                     swal("Cancelled", "Delete cancelled:)", "error");
                 }
             });
-         
-           
+
+
         }
-	
-	
-//	$scope.uploadImport2 = function(file,width,height) 
+
+
+//	$scope.uploadImport2 = function(file,width,height)
 //    {
 //     $scope.block_site();
 //       campaignFactory.import_data2(file,width,height)
 //        .then(function (response)
 //              {
-//               $.unblockUI(); 
+//               $.unblockUI();
 //               if(angular.isDefined(file))
 //                 {
 //                   $timeout(function () {
 //                   file.result = response.data;
 //                   });
-//                   
+//
 //                 }
 //               if(response.data.status_code == '1')
 //                {
@@ -2616,7 +2616,7 @@ $scope.load_adhoc_product=function()
 //                  swal("Error!",response.data.status_text,'error');
 //                }
 //              },
-//            function (response) 
+//            function (response)
 //            {
 //               if (response.status > 0)
 //                 $scope.errorMsg = response.status + ': ' + response.data;
@@ -2627,20 +2627,20 @@ $scope.load_adhoc_product=function()
 //               file.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
 //             });
 //   }
-//	
-//	$scope.uploadImport3 = function(file,width,height) 
+//
+//	$scope.uploadImport3 = function(file,width,height)
 //    {
 //     $scope.block_site();
 //       campaignFactory.import_data3(file,width,height)
 //        .then(function (response)
 //              {
-//               $.unblockUI(); 
+//               $.unblockUI();
 //               if(angular.isDefined(file))
 //                 {
 //                   $timeout(function () {
 //                   file.result = response.data;
 //                   });
-//                   
+//
 //                 }
 //               if(response.data.status_code == '1')
 //                {
@@ -2651,7 +2651,7 @@ $scope.load_adhoc_product=function()
 //                  swal("Error!",response.data.status_text,'error');
 //                }
 //              },
-//            function (response) 
+//            function (response)
 //            {
 //               if (response.status > 0)
 //                 $scope.errorMsg = response.status + ': ' + response.data;
@@ -2662,20 +2662,20 @@ $scope.load_adhoc_product=function()
 //               file.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
 //             });
 //   }
-//		
-//	$scope.uploadImport4 = function(file,width,height) 
+//
+//	$scope.uploadImport4 = function(file,width,height)
 //    {
 //     $scope.block_site();
 //       campaignFactory.import_data4(file,width,height)
 //        .then(function (response)
 //              {
-//               $.unblockUI(); 
+//               $.unblockUI();
 //               if(angular.isDefined(file))
 //                 {
 //                   $timeout(function () {
 //                   file.result = response.data;
 //                   });
-//                   
+//
 //                 }
 //               if(response.data.status_code == '1')
 //                {
@@ -2686,7 +2686,7 @@ $scope.load_adhoc_product=function()
 //                  swal("Error!",response.data.status_text,'error');
 //                }
 //              },
-//            function (response) 
+//            function (response)
 //            {
 //               if (response.status > 0)
 //                 $scope.errorMsg = response.status + ': ' + response.data;
@@ -2696,22 +2696,22 @@ $scope.load_adhoc_product=function()
 //               if(angular.isDefined(file))
 //               file.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
 //             });
-//   }	
-//	
-//	
-//	$scope.uploadImport5 = function(file,width,height) 
+//   }
+//
+//
+//	$scope.uploadImport5 = function(file,width,height)
 //    {
 //     $scope.block_site();
 //       campaignFactory.import_data5(file,width,height)
 //        .then(function (response)
 //              {
-//               $.unblockUI(); 
+//               $.unblockUI();
 //               if(angular.isDefined(file))
 //                 {
 //                   $timeout(function () {
 //                   file.result = response.data;
 //                   });
-//                   
+//
 //                 }
 //               if(response.data.status_code == '1')
 //                {
@@ -2722,7 +2722,7 @@ $scope.load_adhoc_product=function()
 //                  swal("Error!",response.data.status_text,'error');
 //                }
 //              },
-//            function (response) 
+//            function (response)
 //            {
 //               if (response.status > 0)
 //                 $scope.errorMsg = response.status + ': ' + response.data;
@@ -2732,20 +2732,20 @@ $scope.load_adhoc_product=function()
 //               if(angular.isDefined(file))
 //               file.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
 //             });
-//   }	
+//   }
 
 $scope.show_adhoc_edit_message=function()
         {
-		swal('Adhoc Campaign Completed, Unable to Edit');	
+		swal('Adhoc Campaign Completed, Unable to Edit');
 		}
 		$scope.change_adhoc_status=function(is_active,campaign_id)
         {
 			if(is_active==1)
 			{
-		    var sts='Activate';		
+		    var sts='Activate';
 			}else
 			{
-				 var sts='Deactivate';	
+				 var sts='Deactivate';
 			}
 			  var msg= "Are you sure to "+sts+" campaign?";
            swal({
@@ -2768,30 +2768,30 @@ $scope.show_adhoc_edit_message=function()
                            if(html.status_code=='0')
                            {
                              swal('Error!',html.status_text,'error');
-                             
+
                            }
                            if(html.status_code == '1')
-                           { 
+                           {
                             swal('Success!',html.status_text,'success');
                             $scope.adhoccampList=html.adhoc_campaign_list;
                            }
                       }
-                );              
-                    
+                );
+
                 } else {
                     swal("Cancelled", "cancelled:)", "error");
 					$scope.adhoccampList=html.adhoc_campaign_list;
                 }
             });
-         
-           
+
+
         }
 		$( document ).ready(function() {
-CKEDITOR.instances.editor.on('change', function() { 
+CKEDITOR.instances.editor.on('change', function() {
  $scope.tmplt.template_content_html=$sce.trustAsHtml(CKEDITOR.instances.editor.getData());
-    //alert("TEST");		
-   });  
-});   
+    //alert("TEST");
+   });
+});
 
 });
 
@@ -2829,19 +2829,19 @@ CKEDITOR.editorConfig = function( config ) {
         pluginsLoaded: function() {
             var editor = this,
                 config = editor.config;
-            
+
             editor.ui.addRichCombo( 'my-combo', {
                 label: 'Placeholders',
                 title: 'Placeholder text will be replaced by actual text',
                 toolbar: 'others,0',
-        
-                panel: {               
+
+                panel: {
                     css: [ CKEDITOR.skin.getPath( 'editor' ) ].concat( config.contentsCss ),
                     multiSelect: false,
                     attributes: { 'aria-label': 'Placeholders Tag' }
                 },
-    
-                init: function() {    
+
+                init: function() {
                     this.startGroup( 'Order Info' );
 					this.add( '{{logo_image1}}', 'Logo Image 1' );
 					this.add( '{{logo_image2}}', 'Logo Image 2' );
@@ -2865,30 +2865,29 @@ CKEDITOR.editorConfig = function( config ) {
                     //this.add( '{{sku_list}}', 'SKU List' );
                    // this.add( '{{order_date}}', 'Order Date' );
 
-                    
-                    
+
+
                     this.startGroup( 'Company Info' );
                     // this.add( '{{vendor_name}}', 'Amazon Vendor Name' );
                     this.add( '{{company_name}}', 'Company Name' );
                     //this.add( '{{contact_us}}', 'Contact us' );
                     this.add( '{{store_url}}', 'Storefront URL' );
                     //this.add( '{{unsubscribe_link}}', 'Unsubscribe Link' );
-                    
-                    
+
+
                 },
-    
+
                 onClick: function( value ) {
                     editor.focus();
                     editor.fire( 'saveSnapshot' );
-                   
+
                     editor.insertHtml( value );
-                
+
                     editor.fire( 'saveSnapshot' );
                 }
-            } );        
-        }        
+            } );
+        }
     }
 } );
 </script>
-									
-									
+

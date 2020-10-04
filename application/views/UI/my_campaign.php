@@ -10,14 +10,14 @@ $base_url=base_url();
     $(".date_selector").datepicker({minDate:0, dateFormat: "yy-mm-dd",});
   } );
 </script>
- 
+
 <div class="wrapper" ng-controller='emailjunctionCtrl'>
 	<div class="content">
 		<div class="container-fluid">
 		<?php
 			if($store_count[0]['ttl'] == 0)
             {
-			 ?> 
+			 ?>
 				<div class="row">
 					<div class="col-12">
 						<div class="page-title-box">
@@ -28,13 +28,13 @@ $base_url=base_url();
 						</div>
 					</div>
 				</div>
-												
+
 				<div class="row">
 					<div class="col-12">
 						<div class="card">
 							<div class="card-body">
 							  <p>Please connect a store to start importing your inventory.  <a class="btn btn-info" href="<?php echo $base_url.'manage_stores'?>">Connect Stores...</a></p>
-							
+
 							  </div>
 						  </div>
 					</div>
@@ -44,19 +44,19 @@ $base_url=base_url();
 			?><?php
 			 if($store_count[0]['ttl'] > 0)
 			{
-				?> 
+				?>
 				<div class="row">
 					<div class="col-12">
 						<div class="page-title-box">
 							<div class="page-title-right">
 								<ol class="breadcrumb m-0">
-								   
+
 								</ol>
 							</div>
 							<h4 class="page-title">Emails</h4>
 						</div>
 					</div>
-				</div>     
+				</div>
 
 				<div class="row">
 					<div class="col-12">
@@ -102,16 +102,16 @@ $base_url=base_url();
 														<option ng-repeat="x in campList" value='{{x.campaign_id}}'>{{x.campaign_name}}</option>
 													</select>
 												</div>
-												<div class="col-sm-2 no-padding">  
+												<div class="col-sm-2 no-padding">
 													  <input type='text' class='form-control date_selector'  jqdatepicker name='from' placeholder='From' ng-model='filter.frm_date'>
 												</div>
-												<div class="col-sm-2 no-padding">  
+												<div class="col-sm-2 no-padding">
 														<input type='text' class='form-control date_selector'  jqdatepicker name='to' placeholder='To' ng-model='filter.to_date'>
 												</div>
 												<div class="col-sm-1 no-padding">
 												  <a class='btn btn-info' ng-click='filtergrid()'>Search</a>
 												</div>
-											</div> 
+											</div>
 
 											<div class="table-responsive">
 												<table class="table table-centered mb-0">
@@ -191,24 +191,24 @@ $base_url=base_url();
 														<option ng-repeat="x in campList" value='{{x.campaign_id}}'>{{x.campaign_name}}</option>
 													</select>
 												</div>
-												<div class="col-sm-1 no-padding">  
+												<div class="col-sm-1 no-padding">
 													  <input type='text' class='form-control date_selector'  jqdatepicker name='from' placeholder='From' ng-model='filter.frm_date'>
 												</div>
-												<div class="col-sm-1 no-padding">  
+												<div class="col-sm-1 no-padding">
 														<input type='text' class='form-control date_selector'  jqdatepicker name='to' placeholder='To' ng-model='filter.to_date'>
 												</div>
-												
+
 												<div class="col-sm-1 no-padding">
 												  <a class='btn btn-info' ng-click='filtergrid()'>Search</a>
 												</div>
-												
+
 												  <div class="col-sm-2 no-padding" >
 												  <a class='btn btn-danger' ng-click='mark_as_dns()'>Mark DNS</a>
 												</div>
 												<div class="col-sm-2 no-padding">
 												  <a class='btn btn-success' ng-click='send_now()'>Send Now</a>
 												</div>
-											</div> 
+											</div>
 
 											<div class="table-responsive">
 												<table class="table table-centered mb-0">
@@ -285,10 +285,10 @@ $base_url=base_url();
 														<option ng-repeat="x in campList" value='{{x.campaign_id}}'>{{x.campaign_name}}</option>
 													</select>
 												</div>
-												<div class="col-sm-1 no-padding">  
+												<div class="col-sm-1 no-padding">
 													<input type='text' class='form-control date_selector'  jqdatepicker name='from' placeholder='From' ng-model='filter.frm_date'>
 												</div>
-												<div class="col-sm-1 no-padding">  
+												<div class="col-sm-1 no-padding">
 													<input type='text' class='form-control date_selector'  jqdatepicker name='to' placeholder='To' ng-model='filter.to_date'>
 												</div>
 												<div class="col-sm-1 no-padding">
@@ -300,7 +300,7 @@ $base_url=base_url();
 												<div class="col-sm-2 no-padding">
 													<a class='btn btn-success' ng-click='rmv_dns()'>Remove DNS</a>
 												</div>
-											</div> 
+											</div>
 											<div class="table-responsive">
 												<table class="table table-centered mb-0">
 													<thead class="thead-light">
@@ -341,9 +341,9 @@ $base_url=base_url();
 														  <span ng-if="tnx.is_sent=='0'" class='label label-warning'>Not sent</span>
 															<span ng-if="tnx.is_sent=='1'" class='label label-success'>Sent</span>
 														</td>
-														
+
 														<td style='width:200px'>{{tnx.campaign_name}}</td>
-														
+
 														<td style='width:200px'>{{tnx.buyer_name}}<span ng-if="tnx.buyer_name.length==0 ">-------</span></td>
 														<td>{{tnx.seller_sku}}</td>
 														<td>{{tnx.fbk_comment}}<span ng-if='tnx.fbk_comment.length==0'>------</span></td>
@@ -363,7 +363,7 @@ $base_url=base_url();
 											</li>
 										</ul>
 									</div>
-								</div> 
+								</div>
 							</div>
 						</div>
 					</div>
@@ -371,17 +371,17 @@ $base_url=base_url();
 			</div>
 			<?php
 			}
-			?> 
+			?>
 		</div>
-	</div>		
-			
+	</div>
+
 <script type="text/javascript">
 crawlApp.factory('emailjunctionFactory', ['$http', '$q','limitToFilter', function($http,$q,limitToFilter) {
-    
+
     var order_list_url        =   "<?php echo $baseurl."my_campaign/get_campaign_order/"?>";
-    
-    
-    var get_transaction_list = function (cntxt,orderby,direction,offset,limit,search) 
+
+
+    var get_transaction_list = function (cntxt,orderby,direction,offset,limit,search)
     {
           var deferred = $q.defer();
           var path =order_list_url+cntxt+'/'+orderby+'/'+direction+'/'+offset+'/'+limit+'/'+search;
@@ -395,11 +395,11 @@ crawlApp.factory('emailjunctionFactory', ['$http', '$q','limitToFilter', functio
         var dataset_path="<?php echo $baseurl.'my_campaign/get_pre_data'?>";
         var deferred = $q.defer();
         var path =dataset_path;
-        
+
         $http.get(path)
         .success(function(data,status,headers,config){deferred.resolve(data);})
         .error(function(data, status, headers, config) { deferred.reject(status);});
-        
+
         return deferred.promise;
     };
     var send_now=function(tnx)
@@ -408,10 +408,10 @@ crawlApp.factory('emailjunctionFactory', ['$http', '$q','limitToFilter', functio
                       method: "post",
                       url:"<?php echo $baseurl.'my_campaign/send_now'?>",
                       data:{
-                        cmp:angular.toJson(tnx)  
+                        cmp:angular.toJson(tnx)
                       }
-                     }); 
-                   
+                     });
+
     };
     var mark_as_dns=function(selectedOrder)
     {
@@ -421,8 +421,8 @@ crawlApp.factory('emailjunctionFactory', ['$http', '$q','limitToFilter', functio
                       data:{
                           selected_order:angular.toJson(selectedOrder)
                       }
-                     }); 
-                   
+                     });
+
     };
 
    var rmv_dns=function(selectedOrder)
@@ -433,23 +433,23 @@ crawlApp.factory('emailjunctionFactory', ['$http', '$q','limitToFilter', functio
                       data:{
                           selected_order:angular.toJson(selectedOrder)
                       }
-                     }); 
-                   
+                     });
+
     };
-	
-	
-    
+
+
+
     return {
         get_transaction_list:get_transaction_list,
         get_data:get_data,
         send_now:send_now,
         mark_as_dns:mark_as_dns,
-		rmv_dns:rmv_dns        
-        
+		rmv_dns:rmv_dns
+
     };
-    
+
 }]);
-crawlApp.controller('emailjunctionCtrl', ['$scope','$parse','$window','emailjunctionFactory','$http','limitToFilter',function($scope,$parse,$window,emailjunctionFactory,$http,limitToFilter) {        
+crawlApp.controller('emailjunctionCtrl', ['$scope','$parse','$window','emailjunctionFactory','$http','limitToFilter',function($scope,$parse,$window,emailjunctionFactory,$http,limitToFilter) {
       $scope.transactionList=[];
       $scope.context="schduled_mail";
       $scope.outstanding='';
@@ -466,22 +466,22 @@ crawlApp.controller('emailjunctionCtrl', ['$scope','$parse','$window','emailjunc
 
       }
       $scope.reset();
-   
+
 
   $scope.block_site=function()
         {
-            $.blockUI({ css: { 
-                border: 'none', 
-                padding: '3px', 
-                backgroundColor: '#000', 
-                '-webkit-border-radius': '10px', 
-                '-moz-border-radius': '10px', 
-                opacity: .5, 
-                color: '#fff' 
+            $.blockUI({ css: {
+                border: 'none',
+                padding: '3px',
+                backgroundColor: '#000',
+                '-webkit-border-radius': '10px',
+                '-moz-border-radius': '10px',
+                opacity: .9,
+                color: '#fff'
             }});
 
         }
-      
+
     $scope.itemsPerPage = 25;
     $scope.itm_per='25';
     $scope.currentPage = 0;
@@ -491,7 +491,7 @@ crawlApp.controller('emailjunctionCtrl', ['$scope','$parse','$window','emailjunc
     $scope.filterquery=[];
     $scope.selectedOrder=[];
     $scope.order={};
-    
+
     $scope.range = function()
     {
         var rangeSize = 8;
@@ -513,7 +513,7 @@ crawlApp.controller('emailjunctionCtrl', ['$scope','$parse','$window','emailjunc
 
    $scope.prevPage = function()
    {
-        if ($scope.currentPage > 0) 
+        if ($scope.currentPage > 0)
         {
           $scope.currentPage--;
         }
@@ -539,20 +539,20 @@ crawlApp.controller('emailjunctionCtrl', ['$scope','$parse','$window','emailjunc
         return $scope.currentPage === $scope.pageCount() - 1 ? "disabled" : "";
    };
 
-   $scope.pageCount = function() 
+   $scope.pageCount = function()
    {
         return Math.ceil($scope.total/$scope.itemsPerPage);
    };
 
    $scope.setPage = function(n)
    {
-        if (n > 0 && n < $scope.pageCount()) 
+        if (n > 0 && n < $scope.pageCount())
         {
           $scope.currentPage = n;
         }
    };
 
-   $scope.$watch("currentPage",function(newValue, oldValue) 
+   $scope.$watch("currentPage",function(newValue, oldValue)
    {
      $scope.get_transaction_list(newValue);
    });
@@ -561,23 +561,23 @@ crawlApp.controller('emailjunctionCtrl', ['$scope','$parse','$window','emailjunc
     $scope.context=str;
     if($scope.currentPage==0)
     {
-       $scope.currentPage=0; 
+       $scope.currentPage=0;
        $scope.get_transaction_list(0);
     }
     else
     {
       $scope.currentPage=0;
     }
-    
+
     //
    }
    $scope.change_item_per_page=function()
    {
-    
+
     $scope.itemsPerPage=parseInt($scope.itm_per);
     $scope.get_transaction_list($scope.currentPage);
    }
-   
+
    $scope.get_transaction_list=function(currentPage)
    {
       $scope.block_site();
@@ -586,11 +586,11 @@ crawlApp.controller('emailjunctionCtrl', ['$scope','$parse','$window','emailjunc
           $.unblockUI();
          if(value.status_code==1)
          {
-              
+
               $scope.transactionList=value.datalist;
               $scope.total=value.total;
               $scope.outstanding=value.outstanding;
-              
+
          }
          else
          {
@@ -598,10 +598,10 @@ crawlApp.controller('emailjunctionCtrl', ['$scope','$parse','$window','emailjunc
             $scope.total=0;
             $scope.outstanding=value.outstanding;
             console.log(value);
-             
-         }     
-       }, 
-      function(reason) 
+
+         }
+       },
+      function(reason)
       {
         console.log("Reason"+reason);
       });
@@ -633,27 +633,27 @@ crawlApp.controller('emailjunctionCtrl', ['$scope','$parse','$window','emailjunc
                              swal('Error!',html.status_text,'error');
                            }
                            if(html.status_code == '1')
-                           { 
+                           {
                              $scope.get_transaction_list($scope.currentPage);
-                              swal('Success!',html.status_text,'success'); 
+                              swal('Success!',html.status_text,'success');
                            }
                       }
                 )
-                      
+
                 } else {
                     swal("Cancelled", "update cancelled:)", "error");
                 }
             });
-         
-                
+
+
              }
      else
      {
         swal('Error!',"There is no order selected",'error');
-     } 
-     
+     }
+
    }
-   
+
    $scope.rmv_dns=function()
   {
           if($scope.selectedOrder.length>0)
@@ -681,27 +681,27 @@ crawlApp.controller('emailjunctionCtrl', ['$scope','$parse','$window','emailjunc
                              swal('Error!',html.status_text,'error');
                            }
                            if(html.status_code == '1')
-                           { 
+                           {
                              $scope.get_transaction_list($scope.currentPage);
-                              swal('Success!',html.status_text,'success'); 
+                              swal('Success!',html.status_text,'success');
                            }
                       }
                 )
-                      
+
                 } else {
                     swal("Cancelled", "update cancelled:)", "error");
                 }
             });
-         
-                
+
+
              }
      else
      {
         swal('Error!',"There is no order selected",'error');
-     } 
-     
+     }
+
    }
-     
+
    $scope.filtergrid=function()
    {
      $scope.filterquery=[
@@ -716,7 +716,7 @@ crawlApp.controller('emailjunctionCtrl', ['$scope','$parse','$window','emailjunc
     var argum=JSON.stringify($scope.filterquery);
     $scope.searchJSON=encodeURIComponent(argum);
     $scope.get_transaction_list(0);
-  
+
    }
 
    $scope.get_predata = function()
@@ -727,21 +727,21 @@ crawlApp.controller('emailjunctionCtrl', ['$scope','$parse','$window','emailjunc
                              {
                                 if(response.status_code == '1')
                                 {
-                                    $scope.campList=response.campaign_list; 
+                                    $scope.campList=response.campaign_list;
 		                           }
                                 else
                                 {
                                  swal('Error!',response.status_text,'error');
                                 }
-                             }, 
+                             },
                              function(reason)
                              {
                                $scope.serverErrorHandler(reason);
                              }
                           );
-        }        
-             $scope.get_predata();     
-       
+        }
+             $scope.get_predata();
+
     $scope.send_now=function()
       {
 
@@ -770,22 +770,22 @@ crawlApp.controller('emailjunctionCtrl', ['$scope','$parse','$window','emailjunc
                                   if(html.status_code==0)
                                   {
                                      swal('Error!',html.status_text,'error');
-                                  }                    
+                                  }
                                   else if(html.status_code==1)
                                   {
                                      swal('Success!',html.status_text,'success');
                                   }
-                                  
+
                               }
                     )
                     .error(
                            function(data, status, headers, config)
                                 {
-                                     
+
                                  }
 
-                    );              
-                    
+                    );
+
                 } else {
                     swal("Cancelled", "Mail cancelled", "error");
                 }
@@ -794,17 +794,17 @@ crawlApp.controller('emailjunctionCtrl', ['$scope','$parse','$window','emailjunc
         else
         {
           swal("Error", "Please send 3 mail at a time ", "error");
-        }  
-        
-         
+        }
+
+
     }
 
-    
+
   $scope.select_all=function()
    {
       for(i=0;i< $scope.transactionList.length;i++)
       {
-        $scope.addToArray($scope.selectedOrder,$scope.transactionList[i]);  
+        $scope.addToArray($scope.selectedOrder,$scope.transactionList[i]);
       }
       $scope.selectcount=$scope.selectedOrder.length;
       $scope.totalcount=$scope.total;
@@ -814,7 +814,7 @@ crawlApp.controller('emailjunctionCtrl', ['$scope','$parse','$window','emailjunc
    {
       $scope.clearArray($scope.selectedOrder);
    }
-   
+
    $scope.checkExist=function(arr,item)
    {
       if (angular.isArray(arr)) {
@@ -830,7 +830,7 @@ crawlApp.controller('emailjunctionCtrl', ['$scope','$parse','$window','emailjunc
    $scope.addToArray=function(arr,item)
    {
       arr = angular.isArray(arr) ? arr : [];
-      if(!$scope.checkExist(arr, item)) 
+      if(!$scope.checkExist(arr, item))
       {
           arr.push(item);
       }
@@ -838,18 +838,18 @@ crawlApp.controller('emailjunctionCtrl', ['$scope','$parse','$window','emailjunc
    $scope.removeFromArray=function(arr,item)
    {
       arr = angular.isArray(arr) ? arr : [];
-      for (var i = arr.length; i--;) 
+      for (var i = arr.length; i--;)
       {
-        if (angular.equals(arr[i], item)) 
+        if (angular.equals(arr[i], item))
         {
-          arr.splice(i, 1); 
+          arr.splice(i, 1);
         }
       }
    }
 
    $scope.clearArray=function(arr)
    {
-     if (angular.isArray(arr)) 
+     if (angular.isArray(arr))
      {
        for (var i = arr.length; i--;)
         {
@@ -859,7 +859,7 @@ crawlApp.controller('emailjunctionCtrl', ['$scope','$parse','$window','emailjunc
    }
 
    $scope.$watch("selectedOrder.length",
-           function(newValue, oldValue) 
+           function(newValue, oldValue)
            {
              if(newValue < $scope.transactionList.length)
              {
@@ -868,7 +868,7 @@ crawlApp.controller('emailjunctionCtrl', ['$scope','$parse','$window','emailjunc
             });
        $scope.statusCheck=function()
       {
-       
+
            console.log("checkStatus");
            console.log($scope.checkStatus);
 
@@ -880,12 +880,12 @@ crawlApp.controller('emailjunctionCtrl', ['$scope','$parse','$window','emailjunc
            {
             $scope.clear_all();
            }
-      }      
+      }
 
 
 
-   
-   
+
+
 
 }]);
-</script>					
+</script>

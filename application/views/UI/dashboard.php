@@ -14,13 +14,13 @@ $base_url=base_url();
                             <div class="col-12">
                                 <div class="page-title-box">
                                     <div class="page-title-right">
-                                      
+
                                     </div>
                                     <h4 class="page-title">Dashboard</h4>
                                 </div>
                             </div>
-                        </div>     
-                        <!-- end page title --> 
+                        </div>
+                        <!-- end page title -->
 						<!----------Dashboard Notice Starts------------>
 						<div class="row">
 							<div class="col-md-12">
@@ -114,7 +114,7 @@ let’s create your first email campaign with our 40 second setup wizard.</p>
                         <!-- end row-->
 
                         <div class="row">
-                           
+
 
                             <div class="col-xl-12">
                                 <div class="card-box">
@@ -137,14 +137,14 @@ let’s create your first email campaign with our 40 second setup wizard.</p>
 
                                             <thead class="thead-light">
                                                 <tr>
-                                              <th style="width:100px">SKU</th>                                                
+                                              <th style="width:100px">SKU</th>
                                               <th>ASIN</th>
                                               <th>Order No</th>
-     										  <th style="width:100px">PO Date</th>	 
-                                              <th style="width:300px">Title</th>     
-                                              <th>Price</th>     
-                                              <th>Qty</th>     
-                                              <th>Status</th>     
+     										  <th style="width:100px">PO Date</th>
+                                              <th style="width:300px">Title</th>
+                                              <th>Price</th>
+                                              <th>Qty</th>
+                                              <th>Status</th>
                                                 </tr>
                                             </thead>
                                             <tbody >
@@ -152,14 +152,14 @@ let’s create your first email campaign with our 40 second setup wizard.</p>
 												<td>{{ord.seller_sku}} </td>
 						  <td>{{ord.asin}} </td>
 						  <td>{{ord.order_no}} </td>
-                          <td>{{ord.po_date}} </td>										
+                          <td>{{ord.po_date}} </td>
                           <td>{{ord.itm_title | limitTo:50}}</td>
                           <td>{{ord.itm_price}}</td>
 						  <td>{{ord.itm_qty}}</td>
 						  <td><span ng-if="ord.order_status=='Shipped'" class="badge badge-success">{{ord.order_status}}</span>
 						      <span ng-if="ord.order_status=='Canceled'"  class="badge badge-danger">{{ord.order_status}}</span>
 							  <span ng-if="ord.order_status=='Pending'"  class="badge badge-info">{{ord.order_status}}</span></td>
-                                                    
+
                                                 </tr>
 
                                             </tbody>
@@ -193,11 +193,11 @@ let’s create your first email campaign with our 40 second setup wizard.</p>
 													<td>{{tnx.itm_price}}</td>
 													<td style="text-align:center">{{tnx.itm_qty}}</td>
 													<td style="text-align:center">{{tnx.sold_qty}}</td>
-    
-                                                    
+
+
                                                 </tr>
 
-                                                
+
 
                                             </tbody>
                                         </table>
@@ -206,32 +206,32 @@ let’s create your first email campaign with our 40 second setup wizard.</p>
                             </div> <!-- end col -->
                         </div>
                         <!-- end row -->
-                        
+
                     </div> <!-- container -->
 
                 </div> <!-- content -->
-				
-				
-				
+
+
+
 				<script type="text/javascript">
 
 //crawlApp.factory("dashFactory", function($http,$q) {
 crawlApp.factory('dashFactory', function($http,$q,limitToFilter) {
 
-   
+
    var get_data = function () {
         var dataset_path="<?php echo $baseurl.'dashboard/get_pre_data'?>";
         var deferred = $q.defer();
         var path =dataset_path;
-        
+
         $http.get(path)
         .success(function(data,status,headers,config){deferred.resolve(data);})
         .error(function(data, status, headers, config) { deferred.reject(status);});
-        
+
         return deferred.promise;
     };
 	var inv_list_url        =   "<?php echo $baseurl."dashboard/get_top_product/"?>";
-    var get_transaction_list = function (orderby,direction,offset,limit,search) 
+    var get_transaction_list = function (orderby,direction,offset,limit,search)
     {
           var deferred = $q.defer();
           var path =inv_list_url+orderby+'/'+direction+'/'+offset+'/'+limit+'/'+search;
@@ -241,14 +241,14 @@ crawlApp.factory('dashFactory', function($http,$q,limitToFilter) {
           return deferred.promise;
     };
 
-    
+
 
   return {
     get_data:get_data,
     get_transaction_list:get_transaction_list,
   };
 });
-crawlApp.controller('dashCtrl',function($scope,$parse,$window,dashFactory,$http,$sce,$q,$timeout,Upload,limitToFilter) {        
+crawlApp.controller('dashCtrl',function($scope,$parse,$window,dashFactory,$http,$sce,$q,$timeout,Upload,limitToFilter) {
      $scope.date_filter_tmpl="date_filter_tmpl.html";
  	 $scope.transactionList=[];
      $scope.cpn={};
@@ -259,22 +259,22 @@ crawlApp.controller('dashCtrl',function($scope,$parse,$window,dashFactory,$http,
      $scope.top_10=[];
      $scope.revenue_graph=1;
      $scope.sale_graph=0;
-     $scope.campaign_graph=1;      
-      
+     $scope.campaign_graph=1;
+
       $scope.block_site=function()
         {
-            $.blockUI({ css: { 
-                border: 'none', 
-                padding: '3px', 
-                backgroundColor: '#000', 
-                '-webkit-border-radius': '10px', 
-                '-moz-border-radius': '10px', 
-                opacity: .5, 
-                color: '#fff' 
+            $.blockUI({ css: {
+                border: 'none',
+                padding: '3px',
+                backgroundColor: '#000',
+                '-webkit-border-radius': '10px',
+                '-moz-border-radius': '10px',
+                opacity: .9,
+                color: '#fff'
             }});
 
         }
-		
+
 	$scope.itemsPerPage = 10;
     $scope.currentPage = 0;
 	$scope.itm_per='10';
@@ -285,7 +285,7 @@ crawlApp.controller('dashCtrl',function($scope,$parse,$window,dashFactory,$http,
     $scope.selectedCamp=[];
     $scope.checkStatus='N';
     $scope.campList=[];
-    
+
     $scope.range = function()
     {
         var rangeSize = 4;
@@ -307,7 +307,7 @@ crawlApp.controller('dashCtrl',function($scope,$parse,$window,dashFactory,$http,
 
    $scope.prevPage = function()
    {
-        if ($scope.currentPage > 0) 
+        if ($scope.currentPage > 0)
         {
           $scope.currentPage--;
         }
@@ -331,24 +331,24 @@ crawlApp.controller('dashCtrl',function($scope,$parse,$window,dashFactory,$http,
         return $scope.currentPage === $scope.pageCount() - 1 ? "disabled" : "";
    };
 
-   $scope.pageCount = function() 
+   $scope.pageCount = function()
    {
         return Math.ceil($scope.total/$scope.itemsPerPage);
    };
 
    $scope.setPage = function(n)
    {
-        if (n > 0 && n < $scope.pageCount()) 
+        if (n > 0 && n < $scope.pageCount())
         {
           $scope.currentPage = n;
         }
    };
-   $scope.$watch("currentPage",function(newValue, oldValue) 
+   $scope.$watch("currentPage",function(newValue, oldValue)
    {
      $scope.get_transaction_list(newValue);
    });
 
-  
+
    $scope.get_transaction_list=function(currentPage)
    {
       $scope.block_site();
@@ -357,11 +357,11 @@ crawlApp.controller('dashCtrl',function($scope,$parse,$window,dashFactory,$http,
           $.unblockUI();
          if(value.status_code==1)
          {
-              
+
               $scope.transactionList=value.datalist;
 			  $scope.total=value.total;
 			  $scope.outstanding=value.outstanding;
-              
+
          }
          else
          {
@@ -369,15 +369,15 @@ crawlApp.controller('dashCtrl',function($scope,$parse,$window,dashFactory,$http,
             $scope.total=0;
             $scope.outstanding=value.outstanding;
             console.log(value);
-             
-         }     
-       }, 
-      function(reason) 
+
+         }
+       },
+      function(reason)
       {
         console.log("Reason"+reason);
       });
    }
-   
+
          $scope.get_predata = function()
          {
             var promise=dashFactory.get_data();
@@ -386,29 +386,29 @@ crawlApp.controller('dashCtrl',function($scope,$parse,$window,dashFactory,$http,
                              {
                                 if(response.status_code == '1')
                                 {
-                                   
+
                                       $scope.revenue=response.revenue[0];
 									  $scope.metrics=response.metrics;
                                       $scope.fbk_data=response.fbk_data[0];
 									  $scope.recent_ten_orders=response.recent_ten_orders;
                                       $scope.graph_data=response.graph_data;
                                       $scope.show_revenue_graph(response.graph_data.order_date,response.graph_data[0].total_amt);
-                                     
-                                    
+
+
                                 }
                                 else
                                 {
                                  swal('Error!',response.status_text,'error');
                                 }
-                             }, 
+                             },
                              function(reason)
                              {
-                             
+
                              }
                           );
-        }        
+        }
         $scope.get_predata();
-        
+
 
       $scope.visualise_data=function()
       {
@@ -422,7 +422,7 @@ crawlApp.controller('dashCtrl',function($scope,$parse,$window,dashFactory,$http,
                       data: {
                         labels: [],
                         datasets: [{
-                         label: "Graph Data",  
+                         label: "Graph Data",
                           fill: true,
                           backgroundColor: gradientStroke,
                           borderColor: '#0e76bd',
@@ -454,22 +454,22 @@ crawlApp.controller('dashCtrl',function($scope,$parse,$window,dashFactory,$http,
         yAxes: [{
             gridLines: {
                 color: "rgba(0, 0, 0, 0)",
-				
+
             },
 			stacked: true,
 			 offset: true,
-            gridThickness: 1,			
-			
+            gridThickness: 1,
+
              ticks: {
                     beginAtZero:true
-                }			
+                }
 		}],
-	}		
-        
+	}
+
     }
                     };
         $scope.myChartData = new Chart(ctx,config);
-    
+
       }
 
       $scope.visualise_data();
@@ -498,8 +498,8 @@ crawlApp.controller('dashCtrl',function($scope,$parse,$window,dashFactory,$http,
          $scope.myChartData.update();
       }
 
-     
-       
+
+
 
 });
 </script>
@@ -509,8 +509,8 @@ crawlApp.controller('dashCtrl',function($scope,$parse,$window,dashFactory,$http,
 <script>
 $(document).ready(function(){
     $('[data-toggle="popover"]').popover({
-    html: true, 
-  
-});   
+    html: true,
+
+});
 });
 </script>

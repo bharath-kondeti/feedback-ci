@@ -27,7 +27,7 @@
 								<form novalidate="" name="amzForm" ng-submit="update_amazon_api()" class="ng-pristine ng-valid ng-valid-required">
 									<h5 class="mb-4 text-uppercase"><i class="mdi mdi-account-circle mr-1"></i> Personal Info</h5>
 									<div class="row">
-											
+
 										<div class="col-md-6" ng-class="{ 'has-error' : amzForm.user_name.$invalid &amp;&amp; amz_submitted  }">
 											<div class="form-group">
 												<label for="user_name">Full Name</label>
@@ -58,7 +58,7 @@
 												<input type="text" ng-model="amz_api.mobile_no" placeholder="Mobile No" name="mobile_no" class="form-control">
 											</div>
 										</div>
-										
+
 									</div> <!-- end row -->
 
 									<h5 class="mb-3 text-uppercase bg-light p-2"><i class="mdi mdi-office-building mr-1"></i> Company Info</h5>
@@ -69,30 +69,30 @@
 												<input type="text" ng-model="amz_api.com_name" placeholder="Company Name" name="com_name" class="form-control">
 											</div>
 										</div> <!-- end col -->
-										
+
 										<div class="col-md-6" ng-class="{ 'has-error' : amzForm.com_addr.$invalid &amp;&amp; amz_submitted  }">
 											<div class="form-group">
 												<label for="com_addr">Company Address</label>
 												<input type="text" ng-model="amz_api.com_addr" placeholder="Company Address" name="com_addr" class="form-control">
 											</div>
 										</div> <!-- end col -->
-										
+
 										<div class="col-md-6">
 											<div class="form-group">
 												<label for="com_addr">Home Country VAT No</label>
 												<input type="text" ng-model="amz_api.home_vat" placeholder="VAT No" name="home_vat" class="form-control">
 											</div>
 										</div> <!-- end col -->
-										
+
 										<div class="col-md-6">
 											<div class="form-group">
 												<label for="com_addr">All EU VAT Nos</label>
 												<input type="text" ng-model="amz_api.eur_vat" placeholder="VAT No" name="eur_vat" class="form-control">
 											</div>
 										</div> <!-- end col -->
-										
+
 									</div> <!-- end row -->
-								
+
 									<div class="text-right">
 										<button type="submit" class="btn btn-success waves-effect waves-light mt-2" ng-click="amz_submitted=true" value="Update" name="submit"><i class="mdi mdi-content-save"></i> Save</button>
 									</div>
@@ -149,7 +149,7 @@
                          backgroundColor: '#000',
                          '-webkit-border-radius': '10px',
                          '-moz-border-radius': '10px',
-                         opacity: .5,
+                         opacity: .9,
                          color: '#fff'
                      },
                      baseZ: 9999

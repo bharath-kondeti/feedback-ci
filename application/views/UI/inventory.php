@@ -298,7 +298,7 @@
                   backgroundColor: '#000',
                   '-webkit-border-radius': '10px',
                   '-moz-border-radius': '10px',
-                  opacity: .5,
+                  opacity: .9,
                   color: '#fff'
 
               },baseZ:9999});

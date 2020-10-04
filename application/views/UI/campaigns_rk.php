@@ -83,24 +83,24 @@ input:checked + .slider:before {
                             <div class="col-12">
                                 <div class="page-title-box">
                                     <div class="page-title-right">
-                                      
+
                                     </div>
                                     <h4 class="page-title"></h4>
                                 </div>
                             </div>
-                        </div>     
-                        <!-- end page title --> 
-						
+                        </div>
+                        <!-- end page title -->
+
 						<!----------Notification Starts------------>
 						<div class="row">
 							<div class="col-md-12">
-								
+
 									<div class="card-box">
 										<div class="row">
 											<div class="col-md-3">
 												<h4 class="page-title">Campaigns </h4>
 											</div>
-											
+
 											<div class="col-md-6 text-center">
 												<ul class="nav nav-tabs nav-bordered nav-justified ">
 													<li class="nav-item">
@@ -110,17 +110,17 @@ input:checked + .slider:before {
 													</li>
 													<li class="nav-item">
 														<a href="#templates" data-toggle="tab" aria-expanded="true" class="nav-link">
-															Templates 
+															Templates
 														</a>
 													</li>
 													<li class="nav-item">
 														<a href="#sent_messages" data-toggle="tab" aria-expanded="true" class="nav-link">
-															Email Junction 
+															Email Junction
 														</a>
 													</li>
 													<li class="nav-item">
 														<a href="#pending" data-toggle="tab" aria-expanded="true" class="nav-link">
-															Pending 
+															Pending
 														</a>
 													</li>
 
@@ -139,8 +139,8 @@ input:checked + .slider:before {
 												</div>
 											</div>
 											<div class="col-md-1 text-right">
-												
-												
+
+
 
 												<div class="dropdown notification-list">
 													<a class="dropdown-toggle waves-effect" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="true">
@@ -192,7 +192,7 @@ input:checked + .slider:before {
 																</p>
 															</a>
 
-															
+
 														</div><div class="slimScrollBar" style="background: rgb(158, 165, 171); width: 8px; position: absolute; top: 0px; opacity: 0.4; display: none; border-radius: 7px; z-index: 99; right: 1px; height: 124.764px;"></div><div class="slimScrollRail" style="width: 8px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 7px; background: rgb(51, 51, 51); opacity: 0.2; z-index: 90; right: 1px;"></div></div>
 
 														<!-- All-->
@@ -221,7 +221,7 @@ input:checked + .slider:before {
 															<a class="dropdown-item" href="#"> <i class="fe-minus-circle text-info"></i> Draft (0)</a>
 															<a class="dropdown-item" href="#"> <i class="fe-play-circle text-primary"></i> Test (0)</a>
 															<a class="dropdown-item" href="#"> <i class="fe-pause-circle text-warning"></i> Paused (0)</a>
-															
+
 														</div>
 													</div>
 												</div>
@@ -274,7 +274,7 @@ input:checked + .slider:before {
 																		  <button class="btn btn-info" ng-click='test_email()'>Test</button>
 																		</div>
 																		</div>
-																		
+
 																		<div class="row" style="margin-bottom:10px">
 																		<div class="col-sm-10 mg-top-10" >
 																		<select class="form-control" ng-model='tst.order_id' >
@@ -298,12 +298,12 @@ input:checked + .slider:before {
 																		  </table>
 																		</div>
 																		</div>
-																  
+
 																	<!-- end -->
 																</div>
 																<div class="modal-footer">
 																	<button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Close</button>
-																   
+
 																</div>
 															</div>
 														</div>
@@ -314,7 +314,7 @@ input:checked + .slider:before {
 														<?php
 															if($store_count[0]['ttl'] == 0)
 														{
-														?>                        
+														?>
 														<!-- start page title -->
 														<div class="row">
 															<div class="col-12">
@@ -323,7 +323,7 @@ input:checked + .slider:before {
 																		<ol class="breadcrumb m-0">
 																		 </ol>
 																	</div>
-																   
+
 																</div>
 															</div>
 														</div>
@@ -332,28 +332,28 @@ input:checked + .slider:before {
 																<div class="card">
 																	<div class="card-body">
 																	  <p>Please connect a store to start importing your inventory.  <a class="btn btn-info" href="<?php echo $base_url.'manage_stores'?>">Connect Stores...</a></p>
-																	
+
 																	  </div>
 																  </div>
 															</div>
 														</div>
-															
+
 												   <?php
 													}
-												   ?> 						
+												   ?>
 													<?php
 													 if($store_count[0]['ttl'] > 0)
 													  {
-												   ?> 
+												   ?>
 														<div class="row"  ng-show='show_dash==1'>
 															<div class="col-12">
 																<div class="card">
 																	<div class="card-body">
-																		<div class="col-sm-12" style="padding:10px 10px 10px 10px">					
+																		<div class="col-sm-12" style="padding:10px 10px 10px 10px">
 																		<a href='#' style="margin-top:-20px;margin-bottom:10px; " class="btn btn-info pull-right" ng-click='clear_campaign_data();togggle_view()' >Create Campaign</a>
-																		</div>	
-												
-																		<div class="col-sm-12">				
+																		</div>
+
+																		<div class="col-sm-12">
 																			<div class="table-responsive">
 																				<table class="table-bordered table table-hover">
 																					<thead class="thead-light">
@@ -374,7 +374,7 @@ input:checked + .slider:before {
 																					</thead>
 																					<tbody  ng-repeat="idx in campList track by $index">
 																					<tr >
-																					
+
 																					<td ng-if="store_country=='IN'"><img width="20" height="20"  src="<?php echo $base_url.'assets/img/amazon_logo.png'?> "><span style="color:#a3afb7;font-weight:300" >.in</span></td>
 																					<td ng-if="store_country=='US'"><img width="20" height="20"  src="<?php echo $base_url.'assets/img/amazon_logo.png'?> "><span style="color:#a3afb7;font-weight:300" >.com</span></td>
 																					<td ng-if="store_country=='UK'"><img width="20" height="20"  src="<?php echo $base_url.'assets/img/amazon_logo.png'?> "><span style="color:#a3afb7;font-weight:300" >.co.uk</span></td>
@@ -383,27 +383,27 @@ input:checked + .slider:before {
 																					<td ng-if="store_country=='FR'"><img width="20" height="20"  src="<?php echo $base_url.'assets/img/amazon_logo.png'?> "><span style="color:#a3afb7;font-weight:300" >.fr</span></td>
 																					<td ng-if="store_country=='ES'"><img width="20" height="20"  src="<?php echo $base_url.'assets/img/amazon_logo.png'?> "><span style="color:#a3afb7;font-weight:300" >.es</span></td>
 																					<td style="position: relative;">{{idx.campaign_name}}</td>
-																					
+
 																					<td><span style="margin-left:5px"> {{idx.total_mail}} </span></td>
 																					<td><span style="margin-left:5px"> {{idx.sent_count}} </span></td>
-																					
+
 																					<td><div class="form-inline"><i   ng-click='edit_campaign(idx.campaign_id)' style="font-size:20px;margin-left: 10px" class="fe-edit"></i>
-																					<i  ng-click='delete_campaign(idx.campaign_id)' style="font-size:20px;margin-left: 10px" class="fe-trash-2"></i> 
+																					<i  ng-click='delete_campaign(idx.campaign_id)' style="font-size:20px;margin-left: 10px" class="fe-trash-2"></i>
 																					<label class="switch" style="margin-left: 10px">
 																					<input type="checkbox" name='enable_addon'  ng-model="idx.is_active" ng-true-value="'1'" ng-false-value="'0'" ng-change='change_status(idx.is_active,idx.campaign_id)'>
 																					<span class="slider round"></span>
 																					</label></div></td>
 																				   </tr>
-																			
+
 																					</tbody>
-																						 
+
 																				</table>
 																			</div>
-																		</div>					
+																		</div>
 																	</div>
 																</div>
 															</div>
-														</div>	
+														</div>
 
 														<div class="row"  ng-show='show_dash==0'>
 															<div class="col-12">
@@ -415,45 +415,45 @@ input:checked + .slider:before {
 																				<div class="col-sm-12">
 																					<div class="form-group mx-sm-12 mb-12">
 																						<div class="col-sm-3">
-																							<label for="status-select" class="mr-2">Enter Campaign name</label>  
+																							<label for="status-select" class="mr-2">Enter Campaign name</label>
 																						</div>
 																						<div class="col-sm-8">
-																							<input type="text" style="width:100%" id="camp_name" name="" class="form-control mr-10" ng-model='cmp.camp_name' placeholder="Enter Campaign name"> 
+																							<input type="text" style="width:100%" id="camp_name" name="" class="form-control mr-10" ng-model='cmp.camp_name' placeholder="Enter Campaign name">
 																						</div>
 																					</div>
 																					<br>
-																				  
+
 																					<div class="form-group mx-sm-12 mb-12">
 																						<div class="col-sm-3">
-																							<label for="status-select" class="mr-2">Customer Type</label>  
+																							<label for="status-select" class="mr-2">Customer Type</label>
 																						</div>
 																						<div class="col-sm-8">
 																							<select style="width:100%" class="form-control" ng-model='cmp.camp_type'>
 																								<option value="1">ALL</option>
 																								<option value="2">New Customer</option>
 																								<option value="3">Returning Customer</option>
-																							</select>	 
-																						</div>				 
-																					</div> 
+																							</select>
+																						</div>
+																					</div>
 																					<br>
 																					<div class="form-group mx-sm-12 mb-12">
 																						<div class="col-sm-3">
-																							<label for="status-select" class="mr-2">Fulfillment</label>  
+																							<label for="status-select" class="mr-2">Fulfillment</label>
 																						</div>
 																						<div class="col-sm-8">
 																						  <select style="width:100%" class="form-control" ng-model='cmp.camp_fulfill'>
 																							  <option value='1'>ALL</option>
 																							  <option value='2' >Match order fulfilled by Amazon</option>
 																							  <option value='3'>Match order fulfilled by Merchant</option>
-																						  </select>		 
+																						  </select>
 																						</div>
 																					</div>
-																				</div>		
-																			</div>	 
-																		</div>	 
-																	</div>		 
-																</div>	 
-															</div>	  
+																				</div>
+																			</div>
+																		</div>
+																	</div>
+																</div>
+															</div>
 
 															<div class="col-12">
 																<div class="card">
@@ -516,7 +516,7 @@ input:checked + .slider:before {
 
 																					</div>
 																				</div>
-																			</div>  
+																			</div>
 
 																			<br>
 
@@ -576,7 +576,7 @@ input:checked + .slider:before {
 																					<div  style="margin-top: 10px;">
 																						<span ng-model='cmp.camp_review'></span>
 																					</div>
-																				</div>   				  
+																				</div>
 																			</div>
 																		</div>
 																	</div>
@@ -601,25 +601,25 @@ input:checked + .slider:before {
 																							<div class="col-sm-12" style=" margin-top:20px;height: 350px;overflow-y:scroll">
 																								<div ng-bind-html="template_content"></div>
 																							</div>
-																						</div> 
+																						</div>
 																					</div>
 																					<a class="btn btn-info" style="margin-top:20px;margin-left:35px;color:#fff" ng-click='get_template_data()'> Preview &amp; Test </a>
 																					<a class="btn btn-success pull-right" style="margin-top:20px;color:#fff" ng-if='cmp.cpgn_id == 0' ng-click='create_campaign()' > Make it Live</a>
 																					<a class="btn btn-success pull-right" style="margin-top:20px;color:#fff" ng-if='cmp.cpgn_id > "0"' ng-click='create_campaign()' > Update Camapign</a>
 																				</div>
-																			</div> 
-																		</div> 
-																	</div> 
+																			</div>
+																		</div>
+																	</div>
 																	<?php
 																}
-																			   ?> 						
-																					
+																			   ?>
+
 																</div>
 															</div>
-														</div>					
-													</div>					
-												</div>					
-											</div>	
+														</div>
+													</div>
+												</div>
+											</div>
 										<!-----------------------------Templates----------------------------->
 										<div class="tab-pane" id="templates"  ng-controller='templateCtrl'>
 											<div class="row">
@@ -632,8 +632,8 @@ input:checked + .slider:before {
 														<div class="dropdown-menu icon_menu_size" aria-labelledby="dropdownMenuLink" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 35px, 0px);">
 															<a class="dropdown-item" href="#">  Amazon Templates</a>
 															<a class="dropdown-item" href="#">  eBay Templates</a>
-															
-															
+
+
 														</div>
 													</div>
 												</div>
@@ -674,11 +674,11 @@ input:checked + .slider:before {
 															<div class="col-12">
 																<div class="card">
 																	<div class="card-body">
-																	
+
 																	<div class="col-sm-12">
 																		<a href='#'   style="float:right;margin-bottom:10px;" class="btn btn-info" ng-click='clear_template();togggle_view_email()' >Create  New Template</a>
 																	</div>
-												  
+
 																		<div class="table-responsive">
 																			<table class="table-bordered table table-hover">
 																				<thead style="background-color: #f1f5f7;font-size: 12px;font-weight: 200;color: #6c757d;white-space: nowrap">
@@ -687,32 +687,32 @@ input:checked + .slider:before {
 																				<th style="color:#6c757d;width: 466px;position: relative;" >Subject</th>
 																				<th style="color:#6c757d"></th>
 																			</tr>
-																		   
+
 																				</thead>
 																				<tbody  ng-repeat="idx in template_list track by $index">
 																				<tr >
 																				<td >{{idx.template_name}}</td>
 																				<td >{{idx.subject}}</td>
 																				<td><div class="form-inline"><i   ng-click='edit_template(idx.template_id);togggle_view_email()' style="font-size:20px;margin-left: 10px" class="fe-edit"></i>
-																				<i ng-if="idx.is_default=='0'" ng-click='delete_template(idx.template_id,idx.is_default)' style="font-size:20px;margin-left: 10px" class="fe-trash-2"></i> 
-																					
+																				<i ng-if="idx.is_default=='0'" ng-click='delete_template(idx.template_id,idx.is_default)' style="font-size:20px;margin-left: 10px" class="fe-trash-2"></i>
+
 																				</div></td>
 																			   </tr>
-																			
+
 																					 </tbody>
-																					 
+
 																			</table>
 																		</div>
-									  
-										 
+
+
 
 
 																	</div>
 																</div>
 															</div>
 														</div>
-																				  
-											  
+
+
 														<div class="row" ng-show='show_dash_email==0'>
 															<div class="col-12">
 																<div class="card">
@@ -721,13 +721,13 @@ input:checked + .slider:before {
 																		<a href="" style="margin-right:10px;font-size:15px;" id="menuToggle" class="pull-right  dropdown-toggle waves-effect waves-light" data-toggle="dropdown" aria-expanded="true" ng-click='togggle_view_email()'>Close</a>
 																			<p class="control-label col-sm-3" style="margin-top:5px;font-weight:700;margin-left:20px;" for="pwd">Template Name</p>
 																	<div class="col-sm-9">
-																		<input type="text" class="form-control" style="margin-left:20px;" ng-model='tmplt.template_name' > 
+																		<input type="text" class="form-control" style="margin-left:20px;" ng-model='tmplt.template_name' >
 																	</div>
-																				 <br> 
+																				 <br>
 																	  <p class="control-label col-sm-3" style="margin-top:5px;font-weight:700;margin-left:20px;" for="pwd">Subject</p>
 																				 <div class="col-sm-9">
-																	   <input type='text' style="margin-left:20px;" class="form-control" ng-model='tmplt.subject'> </div>                            
-																	  <br> 
+																	   <input type='text' style="margin-left:20px;" class="form-control" ng-model='tmplt.subject'> </div>
+																	  <br>
 																	   <div id='editor' ></div>  </div>
 																		<br>
 																		 <br>
@@ -735,13 +735,13 @@ input:checked + .slider:before {
 																		<div class="pull-right"> <br>
 																	  <button class='btn btn-info'  style="float:right;margin:-40px 10px 10px 10px" ng-if="tmplt.is_default=='0'"  ng-click="save_template()">SAVE</button>
 																	  </div>
-																		
+
 																	 </div>
 																</div>
 														</div>
-					
+
 													<!----------------------------------->
-													
+
 													</div>
 											</div>
 										</div>
@@ -772,7 +772,7 @@ input:checked + .slider:before {
 															<!----------------------------------------->
 															<div id="navigation">
 															<!-- Navigation Menu-->
-														
+
 															</div>
 															<!----------------------------------------->
 													</form>
@@ -789,13 +789,13 @@ input:checked + .slider:before {
 													<?php
 														if($store_count[0]['ttl'] == 0)
 														{
-														 ?> 
+														 ?>
 															<div class="row">
 																<div class="col-12">
 																	<div class="card">
 																		<div class="card-body">
 																		  <p>Please connect a store to start importing your inventory.  <a class="btn btn-info" href="<?php echo $base_url.'manage_stores'?>">Connect Stores...</a></p>
-																		
+
 																		  </div>
 																	  </div>
 																</div>
@@ -805,7 +805,7 @@ input:checked + .slider:before {
 														?><?php
 														 if($store_count[0]['ttl'] > 0)
 														{
-															?> 
+															?>
 															<div class="row">
 																<div class="col-12">
 																	<div class="card">
@@ -850,16 +850,16 @@ input:checked + .slider:before {
 																									<option ng-repeat="x in campList" value='{{x.campaign_id}}'>{{x.campaign_name}}</option>
 																								</select>
 																							</div>
-																							<div class="col-sm-2 no-padding">  
+																							<div class="col-sm-2 no-padding">
 																								  <input type='text' class='form-control date_selector'  jqdatepicker name='from' placeholder='From' ng-model='filter.frm_date'>
 																							</div>
-																							<div class="col-sm-2 no-padding">  
+																							<div class="col-sm-2 no-padding">
 																									<input type='text' class='form-control date_selector'  jqdatepicker name='to' placeholder='To' ng-model='filter.to_date'>
 																							</div>
 																							<div class="col-sm-1 no-padding">
 																							  <a class='btn btn-info' ng-click='filtergrid()'>Search</a>
 																							</div>
-																						</div> 
+																						</div>
 
 																						<div class="table-responsive">
 																							<table class="table table-centered mb-0">
@@ -939,24 +939,24 @@ input:checked + .slider:before {
 																									<option ng-repeat="x in campList" value='{{x.campaign_id}}'>{{x.campaign_name}}</option>
 																								</select>
 																							</div>
-																							<div class="col-sm-1 no-padding">  
+																							<div class="col-sm-1 no-padding">
 																								  <input type='text' class='form-control date_selector'  jqdatepicker name='from' placeholder='From' ng-model='filter.frm_date'>
 																							</div>
-																							<div class="col-sm-1 no-padding">  
+																							<div class="col-sm-1 no-padding">
 																									<input type='text' class='form-control date_selector'  jqdatepicker name='to' placeholder='To' ng-model='filter.to_date'>
 																							</div>
-																							
+
 																							<div class="col-sm-1 no-padding">
 																							  <a class='btn btn-info' ng-click='filtergrid()'>Search</a>
 																							</div>
-																							
+
 																							  <div class="col-sm-2 no-padding" >
 																							  <a class='btn btn-danger' ng-click='mark_as_dns()'>Mark DNS</a>
 																							</div>
 																							<div class="col-sm-2 no-padding">
 																							  <a class='btn btn-success' ng-click='send_now()'>Send Now</a>
 																							</div>
-																						</div> 
+																						</div>
 
 																						<div class="table-responsive">
 																							<table class="table table-centered mb-0">
@@ -1033,10 +1033,10 @@ input:checked + .slider:before {
 																									<option ng-repeat="x in campList" value='{{x.campaign_id}}'>{{x.campaign_name}}</option>
 																								</select>
 																							</div>
-																							<div class="col-sm-1 no-padding">  
+																							<div class="col-sm-1 no-padding">
 																								<input type='text' class='form-control date_selector'  jqdatepicker name='from' placeholder='From' ng-model='filter.frm_date'>
 																							</div>
-																							<div class="col-sm-1 no-padding">  
+																							<div class="col-sm-1 no-padding">
 																								<input type='text' class='form-control date_selector'  jqdatepicker name='to' placeholder='To' ng-model='filter.to_date'>
 																							</div>
 																							<div class="col-sm-1 no-padding">
@@ -1048,7 +1048,7 @@ input:checked + .slider:before {
 																							<div class="col-sm-2 no-padding">
 																								<a class='btn btn-success' ng-click='rmv_dns()'>Remove DNS</a>
 																							</div>
-																						</div> 
+																						</div>
 																						<div class="table-responsive">
 																							<table class="table table-centered mb-0">
 																								<thead class="thead-light">
@@ -1089,9 +1089,9 @@ input:checked + .slider:before {
 																									  <span ng-if="tnx.is_sent=='0'" class='label label-warning'>Not sent</span>
 																										<span ng-if="tnx.is_sent=='1'" class='label label-success'>Sent</span>
 																									</td>
-																									
+
 																									<td style='width:200px'>{{tnx.campaign_name}}</td>
-																									
+
 																									<td style='width:200px'>{{tnx.buyer_name}}<span ng-if="tnx.buyer_name.length==0 ">-------</span></td>
 																									<td>{{tnx.seller_sku}}</td>
 																									<td>{{tnx.fbk_comment}}<span ng-if='tnx.fbk_comment.length==0'>------</span></td>
@@ -1111,7 +1111,7 @@ input:checked + .slider:before {
 																						</li>
 																					</ul>
 																				</div>
-																			</div> 
+																			</div>
 																		</div>
 																	</div>
 																</div>
@@ -1119,7 +1119,7 @@ input:checked + .slider:before {
 														</div>
 														<?php
 														}
-														?> 
+														?>
 													</div>
 												</div>
 											<!-----------------------------------------------email Junction Data--------------->
@@ -1152,7 +1152,7 @@ input:checked + .slider:before {
 															<!----------------------------------------->
 															<div id="navigation">
 															<!-- Navigation Menu-->
-														
+
 															</div>
 															<!----------------------------------------->
 													</form>
@@ -1170,24 +1170,24 @@ input:checked + .slider:before {
 										</div>
 										<!-----------------------------sent_messages----------------------------->
 									</div>
-										
-	
+
+
 									</div> <!-- end card-box-->
 								</div>
-								
-								
+
+
 						</div>
                         <!----------Notification Ends------------>
 						<!------------------------------------------------->
 						<!------------------------------------------------->
-                        
-                        
+
+
                     </div> <!-- container -->
 
                 </div> <!-- content -->
-				
-				
-				
+
+
+
 <script type="text/javascript">
 
 crawlApp.factory("campaignFactory", function($http,$q,Upload) {
@@ -1195,11 +1195,11 @@ crawlApp.factory("campaignFactory", function($http,$q,Upload) {
         var dataset_path="<?php echo $baseurl.'manage_campaign/get_pre_data'?>";
         var deferred = $q.defer();
         var path =dataset_path;
-        
+
         $http.get(path)
         .success(function(data,status,headers,config){deferred.resolve(data);})
         .error(function(data, status, headers, config) { deferred.reject(status);});
-        
+
         return deferred.promise;
     };
 
@@ -1209,13 +1209,13 @@ crawlApp.factory("campaignFactory", function($http,$q,Upload) {
          return $http({
                       method: "post",
                       url: search_path,
-                      data: 
+                      data:
                       {
                         campaign_id:campaign_id
-                        
+
                       }
-                     }); 
-                   
+                     });
+
     };
      var get_products=function(country,brand,key_word,fc_code)
     {
@@ -1223,43 +1223,43 @@ crawlApp.factory("campaignFactory", function($http,$q,Upload) {
          return $http({
                       method: "post",
                       url: search_path,
-                      data: 
+                      data:
                       {
                         country:country,
                         brand:brand,
                         key_word:key_word,
 						fc_code:fc_code
                       }
-                     }); 
-                   
+                     });
+
     };
-	
+
 	var get_brands=function(country_code)
     {
        var search_path="<?php echo $baseurl.'manage_campaign/get_brands_for_country/';?>";
          return $http({
                       method: "post",
                       url: search_path,
-                      data: 
+                      data:
                       {
                         country_code:country_code
                       }
-                     }); 
-                   
+                     });
+
     };
-  
+
     var delete_campaign=function(campaign_id)
     {
        var search_path="<?php echo $baseurl.'manage_campaign/delete_campaign/';?>";
          return $http({
                       method: "post",
                       url: search_path,
-                      data: 
+                      data:
                       {
                         campaign_id:campaign_id
                       }
-                     }); 
-                   
+                     });
+
     };
     var edit_campaign=function(campaign_id)
     {
@@ -1267,42 +1267,42 @@ crawlApp.factory("campaignFactory", function($http,$q,Upload) {
          return $http({
                       method: "post",
                       url: search_path,
-                      data: 
+                      data:
                       {
                         campaign_id:campaign_id
                       }
-                     }); 
-                   
+                     });
+
     };
-	
+
 	var preview_email=function(template_id,order_id)
     {
        var search_path="<?php echo $baseurl.'manage_campaign/preview_email/';?>";
          return $http({
                       method: "post",
                       url: search_path,
-                      data: 
+                      data:
                       {
                         template_id:template_id,
                         order_id:order_id
                       }
-                     }); 
-                   
+                     });
+
     };
-	
+
 	var change_status=function(active,campaign_id)
     {
        var search_path="<?php echo $baseurl.'manage_campaign/change_status/';?>";
          return $http({
                       method: "post",
                       url: search_path,
-                      data: 
+                      data:
                       {
                         w_status:active,
 						campaign_id:campaign_id,
                       }
-                     }); 
-                   
+                     });
+
     };
 
     var test_email=function(template_id,order_id,email)
@@ -1311,18 +1311,18 @@ crawlApp.factory("campaignFactory", function($http,$q,Upload) {
          return $http({
                       method: "post",
                       url: search_path,
-                      data: 
+                      data:
                       {
                         template_id:template_id,
                         order_id:order_id,
                         email:email
                       }
-                     }); 
-                   
+                     });
+
     };
 
 
-	
+
 
 
   return {
@@ -1337,7 +1337,7 @@ crawlApp.factory("campaignFactory", function($http,$q,Upload) {
     get_brands:get_brands
   };
 });
-  crawlApp.controller("campaignCtrl",function campaignCtrl($window,$scope,campaignFactory,$sce,$q,$timeout,Upload) 
+  crawlApp.controller("campaignCtrl",function campaignCtrl($window,$scope,campaignFactory,$sce,$q,$timeout,Upload)
   {
        $scope.cmp={};
        $scope.tmp={};
@@ -1391,13 +1391,13 @@ crawlApp.factory("campaignFactory", function($http,$q,Upload) {
        $scope.selectedProduct=[];
        $scope.product_list=[];
        $scope.checkStatus='N';
-    
+
         $scope.togggle_view=function()
         {
           if($scope.show_dash==0)
           {
             $scope.show_dash=1;
-			 
+
 		}
           else
           {
@@ -1405,13 +1405,13 @@ crawlApp.factory("campaignFactory", function($http,$q,Upload) {
           }
           // console.log($scope.show_dash);
         }
-		
-		
-	
+
+
+
         $scope.clear_campaign_data=function()
         {
-			
-		  $scope.cmp.cpgn_id='0';	
+
+		  $scope.cmp.cpgn_id='0';
           $scope.cmp.camp_name='';
           $scope.cmp.camp_desc='';
           $scope.cmp.camp_brand='ALL';
@@ -1419,7 +1419,7 @@ crawlApp.factory("campaignFactory", function($http,$q,Upload) {
           $scope.cmp.prod_search='';
           $scope.cmp.camp_country='<?php echo $store_country ?>';
           $scope.clear_all();
-          $scope.selectedProduct=[]; 
+          $scope.selectedProduct=[];
 		  $scope.product_list=[];
           $scope.tmp='0';
           $scope.template_content='';
@@ -1435,17 +1435,17 @@ crawlApp.factory("campaignFactory", function($http,$q,Upload) {
           $scope.cmp.camp_am_pm='1';
           $scope.cmp.feedback_status='1';
 		  $scope.tst.order_id='ALL';
-		  
+
         }
-		
-       
+
+
         $scope.open_campaign_ui=function()
         {
           $('#menuToggle').addClass('active');
                           $('body').addClass(' body-push-toleft');
                           $('#theMenu').addClass('menu-open');
         }
-		
+
         $scope.load_template=function(template_id)
         {
           if(template_id != '0')
@@ -1455,9 +1455,9 @@ crawlApp.factory("campaignFactory", function($http,$q,Upload) {
             {
               if($scope.template_list[i].template_id==template_id)
               {
-                $scope.template_content=$sce.trustAsHtml($scope.template_list[i].template_content);   
+                $scope.template_content=$sce.trustAsHtml($scope.template_list[i].template_content);
               }
-            }  
+            }
           }
           //CKEDITOR.instances.editor.setData($scope.tmp);
         }
@@ -1469,7 +1469,7 @@ crawlApp.factory("campaignFactory", function($http,$q,Upload) {
             {
               if($scope.template_list[i].template_id==$scope.tmp)
               {
-                $scope.tst.email_content=$sce.trustAsHtml($scope.template_list[i].template_content);   
+                $scope.tst.email_content=$sce.trustAsHtml($scope.template_list[i].template_content);
                 $scope.tst.template_id=$scope.tmp;
                 $scope.tst.subject=$scope.template_list[i].subject;
 			    $("#Preview_email_box").modal('show');
@@ -1486,7 +1486,7 @@ crawlApp.factory("campaignFactory", function($http,$q,Upload) {
            if($scope.selectedProduct.length > 0)
           {
                $scope.block_site();
-    
+
                file=$scope.cmp.camp_attachment;
                   var upload = Upload.upload({
                   url: '<?php echo $baseurl.'manage_campaign/create_campaign/';?>',
@@ -1505,7 +1505,7 @@ crawlApp.factory("campaignFactory", function($http,$q,Upload) {
                     file.result = response.data;
 
                     });
-                    
+
                   }
                   if(response.data.status_code == '1')
                    {
@@ -1524,19 +1524,19 @@ crawlApp.factory("campaignFactory", function($http,$q,Upload) {
                   if(angular.isDefined(file))
                   file.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
                 });
-           } 
+           }
            else
            {
               swal("Error!","No product has been selected ",'error');
            }
 
         }
-		
-		
+
+
         $scope.load_product=function()
         {
             var blk='#product_list';
-            $(blk).block({message:'Loading Product'  }); 
+            $(blk).block({message:'Loading Product'  });
             // $scope.clear_all();
             // $scope.selectedProduct=[];
             $scope.cmp.camp_country='<?php echo $store_country ?>';
@@ -1545,47 +1545,47 @@ crawlApp.factory("campaignFactory", function($http,$q,Upload) {
               .success(
                       function( html )
                       {
-                           $(blk).unblock(); 
+                           $(blk).unblock();
                            if(html.status_code=='0')
                            {
                              swal('Error!',html.status_text,'error');
                            }
                            if(html.status_code == '1')
-                           { 
+                           {
                              console.log("LOAD PRODUCT");
                              console.log($scope.selectedProduct);
-                             $scope.product_list=html.payload; 
+                             $scope.product_list=html.payload;
                              console.log($scope.selectedProduct);
                              console.log("LOAD PRODUCT ENDs");
                            }
                       }
                 )
-           
+
         }
         $scope.load_country_wise_brand=function()
         {
           $scope.cmp.camp_country='<?php echo $store_country ?>';
             var blk='#product_list';
-            $(blk).block({message:'Loading Product'}); 
+            $(blk).block({message:'Loading Product'});
             campaignFactory.get_brands($scope.cmp.camp_country)
               .success(
                       function( html )
                       {
-                           $(blk).unblock(); 
+                           $(blk).unblock();
                            if(html.status_code=='0')
                            {
                              swal('Error!',html.status_text,'error');
                            }
                            if(html.status_code == '1')
-                           { 
-                             $scope.brand_list=html.brand_list; 
+                           {
+                             $scope.brand_list=html.brand_list;
                              $scope.product_list=html.product_list;
                            }
                       }
                 )
-           
+
         }
-    
+
         $scope.preview_email=function()
         {
             $scope.block_site();
@@ -1599,41 +1599,41 @@ crawlApp.factory("campaignFactory", function($http,$q,Upload) {
                              swal('Error!',html.status_text,'error');
                            }
                            if(html.status_code == '1')
-                           { 
+                           {
                              $scope.tst.email_content=$sce.trustAsHtml(html.email_content);
                            }
                       }
                 )
-           
+
         }
-		
-	
+
+
       $scope.test_email=function()
         {
-            
+
             $scope.block_site();
             campaignFactory.test_email($scope.tst.template_id,$scope.tst.order_id,$scope.tst.email)
               .success(
                       function( html )
                       {
                         $.unblockUI();
-              
+
                            if(html.status_code=='0')
                            {
                              swal('Error!',html.status_text,'error');
                            }
                            if(html.status_code == '1')
-                           { 
-                            swal('Success!',html.status_text,'success'); 
+                           {
+                            swal('Success!',html.status_text,'success');
                            }
                       }
                 )
-           
+
         }
        $scope.edit_campaign=function(campaign_id)
         {
-           $scope.block_site(); 
-		   $scope.tst.order_id='ALL'; 
+           $scope.block_site();
+		   $scope.tst.order_id='ALL';
            campaignFactory.edit_campaign(campaign_id)
               .success(
                       function( html )
@@ -1644,7 +1644,7 @@ crawlApp.factory("campaignFactory", function($http,$q,Upload) {
                              swal('Error!',html.status_text,'error');
                            }
                            if(html.status_code == '1')
-                           { 
+                           {
                              $scope.cmp=html.campaign_detail[0];
                              $scope.cmp.camp_hour=parseInt($scope.cmp.camp_hour);
                              $scope.cmp.camp_days=parseInt($scope.cmp.camp_days);
@@ -1653,23 +1653,23 @@ crawlApp.factory("campaignFactory", function($http,$q,Upload) {
                              $scope.brand_list=html.brand_list;
                              $scope.clear_all();
                              $scope.selectedProduct=[];
-                             
+
                              $scope.tmp=$scope.cmp.template_id;
                              $scope.load_template($scope.tmp);
                              if(html.selected_product.length > 0)
                              {
                                for(i=0;i< html.selected_product.length;i++)
                                 {
-                                  $scope.addToArray($scope.selectedProduct,html.selected_product[i]);  
+                                  $scope.addToArray($scope.selectedProduct,html.selected_product[i]);
                                 }
-                             }   
-                            
+                             }
+
                              // console.log(html.selected_product);
                              $scope.show_dash=0;
                            }
                       }
                 )
-           
+
         }
  $scope.delete_campaign=function(campaign_id)
         {
@@ -1696,30 +1696,30 @@ crawlApp.factory("campaignFactory", function($http,$q,Upload) {
                              $scope.campList=html.campaign_list;
                            }
                            if(html.status_code == '1')
-                           { 
+                           {
                             swal('Success!',html.status_text,'success');
                              $scope.campList=html.campaign_list;
                            }
                       }
-                );              
-                    
+                );
+
                 } else {
                     swal("Cancelled", "Delete cancelled:)", "error");
                 }
             });
-         
-           
+
+
         }
-		
-		
+
+
 		$scope.change_status=function(is_active,campaign_id)
         {
 			if(is_active==1)
 			{
-		    var sts='Activate';		
+		    var sts='Activate';
 			}else
 			{
-				 var sts='Deactivate';	
+				 var sts='Deactivate';
 			}
 			  var msg= "Are you sure to "+sts+" campaign?";
            swal({
@@ -1742,38 +1742,38 @@ crawlApp.factory("campaignFactory", function($http,$q,Upload) {
                            if(html.status_code=='0')
                            {
                              swal('Error!',html.status_text,'error');
-                             
+
                            }
                            if(html.status_code == '1')
-                           { 
+                           {
                             swal('Success!',html.status_text,'success');
                             $scope.campList=html.campaign_list;
                            }
                       }
-                );              
-                    
+                );
+
                 } else {
                     swal("Cancelled", "cancelled:)", "error");
 					$scope.campList=html.campaign_list;
                 }
             });
-         
-           
+
+
         }
 
-     
 
-       
+
+
       $scope.block_site=function()
         {
-            $.blockUI({ css: { 
-                border: 'none', 
-                padding: '3px', 
-                backgroundColor: '#000', 
-                '-webkit-border-radius': '10px', 
-                '-moz-border-radius': '10px', 
-                opacity: .5, 
-                color: '#fff' 
+            $.blockUI({ css: {
+                border: 'none',
+                padding: '3px',
+                backgroundColor: '#000',
+                '-webkit-border-radius': '10px',
+                '-moz-border-radius': '10px',
+                opacity: .9,
+                color: '#fff'
             },baseZ:9999});
 
         }
@@ -1799,35 +1799,35 @@ crawlApp.factory("campaignFactory", function($http,$q,Upload) {
                                 {
                                  swal('Error!',response.status_text,'error');
                                 }
-                             }, 
+                             },
                              function(reason)
                              {
                                $scope.serverErrorHandler(reason);
                              }
                           );
-        }        
-        $scope.get_predata();     
+        }
+        $scope.get_predata();
 
   $scope.select_all=function()
    {
-      
-      
+
+
       for(i=0;i< $scope.product_list.length;i++)
       {
-        $scope.addToArray($scope.selectedProduct,$scope.product_list[i]);  
+        $scope.addToArray($scope.selectedProduct,$scope.product_list[i]);
       }
       $scope.selectcount=$scope.selectedProduct.length;
       $scope.totalcount=$scope.total;
-      
+
    }
 
    $scope.clear_all=function()
    {
       $scope.clearArray($scope.selectedProduct);
    }
-   
-  
-   
+
+
+
    $scope.checkExist=function(arr,item)
    {
       if (angular.isArray(arr)) {
@@ -1843,7 +1843,7 @@ crawlApp.factory("campaignFactory", function($http,$q,Upload) {
    $scope.addToArray=function(arr,item)
    {
       arr = angular.isArray(arr) ? arr : [];
-      if(!$scope.checkExist(arr, item)) 
+      if(!$scope.checkExist(arr, item))
       {
           arr.push(item);
       }
@@ -1851,18 +1851,18 @@ crawlApp.factory("campaignFactory", function($http,$q,Upload) {
    $scope.removeFromArray=function(arr,item)
    {
       arr = angular.isArray(arr) ? arr : [];
-      for (var i = arr.length; i--;) 
+      for (var i = arr.length; i--;)
       {
-        if (angular.equals(arr[i], item)) 
+        if (angular.equals(arr[i], item))
         {
-          arr.splice(i, 1); 
+          arr.splice(i, 1);
         }
       }
    }
 
    $scope.clearArray=function(arr)
    {
-     if (angular.isArray(arr)) 
+     if (angular.isArray(arr))
      {
        for (var i = arr.length; i--;)
         {
@@ -1872,7 +1872,7 @@ crawlApp.factory("campaignFactory", function($http,$q,Upload) {
    }
 
    $scope.$watch("selectedProduct.length",
-           function(newValue, oldValue) 
+           function(newValue, oldValue)
            {
              if(newValue < $scope.product_list.length)
              {
@@ -1882,7 +1882,7 @@ crawlApp.factory("campaignFactory", function($http,$q,Upload) {
 
     $scope.statusCheck=function()
       {
-       
+
        if($scope.checkStatus=='Y')
            {
             $scope.select_all();
@@ -1891,17 +1891,17 @@ crawlApp.factory("campaignFactory", function($http,$q,Upload) {
            {
             $scope.clear_all();
            }
-      }        
+      }
 
 
 
-       
+
 		$( document ).ready(function() {
-CKEDITOR.instances.editor.on('change', function() { 
+CKEDITOR.instances.editor.on('change', function() {
  $scope.tmplt.template_content_html=$sce.trustAsHtml(CKEDITOR.instances.editor.getData());
-    //alert("TEST");		
-   });  
-});   
+    //alert("TEST");
+   });
+});
 
 });
 
@@ -1911,11 +1911,11 @@ crawlApp.factory("templateFactory", function($http,$q,Upload) {
         var dataset_path="<?php echo $baseurl.'template/get_pre_data'?>";
         var deferred = $q.defer();
         var path =dataset_path;
-        
+
         $http.get(path)
         .success(function(data,status,headers,config){deferred.resolve(data);})
         .error(function(data, status, headers, config) { deferred.reject(status);});
-        
+
         return deferred.promise;
     };
 
@@ -1925,12 +1925,12 @@ crawlApp.factory("templateFactory", function($http,$q,Upload) {
          return $http({
                       method: "post",
                       url: search_path,
-                      data: 
+                      data:
                       {
                         template_id:template_id
                       }
-                     }); 
-                   
+                     });
+
     };
      var save_template=function(template_data)
     {
@@ -1938,13 +1938,13 @@ crawlApp.factory("templateFactory", function($http,$q,Upload) {
          return $http({
                       method: "post",
                       url: search_path,
-                      data: 
+                      data:
                       {
-						
+
                         template_data:angular.toJson(template_data)
                       }
-                     }); 
-                   
+                     });
+
     };
     var delete_template=function(template_id)
     {
@@ -1952,16 +1952,16 @@ crawlApp.factory("templateFactory", function($http,$q,Upload) {
          return $http({
                       method: "post",
                       url: search_path,
-                      data: 
+                      data:
                       {
                         template_id:template_id
                       }
-                     }); 
-                   
+                     });
+
     };
-	 
-    
-	
+
+
+
 
 
   return {
@@ -1971,9 +1971,9 @@ crawlApp.factory("templateFactory", function($http,$q,Upload) {
 	delete_template:delete_template
   };
 });
-crawlApp.controller("templateCtrl",function templateCtrl($window,$scope,templateFactory,$sce,$q,$timeout,Upload) 
+crawlApp.controller("templateCtrl",function templateCtrl($window,$scope,templateFactory,$sce,$q,$timeout,Upload)
   {
-      
+
        $scope.tmp={};
 	   $scope.tmplt={};
        $scope.tmp.test_html=CKEDITOR.instances.editor.getData();
@@ -1985,40 +1985,40 @@ crawlApp.controller("templateCtrl",function templateCtrl($window,$scope,template
        $scope.tmplt.template_content_html='';
 	   $scope.block_site=function()
         {
-            $.blockUI({ css: { 
-                border: 'none', 
-                padding: '3px', 
-                backgroundColor: '#000', 
-                '-webkit-border-radius': '10px', 
-                '-moz-border-radius': '10px', 
-                opacity: .5, 
+            $.blockUI({ css: {
+                border: 'none',
+                padding: '3px',
+                backgroundColor: '#000',
+                '-webkit-border-radius': '10px',
+                '-moz-border-radius': '10px',
+                opacity: .9,
                 color: '#fff'
 
             },baseZ:9999});
 
         }
-	 
+
 	    $scope.togggle_view_email=function()
         {
           if($scope.show_dash_email==0)
           {
             $scope.show_dash_email=1;
-			 
+
 		}
           else
           {
             $scope.show_dash_email=0;
           }
         }
-		
-		
+
+
         $scope.open_campaign_ui=function()
         {
           $('#menuToggle').addClass('active');
                           $('body').addClass(' body-push-toleft');
                           $('#theMenu').addClass('menu-open');
         }
-		
+
         $scope.load_template=function(template_id)
         {
           if(template_id != '0')
@@ -2029,9 +2029,9 @@ crawlApp.controller("templateCtrl",function templateCtrl($window,$scope,template
             {
               if($scope.template_list[i].template_id==template_id)
               {
-                $scope.template_content=$sce.trustAsHtml($scope.template_list[i].template_content);   
+                $scope.template_content=$sce.trustAsHtml($scope.template_list[i].template_content);
               }
-            }  
+            }
           }
         }
         $scope.get_template_data=function()
@@ -2042,7 +2042,7 @@ crawlApp.controller("templateCtrl",function templateCtrl($window,$scope,template
             {
               if($scope.template_list[i].template_id==$scope.tmp)
               {
-                $scope.tst.email_content=$sce.trustAsHtml($scope.template_list[i].template_content);   
+                $scope.tst.email_content=$sce.trustAsHtml($scope.template_list[i].template_content);
                 $scope.tst.template_id=$scope.tmp;
                 $scope.tst.subject=$scope.template_list[i].subject;
 			    $("#Preview_email_box").modal('show');
@@ -2054,7 +2054,7 @@ crawlApp.controller("templateCtrl",function templateCtrl($window,$scope,template
             swal('Error!','Please select any template','error');
           }
         }
-        
+
        $scope.get_predata = function()
          {
 			  $scope.block_site();
@@ -2071,16 +2071,16 @@ crawlApp.controller("templateCtrl",function templateCtrl($window,$scope,template
                                 {
                                  swal('Error!',response.status_text,'error');
                                 }
-                             }, 
+                             },
                              function(reason)
                              {
                                $scope.serverErrorHandler(reason);
                              }
                           );
-        }        
-        $scope.get_predata();     
+        }
+        $scope.get_predata();
 
- 
+
 $scope.clear_template=function()
 {
   $scope.tmplt.tmp_id='';
@@ -2113,33 +2113,33 @@ $scope.clear_template=function()
                            }
                            if(html.status_code == '1')
                            {
-                             swal('Success!',html.status_text,'success'); 
-                             // $scope.template_list=html.payload; 
-                             $scope.get_predata(); 
+                             swal('Success!',html.status_text,'success');
+                             // $scope.template_list=html.payload;
+                             $scope.get_predata();
                            }
                       }
                 )
-           }   
-       
+           }
+
         }
-       
+
       $scope.block_site=function()
         {
-            $.blockUI({ css: { 
-                border: 'none', 
-                padding: '3px', 
-                backgroundColor: '#000', 
-                '-webkit-border-radius': '10px', 
-                '-moz-border-radius': '10px', 
-                opacity: .5, 
-                color: '#fff' 
+            $.blockUI({ css: {
+                border: 'none',
+                padding: '3px',
+                backgroundColor: '#000',
+                '-webkit-border-radius': '10px',
+                '-moz-border-radius': '10px',
+                opacity: .9,
+                color: '#fff'
             }});
 
         }
-		
+
 		$scope.edit_template=function(template_id)
         {
-           $scope.block_site();        
+           $scope.block_site();
             templateFactory.edit_template(template_id)
               .success(
                       function( html )
@@ -2150,19 +2150,19 @@ $scope.clear_template=function()
                              swal('Error!',html.status_text,'error');
                            }
                            if(html.status_code == '1')
-                           { 
+                           {
                              $scope.tmplt=html.template_detail[0];
 							 CKEDITOR.instances.editor.setData($scope.tmplt.template_content);
 							 $scope.tmplt.template_content_html=$sce.trustAsHtml($scope.tmplt.template_content);
 							 $scope.tmplt.tmp_id=$scope.tmplt.template_id;
-                            
+
                              // console.log(html.selected_product);
                              $scope.show_dash_email=0;
                            }
                       }
                 )
-           
-        }		
+
+        }
     $scope.delete_template=function(template_id,is_default)
     {
 		//console.log(is_default);
@@ -2191,47 +2191,47 @@ $scope.clear_template=function()
                                     function( html )
                                     {
                                       console.log(html);
-                                      $.unblockUI(); 
+                                      $.unblockUI();
                                         if(html.status_code==0)
                                         {
                                            	swal('Error!',html.status_text,'error');
-                                        }                    
+                                        }
                                         else if(html.status_code==1)
                                         {
                                         	$scope.get_predata();
                                           	swal('Success!',html.status_text,'success');
                                         }
-                                        
+
                                     }
                           )
                           .error(
                                  function(data, status, headers, config)
                                       {
-                                           
+
                                        }
 
-                          );              
-                    
+                          );
+
                 } else {
                     swal("Cancelled", "Delete cancelled:)", "error");
                 }
-            }); 
+            });
 		}
     }
 
 $( document ).ready(function() {
-CKEDITOR.instances.editor.on('change', function() { 
+CKEDITOR.instances.editor.on('change', function() {
  $scope.tmplt.template_content_html=$sce.trustAsHtml(CKEDITOR.instances.editor.getData());
-   });  
-});   
+   });
+});
 
 });
 crawlApp.factory('emailjunctionFactory', ['$http', '$q','limitToFilter', function($http,$q,limitToFilter) {
-    
+
     var order_list_url        =   "<?php echo $baseurl."my_campaign/get_campaign_order/"?>";
-    
-    
-    var get_transaction_list = function (cntxt,orderby,direction,offset,limit,search) 
+
+
+    var get_transaction_list = function (cntxt,orderby,direction,offset,limit,search)
     {
           var deferred = $q.defer();
           var path =order_list_url+cntxt+'/'+orderby+'/'+direction+'/'+offset+'/'+limit+'/'+search;
@@ -2245,11 +2245,11 @@ crawlApp.factory('emailjunctionFactory', ['$http', '$q','limitToFilter', functio
         var dataset_path="<?php echo $baseurl.'my_campaign/get_pre_data'?>";
         var deferred = $q.defer();
         var path =dataset_path;
-        
+
         $http.get(path)
         .success(function(data,status,headers,config){deferred.resolve(data);})
         .error(function(data, status, headers, config) { deferred.reject(status);});
-        
+
         return deferred.promise;
     };
     var send_now=function(tnx)
@@ -2258,10 +2258,10 @@ crawlApp.factory('emailjunctionFactory', ['$http', '$q','limitToFilter', functio
                       method: "post",
                       url:"<?php echo $baseurl.'my_campaign/send_now'?>",
                       data:{
-                        cmp:angular.toJson(tnx)  
+                        cmp:angular.toJson(tnx)
                       }
-                     }); 
-                   
+                     });
+
     };
     var mark_as_dns=function(selectedOrder)
     {
@@ -2271,8 +2271,8 @@ crawlApp.factory('emailjunctionFactory', ['$http', '$q','limitToFilter', functio
                       data:{
                           selected_order:angular.toJson(selectedOrder)
                       }
-                     }); 
-                   
+                     });
+
     };
 
    var rmv_dns=function(selectedOrder)
@@ -2283,23 +2283,23 @@ crawlApp.factory('emailjunctionFactory', ['$http', '$q','limitToFilter', functio
                       data:{
                           selected_order:angular.toJson(selectedOrder)
                       }
-                     }); 
-                   
+                     });
+
     };
-	
-	
-    
+
+
+
     return {
         get_transaction_list:get_transaction_list,
         get_data:get_data,
         send_now:send_now,
         mark_as_dns:mark_as_dns,
-		rmv_dns:rmv_dns        
-        
+		rmv_dns:rmv_dns
+
     };
-    
+
 }]);
-crawlApp.controller('emailjunctionCtrl', ['$scope','$parse','$window','emailjunctionFactory','$http','limitToFilter',function($scope,$parse,$window,emailjunctionFactory,$http,limitToFilter) {        
+crawlApp.controller('emailjunctionCtrl', ['$scope','$parse','$window','emailjunctionFactory','$http','limitToFilter',function($scope,$parse,$window,emailjunctionFactory,$http,limitToFilter) {
       $scope.transactionList=[];
       $scope.context="schduled_mail";
       $scope.outstanding='';
@@ -2316,22 +2316,22 @@ crawlApp.controller('emailjunctionCtrl', ['$scope','$parse','$window','emailjunc
 
       }
       $scope.reset();
-   
+
 
   $scope.block_site=function()
         {
-            $.blockUI({ css: { 
-                border: 'none', 
-                padding: '3px', 
-                backgroundColor: '#000', 
-                '-webkit-border-radius': '10px', 
-                '-moz-border-radius': '10px', 
-                opacity: .5, 
-                color: '#fff' 
+            $.blockUI({ css: {
+                border: 'none',
+                padding: '3px',
+                backgroundColor: '#000',
+                '-webkit-border-radius': '10px',
+                '-moz-border-radius': '10px',
+                opacity: .9,
+                color: '#fff'
             }});
 
         }
-      
+
     $scope.itemsPerPage = 25;
     $scope.itm_per='25';
     $scope.currentPage = 0;
@@ -2341,7 +2341,7 @@ crawlApp.controller('emailjunctionCtrl', ['$scope','$parse','$window','emailjunc
     $scope.filterquery=[];
     $scope.selectedOrder=[];
     $scope.order={};
-    
+
     $scope.range = function()
     {
         var rangeSize = 8;
@@ -2363,7 +2363,7 @@ crawlApp.controller('emailjunctionCtrl', ['$scope','$parse','$window','emailjunc
 
    $scope.prevPage = function()
    {
-        if ($scope.currentPage > 0) 
+        if ($scope.currentPage > 0)
         {
           $scope.currentPage--;
         }
@@ -2389,20 +2389,20 @@ crawlApp.controller('emailjunctionCtrl', ['$scope','$parse','$window','emailjunc
         return $scope.currentPage === $scope.pageCount() - 1 ? "disabled" : "";
    };
 
-   $scope.pageCount = function() 
+   $scope.pageCount = function()
    {
         return Math.ceil($scope.total/$scope.itemsPerPage);
    };
 
    $scope.setPage = function(n)
    {
-        if (n > 0 && n < $scope.pageCount()) 
+        if (n > 0 && n < $scope.pageCount())
         {
           $scope.currentPage = n;
         }
    };
 
-   $scope.$watch("currentPage",function(newValue, oldValue) 
+   $scope.$watch("currentPage",function(newValue, oldValue)
    {
      $scope.get_transaction_list(newValue);
    });
@@ -2411,23 +2411,23 @@ crawlApp.controller('emailjunctionCtrl', ['$scope','$parse','$window','emailjunc
     $scope.context=str;
     if($scope.currentPage==0)
     {
-       $scope.currentPage=0; 
+       $scope.currentPage=0;
        $scope.get_transaction_list(0);
     }
     else
     {
       $scope.currentPage=0;
     }
-    
+
     //
    }
    $scope.change_item_per_page=function()
    {
-    
+
     $scope.itemsPerPage=parseInt($scope.itm_per);
     $scope.get_transaction_list($scope.currentPage);
    }
-   
+
    $scope.get_transaction_list=function(currentPage)
    {
       $scope.block_site();
@@ -2436,11 +2436,11 @@ crawlApp.controller('emailjunctionCtrl', ['$scope','$parse','$window','emailjunc
           $.unblockUI();
          if(value.status_code==1)
          {
-              
+
               $scope.transactionList=value.datalist;
               $scope.total=value.total;
               $scope.outstanding=value.outstanding;
-              
+
          }
          else
          {
@@ -2448,10 +2448,10 @@ crawlApp.controller('emailjunctionCtrl', ['$scope','$parse','$window','emailjunc
             $scope.total=0;
             $scope.outstanding=value.outstanding;
             console.log(value);
-             
-         }     
-       }, 
-      function(reason) 
+
+         }
+       },
+      function(reason)
       {
         console.log("Reason"+reason);
       });
@@ -2483,27 +2483,27 @@ crawlApp.controller('emailjunctionCtrl', ['$scope','$parse','$window','emailjunc
                              swal('Error!',html.status_text,'error');
                            }
                            if(html.status_code == '1')
-                           { 
+                           {
                              $scope.get_transaction_list($scope.currentPage);
-                              swal('Success!',html.status_text,'success'); 
+                              swal('Success!',html.status_text,'success');
                            }
                       }
                 )
-                      
+
                 } else {
                     swal("Cancelled", "update cancelled:)", "error");
                 }
             });
-         
-                
+
+
              }
      else
      {
         swal('Error!',"There is no order selected",'error');
-     } 
-     
+     }
+
    }
-   
+
    $scope.rmv_dns=function()
   {
           if($scope.selectedOrder.length>0)
@@ -2531,27 +2531,27 @@ crawlApp.controller('emailjunctionCtrl', ['$scope','$parse','$window','emailjunc
                              swal('Error!',html.status_text,'error');
                            }
                            if(html.status_code == '1')
-                           { 
+                           {
                              $scope.get_transaction_list($scope.currentPage);
-                              swal('Success!',html.status_text,'success'); 
+                              swal('Success!',html.status_text,'success');
                            }
                       }
                 )
-                      
+
                 } else {
                     swal("Cancelled", "update cancelled:)", "error");
                 }
             });
-         
-                
+
+
              }
      else
      {
         swal('Error!',"There is no order selected",'error');
-     } 
-     
+     }
+
    }
-     
+
    $scope.filtergrid=function()
    {
      $scope.filterquery=[
@@ -2566,7 +2566,7 @@ crawlApp.controller('emailjunctionCtrl', ['$scope','$parse','$window','emailjunc
     var argum=JSON.stringify($scope.filterquery);
     $scope.searchJSON=encodeURIComponent(argum);
     $scope.get_transaction_list(0);
-  
+
    }
 
    $scope.get_predata = function()
@@ -2577,21 +2577,21 @@ crawlApp.controller('emailjunctionCtrl', ['$scope','$parse','$window','emailjunc
                              {
                                 if(response.status_code == '1')
                                 {
-                                    $scope.campList=response.campaign_list; 
+                                    $scope.campList=response.campaign_list;
 		                           }
                                 else
                                 {
                                  swal('Error!',response.status_text,'error');
                                 }
-                             }, 
+                             },
                              function(reason)
                              {
                                $scope.serverErrorHandler(reason);
                              }
                           );
-        }        
-             $scope.get_predata();     
-       
+        }
+             $scope.get_predata();
+
     $scope.send_now=function()
       {
 
@@ -2620,22 +2620,22 @@ crawlApp.controller('emailjunctionCtrl', ['$scope','$parse','$window','emailjunc
                                   if(html.status_code==0)
                                   {
                                      swal('Error!',html.status_text,'error');
-                                  }                    
+                                  }
                                   else if(html.status_code==1)
                                   {
                                      swal('Success!',html.status_text,'success');
                                   }
-                                  
+
                               }
                     )
                     .error(
                            function(data, status, headers, config)
                                 {
-                                     
+
                                  }
 
-                    );              
-                    
+                    );
+
                 } else {
                     swal("Cancelled", "Mail cancelled", "error");
                 }
@@ -2644,17 +2644,17 @@ crawlApp.controller('emailjunctionCtrl', ['$scope','$parse','$window','emailjunc
         else
         {
           swal("Error", "Please send 3 mail at a time ", "error");
-        }  
-        
-         
+        }
+
+
     }
 
-    
+
   $scope.select_all=function()
    {
       for(i=0;i< $scope.transactionList.length;i++)
       {
-        $scope.addToArray($scope.selectedOrder,$scope.transactionList[i]);  
+        $scope.addToArray($scope.selectedOrder,$scope.transactionList[i]);
       }
       $scope.selectcount=$scope.selectedOrder.length;
       $scope.totalcount=$scope.total;
@@ -2664,7 +2664,7 @@ crawlApp.controller('emailjunctionCtrl', ['$scope','$parse','$window','emailjunc
    {
       $scope.clearArray($scope.selectedOrder);
    }
-   
+
    $scope.checkExist=function(arr,item)
    {
       if (angular.isArray(arr)) {
@@ -2680,7 +2680,7 @@ crawlApp.controller('emailjunctionCtrl', ['$scope','$parse','$window','emailjunc
    $scope.addToArray=function(arr,item)
    {
       arr = angular.isArray(arr) ? arr : [];
-      if(!$scope.checkExist(arr, item)) 
+      if(!$scope.checkExist(arr, item))
       {
           arr.push(item);
       }
@@ -2688,18 +2688,18 @@ crawlApp.controller('emailjunctionCtrl', ['$scope','$parse','$window','emailjunc
    $scope.removeFromArray=function(arr,item)
    {
       arr = angular.isArray(arr) ? arr : [];
-      for (var i = arr.length; i--;) 
+      for (var i = arr.length; i--;)
       {
-        if (angular.equals(arr[i], item)) 
+        if (angular.equals(arr[i], item))
         {
-          arr.splice(i, 1); 
+          arr.splice(i, 1);
         }
       }
    }
 
    $scope.clearArray=function(arr)
    {
-     if (angular.isArray(arr)) 
+     if (angular.isArray(arr))
      {
        for (var i = arr.length; i--;)
         {
@@ -2709,7 +2709,7 @@ crawlApp.controller('emailjunctionCtrl', ['$scope','$parse','$window','emailjunc
    }
 
    $scope.$watch("selectedOrder.length",
-           function(newValue, oldValue) 
+           function(newValue, oldValue)
            {
              if(newValue < $scope.transactionList.length)
              {
@@ -2718,7 +2718,7 @@ crawlApp.controller('emailjunctionCtrl', ['$scope','$parse','$window','emailjunc
             });
        $scope.statusCheck=function()
       {
-       
+
            console.log("checkStatus");
            console.log($scope.checkStatus);
 
@@ -2730,12 +2730,12 @@ crawlApp.controller('emailjunctionCtrl', ['$scope','$parse','$window','emailjunc
            {
             $scope.clear_all();
            }
-      }      
+      }
 
 
 
-   
-   
+
+
 
 }]);
 </script>
@@ -2771,19 +2771,19 @@ CKEDITOR.editorConfig = function( config ) {
         pluginsLoaded: function() {
             var editor = this,
                 config = editor.config;
-            
+
             editor.ui.addRichCombo( 'my-combo', {
                 label: 'Placeholders',
                 title: 'Placeholder text will be replaced by actual text',
                 toolbar: 'others,0',
-        
-                panel: {               
+
+                panel: {
                     css: [ CKEDITOR.skin.getPath( 'editor' ) ].concat( config.contentsCss ),
                     multiSelect: false,
                     attributes: { 'aria-label': 'Placeholders Tag' }
                 },
-    
-                init: function() {    
+
+                init: function() {
                     this.startGroup( 'Order Info' );
 					this.add( '{{customer_fullname}}', 'Customer Name' );
                     this.add( '{{customer_firstname}}', 'Customer First Name' );
@@ -2801,13 +2801,13 @@ CKEDITOR.editorConfig = function( config ) {
                     onClick: function( value ) {
                     editor.focus();
                     editor.fire( 'saveSnapshot' );
-                   
+
                     editor.insertHtml( value );
-                
+
                     editor.fire( 'saveSnapshot' );
                 }
-            } );        
-        }        
+            } );
+        }
     }
 } );
 </script>

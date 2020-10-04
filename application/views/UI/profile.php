@@ -2,87 +2,87 @@
 $baseurl=base_url();
 $base_url=base_url();
 ?>
- 
+
             <div class="wrapper" ng-controller='profileCtrl'>
                 <div class="content">
 
                     <div class="container-fluid">
-                        
-                       
+
+
                         <div class="row">
                             <div class="col-12">
                                 <div class="page-title-box">
                                     <div class="page-title-right">
                                         <ol class="breadcrumb m-0">
-                                            
+
                                         </ol>
                                     </div>
                                     <h4 class="page-title">Edit Store</h4>
                                 </div>
                             </div>
-                        </div>     
-                       
+                        </div>
+
                         <div class="row" id="country_selection">
                             <div class="col-12">
                                 <div class="card">
-								
+
 								  <div class="card-panel"> <br> <br>
-								  
+
 								  <div class="col-sm-12">
-								  
+
 								   <form  novalidate="" name="amzForm" ng-submit="update_amazon_api()" class="ng-pristine ng-valid ng-valid-required">
 
-                                                    
+
                                                    <div class="form-group p-v-5">
-                                                  
+
                                                     <div  class="col-sm-12" ng-class="{ 'has-error' : amzForm.store_name.$invalid &amp;&amp; amz_submitted  }">
 													  <label class="control-label col-sm-4" >Store Name</label>
 													  <div class="col-sm-8" style="float:right;">
                                                    <input type="text" ng-model="amz_api.store_name" placeholder="Store Name" name="store_name" class="form-control">
                                         </div>    </div>
-                                                </div> 
-												
-                                                 
-												
+                                                </div>
+
+
+
 														 <div class="form-group p-v-5"  ng-if="amz_api.is_edit==0">
-                                                  
+
                                                <div   class="col-sm-12" ng-class="{ 'has-error' : amzForm.seller_id.$invalid &amp;&amp; amz_submitted  }">
 													  <label class="control-label col-sm-4">Seller ID</label>
 													  <div class="col-sm-8" style="float:right;">
                                                    <input type="text" ng-model="amz_api.seller_id" placeholder="SELLER ID" name="seller_id" class="form-control">
                                         </div>    </div>
                                                 </div>
-												
-												  <div class="form-group p-v-5"  ng-if="amz_api.is_edit==1">   
+
+												  <div class="form-group p-v-5"  ng-if="amz_api.is_edit==1">
                                                <div   class="col-sm-12" ng-class="{ 'has-error' : amzForm.seller_id.$invalid &amp;&amp; amz_submitted  }">
 													  <label class="control-label col-sm-4">Seller ID</label>
 													  <div class="col-sm-8" style="float:right;">
                                                  {{amz_api.seller_id}}
                                         </div>    </div>
                                                 </div>
-												 
-												  
+
+
 												  <div class="form-group p-v-5" ng-if="amz_api.is_mws_work=='0'">
-                                                  
+
                                                     <div  class="col-sm-12" ng-class="{ 'has-error' : amzForm.tokenid.$invalid &amp;&amp; amz_submitted  }">
 													  <label class="control-label col-sm-4" >Auth Token</label>
 													  <div class="col-sm-8" style="float:right;">
                       <input type="text" ng-model="amz_api.tokenid" placeholder="Auth Token" name="tokenid" class="form-control">
                                         </div>    </div>
                                                 </div>
-												
+
 												<div class="form-group p-v-5" ng-if="amz_api.is_mws_work=='1'">
-                                                  
+
                                                     <div  class="col-sm-12" ng-class="{ 'has-error' : amzForm.tokenid.$invalid &amp;&amp; amz_submitted  }">
 													  <label class="control-label col-sm-4" >Auth Token</label>
 													  <div class="col-sm-8" style="float:right;">
 													  {{amz_api.tokenid}}
                                          </div>    </div>
                                                 </div>
-												
-												
+
+
 												  <div class="form-group p-v-5">
-                                                  
+
                                                     <div  class="col-sm-12" ng-class="{ 'has-error' : amzForm.amazon_email.$invalid &amp;&amp; amz_submitted  }">
 													  <label class="control-label col-sm-4" >Your Amazon Email</label>
 													  <div class="col-sm-8" style="float:right">
@@ -91,42 +91,42 @@ $base_url=base_url();
                                                 </div>
 
                                            <div class="form-group p-v-5">
-                                                  
+
                                                     <div  class="col-sm-12" ng-class="{ 'has-error' : amzForm.manager_name.$invalid &amp;&amp; amz_submitted  }">
 													  <label class="control-label col-sm-4" >Manager Name</label>
 													  <div class="col-sm-8" style="float:right;">
                                                    <input type="text" ng-model="amz_api.manager_name" placeholder="Store Name" name="manager_name" class="form-control">
                                         </div>    </div>
-                                                </div>												
-												
-												
+                                                </div>
+
+
                                             <div class="col-md-12"style="float:right">
                                        <input type="submit" style="margin-top:30px;float:right;margin-bottom:30px;" class="btn btn-info" ng-click="amz_submitted=true" value="Update" name="submit">
 
-											</div>                                         
+											</div>
                                         </form>
-								  
+
 								   </div>
                             </div>
                         </div>
-				   </div>		 
-						
-						
-                                    
-										
-					
-					 
-					 
-				    
-								
-								
-								
-								
+				   </div>
+
+
+
+
+
+
+
+
+
+
+
+
 				 </div>
-				
-			 </div>	
-				
-		 </div>	
+
+			 </div>
+
+		 </div>
 
 
 
@@ -137,7 +137,7 @@ $base_url=base_url();
 
 
  <script type="text/javascript">
-$(document).ready(function ($) { 
+$(document).ready(function ($) {
 
              $("#country_selection").show();
              $("#india").hide();
@@ -147,7 +147,7 @@ $(document).ready(function ($) {
 			 $("#de").hide();
 			 $("#fr").hide();
 			 $("#es").hide();
-             
+
             $("#get_details_india").click(function(){
              $("#country_selection").hide();
              $("#india").show();
@@ -158,7 +158,7 @@ $(document).ready(function ($) {
 			 $("#fr").hide();
 			 $("#es").hide();
             });
-			
+
 			$("#get_details_us").click(function(){
              $("#country_selection").hide();
              $("#india").hide();
@@ -169,7 +169,7 @@ $(document).ready(function ($) {
 			 $("#fr").hide();
 			 $("#es").hide();
             });
-			
+
 			$("#get_details_uk").click(function(){
              $("#country_selection").hide();
              $("#india").hide();
@@ -180,7 +180,7 @@ $(document).ready(function ($) {
 			 $("#fr").hide();
 			 $("#es").hide();
             });
-			
+
 			$("#get_details_it").click(function(){
              $("#country_selection").hide();
              $("#india").hide();
@@ -191,7 +191,7 @@ $(document).ready(function ($) {
 			 $("#fr").hide();
 			 $("#es").hide();
             });
-			
+
 			$("#get_details_de").click(function(){
              $("#country_selection").hide();
              $("#india").hide();
@@ -202,7 +202,7 @@ $(document).ready(function ($) {
 			 $("#fr").hide();
 			 $("#es").hide();
             });
-			
+
 			$("#get_details_fr").click(function(){
              $("#country_selection").hide();
              $("#india").hide();
@@ -213,7 +213,7 @@ $(document).ready(function ($) {
 			 $("#fr").show();
 			 $("#es").hide();
             });
-			
+
 			$("#get_details_es").click(function(){
              $("#country_selection").hide();
              $("#india").hide();
@@ -224,7 +224,7 @@ $(document).ready(function ($) {
 			 $("#fr").hide();
 			 $("#es").show();
             });
-			
+
 			 $("#back1").click(function(){
              $("#country_selection").show();
              $("#india").hide();
@@ -235,7 +235,7 @@ $(document).ready(function ($) {
 			 $("#fr").hide();
 			 $("#es").hide();
             });
-			
+
 			$("#back2").click(function(){
              $("#country_selection").show();
              $("#india").hide();
@@ -246,7 +246,7 @@ $(document).ready(function ($) {
 			 $("#fr").hide();
 			 $("#es").hide();
             });
-			
+
 			$("#back3").click(function(){
              $("#country_selection").show();
              $("#india").hide();
@@ -297,12 +297,12 @@ $(document).ready(function ($) {
 			 $("#fr").hide();
 			 $("#es").hide();
             });
-      
-           
+
+
 
 
  });
-</script>  
+</script>
 
 
 
@@ -310,7 +310,7 @@ $(document).ready(function ($) {
 
 
 
-									
+
 <script type="text/javascript">
 
 crawlApp.factory("profileFactory", function($http,$q) {
@@ -330,8 +330,8 @@ crawlApp.factory("profileFactory", function($http,$q) {
                       data:{
                           api_detail:angular.toJson(api)
                       }
-                     }); 
-                   
+                     });
+
     };
     var add_new_store=function(api)
     {
@@ -341,10 +341,10 @@ crawlApp.factory("profileFactory", function($http,$q) {
                       data:{
                           api_detail:angular.toJson(api)
                       }
-                     }); 
-                   
+                     });
+
     };
-	
+
 	 var add_new_store_us=function(api)
     {
        return $http({
@@ -353,10 +353,10 @@ crawlApp.factory("profileFactory", function($http,$q) {
                       data:{
                           api_detail:angular.toJson(api)
                       }
-                     }); 
-                   
+                     });
+
     };
-	
+
 	 var add_new_store_uk=function(api)
     {
        return $http({
@@ -365,10 +365,10 @@ crawlApp.factory("profileFactory", function($http,$q) {
                       data:{
                           api_detail:angular.toJson(api)
                       }
-                     }); 
-                   
+                     });
+
     };
-	
+
 	 var add_new_store_it=function(api)
     {
        return $http({
@@ -377,10 +377,10 @@ crawlApp.factory("profileFactory", function($http,$q) {
                       data:{
                           api_detail:angular.toJson(api)
                       }
-                     }); 
-                   
+                     });
+
     };
-	
+
 	 var add_new_store_de=function(api)
     {
        return $http({
@@ -389,8 +389,8 @@ crawlApp.factory("profileFactory", function($http,$q) {
                       data:{
                           api_detail:angular.toJson(api)
                       }
-                     }); 
-                   
+                     });
+
     };
 	 var add_new_store_fr=function(api)
     {
@@ -400,10 +400,10 @@ crawlApp.factory("profileFactory", function($http,$q) {
                       data:{
                           api_detail:angular.toJson(api)
                       }
-                     }); 
-                   
+                     });
+
     };
-	
+
 	var add_new_store_es=function(api)
     {
        return $http({
@@ -412,8 +412,8 @@ crawlApp.factory("profileFactory", function($http,$q) {
                       data:{
                           api_detail:angular.toJson(api)
                       }
-                     }); 
-                   
+                     });
+
     };
     var update_company_api=function(com_info)
     {
@@ -423,8 +423,8 @@ crawlApp.factory("profileFactory", function($http,$q) {
                       data:{
                           comp_info:angular.toJson(com_info)
                       }
-                     }); 
-                   
+                     });
+
     };
 
     var update_password=function(pwd)
@@ -435,8 +435,8 @@ crawlApp.factory("profileFactory", function($http,$q) {
                       data:{
                           pwd_detail:angular.toJson(pwd)
                       }
-                     }); 
-                   
+                     });
+
     };
     var update_eu_config=function(config_val)
     {
@@ -446,8 +446,8 @@ crawlApp.factory("profileFactory", function($http,$q) {
                       data:{
                           eu_config:config_val
                       }
-                     }); 
-                   
+                     });
+
     };
 	var add_authorization=function()
     {
@@ -455,20 +455,20 @@ crawlApp.factory("profileFactory", function($http,$q) {
                       method: "post",
                       url: "<?php echo $baseurl.'manage_stores/add_authorization'?>",
                       data:1
-                     }); 
-                   
+                     });
+
     };
-	
+
 	var get_store_info=function(country)
     {
        return $http({
                       method: "post",
                       url: "<?php echo $baseurl.'manage_stores/get_store_info'?>",
                       data:{country:country}
-                     }); 
-                   
+                     });
+
     };
-	
+
     return {
        get_profile_info:get_profile_info,
        update_amazon_api:update_amazon_api,
@@ -487,39 +487,39 @@ crawlApp.factory("profileFactory", function($http,$q) {
     };
 
 });
-  crawlApp.controller("profileCtrl",function profileCtrl($window,$scope,profileFactory,$sce,$q,$timeout,Upload) 
+  crawlApp.controller("profileCtrl",function profileCtrl($window,$scope,profileFactory,$sce,$q,$timeout,Upload)
   {
     $scope.amz_api={};
     $scope.amz_api.is_edit=0;
     $scope.amz_api.store_url="http://www.amazon.in/s?ie=UTF8&me=";
     $scope.pwd={};
     $scope.com_info={};
-	$scope.com_info.comp_state='1'; 
-	
+	$scope.com_info.comp_state='1';
+
     $scope.block_site=function()
         {
-            $.blockUI({ css: { 
-                border: 'none', 
-                padding: '3px', 
-                backgroundColor: '#000', 
-                '-webkit-border-radius': '10px', 
-                '-moz-border-radius': '10px', 
-                opacity: .5, 
-                color: '#fff' 
+            $.blockUI({ css: {
+                border: 'none',
+                padding: '3px',
+                backgroundColor: '#000',
+                '-webkit-border-radius': '10px',
+                '-moz-border-radius': '10px',
+                opacity: .9,
+                color: '#fff'
             },baseZ:9999});
 
         }
-  
+
     $scope.append_state_code=function()
     {
-      $scope.com_info.comp_state=$scope.com_info.gst_number.substring(0, 2) 
+      $scope.com_info.comp_state=$scope.com_info.gst_number.substring(0, 2)
 	  console.log($scope.com_info.comp_state);
 	  }
-	  
-	 
+
+
     $scope.add_new_store=function()
     {
-      if($scope.amzForm.$valid) 
+      if($scope.amzForm.$valid)
       {
         $scope.block_site();
                  profileFactory.add_new_store($scope.amz_api)
@@ -529,12 +529,12 @@ crawlApp.factory("profileFactory", function($http,$q) {
                                       $.unblockUI();
                                         if(html.status_code==0)
                                         {
-                                            swal("Error!",html.status_text,'error');  
-                                        }                    
+                                            swal("Error!",html.status_text,'error');
+                                        }
                                         else if(html.status_code==1)
                                         {
                                             $scope.msg=html.msg;
-                                            swal("Success!",html.status_text,'success');  
+                                            swal("Success!",html.status_text,'success');
                                         }
                                     }
                           )
@@ -544,17 +544,17 @@ crawlApp.factory("profileFactory", function($http,$q) {
                                         $.unblockUI();
                                        }
 
-                          );              
-                 
-            
-             
+                          );
+
+
+
       }
   }
-  
-  
+
+
       $scope.add_new_store_us=function()
     {
-      if($scope.amzForm.$valid) 
+      if($scope.amzForm.$valid)
       {
         $scope.block_site();
                  profileFactory.add_new_store_us($scope.amz_api)
@@ -564,12 +564,12 @@ crawlApp.factory("profileFactory", function($http,$q) {
                                       $.unblockUI();
                                         if(html.status_code==0)
                                         {
-                                            swal("Error!",html.status_text,'error');  
-                                        }                    
+                                            swal("Error!",html.status_text,'error');
+                                        }
                                         else if(html.status_code==1)
                                         {
                                             $scope.msg=html.msg;
-                                            swal("Success!",html.status_text,'success');  
+                                            swal("Success!",html.status_text,'success');
                                         }
                                     }
                           )
@@ -579,17 +579,17 @@ crawlApp.factory("profileFactory", function($http,$q) {
                                         $.unblockUI();
                                        }
 
-                          );              
-                 
-            
-             
+                          );
+
+
+
       }
   }
-  
-  
+
+
    $scope.add_new_store_uk=function()
     {
-      if($scope.amzForm.$valid) 
+      if($scope.amzForm.$valid)
       {
         $scope.block_site();
                  profileFactory.add_new_store_uk($scope.amz_api)
@@ -599,12 +599,12 @@ crawlApp.factory("profileFactory", function($http,$q) {
                                       $.unblockUI();
                                         if(html.status_code==0)
                                         {
-                                            swal("Error!",html.status_text,'error');  
-                                        }                    
+                                            swal("Error!",html.status_text,'error');
+                                        }
                                         else if(html.status_code==1)
                                         {
                                             $scope.msg=html.msg;
-                                            swal("Success!",html.status_text,'success');  
+                                            swal("Success!",html.status_text,'success');
                                         }
                                     }
                           )
@@ -614,16 +614,16 @@ crawlApp.factory("profileFactory", function($http,$q) {
                                         $.unblockUI();
                                        }
 
-                          );              
-                 
-            
-             
+                          );
+
+
+
       }
   }
-  
+
    $scope.add_new_store_it=function()
     {
-      if($scope.amzForm.$valid) 
+      if($scope.amzForm.$valid)
       {
         $scope.block_site();
                  profileFactory.add_new_store_it($scope.amz_api)
@@ -633,12 +633,12 @@ crawlApp.factory("profileFactory", function($http,$q) {
                                       $.unblockUI();
                                         if(html.status_code==0)
                                         {
-                                            swal("Error!",html.status_text,'error');  
-                                        }                    
+                                            swal("Error!",html.status_text,'error');
+                                        }
                                         else if(html.status_code==1)
                                         {
                                             $scope.msg=html.msg;
-                                            swal("Success!",html.status_text,'success');  
+                                            swal("Success!",html.status_text,'success');
                                         }
                                     }
                           )
@@ -648,16 +648,16 @@ crawlApp.factory("profileFactory", function($http,$q) {
                                         $.unblockUI();
                                        }
 
-                          );              
-                 
-            
-             
+                          );
+
+
+
       }
   }
-  
+
   $scope.add_new_store_de=function()
     {
-      if($scope.amzForm.$valid) 
+      if($scope.amzForm.$valid)
       {
         $scope.block_site();
                  profileFactory.add_new_store_de($scope.amz_api)
@@ -667,12 +667,12 @@ crawlApp.factory("profileFactory", function($http,$q) {
                                       $.unblockUI();
                                         if(html.status_code==0)
                                         {
-                                            swal("Error!",html.status_text,'error');  
-                                        }                    
+                                            swal("Error!",html.status_text,'error');
+                                        }
                                         else if(html.status_code==1)
                                         {
                                             $scope.msg=html.msg;
-                                            swal("Success!",html.status_text,'success');  
+                                            swal("Success!",html.status_text,'success');
                                         }
                                     }
                           )
@@ -682,16 +682,16 @@ crawlApp.factory("profileFactory", function($http,$q) {
                                         $.unblockUI();
                                        }
 
-                          );              
-                 
-            
-             
+                          );
+
+
+
       }
   }
-  
+
   $scope.add_new_store_fr=function()
     {
-      if($scope.amzForm.$valid) 
+      if($scope.amzForm.$valid)
       {
         $scope.block_site();
                  profileFactory.add_new_store_fr($scope.amz_api)
@@ -701,12 +701,12 @@ crawlApp.factory("profileFactory", function($http,$q) {
                                       $.unblockUI();
                                         if(html.status_code==0)
                                         {
-                                            swal("Error!",html.status_text,'error');  
-                                        }                    
+                                            swal("Error!",html.status_text,'error');
+                                        }
                                         else if(html.status_code==1)
                                         {
                                             $scope.msg=html.msg;
-                                            swal("Success!",html.status_text,'success');  
+                                            swal("Success!",html.status_text,'success');
                                         }
                                     }
                           )
@@ -716,17 +716,17 @@ crawlApp.factory("profileFactory", function($http,$q) {
                                         $.unblockUI();
                                        }
 
-                          );              
-                 
-            
-             
+                          );
+
+
+
       }
   }
-  
-  
+
+
   $scope.add_new_store_es=function()
     {
-      if($scope.amzForm.$valid) 
+      if($scope.amzForm.$valid)
       {
         $scope.block_site();
                  profileFactory.add_new_store_es($scope.amz_api)
@@ -736,12 +736,12 @@ crawlApp.factory("profileFactory", function($http,$q) {
                                       $.unblockUI();
                                         if(html.status_code==0)
                                         {
-                                            swal("Error!",html.status_text,'error');  
-                                        }                    
+                                            swal("Error!",html.status_text,'error');
+                                        }
                                         else if(html.status_code==1)
                                         {
                                             $scope.msg=html.msg;
-                                            swal("Success!",html.status_text,'success');  
+                                            swal("Success!",html.status_text,'success');
                                         }
                                     }
                           )
@@ -751,10 +751,10 @@ crawlApp.factory("profileFactory", function($http,$q) {
                                         $.unblockUI();
                                        }
 
-                          );              
-                 
-            
-             
+                          );
+
+
+
       }
   }
       $scope.toggle_eu_status=function()
@@ -780,16 +780,16 @@ crawlApp.factory("profileFactory", function($http,$q) {
                            if(html.status_code=='0')
                            {
                              swal('Error!',html.status_text,'error');
-                             
+
                            }
                            if(html.status_code == '1')
-                           { 
+                           {
                             swal('Success!',html.status_text,'success');
-                            
+
                            }
                       }
-                );              
-                    
+                );
+
                 } else {
 
 $scope.$apply(function () {
@@ -801,17 +801,17 @@ $scope.$apply(function () {
                     swal("Cancelled", "Update cancelled:)", "error");
                 }
             });
-         
-        
-          
+
+
+
         }
-    
+
      $scope.update_amazon_api=function()
       {
-         // if($scope.amzForm.$valid) 
+         // if($scope.amzForm.$valid)
          //  {
-     //update check    
-	 
+     //update check
+
              $scope.block_site();
                  profileFactory.update_amazon_api($scope.amz_api)
                           .success(
@@ -820,12 +820,12 @@ $scope.$apply(function () {
                                       $.unblockUI();
                                         if(html.status_code==0)
                                         {
-                                            swal("Error!",html.status_text,'error');  
-                                        }                    
+                                            swal("Error!",html.status_text,'error');
+                                        }
                                         else if(html.status_code==1)
                                         {
                                             $scope.msg=html.msg;
-                                            swal("Success!",html.status_text,'success');  
+                                            swal("Success!",html.status_text,'success');
                                         }
                                     }
                           )
@@ -833,28 +833,28 @@ $scope.$apply(function () {
                                  function(data, status, headers, config)
                                       {
                                         $.unblockUI();
-                                           
+
                                        }
 
-                          );              
-                 
-            
-             
-              
+                          );
+
+
+
+
            // }
            // else
            // {
            //  console.log("Form Error ");
-           // }                       
+           // }
       }
       $scope.update_company_api=function()
       {
 
 
-        // if($scope.comForm.$valid) 
+        // if($scope.comForm.$valid)
          // {
              $scope.block_site();
-     
+
               profileFactory.update_company_api($scope.com_info)
                           .success(
                                     function( html )
@@ -862,32 +862,32 @@ $scope.$apply(function () {
                                       $.unblockUI();
                                         if(html.status_code==0)
                                         {
-                                            swal("Error!",html.status_text,'error');  
-                                        }                    
+                                            swal("Error!",html.status_text,'error');
+                                        }
                                         else if(html.status_code==1)
                                         {
                                             $scope.msg=html.msg;
-                                            swal("Success!",html.status_text,'success');  
+                                            swal("Success!",html.status_text,'success');
                                         }
                                     }
                           )
                           .error(
                                  function(data, status, headers, config)
                                       {$.unblockUI();
-                                           
+
                                        }
 
-                          );              
+                          );
                           $.unblockUI();
           // }
           // else
           // {
           //  console.log("Fomr error ");
-          // }                       
+          // }
       }
       $scope.update_password=function()
       {
-         //if($scope.pwdForm.$valid) 
+         //if($scope.pwdForm.$valid)
          // {
               profileFactory.update_password($scope.pwd)
                           .success(
@@ -896,32 +896,32 @@ $scope.$apply(function () {
                                       console.log(html);
                                         if(html.status_code==0)
                                         {
-                                            swal("Error!",html.status_text,'error');  
-                                        }                    
+                                            swal("Error!",html.status_text,'error');
+                                        }
                                         else if(html.status_code==1)
                                         {
                                             // $scope.msg=html.msg;
-                                            swal("Success!",html.status_text,'success');  
+                                            swal("Success!",html.status_text,'success');
                                         }
                                     }
                           )
                           .error(
                                  function(data, status, headers, config)
                                       {
-                                           
+
                                        }
 
-                          );              
+                          );
          //  }
          //  else
          //  {
          //   console.log("Fomr error ");
-         //  }                       
+         //  }
       }
-	  
+
 	  $scope.get_store_info=function(country)
       {
-         //if($scope.pwdForm.$valid) 
+         //if($scope.pwdForm.$valid)
          // {
               profileFactory.get_store_info(country)
                           .success(
@@ -930,27 +930,27 @@ $scope.$apply(function () {
                                       console.log(html);
                                         if(html.status_code==0)
                                         {
-                                            swal("Error!",html.status_text,'error');  
-                                        }                    
+                                            swal("Error!",html.status_text,'error');
+                                        }
                                         else if(html.status_code==1)
                                         {
                                               $scope.amz_api=html.api_details[0];
-                                            //swal("Success!",html.status_text,'success');  
+                                            //swal("Success!",html.status_text,'success');
                                         }
                                     }
                           )
                           .error(
                                  function(data, status, headers, config)
                                       {
-                                           
+
                                        }
 
-                          );              
+                          );
          //  }
          //  else
          //  {
          //   console.log("Fomr error ");
-         //  }                       
+         //  }
       }
     $scope.get_profile_info=function()
     {
@@ -963,12 +963,12 @@ $scope.$apply(function () {
               $scope.amz_api=response.api_details[0];
               if(response.com_details.length > 0)
               $scope.com_info=response.com_details[0];
-		  
+
             $scope.countries=[];
             $scope.user_stores=[];
             $scope.countries=response.supported_country;
             $scope.user_stores=response.user_stores;
-            
+
        //     if($scope.amz_api.store_name.length =='')
        //     {
        //       swal("Please update Store Details");
@@ -976,7 +976,7 @@ $scope.$apply(function () {
 		//	   //$('#step2').removeClass('active');
 		//	   //$('#step3').removeClass('active');
 		//	   //$('#step4').removeClass('active');
-		//	   
+		//
 		//	  // $('#tab_step1').addClass('active show');
 		//	  // $('#tab_step2').removeClass('active show');
 		//	  // $('#tab_step3').removeClass('active show');
@@ -991,7 +991,7 @@ $scope.$apply(function () {
 			  // $('#step2').removeClass('active');
 			  // $('#step3').addClass('active');
 			  // $('#step4').removeClass('active');
-			   
+
 			   //$('#tab_step1').removeClass('active show');
 			   //$('#tab_step2').removeClass('active show');
 			   //$('#tab_step3').addClass('active show');
@@ -1000,13 +1000,13 @@ $scope.$apply(function () {
 
             console.log($scope.amz_api);
 
-                 }, 
+                 },
            function(reason) {
             console.log("Reason"+reason);
          });
     }
     $scope.get_profile_info();
-    $scope.send_message = function(file) 
+    $scope.send_message = function(file)
      {
         var upload = Upload.upload({
           url: '<?php echo $baseurl.'manage_stores/update_profile/';?>',
@@ -1020,7 +1020,7 @@ $scope.$apply(function () {
             file.result = response.data;
 
             });
-            
+
           }
           if(response.data.status_code == '1')
            {
@@ -1038,22 +1038,22 @@ $scope.$apply(function () {
           file.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
         });
     }
-	
-	
-	
+
+
+
 	$scope.authorization_email=function()
-	{   
+	{
          $scope.block_site();
          profileFactory.add_authorization()
                  .success(
                            function( html )
                            {
                              console.log(html);
-                             $.unblockUI(); 
+                             $.unblockUI();
                                if(html.status_code==0)
                                {
                                   	swal('Error!',html.status_text,'error');
-                               }                    
+                               }
                                else if(html.status_code==1)
                                {
                                	//$scope.get_predata();
@@ -1061,20 +1061,19 @@ $scope.$apply(function () {
 									      $scope.tb.currentTab='tab3';
 
                                }
-                               
+
                            }
                  )
                  .error(
                         function(data, status, headers, config)
                              {
-                                  
+
                               }
- 
-                 );              
- 
+
+                 );
+
   }
-   
+
 });
-</script>         
-									
-									
+</script>
+
