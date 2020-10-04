@@ -557,20 +557,35 @@ else
 
   public function new_folder() {
     $folder_name = $_POST['folder_name'];
-    $this->db->trans_start();
-    $insq = "INSERT INTO scr_user_c_folders (user_id, folder_name) VALUES (".$this->user_id.", '".$folder_name."')";
-    $this->db->query($insq);
-    $this->db->trans_complete();
-    if ($this->db->trans_status() === FALSE) {
-      $data['status_text'] = "Something wrong. Please check.";
-      $data['status_code'] = 0;
-      $data['campaign_list'] = $this->campaign_model->get_campaign_list();
-    }
-    else {
-      $data['status_text'] = "Folder added successfully";
-      $data['status_code'] = 1;
-      $data['campaign_list'] = $this->campaign_model->get_campaign_list();
+    $checkdup = $this->duplicate_folder($_POST['folder_name'],$this->user_id);
+    if($checkdup == 1) {
+      $data['status_text'] = "Folder already exist";
+      $data['status_code'] = 2;
+      $data['user_folders'] = $this->campaign_model->get_user_folders();
+    } else {
+      $this->db->trans_start();
+      $insq = "INSERT INTO scr_user_c_folders (user_id, folder_name) VALUES (".$this->user_id.", '".$folder_name."')";
+      $this->db->query($insq);
+      $this->db->trans_complete();
+      if ($this->db->trans_status() === FALSE) {
+        $data['status_text'] = "Something wrong. Please check.";
+        $data['status_code'] = 0;
+        $data['user_folders'] = $this->campaign_model->get_user_folders();
+      }
+      else {
+        $data['status_text'] = "Folder added successfully";
+        $data['status_code'] = 1;
+        $data['user_folders'] = $this->campaign_model->get_user_folders();
+      }
     }
     echo json_encode($data);
+  }
+
+  public function duplicate_folder($fname, $user_id) {
+    $dupfname = strtolower($fname);
+    $query = "SELECT LOWER(folder_name) as fname FROM scr_user_c_folders WHERE user_id = '".$user_id."' AND folder_name  = '".$fname."'";
+    $result = $this->db->query($query);
+    $data= $result->result_array();
+    return sizeof($data);
   }
 }

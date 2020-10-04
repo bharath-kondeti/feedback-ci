@@ -217,7 +217,7 @@
                 </div>
               </div>
             </div>
-            <div ng-click="block_site()" class="col-md-2">
+            <div class="col-md-2">
               <div class="dropdown">
                 <a class="btn btn-primary btn-block dropdown-toggle" href="" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 All Folders<i class="mdi mdi-chevron-down"></i>
@@ -1494,6 +1494,7 @@
           showCancelButton: true,
           closeOnConfirm: false,
         }, function(inputValue) {
+          inputValue = inputValue.trim();
           if (inputValue.length === false) return false;
             if (inputValue.length === 0) {
               swal({
@@ -1508,7 +1509,14 @@
             var promise = campaignFactory.create_folder(inputValue);
             $scope.block_site();
             promise.then( resp => {
-              swal("Nice!", "Folder Name: " + inputValue, "success");
+              $scope.folders = resp.data.user_folders;
+              if(resp.data.status_code == '2') {
+                swal("Error!", resp.data.status_text, 'error');
+                $.unblockUI();
+              } else {
+                swal("Nice!", "Folder Name: " + inputValue, "success");
+                $.unblockUI();
+              }
               $.unblockUI();
             })
           }
