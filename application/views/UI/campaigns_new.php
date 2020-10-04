@@ -332,7 +332,7 @@
             <?php
               if ($store_count[0]['ttl'] > 0) {
               ?>
-            <div class="" ng-show='show_dash==1'>
+            <div class="" ng-show='show_dash==1' id="myc1">
               <div class="col-12 card-box">
                 <div class="table-responsive"><h4>My Campaigns</h4>
                   <table class="text-center table-bordered table-striped table table-hover">
@@ -421,7 +421,7 @@
                 </ul>
               </div>
             </div>
-            <div class="row" ng-show='show_dash==0'>
+            <div class="row" ng-show='show_dash==0' id="myc">
               <div class="col-12">
                 <div class="card">
                   <div class="card-body">
@@ -1728,6 +1728,13 @@
             {
               swal('Success!', response.data.status_text, 'success');
               $scope.campList = response.data.campaign_list;
+              $(document).ready(function () {
+                $('button.confirm').on('click', function() {
+                  $("#myc").addClass('ng-hide');
+                  $("#myc1").removeClass('ng-hide');
+                  $("#myc1").addClass('row');
+                });
+              });
             } else
             {
               swal("Error!", response.data.status_text, 'error');
@@ -2565,7 +2572,6 @@
                       $("#myid").addClass('row');
                     });
                   });
-
                 }
 
               }
