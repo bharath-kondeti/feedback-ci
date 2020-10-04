@@ -2,10 +2,10 @@
 $baseurl=base_url();
 $base_url=base_url();
 ?>
- 
-   <script src="https://checkout.razorpay.com/v1/checkout.js"></script>        
+
+   <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
             <div class="wrapper" ng-controller='acCtrl'>
-			
+
 			<div class="modal fade" id="load_money">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
@@ -14,7 +14,7 @@ $base_url=base_url();
                                     </div>
                                     <div class="modal-body">
                                        <div class="row">
-                            <div class="col-sm-12"> 
+                            <div class="col-sm-12">
                             <b>Select Amount</b><br>
                             <select ng-model='load_amt' class="form-control" >
                             <option value='10'>10</option>
@@ -24,12 +24,12 @@ $base_url=base_url();
                             <option value='10'>100</option>
                             <option value='200'>200</option>
                             </select>
-                            
+
                             <br>
-                           
-                            
+
+
                             </div>
-                           </div> 
+                           </div>
                                     </div>
                                     <div class="modal-footer no-border">
                                          <button class="btn btn-info" ng-click='load_money_using_razor_pay()'>Pay</button>
@@ -41,45 +41,45 @@ $base_url=base_url();
 
                     <!-- Start Content-->
                     <div class="container-fluid">
-                        
+
                         <!-- start page title -->
                         <div class="row">
                             <div class="col-12">
                                 <div class="page-title-box">
                                     <div class="page-title-right">
-                                      <button style="float:right;margin-right:13px" data-toggle="modal" data-target="#load_money" class="btn btn-primary waves-effect waves-light mt-4 mb-2 width-sm">Pay</button>  
+                                      <button style="float:right;margin-right:13px" data-toggle="modal" data-target="#load_money" class="btn btn-primary waves-effect waves-light mt-4 mb-2 width-sm">Pay</button>
                                     </div>
                                     <h4 class="page-title">Billing</h4>
                                 </div>
                             </div>
-                        </div>     
-						
+                        </div>
+
 						<div class="row">
                             <div class="col-md-12">
                            <div class="col-md-12">
                             <div class="row">
-							
-							
+
+
 							<div class="col-sm-4">
                                 <div class="card">
                                     <div class="card-body" style="padding: 20px;">
                                         <div class="media justify-content-between">
                                             <div>
                                                <p class="">Current Plan</p>
-											   
+
                                                 <h2 ng-if="plan.plan_name.length > 0" class="font-size-28 font-weight-light">{{plan.plan_name}}</h2>
 												<h2 ng-if="plan.plan_name.length <= 0" class="font-size-28 font-weight-light">None</h2>
-												
+
 												<p style="margin-top:-35px;float:right;margin-left:250px" ng-if="plan.plan_status =='Paid'"  class="font-size-28 font-weight-light">Paid</p>
 												<p style="margin-top:-35px;float:right;margin-left:210px" ng-if="plan.plan_status =='Free Trail'"  class="font-size-28 font-weight-light">Free Trail</p>
-												
+
                                             </div>
-                                          
+
                                         </div>
                                     </div>
                                 </div>
                             </div>
-							
+
 							<div class="col-sm-4">
                                 <div class="card">
                                     <div class="card-body" style="padding: 20px;">
@@ -89,12 +89,12 @@ $base_url=base_url();
                                                 <h2 ng-if="plan.subscribed_on.length > 0" class="font-size-28 font-weight-light">{{plan.subscribed_on}}</h2>
 												<h2 ng-if="plan.subscribed_on.length <= 0" class="font-size-28 font-weight-light">None</h2>
                                             </div>
-                                          
+
                                         </div>
                                     </div>
                                 </div>
                             </div>
-							
+
 							<div class="col-sm-4">
                                 <div class="card">
                                     <div class="card-body" style="padding: 20px;">
@@ -104,13 +104,13 @@ $base_url=base_url();
                                                 <h2 ng-if="plan.valid_till.length > 0" class="font-size-28 font-weight-light">{{plan.valid_till}}</h2>
 												<h2 ng-if="plan.valid_till.length <= 0" class="font-size-28 font-weight-light">None</h2>
                                             </div>
-                                          
+
                                         </div>
                                     </div>
                                 </div>
                             </div>
-							
-							
+
+
 							<div class="col-sm-4">
                                 <div class="card">
                                     <div class="card-body" style="padding: 20px;">
@@ -120,12 +120,12 @@ $base_url=base_url();
                                                 <h2 ng-if="plan.remaining_email.length > 0" class="font-size-28 font-weight-light">{{plan.remaining_email}}</h2>
 												<h2 ng-if="plan.remaining_email.length <= 0" class="font-size-28 font-weight-light">None</h2>
                                             </div>
-                                          
+
                                         </div>
                                     </div>
                                 </div>
                             </div>
-							
+
 							<div class="col-sm-4">
                                 <div class="card">
                                     <div class="card-body" style="padding: 20px;">
@@ -135,12 +135,12 @@ $base_url=base_url();
                                                 <h2 ng-if="plan.sent_count.length > 0" class="font-size-28 font-weight-light">{{plan.sent_count}}</h2>
 												<h2 ng-if="plan.sent_count.length <= 0" class="font-size-28 font-weight-light">None</h2>
                                             </div>
-                                          
+
                                         </div>
                                     </div>
                                 </div>
                             </div>
-							
+
 							<div class="col-sm-4">
                                 <div class="card">
                                     <div class="card-body" style="padding: 20px;">
@@ -150,19 +150,19 @@ $base_url=base_url();
                                                 <h2 ng-if="plan.wallet_balance.length > 0" class="font-size-28 font-weight-light">£{{plan.wallet_balance}}</h2>
 												<h2 ng-if="plan.wallet_balance.length <= 0" class="font-size-28 font-weight-light">£0.00</h2>
                                             </div>
-                                          
+
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            
-                            
-							
 
 
-						
-						
-                                                                     
+
+
+
+
+
+
                                     </div>
                                 </div>
                             </div>
@@ -170,7 +170,7 @@ $base_url=base_url();
                         <div class="row justify-content-center">
                             <div class="col-xl-10">
 
-                                
+
 
                                 <!-- Plans -->
                                 <div class="row my-3">
@@ -195,8 +195,8 @@ $base_url=base_url();
                                             </div>
                                         </div> <!-- end Pricing_card -->
                                     </div> <!-- end col -->
-									
-									
+
+
                             <div class="col-md-3">
                                         <div class="card card-pricing">
                                             <div class="card-body text-center">
@@ -218,8 +218,8 @@ $base_url=base_url();
                                             </div>
                                         </div> <!-- end Pricing_card -->
                                     </div> <!-- end col -->
-									
-									
+
+
 									 <div class="col-md-3">
                                         <div class="card card-pricing card-pricing-recommended">
                                             <div class="card-body text-center">
@@ -241,10 +241,10 @@ $base_url=base_url();
                                             </div>
                                         </div> <!-- end Pricing_card -->
                                     </div> <!-- end col -->
-									
-												
-                           
-												
+
+
+
+
                             <div class="col-md-3">
                                         <div class="card card-pricing">
                                             <div class="card-body text-center">
@@ -266,36 +266,36 @@ $base_url=base_url();
                                             </div>
                                         </div> <!-- end Pricing_card -->
                                     </div> <!-- end col -->
-									
-							
-									
+
+
+
                                 </div>
                                 <!-- end row -->
 
                             </div> <!-- end col-->
                         </div>
                         <!-- end row -->
-                        
+
                     </div> <!-- container -->
 
                 </div> <!-- content -->
-				
-				
-				
-				
+
+
+
+
 <script type="text/javascript">
 
 crawlApp.factory("acFactory", function($http,$q) {
-   
+
    var get_data = function () {
         var dataset_path="<?php echo $baseurl.'billing/get_plan_data'?>";
         var deferred = $q.defer();
         var path =dataset_path;
-        
+
         $http.get(path)
         .success(function(data,status,headers,config){deferred.resolve(data);})
         .error(function(data, status, headers, config) { deferred.reject(status);});
-        
+
         return deferred.promise;
     };
     var subscribe=function(plan_id)
@@ -304,12 +304,12 @@ crawlApp.factory("acFactory", function($http,$q) {
          return $http({
                       method: "post",
                       url: search_path,
-                      data: 
+                      data:
                       {
                         plan_id:plan_id
                       }
-                     }); 
-                   
+                     });
+
     };
     var load_money=function(amount)
     {
@@ -317,12 +317,12 @@ crawlApp.factory("acFactory", function($http,$q) {
          return $http({
                       method: "post",
                       url: search_path,
-                      data: 
+                      data:
                       {
                         amount:amount
                       }
-                     }); 
-                   
+                     });
+
     };
 
     var buy_addon=function(amount)
@@ -331,12 +331,12 @@ crawlApp.factory("acFactory", function($http,$q) {
          return $http({
                       method: "post",
                       url: search_path,
-                      data: 
+                      data:
                       {
                         amount:amount
                       }
-                     }); 
-                   
+                     });
+
     };
 
     var change_addon_status=function(addon_status)
@@ -345,12 +345,12 @@ crawlApp.factory("acFactory", function($http,$q) {
          return $http({
                       method: "post",
                       url: search_path,
-                      data: 
+                      data:
                       {
                         addon_status:addon_status
                       }
-                     }); 
-                   
+                     });
+
     };
 
     var capture_payment=function(load_amt,tax_amt,payment_id)
@@ -359,14 +359,14 @@ crawlApp.factory("acFactory", function($http,$q) {
          return $http({
                       method: "post",
                       url: search_path,
-                      data: 
+                      data:
                       {
                         load_amt:load_amt,
                         tax_amt:tax_amt,
                         payment_id:payment_id
                       }
-                     }); 
-                   
+                     });
+
     };
 
     var get_subscription_id=function(plan_id)
@@ -375,12 +375,12 @@ crawlApp.factory("acFactory", function($http,$q) {
          return $http({
                       method: "post",
                       url: search_path,
-                      data: 
+                      data:
                       {
                         plan_id:plan_id
                       }
-                     }); 
-                   
+                     });
+
     };
 
     var authorize_subscription=function(subscription_id,razorpay_payment_id,razorpay_subscription_id,razorpay_signature)
@@ -389,14 +389,14 @@ crawlApp.factory("acFactory", function($http,$q) {
          return $http({
                       method: "post",
                       url: search_path,
-                      data: 
+                      data:
                       {
                         subscription_id:subscription_id,
                         payment_id:razorpay_payment_id,
                         r_subscription_id:razorpay_subscription_id,
                         razorpay_signature:razorpay_signature
                       }
-                     }); 
+                     });
     };
 
  var change_subscription_status=function(status)
@@ -405,15 +405,15 @@ crawlApp.factory("acFactory", function($http,$q) {
          return $http({
                       method: "post",
                       url: search_path,
-                      data: 
+                      data:
                       {
                         w_status:status
                       }
-                     }); 
-                   
+                     });
+
     };
 
-    
+
   return {
     get_data:get_data,
     subscribe:subscribe,
@@ -426,14 +426,14 @@ crawlApp.factory("acFactory", function($http,$q) {
     authorize_subscription:authorize_subscription
   };
 });
-  crawlApp.controller("acCtrl",function acCtrl($window,$scope,acFactory,$sce,$q,$timeout,Upload) 
+  crawlApp.controller("acCtrl",function acCtrl($window,$scope,acFactory,$sce,$q,$timeout,Upload)
   {
     $scope.load_amt='30';
     $scope.tax_amt=($scope.load_amt*(18/100));
     $scope.addon_amt='500';
     $scope.selected_plan='3';
     $scope.cur_bal='';
-    
+
     $scope.plan_history=[];
     $scope.plan={};
        $scope.get_predata = function()
@@ -445,8 +445,8 @@ crawlApp.factory("acFactory", function($http,$q) {
 
                                 if(response.status_code == '1')
                                 {
-                                    $scope.plan=response.plan[0]; 
-                                    $scope.addon=response.addon[0]; 
+                                    $scope.plan=response.plan[0];
+                                    $scope.addon=response.addon[0];
                                     $scope.plan_history=response.plan_history;
 									$scope.plan_manager=response.plan_manager;
                                     $scope.cur_bal=response.current_bal;
@@ -455,19 +455,19 @@ crawlApp.factory("acFactory", function($http,$q) {
                                     //$scope.razorpay_plan=response.razorpay_plan[0];
                                     console.log($scope.razorpay);
 									$scope.setting=response.setting[0];
-                                    
+
                                 }
                                 else
                                 {
                                  swal('Error!',response.status_text,'error');
                                 }
-                             }, 
+                             },
                              function(reason)
                              {
                                $scope.serverErrorHandler(reason);
                              }
                           );
-        }        
+        }
         $scope.get_predata();
         $scope.subscribe=function(plan_id)
         {
@@ -491,22 +491,22 @@ crawlApp.factory("acFactory", function($http,$q) {
                            if(html.status_code=='0')
                            {
                              swal('Error!',html.status_text,'error');
-                             
+
                            }
                            if(html.status_code == '1')
-                           { 
+                           {
                             swal('Success!',html.status_text,'success');
                              $scope.get_predata();
                            }
                       }
-                );              
-                    
+                );
+
                 } else {
                     swal("Cancelled", "subscription cancelled:)", "error");
                 }
             });
-         
-           
+
+
         }
         $scope.change_plan=function()
         {
@@ -538,16 +538,16 @@ crawlApp.factory("acFactory", function($http,$q) {
                            if(html.status_code=='0')
                            {
                              swal('Error!',html.status_text,'error');
-                             
+
                            }
                            if(html.status_code == '1')
-                           { 
+                           {
                             swal('Success!',html.status_text,'success');
                              $scope.get_predata();
                            }
                       }
-                );              
-                    
+                );
+
                 } else {
                     swal("Cancelled", "Loading Money cancelled:)", "error");
                 }
@@ -557,8 +557,8 @@ crawlApp.factory("acFactory", function($http,$q) {
          {
           swal("Please enter some amount");
          }
-         
-           
+
+
         }
         $scope.calc_tax=function()
         {
@@ -593,15 +593,15 @@ crawlApp.factory("acFactory", function($http,$q) {
                            if(html.status_code=='0')
                            {
                              swal('Error!',html.status_text,'error');
-                             
+
                            }
                            if(html.status_code == '1')
-                           { 
+                           {
                              swal('Success!',html.status_text,'success');
                              $scope.get_predata();
                            }
                       }
-                   );   
+                   );
 		        }
 			 ,
 		    "prefill":{
@@ -624,7 +624,7 @@ crawlApp.factory("acFactory", function($http,$q) {
     	  	swal('Error!','Choose amount from the dropdown','error');
     	  }
         }
-        
+
         $scope.buy_addon=function()
         {
           if($scope.addon_amt.length > 0)
@@ -651,23 +651,23 @@ crawlApp.factory("acFactory", function($http,$q) {
                            if(html.status_code=='0')
                            {
                              swal('Error!',html.status_text,'error');
-                             
+
                            }
                            if(html.status_code == '1')
-                           { 
+                           {
                             swal('Success!',html.status_text,'success');
                              $scope.get_predata();
                            }
                       }
-                );              
-                    
+                );
+
                 } else {
                     swal("Cancelled", "ADD-ON cancelled:)", "error");
                 }
             });
          }
-         
-           
+
+
         }
 
         $scope.create_subscription_using_razor_pay=function()
@@ -694,15 +694,15 @@ crawlApp.factory("acFactory", function($http,$q) {
                            if(html.status_code=='0')
                            {
                              swal('Error!',html.status_text,'error');
-                             
+
                            }
                            if(html.status_code == '1')
-                           { 
+                           {
                              swal('Success!',html.status_text,'success');
                              $scope.get_predata();
                            }
                       }
-                   );   
+                   );
             }
        ,
         "prefill":{
@@ -725,7 +725,7 @@ crawlApp.factory("acFactory", function($http,$q) {
           swal('Error!','Choose Plan from the dropdown','error');
         }
         }
-        
+
         $scope.buy_addon=function()
         {
           if($scope.addon_amt.length > 0)
@@ -752,28 +752,28 @@ crawlApp.factory("acFactory", function($http,$q) {
                            if(html.status_code=='0')
                            {
                              swal('Error!',html.status_text,'error');
-                             
+
                            }
                            if(html.status_code == '1')
-                           { 
+                           {
                             swal('Success!',html.status_text,'success');
                              $scope.get_predata();
                            }
                       }
-                );              
-                    
+                );
+
                 } else {
                     swal("Cancelled", "ADD-ON cancelled:)", "error");
                 }
             });
          }
-         
-           
+
+
         }
 
         $scope.change_addon_status=function()
         {
-          
+
 
            swal({
                 title: "Are you sure want to change ADD-ON status?",
@@ -795,22 +795,22 @@ crawlApp.factory("acFactory", function($http,$q) {
                            if(html.status_code=='0')
                            {
                              swal('Error!',html.status_text,'error');
-                             
+
                            }
                            if(html.status_code == '1')
-                           { 
+                           {
                             swal('Success!',html.status_text,'success');
                              $scope.get_predata();
                            }
                       }
-                );              
-                    
+                );
+
                 } else {
                     swal("Cancelled", "ADD-ON status update cancelled:)", "error");
                 }
             });
-         
-           
+
+
         }
         $scope.get_subscription_id=function()
         {
@@ -825,17 +825,17 @@ crawlApp.factory("acFactory", function($http,$q) {
                              swal('Error!',html.status_text,'error');
                            }
                            if(html.status_code == '1')
-                           { 
+                           {
                             // swal('Success!',html.status_text,'success');
                             $scope.subscription_id=html.subscription_id;
                              // $scope.get_predata();
                            }
                       }
-                );              
-                    
-                
-         
-           
+                );
+
+
+
+
         }
 
 
@@ -843,10 +843,10 @@ $scope.change_subscription_status=function(subscription_status)
         {
            if(subscription_status==1)
 			{
-		    var sts='Activate';		
+		    var sts='Activate';
 			}else
 			{
-			var sts='Deactivate';	
+			var sts='Deactivate';
 			}
 		  var msg= "Are you sure to "+sts+" Subscription?";
 		   swal({
@@ -869,58 +869,57 @@ $scope.change_subscription_status=function(subscription_status)
                            if(html.status_code=='0')
                            {
                              swal('Error!',html.status_text,'error');
-                             
+
                            }
                            if(html.status_code == '1')
-                           { 
+                           {
                             swal('Success!',html.status_text,'success');
                              $scope.get_data();
                            }
                       }
-                );              
-                    
+                );
+
                 } else {
                     swal("Cancelled", "cancelled:)", "error");
                 }
             });
-         
-           
+
+
         }
 
         $scope.block_site=function(message='Please wait')
         {
 
-            $.blockUI({ message:message,css: { 
-                border: 'none', 
-                padding: '3px', 
-                backgroundColor: '#000', 
-                '-webkit-border-radius': '10px', 
-                '-moz-border-radius': '10px', 
-                opacity: .5, 
-                color: '#fff' 
+            $.blockUI({ message:message,css: {
+                border: 'none',
+                padding: '3px',
+                backgroundColor: '#000',
+                '-webkit-border-radius': '10px',
+                '-moz-border-radius': '10px',
+                opacity: .9,
+                color: '#fff'
             },baseZ:9999});
 
         }
 
 
         // $scope.block_site('Loading Wait');
-    
 
 
 
 
 
-	
-  
 
 
-       
+
+
+
+
 
 });
 </script>
 
 
 
-				
 
-               
+

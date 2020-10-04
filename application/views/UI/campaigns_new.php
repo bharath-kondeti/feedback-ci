@@ -1,9 +1,7 @@
 <?php
   $baseurl = base_url();
-
   $base_url = base_url();
-
-  ?>
+?>
 <link href="<?php echo $baseurl . '/asset/css/datepicker.css' ?>" rel="stylesheet">
 <script src="<?php echo $baseurl . '/asset/js/jquery_ui_core_1_10.js' ?>"></script>
 <script src="<?php echo $baseurl . '/asset/js/jq_datepicker_1_10.js' ?>"></script>
@@ -363,13 +361,27 @@
                             <label class="custom-control-label" for="customCheck3-{{$index+1}}">&nbsp;</label>
                           </div>
                         </td>
-                        <td ng-if="store_country=='IN'"><img width="20" height="20" src="<?php echo $base_url . 'assets/img/amazon_logo.png' ?> "><span style="color:#a3afb7;font-weight:300">.in</span></td>
-                        <td ng-if="store_country=='US'"><img width="20" height="20" src="<?php echo $base_url . 'assets/img/amazon_logo.png' ?> "><span style="color:#a3afb7;font-weight:300">.com</span></td>
-                        <td ng-if="store_country=='UK'"><img width="20" height="20" src="<?php echo $base_url . 'assets/img/amazon_logo.png' ?> "><span style="color:#a3afb7;font-weight:300">.co.uk</span></td>
-                        <td ng-if="store_country=='IT'"><img width="20" height="20" src="<?php echo $base_url . 'assets/img/amazon_logo.png' ?> "><span style="color:#a3afb7;font-weight:300">.it</span></td>
-                        <td ng-if="store_country=='DE'"><img width="20" height="20" src="<?php echo $base_url . 'assets/img/amazon_logo.png' ?> "><span style="color:#a3afb7;font-weight:300">.de</span></td>
-                        <td ng-if="store_country=='FR'"><img width="20" height="20" src="<?php echo $base_url . 'assets/img/amazon_logo.png' ?> "><span style="color:#a3afb7;font-weight:300">.fr</span></td>
-                        <td ng-if="store_country=='ES'"><img width="20" height="20" src="<?php echo $base_url . 'assets/img/amazon_logo.png' ?> "><span style="color:#a3afb7;font-weight:300">.es</span></td>
+                        <?php if($store_country == 'IN') { ?>
+                          <td ng-if="store_country=='IN'"><img width="20" height="20" src="<?php echo $base_url . 'assets/img/amazon_logo.png' ?> "><span style="color:#a3afb7;font-weight:300">.in</span></td>
+                        <?php } ?>
+                        <?php if($store_country == 'US') { ?>
+                          <td ng-if="store_country=='US'"><img width="20" height="20" src="<?php echo $base_url . 'assets/img/amazon_logo.png' ?> "><span style="color:#a3afb7;font-weight:300">.com</span></td>
+                        <?php } ?>
+                        <?php if($store_country == 'UK') { ?>
+                          <td ng-if="store_country=='UK'"><img width="20" height="20" src="<?php echo $base_url . 'assets/img/amazon_logo.png' ?> "><span style="color:#a3afb7;font-weight:300">.co.uk</span></td>
+                        <?php } ?>
+                        <?php if($store_country == 'IT') { ?>
+                          <td ng-if="store_country=='IT'"><img width="20" height="20" src="<?php echo $base_url . 'assets/img/amazon_logo.png' ?> "><span style="color:#a3afb7;font-weight:300">.it</span></td>
+                        <?php } ?>
+                        <?php if($store_country == 'DE') { ?>
+                          <td ng-if="store_country=='DE'"><img width="20" height="20" src="<?php echo $base_url . 'assets/img/amazon_logo.png' ?> "><span style="color:#a3afb7;font-weight:300">.de</span></td>
+                        <?php } ?>
+                        <?php if($store_country == 'FR') { ?>
+                          <td ng-if="store_country=='FR'"><img width="20" height="20" src="<?php echo $base_url . 'assets/img/amazon_logo.png' ?> "><span style="color:#a3afb7;font-weight:300">.fr</span></td>
+                        <?php } ?>
+                        <?php if($store_country == 'ES') { ?>
+                          <td ng-if="store_country=='ES'"><img width="20" height="20" src="<?php echo $base_url . 'assets/img/amazon_logo.png' ?> "><span style="color:#a3afb7;font-weight:300">.es</span></td>
+                        <?php } ?>
                         <td style="position: relative;">{{idx.campaign_name}}</td>
                         <td><span style="margin-left:5px"> {{idx.total_mail}} </span></td>
                         <td><span style="margin-left:5px"> {{idx.sent_count}} </span></td>
