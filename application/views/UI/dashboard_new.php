@@ -4,7 +4,7 @@
   ?>
 <script src="<?php echo $baseurl.'/asset/js/chart.bundle.min.js'?>"></script>
 <div class="wrapper"  ng-controller='dashCtrl'>
-<div class="content">
+<div class="content dashboard" id="dashboard">
   <!-- Start Content-->
   <div class="container-fluid">
     <!-- start page title -->

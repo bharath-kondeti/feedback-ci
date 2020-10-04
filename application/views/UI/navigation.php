@@ -14,14 +14,14 @@ $base_url=base_url();
 						</a>
 					</li>
 
-					<li class="campaigns find-active">
+					<li class="campaign find-active">
 						<a class="stop-nav" href="<?php echo $baseurl.'Campaigns_new'?>">
 							<i class="fe-activity mr-1"></i>
 							<span> Campaigns </span>
 						</a>
 					</li>
 
-					<li class="feedback find-active">
+					<li class="fb find-active">
 						<a class="stop-nav" href="<?php echo $baseurl.'Feedback_new'?>">
 							<i class="fe-check-square"></i>
 							<span> Feedback </span>
@@ -35,7 +35,7 @@ $base_url=base_url();
 						</a>
 					</li>
 
-					<li class="has-submenu products find-active menu-active">
+					<li class="has-submenu products find-active">
 						<a href="#">
 							<i class="fe-box"></i>Products <div class="arrow-down"></div></a>
 							<ul class="submenu">
@@ -95,3 +95,50 @@ $base_url=base_url();
 		background-color: #431c4a;
 	}
 </style>
+<script type="text/javascript">
+	$(document).ready(function () {
+		if($("#dashboard").hasClass('dashboard')) {
+			$('ul.navigation-menu').find('li.dashboard').addClass('menu-active');
+		}
+
+		if($("#campaign").hasClass('campaign')) {
+			$('ul.navigation-menu').find('li.campaign').addClass('menu-active');
+		}
+
+		if($("#fb").hasClass('fb')) {
+			$('ul.navigation-menu').find('li.fb').addClass('menu-active');
+		}
+
+		if($("#fb").hasClass('fb')) {
+			$('ul.navigation-menu').find('li.fb').addClass('menu-active');
+		}
+
+		if($("#review").hasClass('review')) {
+			$('ul.navigation-menu').find('li.review').addClass('menu-active');
+		}
+
+		if($("#inventory").hasClass('inventory')) {
+			$('ul.navigation-menu').find('li.products').addClass('menu-active');
+		}
+
+		if($("#order").hasClass('order')) {
+			$('ul.navigation-menu').find('li.products').addClass('menu-active');
+		}
+
+		if($("#buyers").hasClass('buyers')) {
+			$('ul.navigation-menu').find('li.products').addClass('menu-active');
+		}
+
+		if($("#fbs").hasClass('fbs')) {
+			$('ul.navigation-menu').find('li.products').addClass('menu-active');
+		}
+
+		if($("#hijack").hasClass('hijack')) {
+			$('ul.navigation-menu').find('li.products').addClass('menu-active');
+		}
+
+		if($("#manage_stores").hasClass('manage_stores')) {
+			$('ul.navigation-menu').find('li.channels').addClass('menu-active');
+		}
+	});
+</script>

@@ -7,7 +7,7 @@
 <?php $baseurl=base_url(); $base_url=base_url(); ?>
 <script src="<?php echo $baseurl.'/asset/js/chart.bundle.min.js'?>"></script>
 <div class="wrapper" ng-controller='dashCtrl'>
-  <div class="content">
+  <div class="content fb" id="fb">
     <!-- Start Content-->
     <div class="container">
       <!-- start page title -->

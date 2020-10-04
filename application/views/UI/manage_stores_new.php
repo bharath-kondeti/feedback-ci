@@ -109,7 +109,7 @@
              </div>
          </div>
      </div>
-     <div class="content">
+     <div class="content manage_stores" id="manage_stores">
          <div class="container-fluid">
              <div class="row">
                  <div class="col-12">
@@ -120,7 +120,7 @@
                      </div>
                  </div>
              </div>
-             <!--<div class="col-sm-12" style="padding:10px 10px 10px 10px">					
+             <!--<div class="col-sm-12" style="padding:10px 10px 10px 10px">
 		    	<a href='#' style="margin-top:-20px;margin-bottom:10px; " class="btn btn-info pull-right"  data-toggle="modal" data-target="#load_store"   >Add Store</a>
 				</div>	 <br>	--->
 
@@ -1547,9 +1547,9 @@
          }
 
          $scope.update_amazon_api = function() {
-             // if($scope.amzForm.$valid) 
+             // if($scope.amzForm.$valid)
              //  {
-             //update check    
+             //update check
 
              $scope.block_site();
              profileFactory.update_amazon_api($scope.cpn)
@@ -1579,12 +1579,12 @@
              // else
              // {
              //  console.log("Form Error ");
-             // }                       
+             // }
          }
          $scope.update_company_api = function() {
 
 
-             // if($scope.comForm.$valid) 
+             // if($scope.comForm.$valid)
              // {
              $scope.block_site();
 
@@ -1612,10 +1612,10 @@
              // else
              // {
              //  console.log("Fomr error ");
-             // }                       
+             // }
          }
          $scope.update_password = function() {
-             //if($scope.pwdForm.$valid) 
+             //if($scope.pwdForm.$valid)
              // {
              profileFactory.update_password($scope.pwd)
                  .success(
@@ -1639,11 +1639,11 @@
              //  else
              //  {
              //   console.log("Fomr error ");
-             //  }                       
+             //  }
          }
 
          $scope.get_store_info = function(country) {
-             //if($scope.pwdForm.$valid) 
+             //if($scope.pwdForm.$valid)
              // {
              profileFactory.get_store_info(country)
                  .success(
@@ -1653,7 +1653,7 @@
                              swal("Error!", html.status_text, 'error');
                          } else if (html.status_code == 1) {
                              $scope.amz_api = html.api_details[0];
-                             //swal("Success!",html.status_text,'success');  
+                             //swal("Success!",html.status_text,'success');
                          }
                      }
                  )
@@ -1667,7 +1667,7 @@
              //  else
              //  {
              //   console.log("Fomr error ");
-             //  }                       
+             //  }
          }
          $scope.get_profile_info = function() {
              var promise = profileFactory.get_profile_info();
@@ -1692,7 +1692,7 @@
                      //	   //$('#step2').removeClass('active');
                      //	   //$('#step3').removeClass('active');
                      //	   //$('#step4').removeClass('active');
-                     //	   
+                     //
                      //	  // $('#tab_step1').addClass('active show');
                      //	  // $('#tab_step2').removeClass('active show');
                      //	  // $('#tab_step3').removeClass('active show');

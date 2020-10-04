@@ -5,7 +5,7 @@ $base_url=base_url();
 <script src="<?php echo $baseurl.'/asset/js/chart.bundle.min.js'?>"></script>
 
 <div class="wrapper"  ng-controller='invCtrl'>
-  <div class="content">
+  <div class="content review" id="review">
     <div class="container-fluid">
       <div class="row">
         <div class="col-12">

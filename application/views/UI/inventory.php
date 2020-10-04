@@ -55,7 +55,7 @@
   }
 </style>
 <div class="wrapper" ng-controller='invCtrl'>
-<div class="content">
+<div class="content inventory" id="inventory">
   <div class="container-fluid">
     <?php
       if($store_count[0]['ttl'] == 0)

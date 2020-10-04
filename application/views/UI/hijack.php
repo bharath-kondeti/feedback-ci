@@ -2,72 +2,72 @@
 $baseurl=base_url();
 $base_url=base_url();
 ?>
- 
+
             <div class="wrapper" ng-controller='invCtrl'>
-                <div class="content">
+                <div class="content hijack" id="hijack">
 
                     <!-- Start Content-->
                     <div class="container-fluid">
                          <?php
                      if($store_count[0]['ttl'] == 0)
                       {
-                   ?> 
-                        
+                   ?>
+
                         <!-- start page title -->
                         <div class="row">
                             <div class="col-12">
                                 <div class="page-title-box">
                                     <div class="page-title-right">
                                         <ol class="breadcrumb m-0">
-                                          
+
                                         </ol>
                                     </div>
-                                   
+
                                 </div>
                             </div>
                         </div>
-						
-						
+
+
                         <div class="row">
                             <div class="col-12">
                                 <div class="card">
                                     <div class="card-body">
 									  <p>Please connect a store to start importing your inventory.  <a class="btn btn-info" href="<?php echo $base_url.'manage_stores'?>">Connect Stores...</a><p>
-								  	
+
 									  </div>
                                   </div>
                             </div>
                         </div>
-									
-									
-						
-						
+
+
+
+
 
                    <?php
 					}
-                   ?> 						
-						
-						
+                   ?>
+
+
 					 <?php
                      if($store_count[0]['ttl'] > 0)
                       {
-                   ?> 
-                        
+                   ?>
+
                         <!-- start page title -->
                         <div class="row">
                             <div class="col-12">
                                 <div class="page-title-box">
                                     <div class="page-title-right">
                                         <ol class="breadcrumb m-0">
-                                            
-                                            
+
+
                                         </ol>
                                     </div>
                                     <h4 class="page-title">Hijack </h4>
                                 </div>
                             </div>
-                        </div>     
-                        <!-- end page title --> 
+                        </div>
+                        <!-- end page title -->
 
                         <div class="row">
                             <div class="col-12">
@@ -81,47 +81,47 @@ $base_url=base_url();
                                                         <input type="search"  ng-model = 'filter.search' class="form-control" id="search" placeholder="Search..." ng-enter='filtergrid()'>
                                                     </div>
                                                     <div class="form-group mx-sm-2 mb-2">
-                                                        
+
 														<select class="custom-select"  style="width:100px" ng-model='filter.list_status'>
                                 <option value="ALL">ALL</option>
                                 <option value="ACT">Hijack Alert Active</option>
                                 <option value="INAC">Hijack Alert Inactive</option>
                               </select>
-                                                        
+
                                                     </div>
 													<div class="form-group mx-sm-2 mb-2">
-                                                       
+
 														<select class="custom-select" ng-model='filter.is_hijacked'>
                                 <option value="ALL">ALL</option>
                                 <option value="YES">Yes</option>
                                 <option value="NO">No</option>
                               </select>
-													
+
                                                     </div>
 													<div class="form-group mx-sm-2 mb-2">
-                                                        
+
 													 <select  class="custom-select" style="width:100px" ng-model='filter.prod_brand'>
-                              <option value='ALL'>ALL</option> 
+                              <option value='ALL'>ALL</option>
                               <option ng-repeat="x in brand_list" value='{{x.prod_brand}}'>{{x.prod_brand}}</option>
                             </select>
 							  </div>
 													 <div class="form-group mx-sm-1 mb-2">
 													<button style="margin-top:10px;"  ng-click="filtergrid()" type="button" class="btn btn-info waves-effect waves-light mb-2 mr-2">Search</button>
 													 </div>
-													 
-													 
+
+
 <div class="form-group mx-sm-4 mb-2">
                            <a href='#' class="btn btn-info"  ng-click='set_hijack_alert()'>Set Hijack </a>
                            <a href='#' style="margin-left:10px;" class="btn btn-danger"  ng-click='remove_hijack_alert()'>Remove Hijack </a>
-                            </div>	
-                                                </form>  
+                            </div>
+                                                </form>
 
-											
+
                                             </div>
-											
-										
+
+
                                         </div>
-                
+
                                         <div class="table-responsive">
                                             <table class="table table-stripped table-hover table-bordered table-centered mb-0">
                                                 <thead class="thead-light">
@@ -132,7 +132,7 @@ $base_url=base_url();
                                                   <label class="custom-control-label" for="customCheck1">&nbsp;</label>
                                                 </div>
                                                 </th>
-                                        
+
                                                 <th >Image</th>
                                                 <th  ng-click="change_order('prod_sku')">SKU <i class="mdi mdi-sort-alphabetical "></i></th>
                                                 <th  ng-click="change_order('prod_asin')" >ASIN <i  class="mdi mdi-sort-alphabetical "></i></th>
@@ -161,24 +161,24 @@ $base_url=base_url();
                                                 </td>
                                                <td > <span ng-if="lst.check_hijack=='1'" class="badge badge-info">Active</span>
 												<span ng-if="lst.check_hijack=='0'" class="badge badge-danger">Inactive</span></td>
-												
-                                               
+
+
                                                <!-- <td>{{lst.last_hijack_check}}</td> -->
-												
+
 												 <td>
                 <span class="badge badge-info " ng-if="lst.hijacked_count=='0'">No</span>
                  <span class="badge badge-danger " ng-if="lst.hijacked_count!='0'">Yes</span>
-                
+
               </td>
-                                                
-                                           
+
+
                                                          </tr>
 													 </tbody>
                                             </table>
                                         </div>
 
                                         <ul class="pagination pagination-rounded justify-content-end my-2">
-										
+
 										         <li ng-class="prevPageDisabled()" class="page-item">
                                                     <a  href="javascript:void(0)" ng-click="prevPage()"  class="page-link">Previous</a>
                                                 </li>
@@ -188,15 +188,15 @@ $base_url=base_url();
                                                 <li ng-class="nextPageDisabled()" class="page-item">
                                                     <a href="javascript:void(0)" ng-click="nextPage()" class="page-link">Next</a>
                                                 </li>
-												
-                                          
+
+
                                         </ul>
                                     </div> <!-- end card-body-->
                                 </div> <!-- end card-->
                             </div> <!-- end col -->
                         </div>
                         <!-- end row -->
-                        
+
                     </div> <!-- container -->
 
                 </div> <!-- content -->
@@ -205,7 +205,7 @@ $base_url=base_url();
 
  <?php
 					}
-                   ?> 		
+                   ?>
 
 
 
@@ -219,9 +219,9 @@ $base_url=base_url();
 
 
 
-                                 
-									
-	
+
+
+
 				<script type="text/javascript">
 crawlApp.directive('onFinishRender', function ($timeout) {
     return {
@@ -237,22 +237,22 @@ crawlApp.directive('onFinishRender', function ($timeout) {
 });
 
 crawlApp.factory('invFactory', ['$http', '$q','limitToFilter', function($http,$q,limitToFilter) {
-    
+
     var inv_list_url        =   "<?php echo $baseurl."hijack/get_inventory_list/"?>";
-    
+
     var get_data = function () {
         var dataset_path="<?php echo $baseurl.'hijack/brand_list'?>";
         var deferred = $q.defer();
         var path =dataset_path;
-        
+
         $http.get(path)
         .success(function(data,status,headers,config){deferred.resolve(data);})
         .error(function(data, status, headers, config) { deferred.reject(status);});
-        
+
         return deferred.promise;
     };
 
-    var get_transaction_list = function (orderby,direction,offset,limit,search) 
+    var get_transaction_list = function (orderby,direction,offset,limit,search)
     {
           var deferred = $q.defer();
           var path =inv_list_url+orderby+'/'+direction+'/'+offset+'/'+limit+'/'+search;
@@ -261,7 +261,7 @@ crawlApp.factory('invFactory', ['$http', '$q','limitToFilter', function($http,$q
           .error(function(data, status, headers, config) { deferred.reject(status);});
           return deferred.promise;
     };
-   
+
    var set_hijack_alert=function(selectedOrder)
     {
        return $http({
@@ -270,8 +270,8 @@ crawlApp.factory('invFactory', ['$http', '$q','limitToFilter', function($http,$q
                       data:{
                           selected_order:angular.toJson(selectedOrder)
                       }
-                     }); 
-                   
+                     });
+
     };
 
     var remove_hijack_alert=function(selectedOrder)
@@ -282,26 +282,26 @@ crawlApp.factory('invFactory', ['$http', '$q','limitToFilter', function($http,$q
                       data:{
                           selected_order:angular.toJson(selectedOrder)
                       }
-                     }); 
-                   
+                     });
+
     };
 
 
 
-    
-   
-    
+
+
+
     return {
         get_transaction_list:get_transaction_list,
         set_hijack_alert:set_hijack_alert,
         remove_hijack_alert:remove_hijack_alert,
         get_data:get_data
-        
-        
+
+
     };
-    
+
 }]);
-crawlApp.controller('invCtrl', ['$scope','$parse','$window','invFactory','$http','limitToFilter',function($scope,$parse,$window,invFactory,$http,limitToFilter) {        
+crawlApp.controller('invCtrl', ['$scope','$parse','$window','invFactory','$http','limitToFilter',function($scope,$parse,$window,invFactory,$http,limitToFilter) {
       $scope.transactionList=[];
       $scope.orderList=[];
       $scope.asin='';
@@ -337,18 +337,18 @@ crawlApp.controller('invCtrl', ['$scope','$parse','$window','invFactory','$http'
 
   $scope.block_site=function()
         {
-            $.blockUI({ css: { 
-                border: 'none', 
-                padding: '3px', 
-                backgroundColor: '#000', 
-                '-webkit-border-radius': '10px', 
-                '-moz-border-radius': '10px', 
-                opacity: .5, 
-                color: '#fff' 
+            $.blockUI({ css: {
+                border: 'none',
+                padding: '3px',
+                backgroundColor: '#000',
+                '-webkit-border-radius': '10px',
+                '-moz-border-radius': '10px',
+                opacity: .5,
+                color: '#fff'
             }});
 
         }
-      
+
     $scope.itemsPerPage = 25;
     $scope.itm_per='25';
     $scope.currentPage = 0;
@@ -356,7 +356,7 @@ crawlApp.controller('invCtrl', ['$scope','$parse','$window','invFactory','$http'
     $scope.direction='DESC';
     $scope.searchJSON=[];
     $scope.filterquery=[];
-    
+
     $scope.range = function()
     {
         var rangeSize = 8;
@@ -378,7 +378,7 @@ crawlApp.controller('invCtrl', ['$scope','$parse','$window','invFactory','$http'
 
    $scope.prevPage = function()
    {
-        if ($scope.currentPage > 0) 
+        if ($scope.currentPage > 0)
         {
           $scope.currentPage--;
         }
@@ -402,26 +402,26 @@ crawlApp.controller('invCtrl', ['$scope','$parse','$window','invFactory','$http'
         return $scope.currentPage === $scope.pageCount() - 1 ? "disabled" : "";
    };
 
-   $scope.pageCount = function() 
+   $scope.pageCount = function()
    {
         return Math.ceil($scope.total/$scope.itemsPerPage);
    };
 
    $scope.setPage = function(n)
    {
-        if (n > 0 && n < $scope.pageCount()) 
+        if (n > 0 && n < $scope.pageCount())
         {
           $scope.currentPage = n;
         }
    };
-   $scope.$watch("currentPage",function(newValue, oldValue) 
+   $scope.$watch("currentPage",function(newValue, oldValue)
    {
      $scope.get_transaction_list(newValue);
    });
 
    $scope.change_item_per_page=function()
    {
-    
+
     $scope.itemsPerPage=parseInt($scope.itm_per);
     $scope.get_transaction_list($scope.currentPage);
    }
@@ -440,18 +440,18 @@ crawlApp.controller('invCtrl', ['$scope','$parse','$window','invFactory','$http'
                                 {
                                  swal('Error!',response.status_text,'error');
                                 }
-                             }, 
+                             },
                              function(reason)
                              {
                                $scope.serverErrorHandler(reason);
                              }
                           );
-        }        
-        $scope.get_predata();     
+        }
+        $scope.get_predata();
 
-   
 
-    
+
+
    $scope.get_transaction_list=function(currentPage)
    {
       $scope.block_site();
@@ -460,11 +460,11 @@ crawlApp.controller('invCtrl', ['$scope','$parse','$window','invFactory','$http'
           $.unblockUI();
          if(value.status_code==1)
          {
-              
+
               $scope.transactionList=value.datalist;
               $scope.total=value.total;
               $scope.outstanding=value.outstanding;
-              
+
          }
          else
          {
@@ -472,15 +472,15 @@ crawlApp.controller('invCtrl', ['$scope','$parse','$window','invFactory','$http'
             $scope.total=0;
             $scope.outstanding=value.outstanding;
             console.log(value);
-             
-         }     
-       }, 
-      function(reason) 
+
+         }
+       },
+      function(reason)
       {
         console.log("Reason"+reason);
       });
    }
-     
+
    $scope.filtergrid=function()
    {
      $scope.filterquery=[
@@ -489,12 +489,12 @@ crawlApp.controller('invCtrl', ['$scope','$parse','$window','invFactory','$http'
                           {is_hijacked:$scope.filter.is_hijacked},
                           {brand:$scope.filter.prod_brand},
 						  {active_status:$scope.filter.active_status},
-                          
+
                         ];
     var argum=JSON.stringify($scope.filterquery);
     $scope.searchJSON=encodeURIComponent(argum);
     $scope.get_transaction_list(0);
-  
+
    }
      $scope.change_order=function(col)
     {
@@ -504,19 +504,19 @@ crawlApp.controller('invCtrl', ['$scope','$parse','$window','invFactory','$http'
       if($scope.direction=='ASC')
         $scope.direction='DESC';
       else if($scope.direction=='DESC')
-        $scope.direction='ASC';  
+        $scope.direction='ASC';
       $scope.currentPage=0;
       $scope.get_transaction_list($scope.currentPage);
 
     }
-   
+
 
      $scope.select_all=function()
    {
       for(i=0;i< $scope.transactionList.length;i++)
       {
 		  //console.log($scope.selectedOrder);
-        $scope.addToArray($scope.selectedOrder,$scope.transactionList[i]);  
+        $scope.addToArray($scope.selectedOrder,$scope.transactionList[i]);
       }
       $scope.selectcount=$scope.selectedOrder.length;
       $scope.totalcount=$scope.total;
@@ -526,7 +526,7 @@ crawlApp.controller('invCtrl', ['$scope','$parse','$window','invFactory','$http'
    {
       $scope.clearArray($scope.selectedOrder);
    }
-   
+
    $scope.checkExist=function(arr,item)
    {
       if (angular.isArray(arr)) {
@@ -542,7 +542,7 @@ crawlApp.controller('invCtrl', ['$scope','$parse','$window','invFactory','$http'
    $scope.addToArray=function(arr,item)
    {
       arr = angular.isArray(arr) ? arr : [];
-      if(!$scope.checkExist(arr, item)) 
+      if(!$scope.checkExist(arr, item))
       {
           arr.push(item);
       }
@@ -550,18 +550,18 @@ crawlApp.controller('invCtrl', ['$scope','$parse','$window','invFactory','$http'
    $scope.removeFromArray=function(arr,item)
    {
       arr = angular.isArray(arr) ? arr : [];
-      for (var i = arr.length; i--;) 
+      for (var i = arr.length; i--;)
       {
-        if (angular.equals(arr[i], item)) 
+        if (angular.equals(arr[i], item))
         {
-          arr.splice(i, 1); 
+          arr.splice(i, 1);
         }
       }
    }
 
    $scope.clearArray=function(arr)
    {
-     if (angular.isArray(arr)) 
+     if (angular.isArray(arr))
      {
        for (var i = arr.length; i--;)
         {
@@ -570,15 +570,15 @@ crawlApp.controller('invCtrl', ['$scope','$parse','$window','invFactory','$http'
      }
    }
 
-   
+
    $scope.go_to_page=function()
     {
-      $scope.currentPage=parseInt($scope.paginate.go_to -1); 
-    }   
-	
-	
+      $scope.currentPage=parseInt($scope.paginate.go_to -1);
+    }
+
+
    $scope.$watch("selectedOrder.length",
-           function(newValue, oldValue) 
+           function(newValue, oldValue)
            {
              if(newValue < $scope.transactionList.length)
              {
@@ -586,10 +586,10 @@ crawlApp.controller('invCtrl', ['$scope','$parse','$window','invFactory','$http'
              }
             });
 
-      
+
        $scope.statusCheck=function()
       {
-       
+
            console.log("checkStatus");
            console.log($scope.sel.checkStatus);
 
@@ -602,7 +602,7 @@ crawlApp.controller('invCtrl', ['$scope','$parse','$window','invFactory','$http'
            {
             $scope.clear_all();
            }
-      }      
+      }
 
       $scope.set_hijack_alert=function()
       {
@@ -631,25 +631,25 @@ crawlApp.controller('invCtrl', ['$scope','$parse','$window','invFactory','$http'
                              swal('Error!',html.status_text,'error');
                            }
                            if(html.status_code == '1')
-                           { 
+                           {
                              $scope.get_transaction_list($scope.currentPage);
-                              swal('Success!',html.status_text,'success'); 
+                              swal('Success!',html.status_text,'success');
                            }
                       }
                 )
-                      
+
                 } else {
                     swal("Cancelled", "update cancelled:)", "error");
                 }
             });
-         
-                
+
+
              }
      else
      {
         swal('Error!',"There is no product selected",'error');
-     } 
-     
+     }
+
    }
 
    $scope.remove_hijack_alert=function()
@@ -679,32 +679,31 @@ crawlApp.controller('invCtrl', ['$scope','$parse','$window','invFactory','$http'
                              swal('Error!',html.status_text,'error');
                            }
                            if(html.status_code == '1')
-                           { 
+                           {
                              $scope.get_transaction_list($scope.currentPage);
-                              swal('Success!',html.status_text,'success'); 
+                              swal('Success!',html.status_text,'success');
                            }
                       }
                 )
-                      
+
                 } else {
                     swal("Cancelled", "update cancelled:)", "error");
                 }
             });
-         
-                
+
+
              }
      else
      {
         swal('Error!',"There is no order selected",'error');
-     } 
-     
+     }
+
    }
-  
-  
 
 
-       
+
+
+
 
 }]);
 </script>
-					

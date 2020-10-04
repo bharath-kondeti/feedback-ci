@@ -2,7 +2,7 @@
 $baseurl=base_url();
 $base_url=base_url();
 ?>
- 
+
             <div class="wrapper" ng-controller='invCtrl'>
 			<div id="email_temp" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
                                         <div class="modal-dialog">
@@ -11,112 +11,112 @@ $base_url=base_url();
                                                     <h4 class="modal-title">Email To Buyer</h4>
                                                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                                                 </div>
-												
+
                                                 <div class="modal-body p-4">
 												<form  ng-submit="test_email()" name='amzForm' novalidate>
 												 <div class="row" style="margin-bottom:10px">
-                                                	
+
 													 <div  class="col-sm-12">
-													 
+
                             <input type='text' ng-disabled="true" class='form-control'  name='buyer_email_new' placeholder='Buyer Email' ng-model='cpn.buyer_email_new' required>
-                                     
+
                             </div>
-							
+
 							<div  class="col-sm-12"> <br>
-													  
+
   <input type='text'  class='form-control'  name='seller_sku' placeholder='Subject' ng-model='cpn.subject' required>
-                                     
+
                             </div>
-							
+
 							<div  class="col-sm-12"><br>
-													  <div id='editor'></div>                                      
+													  <div id='editor'></div>
                              </div>
-							 
+
 							  <div class="col-sm-12"  ><br>
-                          
+
                               <input  style="float:right" type='submit' name='submit'  value='Send' ng-click="amz_submitted=true"  class="btn btn-info">
-                              </div> 
-                            
-                            
-                           
+                              </div>
+
+
+
 						                                                        </div>
                                                  </div>
-									</form>			 
-                           
+									</form>
+
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Close</button>
-                                                   
+
 												       </div>
-													   
+
 
                                             </div>
                                         </div>
                                     </div><!-- /.modal -->
-			
-			
-                <div class="content">
+
+
+                <div class="content buyers" id="buyers">
 
                     <!-- Start Content-->
                     <div class="container-fluid">
 					 <?php
                      if($store_count[0]['ttl'] == 0)
                       {
-                   ?> 
-                        
+                   ?>
+
                         <!-- start page title -->
                         <div class="row">
                             <div class="col-12">
                                 <div class="page-title-box">
                                     <div class="page-title-right">
                                         <ol class="breadcrumb m-0">
-                                          
+
                                         </ol>
                                     </div>
-                                   
+
                                 </div>
                             </div>
                         </div>
-						
-						
+
+
                         <div class="row">
                             <div class="col-12">
                                 <div class="card">
                                     <div class="card-body">
 									  <p>Please connect a store to start importing your inventory.  <a class="btn btn-info" href="<?php echo $base_url.'manage_stores'?>">Connect Stores...</a><p>
-								  	
+
 									  </div>
                                   </div>
                             </div>
                         </div>
-									
-									
-						
-						
+
+
+
+
 
                    <?php
 					}
-                   ?> 						
-						
-						
+                   ?>
+
+
 					 <?php
                      if($store_count[0]['ttl'] > 0)
                       {
-                   ?> 
-                        
+                   ?>
+
                         <!-- start page title -->
                           <div class="row">
                             <div class="col-12">
                                 <div class="page-title-box">
                                     <div class="page-title-right">
                                         <ol class="breadcrumb m-0">
-                                            
+
                                         </ol>
                                     </div>
                                     <h4 class="page-title">Buyers</h4>
                                 </div>
                             </div>
-                        </div>     
-                        <!-- end page title --> 
+                        </div>
+                        <!-- end page title -->
 
                         <div class="row">
                             <div class="col-12">
@@ -140,16 +140,16 @@ $base_url=base_url();
 													 <div class="form-group mx-sm-3 mb-2">
 													<button style="margin-top:10px;"  ng-click="filtergrid()" type="button" class="btn btn-info waves-effect waves-light mb-2 mr-2">Search</button>
 													 </div>
-                                                </form>                            
+                                                </form>
                                             </div>
                                         </div>
-                
+
                                         <div class="table-responsive">
                                            <table class="table table-stripped table-hover table-bordered table-centered mb-0">
                                                 <thead class="thead-light">
                                                     <tr>
-                                        
-                                              
+
+
                                    <th ng-click="change_order('order_no')">Order No<i class="mdi mdi-sort-alphabetical "></i></th>
                                    <th ng-click="change_order('buyer_email')">Buyer Email<i  class="mdi mdi-sort-alphabetical "></i></th>
 								   <th>Marketplace  </th>
@@ -158,7 +158,7 @@ $base_url=base_url();
 								   <th ng-click="change_order('scd_count')">Scheduled<i  class="mdi mdi-sort-numeric "></i></th>
 								   <th ng-click="change_order('sent_count')">Sent<i  class="mdi mdi-sort-numeric "></i></th>
                                    <th >Email </th>
-                                  
+
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -177,14 +177,14 @@ $base_url=base_url();
 												<td style="margin-left:20px;">{{lst.scd_count_new}}</td>
 												<td style="margin-left:20px;">{{lst.sent_count_new}}</td>
 												<td><span   ng-click='send_email_to_buyer(lst)'  class="badge badge-info"> Sent Email</span></td>
-												
+
                                                          </tr>
 													 </tbody>
                                             </table>
                                         </div>
 
                                         <ul class="pagination pagination-rounded justify-content-end my-2">
-										
+
 										         <li ng-class="prevPageDisabled()" class="page-item">
                                                     <a  href="javascript:void(0)" ng-click="prevPage()"  class="page-link">Previous</a>
                                                 </li>
@@ -194,34 +194,34 @@ $base_url=base_url();
                                                 <li ng-class="nextPageDisabled()" class="page-item">
                                                     <a href="javascript:void(0)" ng-click="nextPage()" class="page-link">Next</a>
                                                 </li>
-												
-                                          
+
+
                                         </ul>
                                     </div> <!-- end card-body-->
                                 </div> <!-- end card-->
                             </div> <!-- end col -->
-							
+
 							 <?php
 					  }
-                   ?> 
+                   ?>
                         </div>
                         <!-- end row -->
-                        
+
                     </div> <!-- container -->
 
                 </div> <!-- content -->
 
 
-									
+
 <script type="text/javascript">
 crawlApp.factory('invFactory', ['$http', '$q','limitToFilter', 'Upload',function($http,$q,limitToFilter,Upload) {
 
-    
+
     var inv_list_url        =   "<?php echo $baseurl ."buyers/get_inventory_list/"?>";
 	var ord_list_url        =   "<?php echo $baseurl ."buyers/get_order_list/"?>";
-   
-    
-    var get_transaction_list = function (orderby,direction,offset,limit,search) 
+
+
+    var get_transaction_list = function (orderby,direction,offset,limit,search)
     {
           var deferred = $q.defer();
           var path =inv_list_url+orderby+'/'+direction+'/'+offset+'/'+limit+'/'+search;
@@ -230,8 +230,8 @@ crawlApp.factory('invFactory', ['$http', '$q','limitToFilter', 'Upload',function
           .error(function(data, status, headers, config) { deferred.reject(status);});
           return deferred.promise;
     };
-	
-	  var get_order_list = function (buyer_email,orderby,direction,offset,limit,search) 
+
+	  var get_order_list = function (buyer_email,orderby,direction,offset,limit,search)
     {
           var deferred = $q.defer();
           var path =ord_list_url+buyer_email+'/'+orderby+'/'+direction+'/'+offset+'/'+limit+'/'+search;
@@ -241,30 +241,30 @@ crawlApp.factory('invFactory', ['$http', '$q','limitToFilter', 'Upload',function
           return deferred.promise;
     };
 
-	
+
 	 var test_email=function(buyer_email,subject,message)
     {
        var search_path="<?php echo $baseurl.'buyers/test_email/';?>";
          return $http({
                       method: "post",
                       url: search_path,
-                      data: 
+                      data:
                       {
                         buyer_email:buyer_email,
                         subject:subject,
                         message:message
                       }
-                     }); 
-                   
+                     });
+
     };
-    
+
     return {
         get_transaction_list:get_transaction_list,
 		get_order_list:get_order_list,
 		test_email:test_email
-		
+
     };
-    
+
 }]);
 crawlApp.controller('invCtrl', ['$scope','$parse','$window','invFactory','$http','limitToFilter','$timeout',function($scope,$parse,$window,invFactory,$http,limitToFilter,$timeout) {
       $scope.transactionList=[];
@@ -281,31 +281,31 @@ crawlApp.controller('invCtrl', ['$scope','$parse','$window','invFactory','$http'
       $scope.cpn.id_type='ASIN';
       }
       $scope.reset();
-   
+
 
   $scope.block_site=function()
         {
-            $.blockUI({ css: { 
-                border: 'none', 
-                padding: '3px', 
-                backgroundColor: '#000', 
-                '-webkit-border-radius': '10px', 
-                '-moz-border-radius': '10px', 
-                opacity: .5, 
+            $.blockUI({ css: {
+                border: 'none',
+                padding: '3px',
+                backgroundColor: '#000',
+                '-webkit-border-radius': '10px',
+                '-moz-border-radius': '10px',
+                opacity: .5,
                 color: '#fff'
 
             },baseZ:9999});
 
         }
-		
-		
+
+
 	   $scope.send_email_to_buyer=function(tnx)
       {
         $scope.cpn=tnx;
 		console.log($scope.cpn);
 		$('#email_temp').modal('show');
       }
-      
+
     $scope.itemsPerPage = 25;
 	$scope.itm_per ='25';
     $scope.currentPage = 0;
@@ -314,8 +314,8 @@ crawlApp.controller('invCtrl', ['$scope','$parse','$window','invFactory','$http'
     $scope.searchJSON=[];
     $scope.filterquery=[];
     $scope.order={};
-	
-    
+
+
     $scope.range = function()
     {
         var rangeSize = 5;
@@ -337,7 +337,7 @@ crawlApp.controller('invCtrl', ['$scope','$parse','$window','invFactory','$http'
 
    $scope.prevPage = function()
    {
-        if ($scope.currentPage > 0) 
+        if ($scope.currentPage > 0)
         {
           $scope.currentPage--;
         }
@@ -361,24 +361,24 @@ crawlApp.controller('invCtrl', ['$scope','$parse','$window','invFactory','$http'
         return $scope.currentPage === $scope.pageCount() - 1 ? "disabled" : "";
    };
 
-   $scope.pageCount = function() 
+   $scope.pageCount = function()
    {
         return Math.ceil($scope.total/$scope.itemsPerPage);
    };
 
    $scope.setPage = function(n)
    {
-        if (n > 0 && n < $scope.pageCount()) 
+        if (n > 0 && n < $scope.pageCount())
         {
           $scope.currentPage = n;
         }
    };
 
-   $scope.$watch("currentPage",function(newValue, oldValue) 
+   $scope.$watch("currentPage",function(newValue, oldValue)
    {
      $scope.get_transaction_list(newValue);
    });
-   
+
    $scope.get_transaction_list=function(currentPage)
    {
       $scope.block_site();
@@ -387,11 +387,11 @@ crawlApp.controller('invCtrl', ['$scope','$parse','$window','invFactory','$http'
           $.unblockUI();
          if(value.status_code==1)
          {
-              
+
               $scope.transactionList=value.datalist;
               $scope.total=value.total;
               $scope.outstanding=value.outstanding;
-              
+
          }
          else
          {
@@ -399,16 +399,16 @@ crawlApp.controller('invCtrl', ['$scope','$parse','$window','invFactory','$http'
             $scope.total=0;
             $scope.outstanding=value.outstanding;
             console.log(value);
-             
-         }     
-       }, 
-      function(reason) 
+
+         }
+       },
+      function(reason)
       {
         console.log("Reason"+reason);
       });
    }
-    
-	
+
+
    $scope.filtergrid=function()
    {
      $scope.filterquery=[
@@ -416,12 +416,12 @@ crawlApp.controller('invCtrl', ['$scope','$parse','$window','invFactory','$http'
 						  {repeat_status:$scope.filter.repeat_status},
 						  {open_status:$scope.filter.open_status},
 						  {click_status:$scope.filter.click_status}
-                          
+
                           ];
     var argum=JSON.stringify($scope.filterquery);
     $scope.searchJSON=encodeURIComponent(argum);
     $scope.get_transaction_list(0);
-  
+
    }
 
   $scope.change_item_per_page=function()
@@ -429,7 +429,7 @@ crawlApp.controller('invCtrl', ['$scope','$parse','$window','invFactory','$http'
     //alert($scope.itm_per);
     $scope.itemsPerPage=parseInt($scope.itm_per);
     $scope.get_transaction_list($scope.currentPage);
-   } 
+   }
    $scope.change_order=function(col)
     {
        console.log('roder');
@@ -438,16 +438,16 @@ crawlApp.controller('invCtrl', ['$scope','$parse','$window','invFactory','$http'
       if($scope.direction=='ASC')
         $scope.direction='DESC';
       else if($scope.direction=='DESC')
-        $scope.direction='ASC';  
+        $scope.direction='ASC';
       $scope.currentPage=0;
       $scope.get_transaction_list($scope.currentPage);
 
     }
-  
+
 
    $scope.test_email=function()
         {
-            
+
             $scope.block_site();
 			 $scope.cpn.message=CKEDITOR.instances.editor.getData();
             invFactory.test_email($scope.cpn.buyer_email_new,$scope.cpn.subject,$scope.cpn.message)
@@ -455,18 +455,18 @@ crawlApp.controller('invCtrl', ['$scope','$parse','$window','invFactory','$http'
                       function( html )
                       {
                         $.unblockUI();
-              
+
                            if(html.status_code=='0')
                            {
                              swal('Error!',html.status_text,'error');
                            }
                            if(html.status_code == '1')
-                           { 
-                            swal('Success!',html.status_text,'success'); 
+                           {
+                            swal('Success!',html.status_text,'success');
                            }
                       }
                 )
-           
+
         }
 
 
@@ -479,14 +479,14 @@ $scope.date_filter_tmpl="date_filter_tmpl.html";
       $scope.ord_filter.order_status='ALL';
       $scope.ord_filter.tfm_status='ALL';
       $scope.dt_text='';
-      
+
       $scope.item_per_page = 25;
     $scope.current_page = 0;
     $scope.sort_order='added_date';
     $scope.srt_direc='DESC';
     $scope.searchOrder=[];
     $scope.filterOrder=[];
-    
+
      $scope.ord_range = function()
     {
         var rangeSize = 8;
@@ -508,7 +508,7 @@ $scope.date_filter_tmpl="date_filter_tmpl.html";
 
    $scope.ord_prev_page = function()
    {
-        if ($scope.current_page > 0) 
+        if ($scope.current_page > 0)
         {
           $scope.current_page--;
         }
@@ -532,25 +532,25 @@ $scope.date_filter_tmpl="date_filter_tmpl.html";
         return $scope.current_page === $scope.ord_page_count() - 1 ? "disabled" : "";
    };
 
-   $scope.ord_page_count = function() 
+   $scope.ord_page_count = function()
    {
         return Math.ceil($scope.order_total/$scope.item_per_page);
    };
 
    $scope.ord_set_page = function(n)
    {
-        if (n > 0 && n < $scope.ord_page_count()) 
+        if (n > 0 && n < $scope.ord_page_count())
         {
           $scope.current_page = n;
         }
    };
 
-   $scope.$watch("current_page",function(newValue, oldValue) 
+   $scope.$watch("current_page",function(newValue, oldValue)
    {
      if(angular.isDefined($scope.context_buyer_email))
      $scope.get_order_list(newValue);
    });
-   
+
 
 
 $scope.get_order_details=function(lst,inx)
@@ -567,16 +567,16 @@ $scope.get_order_details=function(lst,inx)
             $scope.dt_text='';
             $('#order_history').modal('show');
             $scope.get_order_list(0);
-           
+
    }
-   
+
   $scope.get_order_list=function(currentPage)
    {
       var blk='#collapse'+$scope.box_index;
-      $(blk).block({message:null  }); 
+      $(blk).block({message:null  });
       var promise= invFactory.get_order_list($scope.context_buyer_email,$scope.sort_order,$scope.srt_direc,currentPage*$scope.item_per_page,$scope.item_per_page,$scope.searchOrder);
          promise.then(function(value){
-          $(blk).unblock(); 
+          $(blk).unblock();
          if(value.status_code==1)
          {
               $scope.orderList=value.datalist;
@@ -586,21 +586,21 @@ $scope.get_order_details=function(lst,inx)
          {
             $scope.orderList=[];
             $scope.order_total=0;
-         }     
-       }, 
-      function(reason) 
+         }
+       },
+      function(reason)
       {
         console.log("Reason"+reason);
       });
    }
    $scope.ord_filtergrid=function()
    {
-    
+
     if(angular.isDefined($scope.ord_filter.frm_date) && angular.isDefined($scope.ord_filter.to_date) && $scope.ord_filter.frm_date.length > 0 && $scope.ord_filter.to_date.length > 0)
     {
       $scope.dt_text="ORDERS BETWEEN ["+$scope.ord_filter.frm_date+"] To ["+$scope.ord_filter.to_date+"]";
     }
-    
+
      $scope.filter_query=[
                           {searchtext:$scope.ord_filter.search},
                           {order_status:$scope.ord_filter.order_status},
@@ -608,15 +608,15 @@ $scope.get_order_details=function(lst,inx)
                           {to_date:$scope.ord_filter.to_date},
                           {tfm_status:$scope.ord_filter.tfm_status},
                           {date_rng:$scope.ord_filter.date_rng}
-                          
+
                         ];
     var argum=JSON.stringify($scope.filter_query);
     $scope.searchOrder=encodeURIComponent(argum);
     $scope.get_order_list(0);
-  
-   }   
-   
-   
+
+   }
+
+
 
 }]);
 </script>
@@ -654,35 +654,34 @@ CKEDITOR.editorConfig = function( config ) {
         pluginsLoaded: function() {
             var editor = this,
                 config = editor.config;
-            
+
             editor.ui.addRichCombo( 'my-combo', {
                 label: 'Tags',
                 title: 'Placeholder text will be replaced by actual text',
                 toolbar: 'others,0',
-        
-                panel: {               
+
+                panel: {
                     css: [ CKEDITOR.skin.getPath( 'editor' ) ].concat( config.contentsCss ),
                     multiSelect: false,
                     attributes: { 'aria-label': 'Placeholders Tag' }
                 },
-    
-                init: function() {    
+
+                init: function() {
                     this.startGroup( 'Order Info' );
 				 },
-    
+
                 onClick: function( value ) {
                     editor.focus();
                     editor.fire( 'saveSnapshot' );
-                   
+
                     editor.insertHtml( value );
-                
+
                     editor.fire( 'saveSnapshot' );
                 }
-            } );        
-        }        
+            } );
+        }
     }
 } );
 </script>
 
-		
-									
+

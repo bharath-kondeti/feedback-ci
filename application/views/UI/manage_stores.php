@@ -4,7 +4,7 @@ $base_url=base_url();
 ?>
 
             <div class="wrapper" ng-controller='profileCtrl'>
-                <div class="content">
+                <div class="content manage_stores" id="manage_stores">
 
                     <div class="container-fluid">
 

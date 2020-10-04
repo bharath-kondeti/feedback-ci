@@ -74,7 +74,7 @@
   }
 </style>
 <div class="wrapper">
-<div class="content">
+<div class="content campaign" id="campaign">
   <!-- Start Content-->
   <div class="container">
     <div class="card-box Campaigns">

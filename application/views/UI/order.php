@@ -2,70 +2,70 @@
 $baseurl=base_url();
 $base_url=base_url();
 ?>
- 
+
             <div class="wrapper" ng-controller='transactionCtrl'>
-			    <div class="content">
+			    <div class="content order" id="order">
 
                     <!-- Start Content-->
                     <div class="container-fluid">
-                        
+
                         <?php
                      if($store_count[0]['ttl'] == 0)
                       {
-                   ?> 
-                        
+                   ?>
+
                         <!-- start page title -->
                         <div class="row">
                             <div class="col-12">
                                 <div class="page-title-box">
                                     <div class="page-title-right">
                                         <ol class="breadcrumb m-0">
-                                          
+
                                         </ol>
                                     </div>
-                                   
+
                                 </div>
                             </div>
                         </div>
-						
-						
+
+
                         <div class="row">
                             <div class="col-12">
                                 <div class="card">
                                     <div class="card-body">
 									  <p>Please connect a store to start importing your orders.  <a class="btn btn-info" href="<?php echo $base_url.'manage_stores'?>">Connect Stores...</a><p>
-								  	
+
 									  </div>
                                   </div>
                             </div>
                         </div>
-									
-									
-						
-						
+
+
+
+
 
                    <?php
 					}
-                   ?> 						
-						
-						
+                   ?>
+
+
 					 <?php
                      if($store_count[0]['ttl'] > 0)
                       {
-                   ?> 
+                   ?>
                         <div class="row">
                             <div class="col-12">
                                 <div class="page-title-box">
                                     <div class="page-title-right">
                                         <ol class="breadcrumb m-0">
-                                           
+
                                         </ol>
                                     </div>
                                     <h4 class="page-title">Orders</h4>
                                 </div>
                             </div>
-                        </div>     
-                        <!-- end page title --> 
+                        </div>
+                        <!-- end page title -->
 
                         <div class="row">
                             <div class="col-12">
@@ -85,16 +85,16 @@ $base_url=base_url();
                                                                  <option value="SHI">Shipped</option>
                                                                  <option value="PEN">Unshipped & Pending</option>
                                                                  <option value="CAN">Cancelled</option>
-                                                                
+
                                                         </select>
                                                     </div>
 													 <div class="form-group mx-sm-2 mb-2">
 													<button style="margin-top:10px;"  ng-click="filtergrid()" type="button" class="btn btn-info waves-effect waves-light mb-2 mr-2">Search</button>
 													 </div>
-                                                </form>                            
+                                                </form>
                                             </div>
                                        </div>
-                
+
                                         <div class="table-responsive">
                                             <table class="table table-stripped table-hover table-bordered table-centered mb-0">
                                                 <thead class="thead-light">
@@ -117,24 +117,24 @@ $base_url=base_url();
                 <img ng-if="lst.prod_image==''" src="<?php echo base_url().'asset/img/no_image.gif'?>" width='50' height='50'alt=""></td>
 													    <td  >{{lst.seller_sku}}</td>
 												<td style="width:120px;"><a href="https://www.{{lst.amz_domain}}/dp/{{lst.asin}}" target="_blank">{{lst.asin}}</a></td>
-                                              
+
                                                 <td  ng-click='show_order_details(lst)' data-target="#modal" data-toggle="modal" >
 												{{lst.itm_title | limitTo:80}}<span ng-if="lst.itm_title.length >=80 ">...</span>
                                                 </td>
                                                 <td>{{lst.no_of_item}}</td>
-                                                
+
                                                 <td>{{lst.itm_price}}</td>
                                                 <td>{{lst.purchase_date}}</td>
-                                                
+
                                                 <td ><span class="badge badge-info">{{lst.order_status}}</span></td>
-                                                       
+
                                                          </tr>
 													 </tbody>
                                             </table>
                                         </div>
 
                                         <ul class="pagination pagination-rounded justify-content-end my-2">
-										
+
 										         <li ng-class="prevPageDisabled()" class="page-item">
                                                     <a  href="javascript:void(0)" ng-click="prevPage()"  class="page-link">Previous</a>
                                                 </li>
@@ -144,15 +144,15 @@ $base_url=base_url();
                                                 <li ng-class="nextPageDisabled()" class="page-item">
                                                     <a href="javascript:void(0)" ng-click="nextPage()" class="page-link">Next</a>
                                                 </li>
-												
-                                          
+
+
                                         </ul>
                                     </div> <!-- end card-body-->
                                 </div> <!-- end card-->
                             </div> <!-- end col -->
                         </div>
                         <!-- end row -->
-                        
+
                     </div> <!-- container -->
 
                 </div> <!-- content -->
@@ -163,8 +163,8 @@ $base_url=base_url();
 
 <?php
 					}
-                   ?> 						
-						
+                   ?>
+
 
 
 
@@ -190,11 +190,11 @@ $base_url=base_url();
 
                                 <p><b>Seller SKU </b>: {{ord.seller_sku}}</p>
                                 <p><b>Order NO </b>: {{ord.order_no}}</p>
-                                
 
 
-                              </div>  
-							  
+
+                              </div>
+
 							  <div class="col-sm-6">
                                  <table class="table table-condensed table-striped">
                                    <tr><th colspan="2" class="text-center">Product Details</th></tr>
@@ -207,7 +207,7 @@ $base_url=base_url();
                                    <tr><td>ASIN</td><td class="text-right">{{ord.asin}}</td></tr>
                                    <tr><td>Item Price</td><td class="text-right">{{ord.itm_price}}</td></tr>
                                    <tr><td>Shipping Price</td><td class="text-right">{{ord.itm_ship_price}}</td></tr>
-                                   
+
                                    <tr><td>Order Status</td><td class="text-right"> <span ng-if="ord.order_status=='Shipped'" class='label label-success'>{{ord.order_status}}</span>
                                                 <span ng-if="ord.order_status=='Unshipped'" class='label label-warning'>{{ord.order_status}}</span>
                                                 <span ng-if="ord.order_status=='Canceled'" class='label label-danger'>{{ord.order_status}}</span>
@@ -220,7 +220,7 @@ $base_url=base_url();
                                             <span ng-if="ord.tfm_status=='Undeliverable'" class='label label-danger'>{{ord.tfm_status}}</span>
                                             <span ng-if="ord.tfm_status=='LabelCanceled'" class='label label-danger'>{{ord.tfm_status}}</span>
                                             <span ng-if="ord.tfm_status=='ReturnedToSeller'" class='label label-danger'>{{ord.tfm_status}}</span>
-                                            <span ng-if="ord.tfm_status=='PickedUp'" class='label label-info'>{{ord.tfm_status}}</span>  
+                                            <span ng-if="ord.tfm_status=='PickedUp'" class='label label-info'>{{ord.tfm_status}}</span>
                                             <span ng-if="ord.tfm_status=='PendingPickUp'" class='label label-info'>{{ord.tfm_status}}</span>
                                             </td></tr>
                                  </table>
@@ -230,7 +230,7 @@ $base_url=base_url();
                                    <tr><th colspan="2" class="text-center">Buyer Details</th></tr>
                                    <tr><td>Buyer Name</td><td class="text-right">{{ord.buyer_name}}</td></tr>
                                    <tr><td>Buyer Email</td><td class="text-right">{{ord.buyer_email}}</td></tr>
-                                   
+
                                    <tr><td>Address</td><td class="text-right">{{ord.shipping_addr1}}</td></tr>
                                    <tr><td>City</td><td class="text-right">{{ord.shipping_city}}</td></tr>
                                    <tr><td>Zip</td><td class="text-right">{{ord.shipping_zip}}</td></tr>
@@ -238,28 +238,28 @@ $base_url=base_url();
                                    <tr><td>Country</td><td class="text-right">{{ord.shipping_country}}</td></tr>
                                  </table>
                                  </div>
-							   
+
 							  </div>
-							  
-							  
-                                                  
+
+
+
                                                     <!-- end -->
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Close</button>
-                                                   
+
                                                 </div>
                                             </div>
                                         </div>
                                     </div><!-- /.modal -->
-									
+
 <script type="text/javascript">
 crawlApp.factory('transactionFactory', ['$http', '$q','limitToFilter', 'Upload',function($http,$q,limitToFilter,Upload) {
 
-    
+
     var order_list_url        =   "<?php echo $baseurl."order/get_order_list/"?>";
-	    
-    var get_transaction_list = function (orderby,direction,offset,limit,search) 
+
+    var get_transaction_list = function (orderby,direction,offset,limit,search)
     {
           var deferred = $q.defer();
           var path =order_list_url+orderby+'/'+direction+'/'+offset+'/'+limit+'/'+search;
@@ -268,12 +268,12 @@ crawlApp.factory('transactionFactory', ['$http', '$q','limitToFilter', 'Upload',
           .error(function(data, status, headers, config) { deferred.reject(status);});
           return deferred.promise;
     };
-	
+
 	return {
         get_transaction_list:get_transaction_list
-        
+
     };
-    
+
 }]);
 crawlApp.controller('transactionCtrl', ['$scope','$parse','$window','transactionFactory','$http','limitToFilter','$timeout',function($scope,$parse,$window,transactionFactory,$http,limitToFilter,$timeout) {
       $scope.transactionList=[];
@@ -302,22 +302,22 @@ crawlApp.controller('transactionCtrl', ['$scope','$parse','$window','transaction
 		 $scope.cpn.ship_type='';
 		 $scope.cpn.ship_service='';
 		 $scope.cpn.tracking_number='';
-		   
+
 
       }
       $scope.reset();
-   
+
 
   $scope.block_site=function()
         {
-            $.blockUI({ css: { 
-                border: 'none', 
-                padding: '3px', 
-                backgroundColor: '#000', 
-                '-webkit-border-radius': '10px', 
-                '-moz-border-radius': '10px', 
-                opacity: .5, 
-                color: '#fff' 
+            $.blockUI({ css: {
+                border: 'none',
+                padding: '3px',
+                backgroundColor: '#000',
+                '-webkit-border-radius': '10px',
+                '-moz-border-radius': '10px',
+                opacity: .5,
+                color: '#fff'
             }});
 
         }
@@ -329,7 +329,7 @@ crawlApp.controller('transactionCtrl', ['$scope','$parse','$window','transaction
     $scope.searchJSON=[];
     $scope.filterquery=[];
     $scope.order={};
-    
+
     $scope.range = function()
     {
         var rangeSize = 5;
@@ -351,7 +351,7 @@ crawlApp.controller('transactionCtrl', ['$scope','$parse','$window','transaction
 
    $scope.prevPage = function()
    {
-        if ($scope.currentPage > 0) 
+        if ($scope.currentPage > 0)
         {
           $scope.currentPage--;
         }
@@ -375,24 +375,24 @@ crawlApp.controller('transactionCtrl', ['$scope','$parse','$window','transaction
         return $scope.currentPage === $scope.pageCount() - 1 ? "disabled" : "";
    };
 
-   $scope.pageCount = function() 
+   $scope.pageCount = function()
    {
         return Math.ceil($scope.total/$scope.itemsPerPage);
    };
 
    $scope.setPage = function(n)
    {
-        if (n > 0 && n < $scope.pageCount()) 
+        if (n > 0 && n < $scope.pageCount())
         {
           $scope.currentPage = n;
         }
    };
 
-   $scope.$watch("currentPage",function(newValue, oldValue) 
+   $scope.$watch("currentPage",function(newValue, oldValue)
    {
      $scope.get_transaction_list(newValue);
    });
-   
+
    $scope.get_transaction_list=function(currentPage)
    {
       $scope.block_site();
@@ -401,11 +401,11 @@ crawlApp.controller('transactionCtrl', ['$scope','$parse','$window','transaction
           $.unblockUI();
          if(value.status_code==1)
          {
-              
+
               $scope.transactionList=value.datalist;
               $scope.total=value.total;
               $scope.outstanding=value.outstanding;
-              
+
          }
          else
          {
@@ -413,23 +413,23 @@ crawlApp.controller('transactionCtrl', ['$scope','$parse','$window','transaction
             $scope.total=0;
             $scope.outstanding=value.outstanding;
             console.log(value);
-             
-         }     
-       }, 
-      function(reason) 
+
+         }
+       },
+      function(reason)
       {
         console.log("Reason"+reason);
       });
    }
-     
+
    $scope.filtergrid=function()
    {
-    
+
     if(angular.isDefined($scope.filter.frm_date) && angular.isDefined($scope.filter.to_date) && $scope.filter.frm_date.length > 0 && $scope.filter.to_date.length > 0)
     {
       $scope.dt_text="ORDERS BETWEEN ["+$scope.filter.frm_date+"] To ["+$scope.filter.to_date+"]";
     }
-    
+
      $scope.filterquery=[
                           {searchtext:$scope.filter.search},
                           {order_status:$scope.filter.order_status},
@@ -441,19 +441,19 @@ crawlApp.controller('transactionCtrl', ['$scope','$parse','$window','transaction
     var argum=JSON.stringify($scope.filterquery);
     $scope.searchJSON=encodeURIComponent(argum);
     $scope.get_transaction_list(0);
-  
+
    }
 
    $scope.change_item_per_page=function()
    {
-    
+
     $scope.itemsPerPage=parseInt($scope.itm_per);
     $scope.get_transaction_list($scope.currentPage);
    }
-   
+
 $scope.go_to_page=function()
     {
-      $scope.currentPage=parseInt($scope.paginate.go_to - 1); 
+      $scope.currentPage=parseInt($scope.paginate.go_to - 1);
     }
     $scope.change_order=function(col)
     {
@@ -463,12 +463,12 @@ $scope.go_to_page=function()
       if($scope.direction=='ASC')
         $scope.direction='DESC';
       else if($scope.direction=='DESC')
-        $scope.direction='ASC';  
+        $scope.direction='ASC';
       $scope.currentPage=0;
       $scope.get_transaction_list($scope.currentPage);
 
     }
-  
+
 
 	$scope.get_details=function(lst)
       {
@@ -477,23 +477,22 @@ $scope.go_to_page=function()
 	   $('#Tracking_details').modal('show');
 
       }
-	  
-	  
-	  
-   
+
+
+
+
 
 }]);
 </script>
 <script>
 $(document).ready(function(){
     $('[data-toggle="popover"]').popover({
-    html: true, 
+    html: true,
   content: function() {
           return $('#popover-content').html();
         }
-});   
+});
 });
 </script>
 
-									
-									
+
