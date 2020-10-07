@@ -39,6 +39,10 @@ class Dashboard extends CI_Controller
     $data['status_code']='1';
     $data['revenue']=$this->dash_model->get_revenue($frm_date,$to_date);
     $data['graph_data']=$this->dash_model->get_graph_data($frm_date,$to_date);
+    $data['orders_graph']=$this->dash_model->orders_graph($frm_date,$to_date);
+    $data['feedback_graph']=$this->dash_model->feedback_graph($frm_date,$to_date);
+    $data['review_graph']=$this->dash_model->review_graph($frm_date,$to_date);
+    $data['messages_graph']=$this->dash_model->messages_graph($frm_date,$to_date);
 	  $data['recent_ten_orders']=$this->dash_model->get_recent_ten_orders();
     $data['cmp_info']=$this->dash_model->get_consolidated_campaign_details($frm_date,$to_date);
     $data['metrics']=$this->campaign_model->get_campaign_metrics($frm_date,$to_date);
