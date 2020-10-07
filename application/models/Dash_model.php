@@ -48,12 +48,12 @@ class Dash_model extends CI_Model
 
 
                       // "-- WHERE store_id={$this->store_id} ";
-      if(!empty($frm_date) && !empty($to_date))
-       {
-          $frm_date=$frm_date." 00:00:00";
-          $to_date=$to_date." 23:59:59";
-          $sql.=" AND purchase_date >= ".$this->db->escape($frm_date)." AND purchase_date <= ".$this->db->escape($to_date);
-       }
+      // if(!empty($frm_date) && !empty($to_date))
+      //  {
+      //     $frm_date=$frm_date." 00:00:00";
+      //     $to_date=$to_date." 23:59:59";
+      //     $sql.=" AND purchase_date >= ".$this->db->escape($frm_date)." AND purchase_date <= ".$this->db->escape($to_date);
+      //  }
       $sql.=" GROUP BY prod_sku HAVING sold_qty > 0 ORDER BY sold_qty DESC limit 0,10 " ;
       $query=$this->db->query($sql);
       return $query->result_array();
@@ -145,14 +145,14 @@ public function get_top_product($orderby,$direction,$offet,$limit,$searchterm=''
                  FROM customer_product as prd
                  INNER JOIN amz_order_info AS tx ON  prd.store_id= {$this->store_id} AND tx.store_id=prd.store_id AND seller_sku=prod_sku AND order_status='Shipped' AND prod_title <> '' ";
 
-		 $to_date=date('Y-m-d');
-         $frm_date = date('Y-m-d',strtotime("-31 days"));
-         if(!empty($frm_date) && !empty($to_date))
-          {
-             $frm_date=$frm_date." 00:00:00";
-             $to_date=$to_date." 23:59:59";
-             $sqlquery.=" AND purchase_date >= ".$this->db->escape($frm_date)." AND purchase_date <= ".$this->db->escape($to_date);
-          }
+		 // $to_date=date('Y-m-d');
+   //       $frm_date = date('Y-m-d',strtotime("-31 days"));
+   //       if(!empty($frm_date) && !empty($to_date))
+   //        {
+   //           $frm_date=$frm_date." 00:00:00";
+   //           $to_date=$to_date." 23:59:59";
+   //           $sqlquery.=" AND purchase_date >= ".$this->db->escape($frm_date)." AND purchase_date <= ".$this->db->escape($to_date);
+   //        }
          $sqlquery.=" GROUP BY prod_sku HAVING sold_qty > 0 ORDER BY ".$sort_order." ".$direction." " ;
 
 
