@@ -229,10 +229,21 @@ class Campaign_model extends CI_Model
       return $query->result_array();
   }
 
-    public function get_template_list()
+    public function get_template_list($offet, $limit)
   {
-    $query=$this->db->query("SELECT template_id,template_content,template_name ,subject,is_default FROM email_template  WHERE (created_by=".$this->user_id." OR is_default=1) AND is_active=1 and is_deleted=0 ORDER BY created_on ASC") ;
+    if(!empty($offet) && !empty($limit)) {
+      $sql = " LIMIT ".$offet.",".$limit;
+    } else {
+      $sql = " LIMIT 0, 15";
+    }
+    $query=$this->db->query("SELECT template_id,template_content,template_name ,subject,is_default FROM email_template  WHERE (created_by=".$this->user_id." OR is_default=1) AND is_active=1 and is_deleted=0 ORDER BY created_on ASC ".$sql) ;
     return $query->result_array();
+  }
+
+  public function get_template_count()
+  {
+    $query=$this->db->query("SELECT count(*) as total_records FROM email_template  WHERE (created_by=".$this->user_id." OR is_default=1) AND is_active=1 and is_deleted=0") ;
+    return $query->result_array()[0]['total_records'];
   }
 
  public function get_brand_list($country_code='')

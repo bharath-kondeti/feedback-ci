@@ -38,7 +38,7 @@ class Template extends CI_Controller {
   {
     $data['status_text']='Success';
     $data['status_code']='1';
-    $data['template_list']=$this->campaign_model->get_template_list();
+    //$data['template_list']=$this->campaign_model->get_template_list();
 	echo json_encode($data);
   }
 

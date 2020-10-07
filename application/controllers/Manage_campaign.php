@@ -46,10 +46,18 @@ class Manage_campaign extends CI_Controller
     $data['total_records'] = sizeof($countdata);
     $data['brand_list']=$this->campaign_model->get_brand_list($this->store_country);
   	$data['country_list']=$this->campaign_model->get_country_list();
-    $data['template_list']=$this->campaign_model->get_template_list();
     $data['recent_orders']=$this->campaign_model->get_recent_orders();
     $data['metrics']=$this->campaign_model->get_campaign_metrics();
     $data['user_folders']=$this->campaign_model->get_user_folders();
+    echo json_encode($data);
+  }
+
+  public function get_template_data($offset, $limit) {
+    $data['template_list']=$this->campaign_model->get_template_list($offset, $limit);
+    $data['total_records']=$this->campaign_model->get_template_count();
+    $data['page_count'] = sizeof($data['template_list']);
+    $data['status_text']='Success';
+    $data['status_code']='1';
     echo json_encode($data);
   }
 
