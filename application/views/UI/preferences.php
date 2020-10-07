@@ -98,6 +98,7 @@ else {
                 </div>
                 <div>
                   <button ng-click="uploadLogo()" type="button" class="btn btn-primary">Upload your logo</button>
+                  <span ng-if="notYetUploaded" class="form-text red">Please select a file</span>
                 </div>
               </div>
               <hr>
@@ -272,8 +273,8 @@ else {
 
       }
       $scope.uploadLogo = function () {
-        $scope.block_site();
         if($scope.imageUploaded) {
+          $scope.block_site();
           $scope.notYetUploaded = false;
           var data = new FormData();
           data.append('logo_image', $scope.logo_Image)
@@ -300,6 +301,7 @@ else {
       })
       const handleImageUpload = event => {
         if(event.target.files.length > 0) {
+          $scope.notYetUploaded = false;
           const files = event.target.files[0];
           var filename = files.name;
           var format = filename.substring(filename.lastIndexOf('.')+1, filename.length)

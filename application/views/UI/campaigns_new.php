@@ -74,7 +74,7 @@
 <div class="wrapper">
 <div class="content campaign" id="campaign">
   <!-- Start Content-->
-  <div class="container">
+  <div ng-cloak class="container">
     <div class="card-box Campaigns">
       <div class="row">
         <div class="col-md-3 col-lg-2 col-sm-12">
@@ -332,7 +332,7 @@
               ?>
             <div class="" ng-show='show_dash==1' id="myc1">
               <div class="col-12 card-box">
-                <div class="table-responsive"><h4>My Campaigns</h4>
+                <div ng-cloak class="table-responsive"><h4>My Campaigns</h4>
                   <table class="text-center table-bordered table-striped table table-hover">
                     <thead class="">
                       <tr>
@@ -413,6 +413,7 @@
                           <div class="form-inline">
                             <i ng-click='edit_campaign(idx.campaign_id)' style="font-size:20px;margin-left: 10px" class="fe-edit text-info"></i>
                             <i ng-click='delete_campaign(idx.campaign_id)' style="font-size:20px;margin-left: 10px;" class="fe-trash-2 text-danger"></i>
+                            <span>{{idx.is_active}}</span>
                             <label class="switch" style="margin-left: 10px">
                             <input type="checkbox" name='enable_addon' ng-model="idx.is_active" ng-true-value="'1'" ng-false-value="'0'" ng-change='change_state(idx.is_active,idx.campaign_id)'>
                             <span class="slider round"></span>
@@ -743,6 +744,14 @@
                   </tbody>
                 </table>
               </div>
+              <ul class="pagination pagination-rounded justify-content-end my-2">
+                <li ng-class="prevPageDisabledTemplates()" class="page-item">  <a href="javascript:void(0)" ng-click="prevPageTemplates()" class="page-link">Previous</a>
+                </li>
+                <li ng-repeat="n in rangeTemplates()" ng-class="{active: n == currentPageTemplates}" ng-click="setPageTemplates(n)" class="page-item"> <a href="javascript:void(0)" class="page-link">{{n+1}}</a>
+                </li>
+                <li ng-class="nextPageDisabledTemplates()" class="page-item">  <a href="javascript:void(0)" ng-click="nextPageTemplates()" class="page-link">Next</a>
+                </li>
+              </ul>
             </div>
             <div class="row" ng-show='show_dash_email==0' id="myid1">
               <div class="col-12">
@@ -1166,6 +1175,19 @@
         });
       return deferred.promise;
     };
+    var get_templates = function(offset_val, count_limit) {
+      var dataset_path = "<?php echo $baseurl . 'manage_campaign/get_template_data' ?>";
+      var deferred = $q.defer();
+      var path = dataset_path+'/'+offset_val+'/'+count_limit;
+      $http.get(path)
+        .success(function(data, status, headers, config) {
+         deferred.resolve(data);
+        })
+       .error(function(data, status, headers, config) {
+          deferred.reject(status);
+        });
+      return deferred.promise;
+    };
     var get_customer_status = function(campaign_id)
     {
       var search_path = "<?php echo $baseurl . 'manage_campaign/get_campaign_users/'; ?>";
@@ -1329,6 +1351,7 @@
       get_brands: get_brands,
       perform_action: perform_action,
       create_folder: create_folder,
+      get_templates: get_templates,
     };
 
   });
@@ -1971,12 +1994,14 @@
                     if (html.status_code == '0')
                     {
                       swal('Error!', html.status_text, 'error');
-                      $scope.campList = html.campaign_list;
+                      // $scope.campList = html.campaign_list;
+                      $scope.get_predata(0);
                     }
                     if (html.status_code == '1')
                     {
                       swal('Success!', html.status_text, 'success');
-                      $scope.campList = html.campaign_list;
+                      // $scope.campList = html.campaign_list;
+                      $scope.get_predata(0);
                     }
                   }
                 );
@@ -2026,12 +2051,15 @@
 
       $scope.change_state = function(is_active, campaign_id)
       {
+        var active = 0;
         if (is_active == 1)
         {
           var sts = 'Activate';
+          active = 0;
         } else
         {
           var sts = 'Deactivate';
+          active = 1;
         }
         var msg = "Are you sure to " + sts + " campaign?";
         swal({
@@ -2065,7 +2093,15 @@
                 );
             } else {
               swal("Cancelled", "cancelled:)", "error");
-              $scope.campList = html.campaign_list;
+              $scope.$apply(function() {
+                $scope.campList.forEach(x=>{
+                if(x.campaign_id == campaign_id) {
+                  x.is_active = String(active);
+                  console.log(x.campaign_id, campaign_id, x.is_active, is_active)
+                }
+              })
+              });
+              // $scope.campList = html.campaign_list;
             }
           });
       }
@@ -2119,6 +2155,73 @@
           }
         );
       }
+
+      $scope.itemsPerPageTemplates = 25;
+      $scope.currentPageTemplates = 0;
+      $scope.totalTemplates = 0;
+      $scope.rangeTemplates = function() {
+        var rangeSize = 4;
+        var ret = [];
+        var start;
+        start = $scope.currentPageTemplates;
+        if ( start > $scope.pageCountTemplates()-rangeSize ) {
+          start = $scope.pageCountTemplates()-rangeSize;
+        }
+        for (var i=start; i<start+rangeSize; i++) {
+          if(i>0)
+            ret.push(i);
+        }
+        return ret;
+      };
+      $scope.setRoundTemplates = function(n) {
+        return new Array(parseInt(n));
+      };
+      $scope.prevPageTemplates = function() {
+        if ($scope.currentPageTemplates > 0) {
+          $scope.currentPageTemplates--;
+        }
+      };
+      $scope.prevPageDisabledTemplates = function() {
+        return $scope.currentPageTemplates === 0 ? "disabled" : "";
+      };
+      $scope.nextPageTemplates = function() {
+        if ($scope.currentPageTemplates < $scope.pageCountTemplates() - 1) {
+          $scope.currentPageTemplates++;
+        }
+      };
+      $scope.nextPageDisabledTemplates = function() {
+        return $scope.currentPageTemplates === $scope.pageCountTemplates() - 1 ? "disabled" : "";
+      };
+      $scope.pageCountTemplates = function() {
+        return Math.ceil($scope.totalTemplates/$scope.itemsPerPageTemplates);
+      };
+      $scope.setPageTemplates = function(n) {
+        if (n > 0 && n < $scope.pageCountTemplates()) {
+          $scope.currentPageTemplates = n;
+        }
+      };
+      $scope.$watch("currentPageTemplates",function(newValue, oldValue) {
+        $scope.load_templates(newValue);
+      });
+      $scope.load_templates = function(currentPage) {
+        $scope.block_site();
+        var promise = campaignFactory.get_templates(currentPage*$scope.itemsPerPage,$scope.itemsPerPage);
+        promise.then(
+          function(response) {
+            if (response.status_code == '1') {
+              $.unblockUI();
+              $scope.template_list = response.template_list;
+            } else {
+              swal('Error!', response.status_text, 'error');
+            }
+          },
+          function(reason) {
+            $scope.serverErrorHandler(reason);
+          }
+        );
+      }
+
+
       $scope.select_all = function()
       {
         for (i = 0; i < $scope.product_list.length; i++)
@@ -2707,8 +2810,6 @@
           swal({
 
               title: "Are you sure want to Delete ?",
-
-              text: "!",
 
               type: "warning",
 
