@@ -336,7 +336,7 @@
               </div>
               <div class="col-md-6">
                 <div class="card-box">
-                  <h4 class="header-title mb-3">Positive Feedback</h4>
+                  <h4 class="header-title mb-3">Sales Analytics</h4>
                   <!--<div id="chartBig1" class="flot-chart mt-4 pt-1" style="height: 375px;"></div> --->
                   <canvas id="chartBig1" class="chartBig1" style="display: block;width:100%;height: 160px;"></canvas>
                 </div>
@@ -347,7 +347,7 @@
             <div class="row custom-font">
               <div class="col-md-4">
                 <div class="card-box">
-                  <h4 class="header-title mb-3">Sales Analytics</h4>
+                  <h4 class="header-title mb-3">Positive Feedback</h4>
                   <!--<div id="chartBig1" class="flot-chart mt-4 pt-1" style="height: 375px;"></div> --->
                   <canvas class="chartBig1" style="display: block;width:100%;height: 160px;"></canvas>
                 </div>

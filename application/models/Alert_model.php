@@ -20,7 +20,7 @@ class Alert_model extends CI_Model
     	}
     	$insert_alert=array('alert_type'=>$type,'alert_head'=>$subject,'alert_msg'=>$msg,'is_mailed'=>$sent_mail,'is_read'=>0,'alert_on'=>$timestamp,'alert_for'=>$user_id);
     	$this->db->insert('alert_manager',$insert_alert);
-    	
+
 
     }
     public function notify_negative_review($user_id='')
@@ -30,10 +30,10 @@ class Alert_model extends CI_Model
         echo "There is no user ID Passed";
         die();
       }
-      
+
 	  $qry=$this->db->query("SELECT * FROM amz_feedback_data WHERE fbk_for={$user_id} AND fbk_rating in (1,2) and notify_sent=0");
       $ng_feed=$qry->result_array();
-      
+
 	  $qr=$this->db->query("SELECT * from scr_user where scr_u_id=".$user_id." AND neg_fbk=1");
       $res=$qr->result_array();
       if(empty($res))
@@ -58,11 +58,11 @@ class Alert_model extends CI_Model
     </tr>
     </thead>
     <tbody>';
-       
-          
-    
-     
-            
+
+
+
+
+
 			foreach($ng_feed as $fd)
             {
 				  $msg .='<tr>';
@@ -75,7 +75,7 @@ class Alert_model extends CI_Model
             $msg .='</tr>';
 
               // $msg.="<p>feedback For <b>Order ID :".$fd['order_id']." </b> On ".$fd['fbk_date'];
-              // $msg.="<p><i>".$fd['fbk_comment']."</i><p>"; 
+              // $msg.="<p><i>".$fd['fbk_comment']."</i><p>";
             }
 			 $msg .= '</tbody></table>';
 			 //$msg .= '</tbody></table>';
@@ -92,7 +92,7 @@ class Alert_model extends CI_Model
             foreach($ng_feed as $fd)
             {
                   $up_sql.=$this->db->escape($fd['order_id']).",";
-            } 
+            }
             $up_sql=rtrim($up_sql,',').")";
             $this->db->query($up_sql);
           }
@@ -131,7 +131,7 @@ class Alert_model extends CI_Model
             $msg .='</tr>';
 
               // $msg.="<p>feedback For <b>Order ID :".$fd['order_id']." </b> On ".$fd['fbk_date'];
-              // $msg.="<p><i>".$fd['fbk_comment']."</i><p>"; 
+              // $msg.="<p><i>".$fd['fbk_comment']."</i><p>";
             }
 			 $msg .= '</tbody></table>';
 			 //$msg .= '</tbody></table>';
@@ -147,16 +147,16 @@ class Alert_model extends CI_Model
             foreach($ng_feed as $fd)
             {
                   $up_sql.=$this->db->escape($fd['order_id']).",";
-            } 
+            }
             $up_sql=rtrim($up_sql,',').")";
             $this->db->query($up_sql);
            }
-       }    
-    }	
-	
-	
-	
-	
+       }
+    }
+
+
+
+
 	 public function notify_neutral_review($user_id='')
     {
       if(empty($user_id))
@@ -164,10 +164,10 @@ class Alert_model extends CI_Model
         echo "There is no user ID Passed";
         die();
       }
-      
+
 	  $qry=$this->db->query("SELECT * FROM amz_feedback_data WHERE fbk_for={$user_id} AND fbk_rating='3' and notify_sent=0");
       $ng_feed=$qry->result_array();
-      
+
 	  $qr=$this->db->query("SELECT * from scr_user where scr_u_id=".$user_id." AND ntr_fbk=1");
       $res=$qr->result_array();
       if(empty($res))
@@ -192,11 +192,11 @@ class Alert_model extends CI_Model
     </tr>
     </thead>
     <tbody>';
-       
-          
-    
-     
-            
+
+
+
+
+
 			foreach($ng_feed as $fd)
             {
 				  $msg .='<tr>';
@@ -209,7 +209,7 @@ class Alert_model extends CI_Model
             $msg .='</tr>';
 
               // $msg.="<p>feedback For <b>Order ID :".$fd['order_id']." </b> On ".$fd['fbk_date'];
-              // $msg.="<p><i>".$fd['fbk_comment']."</i><p>"; 
+              // $msg.="<p><i>".$fd['fbk_comment']."</i><p>";
             }
 			 $msg .= '</tbody></table>';
 			 //$msg .= '</tbody></table>';
@@ -226,7 +226,7 @@ class Alert_model extends CI_Model
             foreach($ng_feed as $fd)
             {
                   $up_sql.=$this->db->escape($fd['order_id']).",";
-            } 
+            }
             $up_sql=rtrim($up_sql,',').")";
             $this->db->query($up_sql);
           }
@@ -265,7 +265,7 @@ class Alert_model extends CI_Model
             $msg .='</tr>';
 
               // $msg.="<p>feedback For <b>Order ID :".$fd['order_id']." </b> On ".$fd['fbk_date'];
-              // $msg.="<p><i>".$fd['fbk_comment']."</i><p>"; 
+              // $msg.="<p><i>".$fd['fbk_comment']."</i><p>";
             }
 			 $msg .= '</tbody></table>';
 			 //$msg .= '</tbody></table>';
@@ -281,18 +281,18 @@ class Alert_model extends CI_Model
             foreach($ng_feed as $fd)
             {
                   $up_sql.=$this->db->escape($fd['order_id']).",";
-            } 
+            }
             $up_sql=rtrim($up_sql,',').")";
             $this->db->query($up_sql);
            }
-       }    
-    }	
-	
-	
-	
-	
-	
-	
+       }
+    }
+
+
+
+
+
+
 	public function notify_return_order($user_id='')
     {
       if(empty($user_id))
@@ -300,10 +300,10 @@ class Alert_model extends CI_Model
         echo "There is no user ID Passed";
         die();
       }
-      
+
 	  $qry=$this->db->query("SELECT * FROM amz_order_return_data WHERE ret_for={$user_id}  and notify_sent=0");
       $ng_feed=$qry->result_array();
-      
+
 	  $qr=$this->db->query("SELECT * from scr_user where scr_u_id=".$user_id." AND ret_order=1");
       $res=$qr->result_array();
       if(empty($res))
@@ -328,11 +328,11 @@ class Alert_model extends CI_Model
     </tr>
     </thead>
     <tbody>';
-       
-          
-    
-     
-            
+
+
+
+
+
 			foreach($ng_feed as $fd)
             {
 				  $msg .='<tr>';
@@ -345,7 +345,7 @@ class Alert_model extends CI_Model
             $msg .='</tr>';
 
               // $msg.="<p>feedback For <b>Order ID :".$fd['order_id']." </b> On ".$fd['fbk_date'];
-              // $msg.="<p><i>".$fd['fbk_comment']."</i><p>"; 
+              // $msg.="<p><i>".$fd['fbk_comment']."</i><p>";
             }
 			 $msg .= '</tbody></table>';
 			 //$msg .= '</tbody></table>';
@@ -362,7 +362,7 @@ class Alert_model extends CI_Model
             foreach($ng_feed as $fd)
             {
                   $up_sql.=$this->db->escape($fd['order_id']).",";
-            } 
+            }
             $up_sql=rtrim($up_sql,',').")";
             $this->db->query($up_sql);
           }
@@ -389,11 +389,11 @@ class Alert_model extends CI_Model
     </tr>
     </thead>
     <tbody>';
-       
-          
-    
-     
-            
+
+
+
+
+
 			foreach($ng_feed as $fd)
             {
 				  $msg .='<tr>';
@@ -417,17 +417,17 @@ class Alert_model extends CI_Model
             foreach($ng_feed as $fd)
             {
                   $up_sql.=$this->db->escape($fd['order_id']).",";
-            } 
+            }
             $up_sql=rtrim($up_sql,',').")";
             $this->db->query($up_sql);
            }
-       }    
-    }	
-	
-	
-	
-	
-	
+       }
+    }
+
+
+
+
+
     private function send_mail($subject,$msg,$user_id,$alert_name='LOW_INVENTORY',$do_not_cc_admin=1)
 	{
 		$qry=$this->db->query("SELECT alert_name,alert_template,alert_subject FROM alert_mail_config WHERE  alert_name='{$alert_name}'");
@@ -437,7 +437,7 @@ class Alert_model extends CI_Model
 
 
 		$qry=$this->db->query("SELECT scr_uname FROM `amazon_profile` AS a INNER JOIN `store_access` AS b ON a.store_id=b.store_id
-INNER JOIN scr_user AS c ON c.scr_u_id=b.user_id AND a.store_id=".$user_id);  
+INNER JOIN scr_user AS c ON c.scr_u_id=b.user_id AND a.store_id=".$user_id);
 		$res=$qry->result_array();
 		if(empty($res))
 		{
@@ -461,7 +461,7 @@ INNER JOIN scr_user AS c ON c.scr_u_id=b.user_id AND a.store_id=".$user_id);
      $this->email->to($res[0]['scr_uname']);
      $this->email->subject($subject);
      $this->email->message($email_content);
-	    if ($this->email->send()) 
+	    if ($this->email->send())
 	    {
 	       return 1;
 	    }
@@ -470,12 +470,12 @@ INNER JOIN scr_user AS c ON c.scr_u_id=b.user_id AND a.store_id=".$user_id);
 	      return 2;
 	    }
 
-  
+
 	}
-    
-    
-	
-    
- 
+
+  public function SaveReadCount($cid) {
+    $up_sql = "UPDATE campaign_manager SET read_count = read_count + 1 where cpgn_id = '".$cid."'";
+    $this->db->query($up_sql);
+  }
 
 }

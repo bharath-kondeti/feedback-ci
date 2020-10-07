@@ -61,3 +61,7 @@ ALTER TABLE `buyer_blacklist`
 ADD `bid_store_id` tinyint NOT NULL;
 
 DROP TRIGGER IF EXISTS `blacklistbuyer`;CREATE DEFINER=`root`@`localhost` TRIGGER `blacklistbuyer` AFTER INSERT ON `amz_feedback_data` FOR EACH ROW IF (new.fbk_rating <=2 ) THEN INSERT INTO buyer_blacklist (buyer_email, fd_order_id, bid_store_id) VALUES(new.rater_email, new.order_id, new.fbk_for); END IF
+
+
+ALTER TABLE `campaign_manager`
+ADD `read_count` tinyint(4) NULL DEFAULT '0';

@@ -27,15 +27,39 @@ class Dash_model extends CI_Model
     public function get_graph_data($frm_date='',$to_date='')
     {
        $sql="SELECT DATE_FORMAT(purchase_date,'%b-%d') AS order_date,count(order_no) as order_count,sum(itm_qty) as ord_qty,sum(itm_price) as total_amt FROM amz_order_info WHERE store_id= ".$this->store_id;
-       // if(!empty($frm_date) && !empty($to_date))
-       // {
-       //     $frm_date=$frm_date." 00:00:00";
-       //     $to_date=$to_date." 23:59:59";
-       //     $sql.=" AND purchase_date >= ".$this->db->escape($frm_date)." AND purchase_date <= ".$this->db->escape($to_date);
-       //     $sql.=" AND order_status='Shipped' ";
-       // }
        $sql.=" GROUP BY order_date ORDER BY purchase_date ASC";
+       $query=$this->db->query($sql);
+       return $query->result_array();
+    }
 
+    public function orders_graph($frm_date='',$to_date='')
+    {
+       $sql="SELECT DATE_FORMAT(purchase_date,'%b-%d') AS order_date,count(order_no) as order_count FROM amz_order_info WHERE store_id= ".$this->store_id;
+       $sql.=" GROUP BY order_date ORDER BY purchase_date ASC";
+       $query=$this->db->query($sql);
+       return $query->result_array();
+    }
+
+    public function feedback_graph($frm_date='',$to_date='')
+    {
+       $sql="SELECT DATE_FORMAT(fbk_date,'%b-%d') AS fbk_date,count(order_id) as fbk_count FROM amz_feedback_data WHERE fbk_for= ".$this->store_id;
+       $sql.=" GROUP BY fbk_date ORDER BY fbk_date ASC";
+       $query=$this->db->query($sql);
+       return $query->result_array();
+    }
+
+    public function review_graph($frm_date='',$to_date='')
+    {
+       $sql = "SELECT DATE_FORMAT(cr.review_date,'%b-%d') AS review_date,count(cr.fd_id) as review_count FROM customer_product cp INNER JOIN fd_amazon_cust_reviews cr ON cp.prod_sku = cr.item_SKU WHERE cp.store_id = {$this->store_id} AND cr.user_id = {$this->user_id}";
+       $sql.=" GROUP BY review_date ORDER BY review_date ASC";
+       $query=$this->db->query($sql);
+       return $query->result_array();
+    }
+
+    public function messages_graph($frm_date='',$to_date='')
+    {
+       $sql = "SELECT DATE_FORMAT(co.sent_on,'%b-%d') AS sent_date, count(co.camp_id) as sent_count FROM campaign_manager cm LEFT JOIN campaign_order_list co on co.camp_id = cm.cpgn_id where cm.created_by = {$this->store_id} and co.is_sent = '1'";
+       $sql.=" GROUP BY co.sent_on ORDER BY co.sent_on ASC";
        $query=$this->db->query($sql);
        return $query->result_array();
     }
@@ -48,12 +72,12 @@ class Dash_model extends CI_Model
 
 
                       // "-- WHERE store_id={$this->store_id} ";
-      if(!empty($frm_date) && !empty($to_date))
-       {
-          $frm_date=$frm_date." 00:00:00";
-          $to_date=$to_date." 23:59:59";
-          $sql.=" AND purchase_date >= ".$this->db->escape($frm_date)." AND purchase_date <= ".$this->db->escape($to_date);
-       }
+      // if(!empty($frm_date) && !empty($to_date))
+      //  {
+      //     $frm_date=$frm_date." 00:00:00";
+      //     $to_date=$to_date." 23:59:59";
+      //     $sql.=" AND purchase_date >= ".$this->db->escape($frm_date)." AND purchase_date <= ".$this->db->escape($to_date);
+      //  }
       $sql.=" GROUP BY prod_sku HAVING sold_qty > 0 ORDER BY sold_qty DESC limit 0,10 " ;
       $query=$this->db->query($sql);
       return $query->result_array();
@@ -145,14 +169,14 @@ public function get_top_product($orderby,$direction,$offet,$limit,$searchterm=''
                  FROM customer_product as prd
                  INNER JOIN amz_order_info AS tx ON  prd.store_id= {$this->store_id} AND tx.store_id=prd.store_id AND seller_sku=prod_sku AND order_status='Shipped' AND prod_title <> '' ";
 
-		 $to_date=date('Y-m-d');
-         $frm_date = date('Y-m-d',strtotime("-31 days"));
-         if(!empty($frm_date) && !empty($to_date))
-          {
-             $frm_date=$frm_date." 00:00:00";
-             $to_date=$to_date." 23:59:59";
-             $sqlquery.=" AND purchase_date >= ".$this->db->escape($frm_date)." AND purchase_date <= ".$this->db->escape($to_date);
-          }
+		 // $to_date=date('Y-m-d');
+   //       $frm_date = date('Y-m-d',strtotime("-31 days"));
+   //       if(!empty($frm_date) && !empty($to_date))
+   //        {
+   //           $frm_date=$frm_date." 00:00:00";
+   //           $to_date=$to_date." 23:59:59";
+   //           $sqlquery.=" AND purchase_date >= ".$this->db->escape($frm_date)." AND purchase_date <= ".$this->db->escape($to_date);
+   //        }
          $sqlquery.=" GROUP BY prod_sku HAVING sold_qty > 0 ORDER BY ".$sort_order." ".$direction." " ;
 
 
