@@ -4,7 +4,7 @@ $base_url=base_url();
 ?>
 
             <div class="wrapper" ng-controller='transactionCtrl'>
-			    <div class="content order" id="order">
+			    <div ng-cloak class="content order" id="order">
 
                     <!-- Start Content-->
                     <div class="container-fluid">

@@ -5,7 +5,7 @@ $base_url=base_url();
 <script src="<?php echo $baseurl.'/asset/js/chart.bundle.min.js'?>"></script>
 
 <div class="wrapper"  ng-controller='invCtrl'>
-  <div class="content review" id="review">
+  <div ng-cloak class="content review" id="review">
     <div class="container-fluid">
       <div class="row">
         <div class="col-12">
@@ -356,7 +356,7 @@ crawlApp.controller('invCtrl', ['$scope','$parse','$window','invFactory','$http'
                 backgroundColor: 'white',
                 '-webkit-border-radius': '10px',
                 '-moz-border-radius': '10px',
-                opacity: .9,
+                opacity: 0.9,
                 color: '#fff'
 
             },baseZ:9999});

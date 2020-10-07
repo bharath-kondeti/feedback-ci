@@ -4,7 +4,7 @@
   ?>
 <script src="<?php echo $baseurl.'/asset/js/chart.bundle.min.js'?>"></script>
 <div class="wrapper"  ng-controller='dashCtrl'>
-<div class="content dashboard" id="dashboard">
+<div ng-cloak class="content dashboard" id="dashboard">
   <!-- Start Content-->
   <div class="container-fluid">
     <!-- start page title -->
@@ -150,7 +150,8 @@
                   <div class="row">
                     <div class="col-12">
                       <div class="text-center">
-                        <h3 class="text-dark mt-1">{{revenue.revenue_total}}</h3>
+                        <h3 class="text-dark mt-1" ng-if="revenue.revenue_total !== null">{{revenue.revenue_total}}</h3>
+                        <h3 class="text-dark mt-1" ng-if="revenue.revenue_total === null">0</h3>
                         <p class="text-muted mb-1 text-truncate">Total Revenue</p>
                       </div>
                     </div>
