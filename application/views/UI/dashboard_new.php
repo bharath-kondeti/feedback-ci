@@ -338,7 +338,7 @@
                 <div class="card-box">
                   <h4 class="header-title mb-3">Sales Analytics</h4>
                   <!--<div id="chartBig1" class="flot-chart mt-4 pt-1" style="height: 375px;"></div> --->
-                  <canvas id="chartBig1" class="chartBig1" style="display: block;width:100%;height: 160px;"></canvas>
+                  <canvas id="chartBig1" style="display: block;width:100%;height: 160px;"></canvas>
                 </div>
                 <!-- end card-box -->
               </div>
@@ -349,7 +349,7 @@
                 <div class="card-box">
                   <h4 class="header-title mb-3">Positive Feedback</h4>
                   <!--<div id="chartBig1" class="flot-chart mt-4 pt-1" style="height: 375px;"></div> --->
-                  <canvas class="chartBig1" style="display: block;width:100%;height: 160px;"></canvas>
+                  <canvas id="chartBig2" style="display: block;width:100%;height: 160px;"></canvas>
                 </div>
                 <!-- end card-box -->
               </div>
@@ -357,7 +357,7 @@
                 <div class="card-box">
                   <h4 class="header-title mb-3">Orders</h4>
                   <!--<div id="chartBig1" class="flot-chart mt-4 pt-1" style="height: 375px;"></div> --->
-                  <canvas class="chartBig1" style="display: block;width:100%;height: 160px;"></canvas>
+                  <canvas id="chartBig3" style="display: block;width:100%;height: 160px;"></canvas>
                 </div>
                 <!-- end card-box -->
               </div>
@@ -365,7 +365,7 @@
                 <div class="card-box">
                   <h4 class="header-title mb-3">Messages</h4>
                   <!--<div id="chartBig1" class="flot-chart mt-4 pt-1" style="height: 375px;"></div> --->
-                  <canvas class="chartBig1" style="display: block;width:100%;height: 160px;"></canvas>
+                  <canvas id="chartBig4" style="display: block;width:100%;height: 160px;"></canvas>
                 </div>
                 <!-- end card-box -->
               </div>
@@ -644,7 +644,7 @@
                 <div class="card-box">
                   <h4 class="header-title mb-3">Positive Review</h4>
                   <!--<div id="chartBig1" class="flot-chart mt-4 pt-1" style="height: 375px;"></div> --->
-                  <canvas class="chartBig1" style="display: block;width:100%;height: 160px;"></canvas>
+                  <canvas id="chartBig5" style="display: block;width:100%;height: 160px;"></canvas>
                 </div>
                 <!-- end card-box -->
               </div>
@@ -655,7 +655,7 @@
                 <div class="card-box">
                   <h4 class="header-title mb-3">Sales Analytics</h4>
                   <!--<div id="chartBig1" class="flot-chart mt-4 pt-1" style="height: 375px;"></div> --->
-                  <canvas class="chartBig1" style="display: block;width:100%;height: 160px;"></canvas>
+                  <canvas id="chartBig6" style="display: block;width:100%;height: 160px;"></canvas>
                 </div>
                 <!-- end card-box -->
               </div>
@@ -663,7 +663,7 @@
                 <div class="card-box">
                   <h4 class="header-title mb-3">Orders</h4>
                   <!--<div id="chartBig1" class="flot-chart mt-4 pt-1" style="height: 375px;"></div> --->
-                  <canvas class="chartBig1" style="display: block;width:100%;height: 160px;"></canvas>
+                  <canvas id="chartBig7" style="display: block;width:100%;height: 160px;"></canvas>
                 </div>
                 <!-- end card-box -->
               </div>
@@ -671,7 +671,7 @@
                 <div class="card-box">
                   <h4 class="header-title mb-3">Messages</h4>
                   <!--<div id="chartBig1" class="flot-chart mt-4 pt-1" style="height: 375px;"></div> --->
-                  <canvas class="chartBig1" style="display: block;width:100%;height: 160px;"></canvas>
+                  <canvas id="chartBig8" style="display: block;width:100%;height: 160px;"></canvas>
                 </div>
                 <!-- end card-box -->
               </div>
@@ -940,9 +940,18 @@
                                         $scope.breakdown=response.breakdown;
   									  $scope.recent_ten_orders=response.recent_ten_orders;
                                         $scope.graph_data=response.graph_data;
-                                        $scope.show_revenue_graph(response.graph_data.order_date,response.graph_data[0].total_amt);
-
-
+                                        $scope.feedback_graph_data = response.feedback_graph;
+                                        $scope.orders_graph_data = response.orders_graph;
+                                        $scope.messages_graph_data = response.messages_graph;
+                                        $scope.review_graph_data = response.review_graph;
+                                        $scope.show_revenue_graph();
+                                        $scope.show_feedback_graph();
+                                        $scope.show_orders_graph();
+                                        $scope.show_messages_graph();
+                                        $scope.show_review_graph();
+                                        $scope.show_feedback_graph2();
+                                        $scope.show_orders_graph2();
+                                        $scope.show_messages_graph2();
                                   }
                                   else
                                   {
@@ -1016,15 +1025,7 @@
               }
             }
           };
-          // var ctx = document.getElementsByClassName("chartBig1");
           var ctx = document.getElementById('chartBig1');
-          // for(var i = 0; i<ctx.length; i++) {
-          //   var gradientStroke = ctx[i].getContext('2d').createLinearGradient(0, 230, 0, 50);
-          //   gradientStroke.addColorStop(1, 'rgba(72,72,176,0.1)');
-          //   gradientStroke.addColorStop(0.4, 'rgba(72,72,176,0.0)');
-          //   gradientStroke.addColorStop(0, 'rgba(119,52,169,0)');
-          //   $scope.myChartData = new Chart(ctx[i],config);
-          // }
           var gradientStroke = ctx.getContext('2d').createLinearGradient(0, 230, 0, 50);
           gradientStroke.addColorStop(1, 'rgba(72,72,176,0.1)');
           gradientStroke.addColorStop(0.4, 'rgba(72,72,176,0.0)');
@@ -1054,6 +1055,645 @@
         	$scope.myChartData.config.data.datasets[0].data=chart_data;
           $scope.myChartData.config.data.datasets.length > 1 ? $scope.myChartData.config.data.datasets.pop() : '';
         	$scope.myChartData.update();
+        }
+
+
+        $scope.visualise_feedback_data=function()
+        {
+           //purple colors
+           var config = {
+            type: 'line',
+            height: '150px',
+              data: {
+                labels: [],
+                datasets: [
+                    {
+                      label: "Postive Feedback",
+                      fill: true,
+                      backgroundColor: gradientStroke,
+                      borderColor: '#0e76bd',
+                      borderWidth: 2,
+                      borderDash: [],
+                      borderDashOffset: 0.0,
+                      pointBackgroundColor: '#00acc1',
+                      pointBorderColor: 'rgba(255,255,255,0)',
+                      pointHoverBackgroundColor: '#00acc1',
+                      pointBorderWidth: 20,
+                      pointHoverRadius: 4,
+                      pointHoverBorderWidth: 15,
+                      pointRadius: 4,
+                      data: [],
+                  }
+                ]
+              },
+            options: {
+              scales: {
+                xAxes: [
+                  {
+                    gridLines: {
+                      color: "rgba(0, 0, 0, 0)",
+                    },
+                    offset: true,
+                    stacked: true,
+                    ticks: {
+                      beginAtZero:true
+                    }
+                  }
+                ],
+                yAxes: [
+                  {
+                    gridLines: {
+                      color: "rgba(0, 0, 0, 0)",
+                    },
+                    stacked: true,
+                    offset: true,
+                    gridThickness: 1,
+                    ticks: {
+                      beginAtZero:true
+                    }
+                  }
+                ],
+              }
+            }
+          };
+          var ctx = document.getElementById('chartBig2');
+          var gradientStroke = ctx.getContext('2d').createLinearGradient(0, 230, 0, 50);
+          gradientStroke.addColorStop(1, 'rgba(72,72,176,0.1)');
+          gradientStroke.addColorStop(0.4, 'rgba(72,72,176,0.0)');
+          gradientStroke.addColorStop(0, 'rgba(119,52,169,0)');
+          $scope.myFeedbackChartData = new Chart(ctx,config);
+        }
+        $scope.visualise_feedback_data();
+
+        $scope.show_feedback_graph=function() {
+          $scope.myFeedbackChartData.config.data.datasets.length > 1?$scope.myFeedbackChartData.config.data.datasets.pop():'';
+          $scope.myFeedbackChartData.config.data.datasets.length > 2?$scope.myFeedbackChartData.config.data.datasets.pop():'';
+          $scope.revenue_graph=1;
+          $scope.sale_graph=0;
+          $scope.campaing_graph=0;
+          var lnth=$scope.feedback_graph_data.length;
+          var chart_data=[];
+          var chart_labels=[];
+          for (var i=0; i<lnth; i++) {
+            chart_data[i]=$scope.feedback_graph_data[i].fbk_count;
+            chart_labels[i]=$scope.feedback_graph_data[i].fbk_date;
+          }
+          $scope.chart_for="Feedback" ;
+        	$scope.chart_desc="Positive Feedback";
+          $scope.myFeedbackChartData.config.type='line' ;
+        	$scope.myFeedbackChartData.config.data.datasets[0].label="Feedback";
+        	$scope.myFeedbackChartData.config.data.labels=chart_labels;
+        	$scope.myFeedbackChartData.config.data.datasets[0].data=chart_data;
+          $scope.myFeedbackChartData.config.data.datasets.length > 1 ? $scope.myFeedbackChartData.config.data.datasets.pop() : '';
+        	$scope.myFeedbackChartData.update();
+        }
+
+
+        $scope.visualise_orders_data=function()
+        {
+           //purple colors
+           var config = {
+            type: 'line',
+            height: '150px',
+              data: {
+                labels: [],
+                datasets: [
+                    {
+                      label: "Orders",
+                      fill: true,
+                      backgroundColor: gradientStroke,
+                      borderColor: '#0e76bd',
+                      borderWidth: 2,
+                      borderDash: [],
+                      borderDashOffset: 0.0,
+                      pointBackgroundColor: '#00acc1',
+                      pointBorderColor: 'rgba(255,255,255,0)',
+                      pointHoverBackgroundColor: '#00acc1',
+                      pointBorderWidth: 20,
+                      pointHoverRadius: 4,
+                      pointHoverBorderWidth: 15,
+                      pointRadius: 4,
+                      data: [],
+                  }
+                ]
+              },
+            options: {
+              scales: {
+                xAxes: [
+                  {
+                    gridLines: {
+                      color: "rgba(0, 0, 0, 0)",
+                    },
+                    offset: true,
+                    stacked: true,
+                    ticks: {
+                      beginAtZero:true
+                    }
+                  }
+                ],
+                yAxes: [
+                  {
+                    gridLines: {
+                      color: "rgba(0, 0, 0, 0)",
+                    },
+                    stacked: true,
+                    offset: true,
+                    gridThickness: 1,
+                    ticks: {
+                      beginAtZero:true
+                    }
+                  }
+                ],
+              }
+            }
+          };
+          var ctx = document.getElementById('chartBig3');
+          var gradientStroke = ctx.getContext('2d').createLinearGradient(0, 230, 0, 50);
+          gradientStroke.addColorStop(1, 'rgba(72,72,176,0.1)');
+          gradientStroke.addColorStop(0.4, 'rgba(72,72,176,0.0)');
+          gradientStroke.addColorStop(0, 'rgba(119,52,169,0)');
+          $scope.myOrdersChartData = new Chart(ctx,config);
+        }
+        $scope.visualise_orders_data();
+
+        $scope.show_orders_graph=function() {
+          $scope.myOrdersChartData.config.data.datasets.length > 1?$scope.myOrdersChartData.config.data.datasets.pop():'';
+          $scope.myOrdersChartData.config.data.datasets.length > 2?$scope.myOrdersChartData.config.data.datasets.pop():'';
+          $scope.orders_graph=1;
+          $scope.sale_graph=0;
+          $scope.campaing_graph=0;
+          var lnth=$scope.orders_graph_data.length;
+          var chart_data=[];
+          var chart_labels=[];
+          for (var i=0; i<lnth; i++) {
+            chart_data[i]=$scope.orders_graph_data[i].order_count;
+            chart_labels[i]=$scope.orders_graph_data[i].order_date;
+          }
+          $scope.chart_for="Orders" ;
+        	$scope.chart_desc="Orders";
+          $scope.myOrdersChartData.config.type='line' ;
+        	$scope.myOrdersChartData.config.data.datasets[0].label="Orders";
+        	$scope.myOrdersChartData.config.data.labels=chart_labels;
+        	$scope.myOrdersChartData.config.data.datasets[0].data=chart_data;
+          $scope.myOrdersChartData.config.data.datasets.length > 1 ? $scope.myOrdersChartData.config.data.datasets.pop() : '';
+        	$scope.myOrdersChartData.update();
+        }
+
+
+        $scope.visualise_messages_data=function()
+        {
+           //purple colors
+           var config = {
+            type: 'line',
+            height: '150px',
+              data: {
+                labels: [],
+                datasets: [
+                    {
+                      label: "Messages",
+                      fill: true,
+                      backgroundColor: gradientStroke,
+                      borderColor: '#0e76bd',
+                      borderWidth: 2,
+                      borderDash: [],
+                      borderDashOffset: 0.0,
+                      pointBackgroundColor: '#00acc1',
+                      pointBorderColor: 'rgba(255,255,255,0)',
+                      pointHoverBackgroundColor: '#00acc1',
+                      pointBorderWidth: 20,
+                      pointHoverRadius: 4,
+                      pointHoverBorderWidth: 15,
+                      pointRadius: 4,
+                      data: [],
+                  }
+                ]
+              },
+            options: {
+              scales: {
+                xAxes: [
+                  {
+                    gridLines: {
+                      color: "rgba(0, 0, 0, 0)",
+                    },
+                    offset: true,
+                    stacked: true,
+                    ticks: {
+                      beginAtZero:true
+                    }
+                  }
+                ],
+                yAxes: [
+                  {
+                    gridLines: {
+                      color: "rgba(0, 0, 0, 0)",
+                    },
+                    stacked: true,
+                    offset: true,
+                    gridThickness: 1,
+                    ticks: {
+                      beginAtZero:true
+                    }
+                  }
+                ],
+              }
+            }
+          };
+          var ctx = document.getElementById('chartBig4');
+          var gradientStroke = ctx.getContext('2d').createLinearGradient(0, 230, 0, 50);
+          gradientStroke.addColorStop(1, 'rgba(72,72,176,0.1)');
+          gradientStroke.addColorStop(0.4, 'rgba(72,72,176,0.0)');
+          gradientStroke.addColorStop(0, 'rgba(119,52,169,0)');
+          $scope.myMessagesChartData = new Chart(ctx,config);
+        }
+        $scope.visualise_messages_data();
+
+        $scope.show_messages_graph=function() {
+          $scope.myMessagesChartData.config.data.datasets.length > 1?$scope.myMessagesChartData.config.data.datasets.pop():'';
+          $scope.myMessagesChartData.config.data.datasets.length > 2?$scope.myMessagesChartData.config.data.datasets.pop():'';
+          $scope.messages_graph=1;
+          $scope.sale_graph=0;
+          $scope.campaing_graph=0;
+          var lnth=$scope.messages_graph_data.length;
+          var chart_data=[];
+          var chart_labels=[];
+          for (var i=0; i<lnth; i++) {
+            chart_data[i]=$scope.messages_graph_data[i].sent_count;
+            chart_labels[i]=$scope.messages_graph_data[i].sent_date;
+          }
+          $scope.chart_for="Messages" ;
+        	$scope.chart_desc="Messages";
+          $scope.myMessagesChartData.config.type='line' ;
+        	$scope.myMessagesChartData.config.data.datasets[0].label="Messages";
+        	$scope.myMessagesChartData.config.data.labels=chart_labels;
+        	$scope.myMessagesChartData.config.data.datasets[0].data=chart_data;
+          $scope.myMessagesChartData.config.data.datasets.length > 1 ? $scope.myMessagesChartData.config.data.datasets.pop() : '';
+        	$scope.myMessagesChartData.update();
+        }
+
+
+
+        $scope.visualise_reviews_data=function()
+        {
+           //purple colors
+           var config = {
+            type: 'line',
+            height: '150px',
+              data: {
+                labels: [],
+                datasets: [
+                    {
+                      label: "Reviews",
+                      fill: true,
+                      backgroundColor: gradientStroke,
+                      borderColor: '#0e76bd',
+                      borderWidth: 2,
+                      borderDash: [],
+                      borderDashOffset: 0.0,
+                      pointBackgroundColor: '#00acc1',
+                      pointBorderColor: 'rgba(255,255,255,0)',
+                      pointHoverBackgroundColor: '#00acc1',
+                      pointBorderWidth: 20,
+                      pointHoverRadius: 4,
+                      pointHoverBorderWidth: 15,
+                      pointRadius: 4,
+                      data: [],
+                  }
+                ]
+              },
+            options: {
+              scales: {
+                xAxes: [
+                  {
+                    gridLines: {
+                      color: "rgba(0, 0, 0, 0)",
+                    },
+                    offset: true,
+                    stacked: true,
+                    ticks: {
+                      beginAtZero:true
+                    }
+                  }
+                ],
+                yAxes: [
+                  {
+                    gridLines: {
+                      color: "rgba(0, 0, 0, 0)",
+                    },
+                    stacked: true,
+                    offset: true,
+                    gridThickness: 1,
+                    ticks: {
+                      beginAtZero:true
+                    }
+                  }
+                ],
+              }
+            }
+          };
+          var ctx = document.getElementById('chartBig5');
+          var gradientStroke = ctx.getContext('2d').createLinearGradient(0, 230, 0, 50);
+          gradientStroke.addColorStop(1, 'rgba(72,72,176,0.1)');
+          gradientStroke.addColorStop(0.4, 'rgba(72,72,176,0.0)');
+          gradientStroke.addColorStop(0, 'rgba(119,52,169,0)');
+          $scope.myReviewsChartData = new Chart(ctx,config);
+        }
+        $scope.visualise_reviews_data();
+
+        $scope.show_review_graph=function() {
+          $scope.myReviewsChartData.config.data.datasets.length > 1?$scope.myReviewsChartData.config.data.datasets.pop():'';
+          $scope.myReviewsChartData.config.data.datasets.length > 2?$scope.myReviewsChartData.config.data.datasets.pop():'';
+          $scope.reviews_graph=1;
+          $scope.sale_graph=0;
+          $scope.campaing_graph=0;
+          var lnth=$scope.review_graph_data.length;
+          var chart_data=[];
+          var chart_labels=[];
+          for (var i=0; i<lnth; i++) {
+            chart_data[i]=$scope.review_graph_data[i].review_count;
+            chart_labels[i]=$scope.review_graph_data[i].review_date;
+          }
+          $scope.chart_for="Reviews" ;
+        	$scope.chart_desc="Positive Reviews";
+          $scope.myReviewsChartData.config.type='line' ;
+        	$scope.myReviewsChartData.config.data.datasets[0].label="Reviews";
+        	$scope.myReviewsChartData.config.data.labels=chart_labels;
+        	$scope.myReviewsChartData.config.data.datasets[0].data=chart_data;
+          $scope.myReviewsChartData.config.data.datasets.length > 1 ? $scope.myReviewsChartData.config.data.datasets.pop() : '';
+        	$scope.myReviewsChartData.update();
+        }
+
+
+
+        $scope.visualise_feedback_data2=function()
+        {
+           //purple colors
+           var config = {
+            type: 'line',
+            height: '150px',
+              data: {
+                labels: [],
+                datasets: [
+                    {
+                      label: "Postive Feedback",
+                      fill: true,
+                      backgroundColor: gradientStroke,
+                      borderColor: '#0e76bd',
+                      borderWidth: 2,
+                      borderDash: [],
+                      borderDashOffset: 0.0,
+                      pointBackgroundColor: '#00acc1',
+                      pointBorderColor: 'rgba(255,255,255,0)',
+                      pointHoverBackgroundColor: '#00acc1',
+                      pointBorderWidth: 20,
+                      pointHoverRadius: 4,
+                      pointHoverBorderWidth: 15,
+                      pointRadius: 4,
+                      data: [],
+                  }
+                ]
+              },
+            options: {
+              scales: {
+                xAxes: [
+                  {
+                    gridLines: {
+                      color: "rgba(0, 0, 0, 0)",
+                    },
+                    offset: true,
+                    stacked: true,
+                    ticks: {
+                      beginAtZero:true
+                    }
+                  }
+                ],
+                yAxes: [
+                  {
+                    gridLines: {
+                      color: "rgba(0, 0, 0, 0)",
+                    },
+                    stacked: true,
+                    offset: true,
+                    gridThickness: 1,
+                    ticks: {
+                      beginAtZero:true
+                    }
+                  }
+                ],
+              }
+            }
+          };
+          var ctx = document.getElementById('chartBig6');
+          var gradientStroke = ctx.getContext('2d').createLinearGradient(0, 230, 0, 50);
+          gradientStroke.addColorStop(1, 'rgba(72,72,176,0.1)');
+          gradientStroke.addColorStop(0.4, 'rgba(72,72,176,0.0)');
+          gradientStroke.addColorStop(0, 'rgba(119,52,169,0)');
+          $scope.myFeedbackChartData2 = new Chart(ctx,config);
+        }
+        $scope.visualise_feedback_data2();
+
+        $scope.show_feedback_graph2=function() {
+          $scope.myFeedbackChartData2.config.data.datasets.length > 1?$scope.myFeedbackChartData2.config.data.datasets.pop():'';
+          $scope.myFeedbackChartData2.config.data.datasets.length > 2?$scope.myFeedbackChartData2.config.data.datasets.pop():'';
+          $scope.revenue_graph=1;
+          $scope.sale_graph=0;
+          $scope.campaing_graph=0;
+          var lnth=$scope.feedback_graph_data.length;
+          var chart_data=[];
+          var chart_labels=[];
+          for (var i=0; i<lnth; i++) {
+            chart_data[i]=$scope.feedback_graph_data[i].fbk_count;
+            chart_labels[i]=$scope.feedback_graph_data[i].fbk_date;
+          }
+          $scope.chart_for="Feedback" ;
+        	$scope.chart_desc="Positive Feedback";
+          $scope.myFeedbackChartData2.config.type='line' ;
+        	$scope.myFeedbackChartData2.config.data.datasets[0].label="Feedback";
+        	$scope.myFeedbackChartData2.config.data.labels=chart_labels;
+        	$scope.myFeedbackChartData2.config.data.datasets[0].data=chart_data;
+          $scope.myFeedbackChartData2.config.data.datasets.length > 1 ? $scope.myFeedbackChartData2.config.data.datasets.pop() : '';
+        	$scope.myFeedbackChartData2.update();
+        }
+
+
+        $scope.visualise_orders_data2=function()
+        {
+           //purple colors
+           var config = {
+            type: 'line',
+            height: '150px',
+              data: {
+                labels: [],
+                datasets: [
+                    {
+                      label: "Orders",
+                      fill: true,
+                      backgroundColor: gradientStroke,
+                      borderColor: '#0e76bd',
+                      borderWidth: 2,
+                      borderDash: [],
+                      borderDashOffset: 0.0,
+                      pointBackgroundColor: '#00acc1',
+                      pointBorderColor: 'rgba(255,255,255,0)',
+                      pointHoverBackgroundColor: '#00acc1',
+                      pointBorderWidth: 20,
+                      pointHoverRadius: 4,
+                      pointHoverBorderWidth: 15,
+                      pointRadius: 4,
+                      data: [],
+                  }
+                ]
+              },
+            options: {
+              scales: {
+                xAxes: [
+                  {
+                    gridLines: {
+                      color: "rgba(0, 0, 0, 0)",
+                    },
+                    offset: true,
+                    stacked: true,
+                    ticks: {
+                      beginAtZero:true
+                    }
+                  }
+                ],
+                yAxes: [
+                  {
+                    gridLines: {
+                      color: "rgba(0, 0, 0, 0)",
+                    },
+                    stacked: true,
+                    offset: true,
+                    gridThickness: 1,
+                    ticks: {
+                      beginAtZero:true
+                    }
+                  }
+                ],
+              }
+            }
+          };
+          var ctx = document.getElementById('chartBig7');
+          var gradientStroke = ctx.getContext('2d').createLinearGradient(0, 230, 0, 50);
+          gradientStroke.addColorStop(1, 'rgba(72,72,176,0.1)');
+          gradientStroke.addColorStop(0.4, 'rgba(72,72,176,0.0)');
+          gradientStroke.addColorStop(0, 'rgba(119,52,169,0)');
+          $scope.myOrdersChartData2 = new Chart(ctx,config);
+        }
+        $scope.visualise_orders_data2();
+
+        $scope.show_orders_graph2=function() {
+          $scope.myOrdersChartData2.config.data.datasets.length > 1?$scope.myOrdersChartData2.config.data.datasets.pop():'';
+          $scope.myOrdersChartData2.config.data.datasets.length > 2?$scope.myOrdersChartData2.config.data.datasets.pop():'';
+          $scope.orders_graph=1;
+          $scope.sale_graph=0;
+          $scope.campaing_graph=0;
+          var lnth=$scope.orders_graph_data.length;
+          var chart_data=[];
+          var chart_labels=[];
+          for (var i=0; i<lnth; i++) {
+            chart_data[i]=$scope.orders_graph_data[i].order_count;
+            chart_labels[i]=$scope.orders_graph_data[i].order_date;
+          }
+          $scope.chart_for="Orders" ;
+        	$scope.chart_desc="Orders";
+          $scope.myOrdersChartData2.config.type='line' ;
+        	$scope.myOrdersChartData2.config.data.datasets[0].label="Orders";
+        	$scope.myOrdersChartData2.config.data.labels=chart_labels;
+        	$scope.myOrdersChartData2.config.data.datasets[0].data=chart_data;
+          $scope.myOrdersChartData2.config.data.datasets.length > 1 ? $scope.myOrdersChartData2.config.data.datasets.pop() : '';
+        	$scope.myOrdersChartData2.update();
+        }
+
+
+        $scope.visualise_messages_data2=function()
+        {
+           //purple colors
+           var config = {
+            type: 'line',
+            height: '150px',
+              data: {
+                labels: [],
+                datasets: [
+                    {
+                      label: "Messages",
+                      fill: true,
+                      backgroundColor: gradientStroke,
+                      borderColor: '#0e76bd',
+                      borderWidth: 2,
+                      borderDash: [],
+                      borderDashOffset: 0.0,
+                      pointBackgroundColor: '#00acc1',
+                      pointBorderColor: 'rgba(255,255,255,0)',
+                      pointHoverBackgroundColor: '#00acc1',
+                      pointBorderWidth: 20,
+                      pointHoverRadius: 4,
+                      pointHoverBorderWidth: 15,
+                      pointRadius: 4,
+                      data: [],
+                  }
+                ]
+              },
+            options: {
+              scales: {
+                xAxes: [
+                  {
+                    gridLines: {
+                      color: "rgba(0, 0, 0, 0)",
+                    },
+                    offset: true,
+                    stacked: true,
+                    ticks: {
+                      beginAtZero:true
+                    }
+                  }
+                ],
+                yAxes: [
+                  {
+                    gridLines: {
+                      color: "rgba(0, 0, 0, 0)",
+                    },
+                    stacked: true,
+                    offset: true,
+                    gridThickness: 1,
+                    ticks: {
+                      beginAtZero:true
+                    }
+                  }
+                ],
+              }
+            }
+          };
+          var ctx = document.getElementById('chartBig8');
+          var gradientStroke = ctx.getContext('2d').createLinearGradient(0, 230, 0, 50);
+          gradientStroke.addColorStop(1, 'rgba(72,72,176,0.1)');
+          gradientStroke.addColorStop(0.4, 'rgba(72,72,176,0.0)');
+          gradientStroke.addColorStop(0, 'rgba(119,52,169,0)');
+          $scope.myMessagesChartData2 = new Chart(ctx,config);
+        }
+        $scope.visualise_messages_data2();
+
+        $scope.show_messages_graph2=function() {
+          $scope.myMessagesChartData2.config.data.datasets.length > 1?$scope.myMessagesChartData2.config.data.datasets.pop():'';
+          $scope.myMessagesChartData2.config.data.datasets.length > 2?$scope.myMessagesChartData2.config.data.datasets.pop():'';
+          $scope.messages_graph=1;
+          $scope.sale_graph=0;
+          $scope.campaing_graph=0;
+          var lnth=$scope.messages_graph_data.length;
+          var chart_data=[];
+          var chart_labels=[];
+          for (var i=0; i<lnth; i++) {
+            chart_data[i]=$scope.messages_graph_data[i].sent_count;
+            chart_labels[i]=$scope.messages_graph_data[i].sent_date;
+          }
+          $scope.chart_for="Messages" ;
+        	$scope.chart_desc="Messages";
+          $scope.myMessagesChartData2.config.type='line' ;
+        	$scope.myMessagesChartData2.config.data.datasets[0].label="Messages";
+        	$scope.myMessagesChartData2.config.data.labels=chart_labels;
+        	$scope.myMessagesChartData2.config.data.datasets[0].data=chart_data;
+          $scope.myMessagesChartData2.config.data.datasets.length > 1 ? $scope.myMessagesChartData2.config.data.datasets.pop() : '';
+        	$scope.myMessagesChartData2.update();
         }
 
 
