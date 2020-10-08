@@ -1175,19 +1175,6 @@
         });
       return deferred.promise;
     };
-    var get_templates = function(offset_val, count_limit) {
-      var dataset_path = "<?php echo $baseurl . 'manage_campaign/get_template_data' ?>";
-      var deferred = $q.defer();
-      var path = dataset_path+'/'+offset_val+'/'+count_limit;
-      $http.get(path)
-        .success(function(data, status, headers, config) {
-         deferred.resolve(data);
-        })
-       .error(function(data, status, headers, config) {
-          deferred.reject(status);
-        });
-      return deferred.promise;
-    };
     var get_customer_status = function(campaign_id)
     {
       var search_path = "<?php echo $baseurl . 'manage_campaign/get_campaign_users/'; ?>";
@@ -1351,7 +1338,6 @@
       get_brands: get_brands,
       perform_action: perform_action,
       create_folder: create_folder,
-      get_templates: get_templates,
     };
 
   });
@@ -2137,7 +2123,7 @@
               $scope.brand_list = response.brand_list;
               $scope.recent_orders = response.recent_orders;
               $scope.country_list = response.country_list;
-              $scope.template_list = response.template_list;
+              // $scope.template_list = response.template_list;
               $scope.metrics = response.metrics;
               $scope.product_list = response.product_list;
               $scope.folders = response.user_folders;
@@ -2151,71 +2137,6 @@
 
           function(reason)
           {
-            $scope.serverErrorHandler(reason);
-          }
-        );
-      }
-
-      $scope.itemsPerPageTemplates = 25;
-      $scope.currentPageTemplates = 0;
-      $scope.totalTemplates = 0;
-      $scope.rangeTemplates = function() {
-        var rangeSize = 4;
-        var ret = [];
-        var start;
-        start = $scope.currentPageTemplates;
-        if ( start > $scope.pageCountTemplates()-rangeSize ) {
-          start = $scope.pageCountTemplates()-rangeSize;
-        }
-        for (var i=start; i<start+rangeSize; i++) {
-          if(i>0)
-            ret.push(i);
-        }
-        return ret;
-      };
-      $scope.setRoundTemplates = function(n) {
-        return new Array(parseInt(n));
-      };
-      $scope.prevPageTemplates = function() {
-        if ($scope.currentPageTemplates > 0) {
-          $scope.currentPageTemplates--;
-        }
-      };
-      $scope.prevPageDisabledTemplates = function() {
-        return $scope.currentPageTemplates === 0 ? "disabled" : "";
-      };
-      $scope.nextPageTemplates = function() {
-        if ($scope.currentPageTemplates < $scope.pageCountTemplates() - 1) {
-          $scope.currentPageTemplates++;
-        }
-      };
-      $scope.nextPageDisabledTemplates = function() {
-        return $scope.currentPageTemplates === $scope.pageCountTemplates() - 1 ? "disabled" : "";
-      };
-      $scope.pageCountTemplates = function() {
-        return Math.ceil($scope.totalTemplates/$scope.itemsPerPageTemplates);
-      };
-      $scope.setPageTemplates = function(n) {
-        if (n > 0 && n < $scope.pageCountTemplates()) {
-          $scope.currentPageTemplates = n;
-        }
-      };
-      $scope.$watch("currentPageTemplates",function(newValue, oldValue) {
-        $scope.load_templates(newValue);
-      });
-      $scope.load_templates = function(currentPage) {
-        $scope.block_site();
-        var promise = campaignFactory.get_templates(currentPage*$scope.itemsPerPage,$scope.itemsPerPage);
-        promise.then(
-          function(response) {
-            if (response.status_code == '1') {
-              $.unblockUI();
-              $scope.template_list = response.template_list;
-            } else {
-              swal('Error!', response.status_text, 'error');
-            }
-          },
-          function(reason) {
             $scope.serverErrorHandler(reason);
           }
         );
@@ -2358,6 +2279,22 @@
     });
 
   crawlApp.factory("templateFactory", function($http, $q, Upload) {
+
+    var get_templates = function(offset_val, count_limit) {
+      var dataset_path = "<?php echo $baseurl . 'manage_campaign/get_template_data' ?>";
+      var deferred = $q.defer();
+      var path = dataset_path+'/'+offset_val+'/'+count_limit;
+      $http.get(path)
+        .success(function(data, status, headers, config) {
+         deferred.resolve(data);
+        })
+       .error(function(data, status, headers, config) {
+          deferred.reject(status);
+        });
+      return deferred.promise;
+    };
+
+
     var get_data = function() {
     var dataset_path = "<?php echo $baseurl . 'template/get_pre_data' ?>";
     var deferred = $q.defer();
@@ -2451,11 +2388,7 @@
 
       });
 
-
-
     };
-
-
 
 
 
@@ -2473,7 +2406,9 @@
 
       save_template: save_template,
 
-      delete_template: delete_template
+      delete_template: delete_template,
+
+      get_templates: get_templates,
 
     };
 
@@ -2576,7 +2511,72 @@
           }
         );
       }
-      $scope.get_predata();
+      // $scope.get_predata();
+      $scope.itemsPerPageTemplates = 25;
+      $scope.currentPageTemplates = 0;
+      $scope.totalTemplates = 0;
+      $scope.rangeTemplates = function() {
+        var rangeSize = 4;
+        var ret = [];
+        var start;
+        start = $scope.currentPageTemplates;
+        if ( start > $scope.pageCountTemplates()-rangeSize ) {
+          start = $scope.pageCountTemplates()-rangeSize;
+        }
+        for (var i=start; i<start+rangeSize; i++) {
+          if(i>0)
+            ret.push(i);
+        }
+        return ret;
+      };
+      $scope.setRoundTemplates = function(n) {
+        return new Array(parseInt(n));
+      };
+      $scope.prevPageTemplates = function() {
+        if ($scope.currentPageTemplates > 0) {
+          $scope.currentPageTemplates--;
+        }
+      };
+      $scope.prevPageDisabledTemplates = function() {
+        return $scope.currentPageTemplates === 0 ? "disabled" : "";
+      };
+      $scope.nextPageTemplates = function() {
+        if ($scope.currentPageTemplates < $scope.pageCountTemplates() - 1) {
+          $scope.currentPageTemplates++;
+        }
+      };
+      $scope.nextPageDisabledTemplates = function() {
+        return $scope.currentPageTemplates === $scope.pageCountTemplates() - 1 ? "disabled" : "";
+      };
+      $scope.pageCountTemplates = function() {
+        return Math.ceil($scope.totalTemplates/$scope.itemsPerPageTemplates);
+      };
+      $scope.setPageTemplates = function(n) {
+        if (n > 0 && n < $scope.pageCountTemplates()) {
+          $scope.currentPageTemplates = n;
+        }
+      };
+      $scope.$watch("currentPageTemplates",function(newValue, oldValue) {
+        $scope.load_templates(newValue);
+      });
+      $scope.load_templates = function(currentPage) {
+        $scope.block_site();
+        var promise = templateFactory.get_templates(currentPage*$scope.itemsPerPageTemplates,$scope.itemsPerPageTemplates);
+        promise.then(
+          function(response) {
+            if (response.status_code == '1') {
+              $.unblockUI();
+              $scope.template_list = response.template_list;
+              $scope.totalTemplates = response.total_records;
+            } else {
+              swal('Error!', response.status_text, 'error');
+            }
+          },
+          function(reason) {
+            $scope.serverErrorHandler(reason);
+          }
+        );
+      }
       $scope.clear_template = function()
       {
         $scope.tmplt.tmp_id = '';
