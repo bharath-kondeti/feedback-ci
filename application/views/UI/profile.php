@@ -3,7 +3,7 @@ $baseurl=base_url();
 $base_url=base_url();
 ?>
 
-            <div class="wrapper" ng-controller='profileCtrl'>
+            <div class="wrapper" ng-cloak ng-controller='profileCtrl'>
                 <div class="content">
 
                     <div class="container-fluid">

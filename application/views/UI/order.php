@@ -92,7 +92,10 @@ $base_url=base_url();
 													<button style="margin-top:10px;"  ng-click="filtergrid()" type="button" class="btn btn-info waves-effect waves-light mb-2 mr-2">Search</button>
 													 </div>
                                                 </form>
-                                                <ul class="pagination pagination-rounded justify-content-end my-2">
+                                                
+                                            </div>
+                                            <div class="col-lg-2">
+                                            <ul class="pagination pagination-rounded justify-content-end my-2">
 
                              <li ng-class="prevPageDisabled()" class="page-item">
                                                     <a  href="javascript:void(0)" ng-click="prevPage()"  class="page-link">Previous</a>

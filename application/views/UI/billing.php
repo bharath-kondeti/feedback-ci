@@ -118,7 +118,7 @@ $base_url=base_url();
 
  </style>
 
- <div class="wrapper" ng-controller='acCtrl'>
+ <div class="wrapper" ng-cloak ng-controller='acCtrl'>
 
  	<div class="modal fade" id="load_money">
  		<div class="modal-dialog" role="document">

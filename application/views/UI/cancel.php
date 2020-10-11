@@ -3,7 +3,7 @@ $baseurl=base_url();
 $base_url=base_url();
 ?>
 
-<div class="wrapper" ng-controller="canCtrl">
+<div class="wrapper" ng-cloak ng-controller="canCtrl">
 	<div class="content">
 		<div class="container-fluid">
 			<div class="row">

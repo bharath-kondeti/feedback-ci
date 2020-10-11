@@ -3,7 +3,7 @@ $baseurl=base_url();
 $base_url=base_url();
 ?>
 
-            <div class="wrapper" ng-controller='invCtrl'>
+            <div class="wrapper" ng-cloak ng-controller='invCtrl'>
                 <div class="content hijack" id="hijack">
 
                     <!-- Start Content-->

@@ -124,17 +124,19 @@
                   </div>
                 </form>
               </div>
-              <ul class="pagination pagination-rounded justify-content-end my-2">
-              <li ng-class="prevPageDisabled()" class="page-item">
-                <a  href="javascript:void(0)" ng-click="prevPage()"  class="page-link">Previous</a>
-              </li>
-              <li ng-repeat="n in range()" ng-class="{active: n == currentPage}" ng-click="setPage(n)"  class="page-item">
-                <a href="javascript:void(0)" class="page-link">{{n+1}}</a>
-              </li>
-              <li ng-class="nextPageDisabled()" class="page-item">
-                <a href="javascript:void(0)" ng-click="nextPage()" class="page-link">Next</a>
-              </li>
-            </ul>
+              <div class="col-lg-5">
+                <ul class="pagination pagination-rounded justify-content-end my-2">
+                  <li ng-class="prevPageDisabled()" class="page-item">
+                    <a  href="javascript:void(0)" ng-click="prevPage()"  class="page-link">Previous</a>
+                  </li>
+                  <li ng-repeat="n in range()" ng-class="{active: n == currentPage}" ng-click="setPage(n)"  class="page-item">
+                    <a href="javascript:void(0)" class="page-link">{{n+1}}</a>
+                  </li>
+                  <li ng-class="nextPageDisabled()" class="page-item">
+                    <a href="javascript:void(0)" ng-click="nextPage()" class="page-link">Next</a>
+                  </li>
+                </ul>
+              </div>
             </div>
             <div class="table-responsive">
               <table class="table table-stripped table-hover table-bordered table-centered mb-0" style="text-align: center;">

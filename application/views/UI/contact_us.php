@@ -5,7 +5,7 @@
 .cke_chrome {margin-left:0px !important;}
 </style>
 
-   <div class="wrapper" ng-controller='templateCtrl'>
+   <div class="wrapper" ng-cloak ng-controller='templateCtrl'>
                 <div class="content">
 
                     <div class="container">

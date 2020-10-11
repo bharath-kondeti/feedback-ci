@@ -66,7 +66,7 @@ input:checked + .slider:before {
     }
 </style>
 
-				<div class="wrapper" ng-controller='campaignCtrl'>
+				<div class="wrapper" ng-cloak ng-controller='campaignCtrl'>
 
 
 				<div id="Preview_email_box" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">

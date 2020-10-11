@@ -3,7 +3,7 @@ $baseurl=base_url();
 $base_url=base_url();
 ?>
 
-            <div class="wrapper" ng-controller='invCtrl'>
+            <div class="wrapper" ng-cloak ng-controller='invCtrl'>
 			<div id="email_temp" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
                                         <div class="modal-dialog">
                                             <div class="modal-content" style="margin-left:-100px;width:700px">
@@ -141,20 +141,22 @@ $base_url=base_url();
 													<button style="margin-top:10px;"  ng-click="filtergrid()" type="button" class="btn btn-info waves-effect waves-light mb-2 mr-2">Search</button>
 													 </div>
                                                 </form>
-                                                <ul class="pagination pagination-rounded justify-content-end my-2">
+                                            </div>
+                                            <div class="col-lg-5">
+                                            <ul class="pagination pagination-rounded justify-content-end my-2">
 
-                             <li ng-class="prevPageDisabled()" class="page-item">
-                                                    <a  href="javascript:void(0)" ng-click="prevPage()"  class="page-link">Previous</a>
-                                                </li>
-                         <li ng-repeat="n in range()" ng-class="{active: n == currentPage}" ng-click="setPage(n)"  class="page-item">
-                                                    <a href="javascript:void(0)" class="page-link">{{n+1}}</a>
-                                                </li>
-                                                <li ng-class="nextPageDisabled()" class="page-item">
-                                                    <a href="javascript:void(0)" ng-click="nextPage()" class="page-link">Next</a>
-                                                </li>
+<li ng-class="prevPageDisabled()" class="page-item">
+                       <a  href="javascript:void(0)" ng-click="prevPage()"  class="page-link">Previous</a>
+                   </li>
+<li ng-repeat="n in range()" ng-class="{active: n == currentPage}" ng-click="setPage(n)"  class="page-item">
+                       <a href="javascript:void(0)" class="page-link">{{n+1}}</a>
+                   </li>
+                   <li ng-class="nextPageDisabled()" class="page-item">
+                       <a href="javascript:void(0)" ng-click="nextPage()" class="page-link">Next</a>
+                   </li>
 
 
-                                        </ul>
+           </ul>
                                             </div>
                                             <a class="nav-link" href="<?php echo $baseurl.'blacklist'?>">Blacklist buyers</a>
                                         </div>

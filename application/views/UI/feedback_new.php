@@ -24,14 +24,6 @@
           <div class="col-md-12 col-lg-2 col-sm-12">
             <h4 class="page-title">Feedback </h4>
           </div>
-          <ul class="pagination pagination-rounded justify-content-end my-2">
-            <li ng-class="prevPageDisabled()" class="page-item">  <a href="javascript:void(0)" ng-click="prevPage()" class="page-link">Previous</a>
-            </li>
-            <li ng-repeat="n in range()" ng-class="{active: n == currentPage}" ng-click="setPage(n)" class="page-item"> <a href="javascript:void(0)" class="page-link">{{n+1}}</a>
-            </li>
-            <li ng-class="nextPageDisabled()" class="page-item">  <a href="javascript:void(0)" ng-click="nextPage()" class="page-link">Next</a>
-            </li>
-          </ul>
           <div class="col-md-12 col-lg-10 col-sm-12">
             <div class="row">
               <div class="col-md-10 col-xs-10 col-sm-10">
@@ -136,6 +128,16 @@
           </div>
         </form>
         </form>
+        <div class="col-lg-12">
+          <ul class="pagination pagination-rounded justify-content-end my-2">
+          <li ng-class="prevPageDisabled()" class="page-item">  <a href="javascript:void(0)" ng-click="prevPage()" class="page-link">Previous</a>
+          </li>
+          <li ng-repeat="n in range()" ng-class="{active: n == currentPage}" ng-click="setPage(n)" class="page-item"> <a href="javascript:void(0)" class="page-link">{{n+1}}</a>
+          </li>
+          <li ng-class="nextPageDisabled()" class="page-item">  <a href="javascript:void(0)" ng-click="nextPage()" class="page-link">Next</a>
+          </li>
+        </ul>
+          </div>
         <div class="table-responsive">
           <table class="text-center table-bordered table" style="text-align: center;">
             <thead class="thead-light">

@@ -3,7 +3,7 @@ $baseurl=base_url();
 $base_url=base_url();
 ?>
 
-            <div class="wrapper" ng-controller='feedbackCtrl'>
+            <div class="wrapper" ng-cloak ng-controller='feedbackCtrl'>
                 <div class="content fbs" id="fbs">
 
                     <!-- Start Content-->

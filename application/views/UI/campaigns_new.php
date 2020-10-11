@@ -421,7 +421,7 @@
                           <div class="form-inline">
                             <i ng-click='edit_campaign(idx.campaign_id)' style="font-size:20px;margin-left: 10px" class="fe-edit text-info"></i>
                             <i ng-click='delete_campaign(idx.campaign_id)' style="font-size:20px;margin-left: 10px;" class="fe-trash-2 text-danger"></i>
-                            <span>{{idx.is_active}}</span>
+                            
                             <label class="switch" style="margin-left: 10px">
                             <input type="checkbox" name='enable_addon' ng-model="idx.is_active" ng-true-value="'1'" ng-false-value="'0'" ng-change='change_state(idx.is_active,idx.campaign_id)'>
                             <span class="slider round"></span>
