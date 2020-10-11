@@ -24,6 +24,14 @@
           <div class="col-md-12 col-lg-2 col-sm-12">
             <h4 class="page-title">Feedback </h4>
           </div>
+          <ul class="pagination pagination-rounded justify-content-end my-2">
+            <li ng-class="prevPageDisabled()" class="page-item">  <a href="javascript:void(0)" ng-click="prevPage()" class="page-link">Previous</a>
+            </li>
+            <li ng-repeat="n in range()" ng-class="{active: n == currentPage}" ng-click="setPage(n)" class="page-item"> <a href="javascript:void(0)" class="page-link">{{n+1}}</a>
+            </li>
+            <li ng-class="nextPageDisabled()" class="page-item">  <a href="javascript:void(0)" ng-click="nextPage()" class="page-link">Next</a>
+            </li>
+          </ul>
           <div class="col-md-12 col-lg-10 col-sm-12">
             <div class="row">
               <div class="col-md-10 col-xs-10 col-sm-10">
@@ -129,11 +137,11 @@
         </form>
         </form>
         <div class="table-responsive">
-          <table class="text-center table-bordered table">
+          <table class="text-center table-bordered table" style="text-align: center;">
             <thead class="thead-light">
               <tr>
+                <th>Channel</th>
                 <th>Product SKU</th>
-                <th>Image</th>
                 <th>Order ID</th>
                 <th>Date</th>
                 <th>Buyer</th>
@@ -143,8 +151,29 @@
             </thead>
             <tbody>
               <tr ng-if="feedback_all.length != 0" ng-repeat="idx in feedback_all track by $index">
-                <td>{{idx.seller_sku}}</td>
+                <?php if($store_country == 'IN') { ?>
+                <td><img width="20" height="20" src="<?php echo $base_url . 'assets/img/amazon_logo.png' ?> "><span style="color:#a3afb7;font-weight:300">.in</span></td>
+              <?php } ?>
+              <?php if($store_country == 'US') { ?>
+                <td><img width="20" height="20" src="<?php echo $base_url . 'assets/img/amazon_logo.png' ?> "><span style="color:#a3afb7;font-weight:300">.com</span></td>
+              <?php } ?>
+              <?php if($store_country == 'UK') { ?>
+                <td><img width="20" height="20" src="<?php echo $base_url . 'assets/img/amazon_logo.png' ?> "><span style="color:#a3afb7;font-weight:300">.co.uk</span></td>
+              <?php } ?>
+              <?php if($store_country == 'IT') { ?>
+                <td><img width="20" height="20" src="<?php echo $base_url . 'assets/img/amazon_logo.png' ?> "><span style="color:#a3afb7;font-weight:300">.it</span></td>
+              <?php } ?>
+              <?php if($store_country == 'DE') { ?>
+                <td><img width="20" height="20" src="<?php echo $base_url . 'assets/img/amazon_logo.png' ?> "><span style="color:#a3afb7;font-weight:300">.de</span></td>
+              <?php } ?>
+              <?php if($store_country == 'FR') { ?>
+                <td><img width="20" height="20" src="<?php echo $base_url . 'assets/img/amazon_logo.png' ?> "><span style="color:#a3afb7;font-weight:300">.fr</span></td>
+              <?php } ?>
+              <?php if($store_country == 'ES') { ?>
+                <td><img width="20" height="20" src="<?php echo $base_url . 'assets/img/amazon_logo.png' ?> "><span style="color:#a3afb7;font-weight:300">.es</span></td>
+              <?php } ?>
                 <td>
+                  <p>{{idx.seller_sku}}</p>
                   <img width='32' height="32" src="{{idx.prod_image}}">
                 </td>
                 <td>{{idx.order_id}}</td>

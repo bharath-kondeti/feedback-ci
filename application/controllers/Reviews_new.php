@@ -24,11 +24,11 @@ class Reviews_new extends CI_Controller
   }
   public function index()
 	{
+    $data['store_country'] = $this->store_country;
     $this->load->view('UI/header');
 		$this->load->view('UI/sidepanel');
 		$this->load->view('UI/navigation');
 		$data['reviews']=$this->reviews_model->get_users_reviews('1');
-		//echo "<pre>"; print_r($data['reviews']); exit;
 		$this->load->view('UI/reviews_new',$data);
 		$this->load->view('UI/footer');
 	}

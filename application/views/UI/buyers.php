@@ -141,18 +141,31 @@ $base_url=base_url();
 													<button style="margin-top:10px;"  ng-click="filtergrid()" type="button" class="btn btn-info waves-effect waves-light mb-2 mr-2">Search</button>
 													 </div>
                                                 </form>
+                                                <ul class="pagination pagination-rounded justify-content-end my-2">
+
+                             <li ng-class="prevPageDisabled()" class="page-item">
+                                                    <a  href="javascript:void(0)" ng-click="prevPage()"  class="page-link">Previous</a>
+                                                </li>
+                         <li ng-repeat="n in range()" ng-class="{active: n == currentPage}" ng-click="setPage(n)"  class="page-item">
+                                                    <a href="javascript:void(0)" class="page-link">{{n+1}}</a>
+                                                </li>
+                                                <li ng-class="nextPageDisabled()" class="page-item">
+                                                    <a href="javascript:void(0)" ng-click="nextPage()" class="page-link">Next</a>
+                                                </li>
+
+
+                                        </ul>
                                             </div>
+                                            <a class="nav-link" href="<?php echo $baseurl.'blacklist'?>">Blacklist buyers</a>
                                         </div>
 
                                         <div class="table-responsive">
-                                           <table class="table table-stripped table-hover table-bordered table-centered mb-0">
+                                           <table class="table table-stripped table-hover table-bordered table-centered mb-0" style="text-align: center;">
                                                 <thead class="thead-light">
                                                     <tr>
-
-
+                                                      <th>Channel</th>
                                    <th ng-click="change_order('order_no')">Order No<i class="mdi mdi-sort-alphabetical "></i></th>
                                    <th ng-click="change_order('buyer_email')">Buyer Email<i  class="mdi mdi-sort-alphabetical "></i></th>
-								   <th>Marketplace  </th>
                                    <th ng-click="change_order('ttl_orders')">Total Orders<i  class="mdi mdi-sort-numeric "></i></th>
                                    <th ng-click="change_order('po_date')">Last Order Date<i  class="mdi mdi-sort-numeric "></i></th>
 								   <th ng-click="change_order('scd_count')">Scheduled<i  class="mdi mdi-sort-numeric "></i></th>
@@ -163,20 +176,20 @@ $base_url=base_url();
                                                 </thead>
                                                 <tbody>
                                                     <tr ng-repeat="lst in transactionList ">
+                                                      <td ng-if="lst.country_code=='IN'"><img width="20" height="20"  src="<?php echo $base_url.'assets/img/amazon_logo.png'?> "><span style="color:#a3afb7;font-weight:300" >.in</span></td>
+                        <td ng-if="lst.country_code=='US'"><img width="20" height="20"  src="<?php echo $base_url.'assets/img/amazon_logo.png'?> "><span style="color:#a3afb7;font-weight:300" >.com</span></td>
+                        <td ng-if="lst.country_code=='UK'"><img width="20" height="20"  src="<?php echo $base_url.'assets/img/amazon_logo.png'?> "><span style="color:#a3afb7;font-weight:300" >.co.uk</span></td>
+                        <td ng-if="lst.country_code=='IT'"><img width="20" height="20"  src="<?php echo $base_url.'assets/img/amazon_logo.png'?> "><span style="color:#a3afb7;font-weight:300" >.it</span></td>
+                        <td ng-if="lst.country_code=='DE'"><img width="20" height="20"  src="<?php echo $base_url.'assets/img/amazon_logo.png'?> "><span style="color:#a3afb7;font-weight:300" >.de</span></td>
+                        <td ng-if="lst.country_code=='FR'"><img width="20" height="20"  src="<?php echo $base_url.'assets/img/amazon_logo.png'?> "><span style="color:#a3afb7;font-weight:300" >.fr</span></td>
+                        <td ng-if="lst.country_code=='ES'"><img width="20" height="20"  src="<?php echo $base_url.'assets/img/amazon_logo.png'?> "><span style="color:#a3afb7;font-weight:300" >.es</span></td>
 													<td>{{lst.order_no}}</td>
 													<td>{{lst.buyer_email_new}}</td>
-                                                <td ng-if="lst.country_code=='IN'"><img width="20" height="20"  src="<?php echo $base_url.'assets/img/amazon_logo.png'?> "><span style="color:#a3afb7;font-weight:300" >.in</span></td>
-												<td ng-if="lst.country_code=='US'"><img width="20" height="20"  src="<?php echo $base_url.'assets/img/amazon_logo.png'?> "><span style="color:#a3afb7;font-weight:300" >.com</span></td>
-												<td ng-if="lst.country_code=='UK'"><img width="20" height="20"  src="<?php echo $base_url.'assets/img/amazon_logo.png'?> "><span style="color:#a3afb7;font-weight:300" >.co.uk</span></td>
-												<td ng-if="lst.country_code=='IT'"><img width="20" height="20"  src="<?php echo $base_url.'assets/img/amazon_logo.png'?> "><span style="color:#a3afb7;font-weight:300" >.it</span></td>
-												<td ng-if="lst.country_code=='DE'"><img width="20" height="20"  src="<?php echo $base_url.'assets/img/amazon_logo.png'?> "><span style="color:#a3afb7;font-weight:300" >.de</span></td>
-												<td ng-if="lst.country_code=='FR'"><img width="20" height="20"  src="<?php echo $base_url.'assets/img/amazon_logo.png'?> "><span style="color:#a3afb7;font-weight:300" >.fr</span></td>
-												<td ng-if="lst.country_code=='ES'"><img width="20" height="20"  src="<?php echo $base_url.'assets/img/amazon_logo.png'?> "><span style="color:#a3afb7;font-weight:300" >.es</span></td>
 												<td style="margin-left:20px;">{{lst.ttl_orders}}</td>
 												<td style="margin-left:20px;">{{lst.purchase_date_new}}</td>
 												<td style="margin-left:20px;">{{lst.scd_count_new}}</td>
 												<td style="margin-left:20px;">{{lst.sent_count_new}}</td>
-												<td><span   ng-click='send_email_to_buyer(lst)'  class="badge badge-info"> Sent Email</span></td>
+												<td><span   ng-click='send_email_to_buyer(lst)'  class="badge badge-info"> Send Email</span></td>
 
                                                          </tr>
 													 </tbody>

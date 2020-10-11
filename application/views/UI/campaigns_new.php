@@ -333,6 +333,14 @@
             <div class="" ng-show='show_dash==1' id="myc1">
               <div class="col-12 card-box">
                 <div ng-cloak class="table-responsive"><h4>My Campaigns</h4>
+                  <ul class="pagination pagination-rounded justify-content-end my-2">
+                    <li ng-class="prevPageDisabled()" class="page-item">  <a href="javascript:void(0)" ng-click="prevPage()" class="page-link">Previous</a>
+                    </li>
+                    <li ng-repeat="n in range()" ng-class="{active: n == currentPage}" ng-click="setPage(n)" class="page-item"> <a href="javascript:void(0)" class="page-link">{{n+1}}</a>
+                    </li>
+                    <li ng-class="nextPageDisabled()" class="page-item">  <a href="javascript:void(0)" ng-click="nextPage()" class="page-link">Next</a>
+                    </li>
+                  </ul>
                   <table class="text-center table-bordered table-striped table table-hover">
                     <thead class="">
                       <tr>
@@ -723,6 +731,14 @@
             <div class="" ng-show='show_dash_email==1' id="myid">
               <!----------------------------------->
               <div class="table-responsive"><h4>Templates</h4>
+                <ul class="pagination pagination-rounded justify-content-end my-2">
+                  <li ng-class="prevPageDisabledTemplates()" class="page-item">  <a href="javascript:void(0)" ng-click="prevPageTemplates()" class="page-link">Previous</a>
+                  </li>
+                  <li ng-repeat="n in rangeTemplates()" ng-class="{active: n == currentPageTemplates}" ng-click="setPageTemplates(n)" class="page-item"> <a href="javascript:void(0)" class="page-link">{{n+1}}</a>
+                  </li>
+                  <li ng-class="nextPageDisabledTemplates()" class="page-item">  <a href="javascript:void(0)" ng-click="nextPageTemplates()" class="page-link">Next</a>
+                  </li>
+                </ul>
                 <table class="table-bordered table table-hover table-striped">
                   <thead>
                     <tr>

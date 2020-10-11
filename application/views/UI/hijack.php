@@ -22,7 +22,6 @@ $base_url=base_url();
 
                                         </ol>
                                     </div>
-
                                 </div>
                             </div>
                         </div>
@@ -63,7 +62,7 @@ $base_url=base_url();
 
                                         </ol>
                                     </div>
-                                    <h4 class="page-title">Hijack </h4>
+                                    <h4 class="page-title">Hijack Check </h4>
                                 </div>
                             </div>
                         </div>
@@ -116,6 +115,21 @@ $base_url=base_url();
                             </div>
                                                 </form>
 
+                                                <ul class="pagination pagination-rounded justify-content-end my-2">
+
+                             <li ng-class="prevPageDisabled()" class="page-item">
+                                                    <a  href="javascript:void(0)" ng-click="prevPage()"  class="page-link">Previous</a>
+                                                </li>
+                         <li ng-repeat="n in range()" ng-class="{active: n == currentPage}" ng-click="setPage(n)"  class="page-item">
+                                                    <a href="javascript:void(0)" class="page-link">{{n+1}}</a>
+                                                </li>
+                                                <li ng-class="nextPageDisabled()" class="page-item">
+                                                    <a href="javascript:void(0)" ng-click="nextPage()" class="page-link">Next</a>
+                                                </li>
+
+
+                                        </ul>
+
 
                                             </div>
 
@@ -123,21 +137,21 @@ $base_url=base_url();
                                         </div>
 
                                         <div class="table-responsive">
-                                            <table class="table table-stripped table-hover table-bordered table-centered mb-0">
+                                            <table class="table table-stripped table-hover table-bordered table-centered mb-0" style="text-align: center;">
                                                 <thead class="thead-light">
                                                     <tr>
+
 													 <th>
                                              <div class="custom-control custom-checkbox">
                                                 <input type="checkbox" class="custom-control-input" id="customCheck1"  ng-model="sel.checkStatus" ng-change="statusCheck()" ng-true-value="'Y'" ng-false-value="'N'"/>
                                                   <label class="custom-control-label" for="customCheck1">&nbsp;</label>
                                                 </div>
                                                 </th>
-
-                                                <th >Image</th>
+                                                <th>Channel</th>
                                                 <th  ng-click="change_order('prod_sku')">SKU <i class="mdi mdi-sort-alphabetical "></i></th>
                                                 <th  ng-click="change_order('prod_asin')" >ASIN <i  class="mdi mdi-sort-alphabetical "></i></th>
                                                 <th  ng-click="change_order('prod_brand')" >Brand <i  class="mdi mdi-sort-alphabetical "></i></th>
-                                                <th  ng-click="change_order('prod_title')" >Title <i  class="mdi mdi-sort-alphabetical "></i></th>
+                                                <th  ng-click="change_order('prod_title')" >Product Name <i  class="mdi mdi-sort-alphabetical "></i></th>
 										        <th>Hijack Status</th>
                                                 <!-- <th ng-click="change_order('last_hijack_check')" >Updated on <i class="mdi mdi-sort-alphabetical "></i></th> -->
 												  <th >Hijacked<i class="mdi mdi-sort-alphabetical "></i></th>
@@ -145,15 +159,39 @@ $base_url=base_url();
                                                 </thead>
                                                 <tbody>
                                                     <tr ng-repeat="lst in transactionList ">
+
 													 <td>
                                             <div class="custom-control custom-checkbox">
                                                <input type="checkbox"  checklist-value="lst" checklist-model="selectedOrder" class="custom-control-input" id="customCheck2-{{$index+1}}">
                                                 <label class="custom-control-label" for="customCheck2-{{$index+1}}">&nbsp;</label>
                                                    </div>
                                                </td>
-													  <td> <img ng-if="lst.prod_image.length > 0" src="{{lst.prod_image}}" alt="" width='25' height="25">
-                <img ng-if="lst.prod_image==''" src="<?php echo base_url().'asset/img/no_image.gif'?>" width='25' height='25'alt=""></td>
-                                           <td>{{lst.prod_sku}}</td>
+                                               <?php if($store_country == 'IN') { ?>
+                <td><img width="20" height="20" src="<?php echo $base_url . 'assets/img/amazon_logo.png' ?> "><span style="color:#a3afb7;font-weight:300">.in</span></td>
+              <?php } ?>
+              <?php if($store_country == 'US') { ?>
+                <td><img width="20" height="20" src="<?php echo $base_url . 'assets/img/amazon_logo.png' ?> "><span style="color:#a3afb7;font-weight:300">.com</span></td>
+              <?php } ?>
+              <?php if($store_country == 'UK') { ?>
+                <td><img width="20" height="20" src="<?php echo $base_url . 'assets/img/amazon_logo.png' ?> "><span style="color:#a3afb7;font-weight:300">.co.uk</span></td>
+              <?php } ?>
+              <?php if($store_country == 'IT') { ?>
+                <td><img width="20" height="20" src="<?php echo $base_url . 'assets/img/amazon_logo.png' ?> "><span style="color:#a3afb7;font-weight:300">.it</span></td>
+              <?php } ?>
+              <?php if($store_country == 'DE') { ?>
+                <td><img width="20" height="20" src="<?php echo $base_url . 'assets/img/amazon_logo.png' ?> "><span style="color:#a3afb7;font-weight:300">.de</span></td>
+              <?php } ?>
+              <?php if($store_country == 'FR') { ?>
+                <td><img width="20" height="20" src="<?php echo $base_url . 'assets/img/amazon_logo.png' ?> "><span style="color:#a3afb7;font-weight:300">.fr</span></td>
+              <?php } ?>
+              <?php if($store_country == 'ES') { ?>
+                <td><img width="20" height="20" src="<?php echo $base_url . 'assets/img/amazon_logo.png' ?> "><span style="color:#a3afb7;font-weight:300">.es</span></td>
+              <?php } ?>
+                                           <td>
+                                           <p>{{lst.prod_sku}}</p>
+                                           <img ng-if="lst.prod_image.length > 0" src="{{lst.prod_image}}" alt="" width='25' height="25">
+                <img ng-if="lst.prod_image==''" src="<?php echo base_url().'asset/img/no_image.gif'?>" width='25' height='25'alt="">
+                                         </td>
                                                 <td ><a class="text-body font-weight-bold" target="_blank" href="https://www.{{lst.amz_domain}}/dp/{{lst.prod_asin}}">{{lst.prod_asin}}</a></td>
                                                 <td >{{lst.prod_brand}}</td>
                                                 <td >

@@ -18,11 +18,15 @@ class Order extends CI_Controller {
         $this->load->model("order_model");
         $user=$this->session->userdata('user_logged_in');
         $this->user_id=$user['id'];
+        $store=$this->session->userdata('store_info');
+       $this->store_id=$store['store_id'];
+     $this->store_country=$store['store_country'];
 
      }
   }
 	public function index()
 	{
+    $data['store_country'] = $this->store_country;
 		$this->load->view('UI/header');
 		$this->load->view('UI/sidepanel');
 		$this->load->view('UI/navigation');

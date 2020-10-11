@@ -92,38 +92,67 @@ $base_url=base_url();
 													<button style="margin-top:10px;"  ng-click="filtergrid()" type="button" class="btn btn-info waves-effect waves-light mb-2 mr-2">Search</button>
 													 </div>
                                                 </form>
+                                                <ul class="pagination pagination-rounded justify-content-end my-2">
+
+                             <li ng-class="prevPageDisabled()" class="page-item">
+                                                    <a  href="javascript:void(0)" ng-click="prevPage()"  class="page-link">Previous</a>
+                                                </li>
+                         <li ng-repeat="n in range()" ng-class="{active: n == currentPage}" ng-click="setPage(n)"  class="page-item">
+                                                    <a href="javascript:void(0)" class="page-link">{{n+1}}</a>
+                                                </li>
+                                                <li ng-class="nextPageDisabled()" class="page-item">
+                                                    <a href="javascript:void(0)" ng-click="nextPage()" class="page-link">Next</a>
+                                                </li>
+                                        </ul>
                                             </div>
                                        </div>
 
                                         <div class="table-responsive">
-                                            <table class="table table-stripped table-hover table-bordered table-centered mb-0">
+                                            <table class="table table-stripped table-hover table-bordered table-centered mb-0" style="text-align: center;">
                                                 <thead class="thead-light">
                                                     <tr>
+                                                <th>Channel</th>
+                                                <th ng-click="change_order('asin')" style="width:120px;">ASIN <i class="mdi mdi-sort-alphabetical "></i></th>
                                                  <th ng-click="change_order('order_no')" style="width:170px;">Order ID <i class="mdi mdi-sort-numeric "></i></th>
-                                                 <th style="width:60px;">Image</th>
 												 <th ng-click="change_order('seller_sku')" style="width:170px;">SKU  <i class="mdi mdi-sort-alphabetical "></i></th>
-												 <th ng-click="change_order('asin')" style="width:120px;">ASIN <i class="mdi mdi-sort-alphabetical "></i></th>
                                                  <th ng-click="change_order('itm_title')" style="width:280px;" >Title <i class="mdi mdi-sort-alphabetical "></i></th>
-                                                 <th ng-click="change_order('itm_qty')" style="width:70px;">Qty <i class="mdi mdi-sort-numeric "></i></th>
-                                                 <th ng-click="change_order('itm_price')" style="width:90px;">Price <i class="mdi mdi-sort-numeric "></i></th>
                                                  <th ng-click="change_order('purchase_date')" style="width:100px;">PO Date <i class="mdi mdi-sort-numeric "></i></th>
                                                  <th ng-click="change_order('order_status')" style="width:110px;">Status <i class="mdi mdi-sort-alphabetical "></i></th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
                                                     <tr ng-repeat="lst in transactionList ">
+                                                        <?php if($store_country == 'IN') { ?>
+                <td><img width="20" height="20" src="<?php echo $base_url . 'assets/img/amazon_logo.png' ?> "><span style="color:#a3afb7;font-weight:300">.in</span></td>
+              <?php } ?>
+              <?php if($store_country == 'US') { ?>
+                <td><img width="20" height="20" src="<?php echo $base_url . 'assets/img/amazon_logo.png' ?> "><span style="color:#a3afb7;font-weight:300">.com</span></td>
+              <?php } ?>
+              <?php if($store_country == 'UK') { ?>
+                <td><img width="20" height="20" src="<?php echo $base_url . 'assets/img/amazon_logo.png' ?> "><span style="color:#a3afb7;font-weight:300">.co.uk</span></td>
+              <?php } ?>
+              <?php if($store_country == 'IT') { ?>
+                <td><img width="20" height="20" src="<?php echo $base_url . 'assets/img/amazon_logo.png' ?> "><span style="color:#a3afb7;font-weight:300">.it</span></td>
+              <?php } ?>
+              <?php if($store_country == 'DE') { ?>
+                <td><img width="20" height="20" src="<?php echo $base_url . 'assets/img/amazon_logo.png' ?> "><span style="color:#a3afb7;font-weight:300">.de</span></td>
+              <?php } ?>
+              <?php if($store_country == 'FR') { ?>
+                <td><img width="20" height="20" src="<?php echo $base_url . 'assets/img/amazon_logo.png' ?> "><span style="color:#a3afb7;font-weight:300">.fr</span></td>
+              <?php } ?>
+              <?php if($store_country == 'ES') { ?>
+                <td><img width="20" height="20" src="<?php echo $base_url . 'assets/img/amazon_logo.png' ?> "><span style="color:#a3afb7;font-weight:300">.es</span></td>
+              <?php } ?>
+                                                        <td style="width:120px;"><a href="https://www.{{lst.amz_domain}}/dp/{{lst.asin}}" target="_blank">{{lst.asin}}</a></td>
                                                       <td class="text-body font-weight-bold">{{lst.order_no}}</td>
-													 <td> <img ng-if="lst.prod_image.length > 0" src="{{lst.prod_image}}" alt="" width='50' height="50">
-                <img ng-if="lst.prod_image==''" src="<?php echo base_url().'asset/img/no_image.gif'?>" width='50' height='50'alt=""></td>
-													    <td  >{{lst.seller_sku}}</td>
-												<td style="width:120px;"><a href="https://www.{{lst.amz_domain}}/dp/{{lst.asin}}" target="_blank">{{lst.asin}}</a></td>
-
+													    <td>
+                                                            <p>{{lst.seller_sku}}</p>
+                                                            <img ng-if="lst.prod_image.length > 0" src="{{lst.prod_image}}" alt="" width='50' height="50">
+                <img ng-if="lst.prod_image==''" src="<?php echo base_url().'asset/img/no_image.gif'?>" width='50' height='50'alt="">
+                                                            </td>
                                                 <td  ng-click='show_order_details(lst)' data-target="#modal" data-toggle="modal" >
 												{{lst.itm_title | limitTo:80}}<span ng-if="lst.itm_title.length >=80 ">...</span>
                                                 </td>
-                                                <td>{{lst.no_of_item}}</td>
-
-                                                <td>{{lst.itm_price}}</td>
                                                 <td>{{lst.purchase_date}}</td>
 
                                                 <td ><span class="badge badge-info">{{lst.order_status}}</span></td>

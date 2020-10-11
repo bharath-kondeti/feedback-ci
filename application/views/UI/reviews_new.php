@@ -20,8 +20,16 @@ $base_url=base_url();
           <div class="card-box">
             <div class="row">
               <div class="col-md-3">
-                <h4 class="page-title">Amazon Product Reviews </h4>
+                <h4 class="page-title">Product Reviews </h4>
               </div>
+              <ul class="pagination pagination-rounded justify-content-end my-2">
+                <li ng-class="prevPageDisabled()" class="page-item">  <a href="javascript:void(0)" ng-click="prevPage()" class="page-link">Previous</a>
+                </li>
+                <li ng-repeat="n in range()" ng-class="{active: n == currentPage}" ng-click="setPage(n)" class="page-item"> <a href="javascript:void(0)" class="page-link">{{n+1}}</a>
+                </li>
+                <li ng-class="nextPageDisabled()" class="page-item">  <a href="javascript:void(0)" ng-click="nextPage()" class="page-link">Next</a>
+                </li>
+              </ul>
               <div class="col-md-8"></div>
               <div class="col-md-1 text-right">
                 <div class="dropdown notification-list">
@@ -88,14 +96,13 @@ $base_url=base_url();
               <div class="row">
                 <div class="col-xl-12">
                   <div class="table-responsive">
-                    <table style="border: 1px solid #DEE2E6" class="table table-hover table-centered mb-0">
+                    <table style="border: 1px solid #DEE2E6; text-align: center;" class="table table-hover table-centered mb-0">
                       <thead class="thead-color">
                         <tr class="">
                           <th>Channel</th>
-                          <th>SKU</th>
-                          <th>Image</th>
-                          <th>Title</th>
                           <th>ASIN</th>
+                          <th>SKU</th>
+                          <th>Product Name</th>
                           <th>Today Reviews</th>
                           <th>Last 7 days Reviews</th>
                           <th>Positive Reviews</th>
@@ -106,17 +113,37 @@ $base_url=base_url();
                       </thead>
                       <tbody ng-repeat="idx in reviews_data.reviews track by $index">
  						<tr>
- 							<td>Channel</td>
-							<td>{{idx.item_sku}}</td>
+ 							<?php if($store_country == 'IN') { ?>
+                <td><img width="20" height="20" src="<?php echo $base_url . 'assets/img/amazon_logo.png' ?> "><span style="color:#a3afb7;font-weight:300">.in</span></td>
+              <?php } ?>
+              <?php if($store_country == 'US') { ?>
+                <td><img width="20" height="20" src="<?php echo $base_url . 'assets/img/amazon_logo.png' ?> "><span style="color:#a3afb7;font-weight:300">.com</span></td>
+              <?php } ?>
+              <?php if($store_country == 'UK') { ?>
+                <td><img width="20" height="20" src="<?php echo $base_url . 'assets/img/amazon_logo.png' ?> "><span style="color:#a3afb7;font-weight:300">.co.uk</span></td>
+              <?php } ?>
+              <?php if($store_country == 'IT') { ?>
+                <td><img width="20" height="20" src="<?php echo $base_url . 'assets/img/amazon_logo.png' ?> "><span style="color:#a3afb7;font-weight:300">.it</span></td>
+              <?php } ?>
+              <?php if($store_country == 'DE') { ?>
+                <td><img width="20" height="20" src="<?php echo $base_url . 'assets/img/amazon_logo.png' ?> "><span style="color:#a3afb7;font-weight:300">.de</span></td>
+              <?php } ?>
+              <?php if($store_country == 'FR') { ?>
+                <td><img width="20" height="20" src="<?php echo $base_url . 'assets/img/amazon_logo.png' ?> "><span style="color:#a3afb7;font-weight:300">.fr</span></td>
+              <?php } ?>
+              <?php if($store_country == 'ES') { ?>
+                <td><img width="20" height="20" src="<?php echo $base_url . 'assets/img/amazon_logo.png' ?> "><span style="color:#a3afb7;font-weight:300">.es</span></td>
+              <?php } ?>
+              <td>{{idx.item_asin}}</td>
 							<td>
- 								<img src="{{idx.item_image}}" height="32" width="32" alt="">
-							</td>
+                {{idx.item_sku}}
+                <img src="{{idx.item_image}}" height="32" width="32" alt="">
+              </td>
 							<td>
 								<div class="cur-pointer" ng-click="expand($index)">
 									{{idx.item_title}}
 								</div>
 							</td>
-							<td>{{idx.item_asin}}</td>
 							<td class="text-center">{{idx.today_review_count}}</td>
 							<td class="text-center">{{idx.seven_days_count}}</td>
 							<td class="text-center">{{idx.positive_review_count}}</td>

@@ -96,7 +96,7 @@
             <ol class="breadcrumb m-0">
             </ol>
           </div>
-          <h4 class="page-title">Inventory</h4>
+          <h4 class="page-title">Products</h4>
         </div>
       </div>
     </div>
@@ -124,33 +124,60 @@
                   </div>
                 </form>
               </div>
+              <ul class="pagination pagination-rounded justify-content-end my-2">
+              <li ng-class="prevPageDisabled()" class="page-item">
+                <a  href="javascript:void(0)" ng-click="prevPage()"  class="page-link">Previous</a>
+              </li>
+              <li ng-repeat="n in range()" ng-class="{active: n == currentPage}" ng-click="setPage(n)"  class="page-item">
+                <a href="javascript:void(0)" class="page-link">{{n+1}}</a>
+              </li>
+              <li ng-class="nextPageDisabled()" class="page-item">
+                <a href="javascript:void(0)" ng-click="nextPage()" class="page-link">Next</a>
+              </li>
+            </ul>
             </div>
             <div class="table-responsive">
-              <table class="table table-stripped table-hover table-bordered table-centered mb-0">
+              <table class="table table-stripped table-hover table-bordered table-centered mb-0" style="text-align: center;">
                 <thead class="thead-light">
                   <tr>
-                    <th ng-click="change_order('prod_sku')">SKU <i class="mdi mdi-sort-alphabetical "></i></th>
-                    <th>Image  </th>
+                    <th>Channel</th>
                     <th ng-click="change_order('prod_asin')">ASIN <i  class="mdi mdi-sort-alphabetical "></i></th>
-                    <th style="width:400px;" ng-click="change_order('prod_title')">Title <i  class="mdi mdi-sort-alphabetical "></i></th>
-                    <th ng-click="change_order('itm_price')">Sale Price <i  class="mdi mdi-sort-numeric "></i></th>
-                    <th ng-click="change_order('itm_qty')">Qty <i  class="mdi mdi-sort-numeric "></i></th>
-                    <th ng-click="change_order('open_date')">Open Date <i class="mdi mdi-sort-numeric "></i></th>
+                    <th ng-click="change_order('prod_sku')">SKU <i class="mdi mdi-sort-alphabetical "></i></th>
+                    <th style="width:400px;" ng-click="change_order('prod_title')">Product Name <i  class="mdi mdi-sort-alphabetical "></i></th>
                     <th ng-click="change_order('is_active')">Status  <i  class="mdi mdi-sort-alphabetical "></i></th>
                     <th>Review Tracking  <i  class="mdi mdi-sort-alphabetical "></i></th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr ng-repeat="lst in transactionList ">
-                    <td class="text-body font-weight-bold"><a target="_blank" href="https://catalog-sc.{{lst.amz_domain}}/abis/product/DisplayEditProduct?marketplaceID={{lst.amz_code}}&ref=xx_myiedit_cont_myifba&sku={{lst.prod_sku}}&asin={{lst.prod_asin}}">{{lst.prod_sku}}</a></td>
-                    <td> <img ng-if="lst.prod_image.length > 0" src="{{lst.prod_image}}" alt="" width='32' height="32">
+                    <?php if($store_country == 'IN') { ?>
+                <td><img width="20" height="20" src="<?php echo $base_url . 'assets/img/amazon_logo.png' ?> "><span style="color:#a3afb7;font-weight:300">.in</span></td>
+              <?php } ?>
+              <?php if($store_country == 'US') { ?>
+                <td><img width="20" height="20" src="<?php echo $base_url . 'assets/img/amazon_logo.png' ?> "><span style="color:#a3afb7;font-weight:300">.com</span></td>
+              <?php } ?>
+              <?php if($store_country == 'UK') { ?>
+                <td><img width="20" height="20" src="<?php echo $base_url . 'assets/img/amazon_logo.png' ?> "><span style="color:#a3afb7;font-weight:300">.co.uk</span></td>
+              <?php } ?>
+              <?php if($store_country == 'IT') { ?>
+                <td><img width="20" height="20" src="<?php echo $base_url . 'assets/img/amazon_logo.png' ?> "><span style="color:#a3afb7;font-weight:300">.it</span></td>
+              <?php } ?>
+              <?php if($store_country == 'DE') { ?>
+                <td><img width="20" height="20" src="<?php echo $base_url . 'assets/img/amazon_logo.png' ?> "><span style="color:#a3afb7;font-weight:300">.de</span></td>
+              <?php } ?>
+              <?php if($store_country == 'FR') { ?>
+                <td><img width="20" height="20" src="<?php echo $base_url . 'assets/img/amazon_logo.png' ?> "><span style="color:#a3afb7;font-weight:300">.fr</span></td>
+              <?php } ?>
+              <?php if($store_country == 'ES') { ?>
+                <td><img width="20" height="20" src="<?php echo $base_url . 'assets/img/amazon_logo.png' ?> "><span style="color:#a3afb7;font-weight:300">.es</span></td>
+              <?php } ?>
+                    <td><a href="https://www.{{lst.amz_domain}}/dp/{{lst.prod_asin}}" target="_blank">{{lst.prod_asin}}</a></td>
+                    <td class="text-body font-weight-bold">
+                      <p><a target="_blank" href="https://catalog-sc.{{lst.amz_domain}}/abis/product/DisplayEditProduct?marketplaceID={{lst.amz_code}}&ref=xx_myiedit_cont_myifba&sku={{lst.prod_sku}}&asin={{lst.prod_asin}}">{{lst.prod_sku}}</a></p>
+                      <img ng-if="lst.prod_image.length > 0" src="{{lst.prod_image}}" alt="" width='32' height="32">
                       <img ng-if="lst.prod_image==''" src="<?php echo base_url().'asset/img/no_image.gif'?>" width='32' height='32'alt="">
                     </td>
-                    <td><a href="https://www.{{lst.amz_domain}}/dp/{{lst.prod_asin}}" target="_blank">{{lst.prod_asin}}</a></td>
                     <td>{{lst.prod_title | limitTo:100}}<span ng-if="lst.prod_title.length >=101 ">...</span>  </td>
-                    <td>{{lst.itm_price}}</td>
-                    <td >{{lst.itm_qty}}</td>
-                    <td >{{lst.open_date}}</td>
                     <td style="width:90px"><span ng-if="lst.is_active=='1'"class="badge badge-info">Active</span>
                       <span ng-if="lst.is_active=='0'"   class="badge badge-danger">Inactive</span>
                     </td>

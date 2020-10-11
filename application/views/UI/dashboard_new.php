@@ -13,7 +13,6 @@
         <div class="page-title-box">
           <div class="page-title-right">
           </div>
-          <h4 class="page-title">Dashboard</h4>
         </div>
       </div>
     </div>
@@ -69,12 +68,12 @@
               <ul class="nav nav-tabs nav-bordered nav-justified ">
                 <li class="nav-item active" ng-class="{active: selectedTab == 1}">
                   <a ng-class="{active: selectedTab == 1}" ng-click="selectedTab = 1;" href="#feedback" data-toggle="tab" aria-expanded="false" class="nav-link">
-                  Feeback
+                  Feedback
                   </a>
                 </li>
                 <li class="nav-item">
                   <a ng-class="{active: selectedTab == 2}"  ng-click="selectedTab = 2;" href="#reviews" data-toggle="tab" aria-expanded="true" class="nav-link">
-                  Reviews <span class="badge badge-warning badge-pill">New</span>
+                  Reviews
                   </a>
                 </li>
               </ul>
@@ -377,14 +376,14 @@
                 <div class="card-box">
                   <h4 class="header-title mb-3">Recent Orders</h4>
                   <div class="table-responsive">
-                    <table class="table table-borderless table-hover table-centered m-0">
+                    <table class="table table-borderless table-hover table-centered m-0"  style="text-align: center;">
                       <thead class="thead-light">
                         <tr>
-                          <th style="width:100px">SKU</th>
+                          <!-- <th style="width:100px">SKU</th> -->
                           <!--<th>ASIN</th> -->
                           <th>Order No</th>
                           <!--<th style="width:100px">PO Date</th>	 -->
-                          <th style="width:300px">Title</th>
+                          <th style="width:300px;text-align: center;">Product Name</th>
                           <!--<th>Price</th>     -->
                           <th style="text-align: center;">Qty</th>
                           <th>Status</th>
@@ -392,7 +391,7 @@
                       </thead>
                       <tbody >
                         <tr ng-repeat="ord in recent_ten_orders">
-                          <td>{{ord.seller_sku}} </td>
+                          <!-- <td>{{ord.seller_sku}} </td> -->
                           <!-- <td>{{ord.asin}} </td> -->
                           <td>{{ord.order_no}} </td>
                           <!-- <td>{{ord.po_date}} </td>	-->
@@ -414,12 +413,12 @@
                 <div class="card-box">
                   <h4 class="header-title mb-3">Best Selling Products</h4>
                   <div class="table-responsive">
-                    <table class="table table-borderless table-hover table-centered m-0">
+                    <table class="table table-borderless table-hover table-centered m-0" style="text-align: center;">
                       <thead class="thead-light">
                         <tr>
                           <!--<th style="width:100px">SKU</th>
                             <th style="width:100px">ASIN</th> -->
-                          <th>Title</th>
+                          <th style="width: 300px;text-align: center;">Product Name</th>
                           <th>Price</th>
                           <!-- <th>Qty</th> -->
                           <th>Sold Qty</th>
@@ -683,22 +682,22 @@
                 <div class="card-box">
                   <h4 class="header-title mb-3">Recent Orders</h4>
                   <div class="table-responsive">
-                    <table class="table table-borderless table-hover table-centered m-0">
+                    <table class="table table-borderless table-hover table-centered m-0" style="text-align: center;">
                       <thead class="thead-light">
                         <tr>
-                          <th style="width:100px">SKU</th>
+                          <!-- <th style="width:100px">SKU</th> -->
                           <!--<th>ASIN</th> -->
                           <th>Order No</th>
                           <!--<th style="width:100px">PO Date</th>	 -->
-                          <th style="width:300px">Title</th>
+                          <th style="width:300px;text-align: center;">Product Name</th>
                           <!--<th>Price</th>     -->
-                          <th>Qty</th>
+                          <th style="text-align: center;">Qty</th>
                           <th>Status</th>
                         </tr>
                       </thead>
                       <tbody >
                         <tr ng-repeat="ord in recent_ten_orders">
-                          <td>{{ord.seller_sku}} </td>
+                          <!-- <td>{{ord.seller_sku}} </td> -->
                           <!-- <td>{{ord.asin}} </td> -->
                           <td>{{ord.order_no}} </td>
                           <!-- <td>{{ord.po_date}} </td>	-->
@@ -720,15 +719,15 @@
                 <div class="card-box">
                   <h4 class="header-title mb-3">Best Selling Products</h4>
                   <div class="table-responsive">
-                    <table class="table table-borderless table-hover table-centered m-0">
+                    <table class="table table-borderless table-hover table-centered m-0" style="text-align: center;">
                       <thead class="thead-light">
                         <tr>
                           <!--<th style="width:100px">SKU</th>
                             <th style="width:100px">ASIN</th> -->
-                          <th>Title</th>
+                          <th style="width: 300px;text-align: center;">Product Name</th>
                           <th>Price</th>
                           <!-- <th>Qty</th> -->
-                          <th>Sold Qty</th>
+                          <th style="text-align: center;">Sold Qty</th>
                         </tr>
                       </thead>
                       <tbody>
