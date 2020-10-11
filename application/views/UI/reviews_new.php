@@ -22,14 +22,6 @@ $base_url=base_url();
               <div class="col-md-3">
                 <h4 class="page-title">Product Reviews </h4>
               </div>
-              <ul class="pagination pagination-rounded justify-content-end my-2">
-                <li ng-class="prevPageDisabled()" class="page-item">  <a href="javascript:void(0)" ng-click="prevPage()" class="page-link">Previous</a>
-                </li>
-                <li ng-repeat="n in range()" ng-class="{active: n == currentPage}" ng-click="setPage(n)" class="page-item"> <a href="javascript:void(0)" class="page-link">{{n+1}}</a>
-                </li>
-                <li ng-class="nextPageDisabled()" class="page-item">  <a href="javascript:void(0)" ng-click="nextPage()" class="page-link">Next</a>
-                </li>
-              </ul>
               <div class="col-md-8"></div>
               <div class="col-md-1 text-right">
                 <div class="dropdown notification-list">
@@ -93,6 +85,16 @@ $base_url=base_url();
             </div>
             <hr>
             <div class="container-fluid">
+            <div class="col-lg-12">
+              <ul class="pagination pagination-rounded justify-content-end my-2">
+                <li ng-class="prevPageDisabled()" class="page-item">  <a href="javascript:void(0)" ng-click="prevPage()" class="page-link">Previous</a>
+                </li>
+                <li ng-repeat="n in range()" ng-class="{active: n == currentPage}" ng-click="setPage(n)" class="page-item"> <a href="javascript:void(0)" class="page-link">{{n+1}}</a>
+                </li>
+                <li ng-class="nextPageDisabled()" class="page-item">  <a href="javascript:void(0)" ng-click="nextPage()" class="page-link">Next</a>
+                </li>
+              </ul>
+            </div>
               <div class="row">
                 <div class="col-xl-12">
                   <div class="table-responsive">

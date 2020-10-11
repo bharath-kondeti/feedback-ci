@@ -93,30 +93,53 @@ echo "</a>";
 
                     ?>
                     <div class="dropdown-divider"></div>
-                    <a href="<?php echo $base_url . 'manage_stores' ?>" class="dropdown-item notify-item">
-                        <i class="mdi mdi-store"></i>
-                        <span>Manage Stores</span>
-                    </a>
-
-                    <a href="<?php echo $base_url . 'user_profile' ?>" class="dropdown-item notify-item">
+                    <h6 class="dropdown-header">My Account</h6>
+                    <a href="<?php echo $base_url . 'user_profile' ?>" class="dropdown-item notify-item ml-3 w-auto">
                         <i class="fe-users"></i>
                         <span>Edit Profile</span>
                     </a>
-
-                    <!-- <a href="<?php echo $base_url . 'change_password' ?>" class="dropdown-item notify-item">
+                    <a href="<?php echo $base_url . 'change_password' ?>" class="dropdown-item notify-item ml-3 w-auto">
                         <i class="fe-edit"></i>
                         <span>Change Password</span>
+                    </a>
+                    <!-- <a href="<?php echo $base_url . 'manage_stores' ?>" class="dropdown-item notify-item ">
+                        <i class="mdi mdi-store"></i>
+                        <span>Manage Stores</span>
                     </a> -->
-                    <!-- <a href="<?php echo $baseurl . 'billing' ?>" class="dropdown-item notify-item">
+                    <div class="dropdown-divider"></div>
+                    <h6 class="dropdown-header">Billing</h6>
+                    <a href="<?php echo $baseurl . 'billing' ?>" class="dropdown-item notify-item ml-3 w-auto">
                         <i class="mdi mdi-credit-card-plus"></i>
-                        <span>Billing</span>
-                    </a> -->
+                        <span>Billing Info</span>
+                    </a>
+                    <a href="#" class="dropdown-item notify-item ml-3 w-auto">
+                        <i class="mdi mdi-library-books"></i>
+                        <span>Invoice</span>
+                    </a>
+                    <a href="<?php echo $baseurl.'cancel'?>" class="dropdown-item notify-item ml-3 w-auto">
+                        <i class="mdi mdi-cancel"></i>
+                        <span>Cancel</span>
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a href="<?php echo $baseurl.'preferences'?>" class="dropdown-item notify-item">
+                        <i class="mdi mdi-settings"></i>
+                        <span>Preferences</span>
+                    </a>
                     <a href="<?php echo $base_url . 'contact_us' ?>" class="dropdown-item notify-item">
                         <i class="fe-mail"></i>
                         <span>Create Ticket</span>
                     </a>
 
-                    <a href="<?php echo $base_url . 'give_us_feedback' ?>" class="dropdown-item notify-item">
+                    <a href="<?php echo $base_url . 'manage_referal' ?>" class="dropdown-item notify-item">
+                        <i class="fe-user-plus"></i>
+                        <span>Refer a Friend</span>
+                    </a>
+                    <a href="<?php echo $base_url . 'user_auth/logout' ?>" class="dropdown-item notify-item">
+                        <i class="fe-log-out"></i>
+                        <span>Logout</span>
+                    </a>
+
+                    <!-- <a href="<?php echo $base_url . 'give_us_feedback' ?>" class="dropdown-item notify-item">
                         <i class="fe-star"></i>
                         <span>Feedback</span>
                     </a>
@@ -124,23 +147,17 @@ echo "</a>";
                     <a href="<?php echo $baseurl.'preferences'?>" class="dropdown-item notify-item">
                         <i class="mdi mdi-settings"></i>
                         <span>Settings</span>
-                    </a>
-
-                    <!-- <a href="<?php echo $base_url . 'manage_referal' ?>" class="dropdown-item notify-item">
-                        <i class="fe-user-plus"></i>
-                        <span>Referals</span>
                     </a> -->
 
-                    <a href="<?php echo $base_url . 'alert_manager' ?>" class="dropdown-item notify-item">
+                    
+
+                    <!-- <a href="<?php echo $base_url . 'alert_manager' ?>" class="dropdown-item notify-item">
                         <i class="fe-alert-circle"></i>
                         <span>Alert</span>
-                    </a>
+                    </a> -->
 
                     <!-- item-->
-                    <a href="<?php echo $base_url . 'user_auth/logout' ?>" class="dropdown-item notify-item">
-                        <i class="fe-log-out"></i>
-                        <span>Logout</span>
-                    </a>
+                    
 
 
 
