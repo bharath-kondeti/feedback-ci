@@ -229,7 +229,14 @@ class Campaign_model extends CI_Model
       return $query->result_array();
   }
 
-    public function get_template_list($offet, $limit)
+  public function get_template_list()
+  {
+    $query=$this->db->query("SELECT template_id,template_content,template_name ,subject,is_default FROM email_template  WHERE (created_by=".$this->user_id." OR is_default=1) AND is_active=1 and is_deleted=0 ORDER BY created_on ASC ") ;
+    return $query->result_array();
+  }
+
+
+    public function new_template_list($offet, $limit)
   {
     if(!empty($offet) && !empty($limit)) {
       $sql = " LIMIT ".$offet.",".$limit;

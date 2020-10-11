@@ -2512,7 +2512,7 @@
         );
       }
       // $scope.get_predata();
-      $scope.itemsPerPageTemplates = 25;
+      $scope.itemsPerPageTemplates = 15;
       $scope.currentPageTemplates = 0;
       $scope.totalTemplates = 0;
       $scope.rangeTemplates = function() {

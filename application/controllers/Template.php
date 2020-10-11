@@ -34,11 +34,11 @@ class Template extends CI_Controller {
 	}
 
 
-	 public function get_pre_data()
+	 public function get_pre_data($offset, $limit)
   {
     $data['status_text']='Success';
     $data['status_code']='1';
-    //$data['template_list']=$this->campaign_model->get_template_list();
+  $data['template_list']=$this->campaign_model->new_template_list($offset, $limit);
 	echo json_encode($data);
   }
 
