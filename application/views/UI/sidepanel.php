@@ -129,6 +129,10 @@ echo "</a>";
                         <i class="fe-mail"></i>
                         <span>Create Ticket</span>
                     </a>
+                    <a href="#" class="dropdown-item notify-item">
+                        <i class="fa fa-support"></i>
+                        <span>User Guides</span>
+                    </a>
 
                     <a href="<?php echo $base_url . 'manage_referal' ?>" class="dropdown-item notify-item">
                         <i class="fe-user-plus"></i>
@@ -149,7 +153,7 @@ echo "</a>";
                         <span>Settings</span>
                     </a> -->
 
-                    
+
 
                     <!-- <a href="<?php echo $base_url . 'alert_manager' ?>" class="dropdown-item notify-item">
                         <i class="fe-alert-circle"></i>
@@ -157,7 +161,7 @@ echo "</a>";
                     </a> -->
 
                     <!-- item-->
-                    
+
 
 
 

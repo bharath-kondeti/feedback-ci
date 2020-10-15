@@ -163,72 +163,14 @@ $base_url=base_url();
  						<div class="page-title-right">
  							<!-- <button style="float:right;margin-right:13px" data-toggle="modal" data-target="#load_money" class="btn btn-primary waves-effect waves-light mt-4 mb-2 width-sm">Pay</button>   -->
  						</div>
- 						<h4 class="page-title settings-border">Settings</h4>
+ 						<h4 class="page-title settings-border">Billing Plans</h4>
  					</div>
  				</div>
  			</div>
 
  			<div class="row">
- 				<div class="col-sm-2">
- 					<div class="card-box">
- 						<div class="h4">
- 							App
- 						</div>
- 						<div class="ml-2">
- 							<ul class="nav flex-column">
- 								<li class="nav-item  hover-nav">
- 									<a class="nav-link" href="<?php echo $baseurl.'blacklist'?>">Blacklist</a>
- 								</li>
- 								<li class="nav-item hover-nav">
- 									<a class="nav-link active"
- 										href="<?php echo $baseurl.'preferences'?>">Preferences</a>
- 								</li>
- 							</ul>
- 						</div>
- 						<div class="h4">
- 							Billing
- 						</div>
- 						<div class="ml-2">
- 							<ul class="nav flex-column">
- 								<li class="nav-item hover-nav settings-active">
- 									<a class="nav-link" href="<?php echo $baseurl . 'billing' ?>">Billing Info</a>
- 								</li>
- 								<li class="nav-item hover-nav">
- 									<a class="nav-link" href="#">Invoices</a>
- 								</li>
- 								<!-- <li class="nav-item hover-nav">
-                  <a class="nav-link" href="#">My Plan</a>
-                </li> -->
- 								<li class="nav-item hover-nav">
- 									<a class="nav-link" href="<?php echo $baseurl.'cancel'?>">Cancel</a>
- 								</li>
- 							</ul>
- 						</div>
- 						<div class="h4">
- 							My Account
- 						</div>
- 						<div class="ml-2">
- 							<ul class="nav flex-column">
- 								<li class="nav-item hover-nav">
- 									<a class="nav-link" href="<?php echo $base_url . 'change_password' ?>">Change
- 										Password</a>
- 								</li>
- 							</ul>
- 						</div>
- 						<div class="h4">
- 							Promotions
- 						</div>
- 						<div class="ml-2">
- 							<ul class="nav flex-column">
- 								<li class="nav-item hover hover-nav">
- 									<a class="nav-link" href="<?php echo $base_url . 'manage_referal' ?>">Refer a
- 										friend</a>
- 								</li>
- 							</ul>
- 						</div>
- 					</div>
- 				</div>
- 				<div class="col-10">
+        <div class="col-sm-2"></div>
+ 				<div class="col-sm-8">
  					<div class="row">
  						<div class="col-md-12">
  							<div class="col-md-12">
@@ -569,6 +511,7 @@ $base_url=base_url();
  						</div> <!-- end col-->
  					</div>
  				</div>
+        <div class="col-sm-2"></div>
  			</div>
  			<!-- end row -->
 

@@ -92,7 +92,7 @@ $base_url=base_url();
 													<button style="margin-top:10px;"  ng-click="filtergrid()" type="button" class="btn btn-info waves-effect waves-light mb-2 mr-2">Search</button>
 													 </div>
                                                 </form>
-                                                
+
                                             </div>
                                             <div class="col-lg-2">
                                             <ul class="pagination pagination-rounded justify-content-end my-2">
@@ -118,7 +118,7 @@ $base_url=base_url();
                                                 <th ng-click="change_order('asin')" style="width:120px;">ASIN <i class="mdi mdi-sort-alphabetical "></i></th>
                                                  <th ng-click="change_order('order_no')" style="width:170px;">Order ID <i class="mdi mdi-sort-numeric "></i></th>
 												 <th ng-click="change_order('seller_sku')" style="width:170px;">SKU  <i class="mdi mdi-sort-alphabetical "></i></th>
-                                                 <th ng-click="change_order('itm_title')" style="width:280px;" >Title <i class="mdi mdi-sort-alphabetical "></i></th>
+                                                 <th ng-click="change_order('itm_title')" style="width:280px;" >Product Name <i class="mdi mdi-sort-alphabetical "></i></th>
                                                  <th ng-click="change_order('purchase_date')" style="width:100px;">PO Date <i class="mdi mdi-sort-numeric "></i></th>
                                                  <th ng-click="change_order('order_status')" style="width:110px;">Status <i class="mdi mdi-sort-alphabetical "></i></th>
                                                     </tr>
@@ -126,25 +126,25 @@ $base_url=base_url();
                                                 <tbody>
                                                     <tr ng-repeat="lst in transactionList ">
                                                         <?php if($store_country == 'IN') { ?>
-                <td><img width="20" height="20" src="<?php echo $base_url . 'assets/img/amazon_logo.png' ?> "><span style="color:#a3afb7;font-weight:300">.in</span></td>
+                <td style="width: 30px;"><img width="20" height="20" src="<?php echo $base_url . 'assets/img/amazon_logo.png' ?> "><span style="color:#a3afb7;font-weight:300">.in</span></td>
               <?php } ?>
               <?php if($store_country == 'US') { ?>
-                <td><img width="20" height="20" src="<?php echo $base_url . 'assets/img/amazon_logo.png' ?> "><span style="color:#a3afb7;font-weight:300">.com</span></td>
+                <td style="width: 30px;"><img width="20" height="20" src="<?php echo $base_url . 'assets/img/amazon_logo.png' ?> "><span style="color:#a3afb7;font-weight:300">.com</span></td>
               <?php } ?>
               <?php if($store_country == 'UK') { ?>
-                <td><img width="20" height="20" src="<?php echo $base_url . 'assets/img/amazon_logo.png' ?> "><span style="color:#a3afb7;font-weight:300">.co.uk</span></td>
+                <td style="width: 30px;"><img width="20" height="20" src="<?php echo $base_url . 'assets/img/amazon_logo.png' ?> "><span style="color:#a3afb7;font-weight:300">.co.uk</span></td>
               <?php } ?>
               <?php if($store_country == 'IT') { ?>
-                <td><img width="20" height="20" src="<?php echo $base_url . 'assets/img/amazon_logo.png' ?> "><span style="color:#a3afb7;font-weight:300">.it</span></td>
+                <td style="width: 30px;"><img width="20" height="20" src="<?php echo $base_url . 'assets/img/amazon_logo.png' ?> "><span style="color:#a3afb7;font-weight:300">.it</span></td>
               <?php } ?>
               <?php if($store_country == 'DE') { ?>
-                <td><img width="20" height="20" src="<?php echo $base_url . 'assets/img/amazon_logo.png' ?> "><span style="color:#a3afb7;font-weight:300">.de</span></td>
+                <td style="width: 30px;"><img width="20" height="20" src="<?php echo $base_url . 'assets/img/amazon_logo.png' ?> "><span style="color:#a3afb7;font-weight:300">.de</span></td>
               <?php } ?>
               <?php if($store_country == 'FR') { ?>
-                <td><img width="20" height="20" src="<?php echo $base_url . 'assets/img/amazon_logo.png' ?> "><span style="color:#a3afb7;font-weight:300">.fr</span></td>
+                <td style="width: 30px;"><img width="20" height="20" src="<?php echo $base_url . 'assets/img/amazon_logo.png' ?> "><span style="color:#a3afb7;font-weight:300">.fr</span></td>
               <?php } ?>
               <?php if($store_country == 'ES') { ?>
-                <td><img width="20" height="20" src="<?php echo $base_url . 'assets/img/amazon_logo.png' ?> "><span style="color:#a3afb7;font-weight:300">.es</span></td>
+                <td style="width: 30px;"><img width="20" height="20" src="<?php echo $base_url . 'assets/img/amazon_logo.png' ?> "><span style="color:#a3afb7;font-weight:300">.es</span></td>
               <?php } ?>
                                                         <td style="width:120px;"><a href="https://www.{{lst.amz_domain}}/dp/{{lst.asin}}" target="_blank">{{lst.asin}}</a></td>
                                                       <td class="text-body font-weight-bold">{{lst.order_no}}</td>

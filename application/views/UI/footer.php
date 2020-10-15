@@ -10,9 +10,15 @@ $base_url=base_url();
                             <div class="col-md-6 footer-links">
                                 2020 &copy; <a href="#"> FeedbackOutlook</a>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-4"></div>
+                            <div class="col-md-1">
                                 <div class="text-md-right footer-links d-none d-sm-block">
                                     <a href="javascript:void(0);">Support</a>
+                                </div>
+                            </div>
+                            <div class="col-md-1">
+                                <div class="text-md-right footer-links d-none d-sm-block">
+                                    <a href="mailto:support@feedbackoutlook.com">Email Us</a>
                                 </div>
                             </div>
                         </div>

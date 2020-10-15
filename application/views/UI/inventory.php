@@ -109,7 +109,7 @@
                 <form class="form-inline">
                   <div class="form-group mb-2">
                     <label for="inputPassword2" class="sr-only">Search</label>
-                    <input type="search"  ng-model = 'filter.search' class="form-control" id="search" placeholder="Search..." ng-enter='filtergrid()'>
+                    <input type="search"  ng-model = 'filter.search' class="form-control" id="search" placeholder="Search with SKU" ng-enter='filtergrid()'>
                   </div>
                   <div class="form-group mx-sm-3 mb-2">
                     <label for="status-select" class="mr-2">Status</label>

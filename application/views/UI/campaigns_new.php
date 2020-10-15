@@ -70,6 +70,51 @@
   .pad-15 {
   padding: 15px;
   }
+  .cc_design, .ct_design {
+    font-weight: 500 !important;
+    padding: 3% !important;
+    font-size: 15px !important;
+    background-color: #0b36e3 !important;
+    border-color: #0b36e3 !important;
+  }
+  .ct_design {
+    font-weight: 500 !important;
+    padding: 2% !important;
+    font-size: 15px !important;
+    background-color: #0b36e3 !important;
+    border-color: #0b36e3 !important;
+    color: #fff !important;
+  }
+  .tt_design1 {
+    background-color: #1abc9c !important;
+    border-color: #1abc9c !important;
+  }
+  .tt_design2 {
+    background-color: #f5a51a !important;
+    border-color: #f4a00e !important;
+  }
+  .tt_design3 {
+    background-color: #595b61 !important;
+    border-color: #53555a !important;
+  }
+  .sc_emails {
+    background-color: #aba246 !important;
+    color: #fff !important;
+    font-size: 14px !important;
+    font-weight: 400 !important;
+  }
+  .se_emails {
+    background-color: #38c25b !important;
+    color: #fff !important;
+    font-size: 14px !important;
+    font-weight: 400 !important;
+  }
+  .bl_emails {
+    background-color: #c91a2f !important;
+    color: #fff !important;
+    font-size: 14px !important;
+    font-weight: 400 !important;
+  }
 </style>
 <div class="wrapper">
 <div class="content campaign" id="campaign">
@@ -235,7 +280,7 @@
             </div>
             <div class="col-md-4">
               <?php if ($store_count[0]['ttl'] > 0) { ?>
-              <a href='' class="btn btn-info pull-right" ng-click='clear_campaign_data();togggle_view(); load_product(0)'>Create Campaign</a>
+              <a href='' class="btn btn-info pull-right cc_design" ng-click='clear_campaign_data();togggle_view(); load_product(0)'>Create Campaign</a>
               <?php }?>
             </div>
           </div>
@@ -421,7 +466,7 @@
                           <div class="form-inline">
                             <i ng-click='edit_campaign(idx.campaign_id)' style="font-size:20px;margin-left: 10px" class="fe-edit text-info"></i>
                             <i ng-click='delete_campaign(idx.campaign_id)' style="font-size:20px;margin-left: 10px;" class="fe-trash-2 text-danger"></i>
-                            
+
                             <label class="switch" style="margin-left: 10px">
                             <input type="checkbox" name='enable_addon' ng-model="idx.is_active" ng-true-value="'1'" ng-false-value="'0'" ng-change='change_state(idx.is_active,idx.campaign_id)'>
                             <span class="slider round"></span>
@@ -447,7 +492,7 @@
                 <div class="card">
                   <div class="card-body">
                     <h4 class="page-title">Campaign Details</h4>
-                    <a href="" id="menuToggle" style="margin-top:-15px;" class="pull-right  dropdown-toggle waves-effect waves-light close-template" data-toggle="dropdown" aria-expanded="true" ng-click='togggle_view()'>Close</a>
+                    <a href="" id="menuToggle" style="margin-top:-15px;" class="pull-right btn btn-secondary dropdown-toggle waves-effect waves-light close-template" data-toggle="dropdown" aria-expanded="true" ng-click='togggle_view()'>Close</a>
                     <div class="col-sm-12">
                       <div class="form-inline">
                         <div class="col-sm-12">
@@ -560,7 +605,7 @@
                         <div class="form-group">
                           <div class="" id='product_list' style="">
                             <div class="table-responsive">
-                              <table class="table table-center table-striped table-bordered table-hover mb-0">
+                              <table class="table table-center table-striped table-bordered table-hover mb-0" style="text-align: center;">
                                 <tr>
                                   <th style="width: 20px;">
                                     <div class="custom-control custom-checkbox">
@@ -568,12 +613,11 @@
                                       <label class="custom-control-label" for="customCheck1">&nbsp;</label>
                                     </div>
                                   </th>
-                                  <th>Image</th>
-                                  <th>ASIN</th>
                                   <th>SKU</th>
-                                  <th>Fullfillment</th>
+                                  <th>ASIN</th>
+                                  <th>Fulfillment</th>
                                   <th>Brand</th>
-                                  <th>Title</th>
+                                  <th>Product Name</th>
                                 </tr>
                                 <tr ng-repeat='prd in product_list'>
                                   <td>
@@ -582,9 +626,8 @@
                                       <label class="custom-control-label" for="customCheck2-{{$index+1}}">&nbsp;</label>
                                     </div>
                                   </td>
-                                  <td><img src='{{prd.prod_image}}' width='50' height='50'></td>
+                                  <td><p>{{prd.prod_sku}}</p><img src='{{prd.prod_image}}' width='50' height='50'></td>
                                   <td class="align-middle">{{prd.prod_asin}}</td>
-                                  <td class="align-middle">{{prd.prod_sku}}</td>
                                   <td class="align-middle">{{prd.fc_code}}</td>
                                   <td class="align-middle">{{prd.prod_brand}}</td>
                                   <td class="align-middle">{{prd.prod_title | limitTo:100}}<span ng-if='prd.prod_title.length>100'>...</span></td>
@@ -687,7 +730,7 @@
           <div class="row">
             <div class="col-md-2">
               <div class="dropdown">
-                <a class="btn btn-primary btn-block dropdown-toggle" href="" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a class="btn btn-primary btn-block dropdown-toggle tt_design1" href="" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Amazon Templates<i class="mdi mdi-chevron-down"></i>
                 </a>
                 <div class="dropdown-menu icon_menu_size" aria-labelledby="dropdownMenuLink" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 35px, 0px);">
@@ -698,7 +741,7 @@
             </div>
             <div class="col-md-2">
               <div class="dropdown">
-                <a class="btn btn-primary btn-block dropdown-toggle" href="" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a class="btn btn-primary btn-block dropdown-toggle tt_design2" href="" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Any Trigger<i class="mdi mdi-chevron-down"></i>
                 </a>
                 <div class="dropdown-menu icon_menu_size" aria-labelledby="dropdownMenuLink" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 35px, 0px);">
@@ -711,7 +754,7 @@
             </div>
             <div class="col-md-2">
               <div class="dropdown">
-                <a class="btn btn-primary btn-block dropdown-toggle" href="" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a class="btn btn-primary btn-block dropdown-toggle tt_design3" href="" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 All Goals<i class="mdi mdi-chevron-down"></i>
                 </a>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuLink" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 35px, 0px);">
@@ -723,7 +766,7 @@
               </div>
             </div>
             <div class="col-md-6">
-              <a class="btn btn-info pull-right" ng-click='clear_template();togggle_view_email()'>Create New Template</a>
+              <a class="btn btn-info pull-right ct_design" ng-click='clear_template();togggle_view_email()'>Create New Template</a>
             </div>
           </div>
           <br>
@@ -774,7 +817,7 @@
                 <div class="card">
                   <div class="card-body">
                     <div class="col-sm-12">
-                      <a href="" style="margin-right:10px;font-size:15px;" id="menuToggle" class="pull-right  dropdown-toggle waves-effect waves-light" data-toggle="dropdown" aria-expanded="true" ng-click='togggle_view_email()'>Close</a>
+                      <a href="" style="margin-right:10px;font-size:15px;" id="menuToggle" class="pull-right btn btn-secondary dropdown-toggle waves-effect waves-light" data-toggle="dropdown" aria-expanded="true" ng-click='togggle_view_email()'>Close</a>
                       <p class="control-label col-sm-3" style="margin-top:5px;font-weight:700;margin-left:20px;" for="pwd">Template Name</p>
                       <div class="col-sm-9">
                         <input type="text" class="form-control" style="margin-left:20px;" ng-model='tmplt.template_name'>
@@ -811,7 +854,7 @@
             </div>
             <div class="col-md-3">
             <div class="dropdown">
-            <a class="btn btn-primary btn-block dropdown-toggle" href="" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <a class="btn btn-primary btn-block dropdown-toggle tt_design1" href="" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Select a campaign<i class="mdi mdi-chevron-down"></i>
             </a>
             <div class="dropdown-menu icon_menu_size" aria-labelledby="dropdownMenuLink" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 35px, 0px);">
@@ -863,19 +906,19 @@
                         <div id="basicwizard">
                           <ul class="nav nav-pills bg-light nav-justified form-wizard-header mb-4">
                             <li class="nav-item">
-                              <a href="#basictab1" data-toggle="tab" class="nav-link rounded-0 pt-2 pb-2" ng-click="get_campaign_list('schduled_mail')">
+                              <a href="#basictab1" data-toggle="tab" class="nav-link rounded-0 pt-2 pb-2 sc_emails" ng-click="get_campaign_list('schduled_mail')">
                               <i class="mdi mdi-account-circle mr-1"></i>
                               <span class="d-none d-sm-inline">Scheduled Emails</span>
                               </a>
                             </li>
                             <li class="nav-item">
-                              <a href="#basictab2" data-toggle="tab" class="nav-link rounded-0 pt-2 pb-2" ng-click="get_campaign_list('sent_mail')">
+                              <a href="#basictab2" data-toggle="tab" class="nav-link rounded-0 pt-2 pb-2 se_emails" ng-click="get_campaign_list('sent_mail')">
                               <i class="mdi mdi-face-profile mr-1"></i>
                               <span class="d-none d-sm-inline">Sent Emails</span>
                               </a>
                             </li>
                             <li class="nav-item">
-                              <a href="#basictab3" data-toggle="tab" class="nav-link rounded-0 pt-2 pb-2" ng-click="get_campaign_list('blocked_mail')">
+                              <a href="#basictab3" data-toggle="tab" class="nav-link rounded-0 pt-2 pb-2 bl_emails" ng-click="get_campaign_list('blocked_mail')">
                               <i class="mdi mdi-checkbox-marked-circle-outline mr-1"></i>
                               <span class="d-none d-sm-inline">Blocked Emails</span>
                               </a>
