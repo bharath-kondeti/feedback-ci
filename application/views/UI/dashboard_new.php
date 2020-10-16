@@ -376,8 +376,8 @@
                 <div class="card-box">
                   <h4 class="header-title mb-3">Recent Orders</h4>
                   <div class="table-responsive">
-                    <table class="table table-borderless table-hover table-centered m-0"  style="text-align: center;">
-                      <thead class="thead-light">
+                    <table style="border: 1px solid #DEE2E6; text-align: center;" class="table table-hover table-centered mb-0">
+                      <thead class="thead-color">
                         <tr>
                           <!-- <th style="width:100px">SKU</th> -->
                           <!--<th>ASIN</th> -->
@@ -413,8 +413,8 @@
                 <div class="card-box">
                   <h4 class="header-title mb-3">Best Selling Products</h4>
                   <div class="table-responsive">
-                    <table class="table table-borderless table-hover table-centered m-0" style="text-align: center;">
-                      <thead class="thead-light">
+                    <table style="border: 1px solid #DEE2E6; text-align: center;" class="table table-hover table-centered mb-0">
+                      <thead class="thead-color">
                         <tr>
                           <!--<th style="width:100px">SKU</th>
                             <th style="width:100px">ASIN</th> -->
@@ -682,8 +682,8 @@
                 <div class="card-box">
                   <h4 class="header-title mb-3">Recent Orders</h4>
                   <div class="table-responsive">
-                    <table class="table table-borderless table-hover table-centered m-0" style="text-align: center;">
-                      <thead class="thead-light">
+                    <table style="border: 1px solid #DEE2E6; text-align: center;" class="table table-hover table-centered mb-0">
+                      <thead class="thead-color">
                         <tr>
                           <!-- <th style="width:100px">SKU</th> -->
                           <!--<th>ASIN</th> -->
@@ -719,8 +719,8 @@
                 <div class="card-box">
                   <h4 class="header-title mb-3">Best Selling Products</h4>
                   <div class="table-responsive">
-                    <table class="table table-borderless table-hover table-centered m-0" style="text-align: center;">
-                      <thead class="thead-light">
+                    <table style="border: 1px solid #DEE2E6; text-align: center;" class="table table-hover table-centered mb-0">
+                      <thead class="thead-color">
                         <tr>
                           <!--<th style="width:100px">SKU</th>
                             <th style="width:100px">ASIN</th> -->

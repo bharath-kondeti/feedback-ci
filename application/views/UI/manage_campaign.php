@@ -99,7 +99,7 @@ input:checked + .slider:before {
 										</div>
 										<div class="row" style="margin-bottom:10px">
 										<div class="col-sm-12 mg-top-10">
-										  <table class='table mg-top-10'>
+										  <table style="border: 1px solid #DEE2E6; text-align: center;" class="table table-hover table-centered mb-0">
 										  <tr><th>From</th><th>feedback_mail@feedbackgrid.com</th></tr>
 										  <tr><th>To</th><th><span ng-if='tst.email.length > 0'>{{tst.email}}</span><span ng-if='tst.email.length == 0'>preview_mail@feedbackgrid.com</span></th></tr>
 										  <tr><th>Subject</th><th>{{tst.subject}}</th></tr>
@@ -183,7 +183,7 @@ input:checked + .slider:before {
 
 										<div class="col-sm-12">
 											<div class="table-responsive">
-												<table class="table" style="width: auto;position: relative;">
+												<table style="border: 1px solid #DEE2E6; text-align: center;" class="table table-hover table-centered mb-0">
 													<thead style="background-color: #f1f5f7;font-size: 12px;font-weight: 200;color: #6c757d;white-space: nowrap">
 													<tr>
 													<th style="color:#6c757d">MarketPlace</th>
@@ -320,7 +320,7 @@ input:checked + .slider:before {
 								<div class="form-group" >
 									<div class="col-sm-12" id='product_list' style=" margin-top:20px;height: 350px;overflow-y:scroll">
 										<div class="table-responsive">
-											<table class="table table-centered mb-0">
+											<table style="border: 1px solid #DEE2E6; text-align: center;" class="table table-hover table-centered mb-0">
 											<tr>
 												<th style="width: 20px;">
 												<div class="custom-control custom-checkbox">

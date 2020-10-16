@@ -162,8 +162,8 @@ $base_url=base_url();
                                         </div>
 
                                         <div class="table-responsive">
-                                           <table class="table table-stripped table-hover table-bordered table-centered mb-0" style="text-align: center;">
-                                                <thead class="thead-light">
+                                           <table style="border: 1px solid #DEE2E6; text-align: center;" class="table table-hover table-centered mb-0">
+                                                <thead class="thead-color">
                                                     <tr>
                                                       <th>Channel</th>
                                    <th ng-click="change_order('order_no')">Order No<i class="mdi mdi-sort-alphabetical "></i></th>

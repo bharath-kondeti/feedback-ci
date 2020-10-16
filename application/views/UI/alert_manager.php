@@ -60,7 +60,7 @@ input:checked + .slider:before {
 
 .slider.round:before {
   border-radius: 50%;
-} 
+}
 </style>
 <div class="wrapper" ng-controller='acCtrl'>
 
@@ -73,7 +73,7 @@ input:checked + .slider:before {
                                                 </div>
                                                 <div class="modal-body p-4">
 												 <div ng-bind-html="alt.alert_msg"></div>
-                                                	
+
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Close</button>
@@ -84,29 +84,29 @@ input:checked + .slider:before {
                 <div class="content">
 
                     <div class="container-fluid">
-                        
-                       
+
+
                         <div class="row">
                             <div class="col-12">
                                 <div class="page-title-box">
                                     <div class="page-title-right">
                                         <ol class="breadcrumb m-0">
-                                            
+
                                         </ol>
                                     </div>
                                     <h4 class="page-title">Alert Manager</h4>
                                 </div>
                             </div>
-                        </div>  
-						
-						   
+                        </div>
+
+
 					  <div class="row">
                             <div class="col-sm-12">
                                 <div class="card">
 								   <div class="card-panel"> <br> <br>
 								   <div class="row">
 										<div class="col-sm-4">
-										 <table class="table">
+										 <table style="border: 1px solid #DEE2E6; text-align: center;" class="table table-hover table-centered mb-0">
                                     <!-- <tr><td><b>Enable ADD-ON:</b></td><td>
                               <label class="switch">
 
@@ -152,48 +152,48 @@ input:checked + .slider:before {
                                     </table>
 									</div>
 									<div class="col-sm-8">
-									<table class="table table-condesed">
+									<table style="border: 1px solid #DEE2E6; text-align: center;" class="table table-hover table-centered mb-0">
                                     <tr><th></th><th>Alert Type</th><th>Subject</th><th>Timestamp</th></tr>
                                     <tr ng-click='show_alert(alt)' data-target="#myModal" data-toggle="modal"  ng-repeat="alt in alert">
                                     <td><span ng-if="alt.is_important=='1'" class="glyphicon glyphicon-star-empty"></span></td>
                                     <td>{{alt.alert_type}}</td>
                                     <td>{{alt.alert_head}}</td>
                                     <td><span>{{alt.alert_on}}</span></td>
-                                    </tr> 
+                                    </tr>
                                     </table>
 									</div>
-										
-										
-										
-										
+
+
+
+
 										</div>
 									</div>
                                </div>
                           </div>
-                       </div>						  
+                       </div>
 
-						
-						
-				
 
-				
-				 </div> 		
-		  </div>				
-    </div>						
+
+
+
+
+				 </div>
+		  </div>
+    </div>
 
 <script type="text/javascript">
 
 crawlApp.factory("acFactory", function($http,$q) {
-   
+
    var get_data = function () {
         var dataset_path="<?php echo $baseurl.'alert_manager/get_recent_alert_data'?>";
         var deferred = $q.defer();
         var path =dataset_path;
-        
+
         $http.get(path)
         .success(function(data,status,headers,config){deferred.resolve(data);})
         .error(function(data, status, headers, config) { deferred.reject(status);});
-        
+
         return deferred.promise;
     };
     var change_addon_status=function(addon_status)
@@ -202,12 +202,12 @@ crawlApp.factory("acFactory", function($http,$q) {
          return $http({
                       method: "post",
                       url: search_path,
-                      data: 
+                      data:
                       {
                         addon_status:addon_status
                       }
-                     }); 
-                   
+                     });
+
     };
     var change_wallet_status=function(status)
     {
@@ -215,12 +215,12 @@ crawlApp.factory("acFactory", function($http,$q) {
          return $http({
                       method: "post",
                       url: search_path,
-                      data: 
+                      data:
                       {
                         w_status:status
                       }
-                     }); 
-                   
+                     });
+
     };
     var change_negative_status=function(status)
     {
@@ -228,12 +228,12 @@ crawlApp.factory("acFactory", function($http,$q) {
          return $http({
                       method: "post",
                       url: search_path,
-                      data: 
+                      data:
                       {
                         w_status:status
                       }
-                     }); 
-                   
+                     });
+
     };
     var change_ac_status=function(status)
     {
@@ -241,12 +241,12 @@ crawlApp.factory("acFactory", function($http,$q) {
          return $http({
                       method: "post",
                       url: search_path,
-                      data: 
+                      data:
                       {
                         w_status:status
                       }
-                     }); 
-                   
+                     });
+
     };
     var change_lw_bal_status=function(status)
     {
@@ -254,12 +254,12 @@ crawlApp.factory("acFactory", function($http,$q) {
          return $http({
                       method: "post",
                       url: search_path,
-                      data: 
+                      data:
                       {
                         w_status:status
                       }
-                     }); 
-                   
+                     });
+
     };
     var change_plan_ev_status=function(status)
     {
@@ -267,12 +267,12 @@ crawlApp.factory("acFactory", function($http,$q) {
          return $http({
                       method: "post",
                       url: search_path,
-                      data: 
+                      data:
                       {
                         w_status:status
                       }
-                     }); 
-                   
+                     });
+
     };
     var change_lw_inv_status=function(status)
     {
@@ -280,12 +280,12 @@ crawlApp.factory("acFactory", function($http,$q) {
          return $http({
                       method: "post",
                       url: search_path,
-                      data: 
+                      data:
                       {
                         w_status:status
                       }
-                     }); 
-                   
+                     });
+
     };
 
     var subscribe=function(plan_id)
@@ -294,17 +294,17 @@ crawlApp.factory("acFactory", function($http,$q) {
          return $http({
                       method: "post",
                       url: search_path,
-                      data: 
+                      data:
                       {
                         plan_id:plan_id
                       }
-                     }); 
-                   
+                     });
+
     };
-    
 
 
-    
+
+
   return {
     get_data:get_data,
     subscribe:subscribe,
@@ -317,7 +317,7 @@ crawlApp.factory("acFactory", function($http,$q) {
     change_lw_inv_status:change_lw_inv_status
   };
 });
-  crawlApp.controller("acCtrl",function acCtrl($window,$scope,acFactory,$sce,$q,$timeout,Upload) 
+  crawlApp.controller("acCtrl",function acCtrl($window,$scope,acFactory,$sce,$q,$timeout,Upload)
   {
        $scope.get_predata = function()
        {
@@ -328,27 +328,27 @@ crawlApp.factory("acFactory", function($http,$q) {
 
                                 if(response.status_code == '1')
                                 {
-                                    $scope.alert=response.alert; 
+                                    $scope.alert=response.alert;
                                     $scope.setting=response.setting[0];
-                                    
+
                                 }
                                 else
                                 {
                                  swal('Error!',response.status_text,'error');
                                 }
-                             }, 
+                             },
                              function(reason)
                              {
                                $scope.serverErrorHandler(reason);
                              }
                           );
-        }        
+        }
         $scope.get_predata();
         $scope.show_alert=function(alt_data)
         {
           $scope.alt={}
           $scope.alt.alert_head=alt_data.alert_head;
-          $scope.alt.alert_msg=$sce.trustAsHtml(alt_data.alert_msg);   
+          $scope.alt.alert_msg=$sce.trustAsHtml(alt_data.alert_msg);
 
         }
         $scope.subscribe=function(plan_id)
@@ -373,27 +373,27 @@ crawlApp.factory("acFactory", function($http,$q) {
                            if(html.status_code=='0')
                            {
                              swal('Error!',html.status_text,'error');
-                             
+
                            }
                            if(html.status_code == '1')
-                           { 
+                           {
                             swal('Success!',html.status_text,'success');
                              $scope.get_predata();
                            }
                       }
-                );              
-                    
+                );
+
                 } else {
                     swal("Cancelled", "subscription cancelled:)", "error");
                 }
             });
-         
-           
+
+
         }
 
         $scope.change_addon_status=function()
         {
-          
+
 
            swal({
                 title: "Are you sure want to change ADD-ON status?",
@@ -415,27 +415,27 @@ crawlApp.factory("acFactory", function($http,$q) {
                            if(html.status_code=='0')
                            {
                              swal('Error!',html.status_text,'error');
-                             
+
                            }
                            if(html.status_code == '1')
-                           { 
+                           {
                             swal('Success!',html.status_text,'success');
                              $scope.get_predata();
                            }
                       }
-                );              
-                    
+                );
+
                 } else {
                     swal("Cancelled", "ADD-ON status update cancelled:)", "error");
                 }
             });
-         
-           
+
+
         }
 
         $scope.change_wallet_status=function()
         {
-          
+
 
            swal({
                 title: "Are you sure want to wallet notification?",
@@ -457,26 +457,26 @@ crawlApp.factory("acFactory", function($http,$q) {
                            if(html.status_code=='0')
                            {
                              swal('Error!',html.status_text,'error');
-                             
+
                            }
                            if(html.status_code == '1')
-                           { 
+                           {
                             swal('Success!',html.status_text,'success');
                              $scope.get_predata();
                            }
                       }
-                );              
-                    
+                );
+
                 } else {
                     swal("Cancelled", "cancelled:)", "error");
                 }
             });
-         
-           
+
+
         }
         $scope.change_negative_status=function()
         {
-          
+
 
            swal({
                 title: "Are you sure ?",
@@ -498,27 +498,27 @@ crawlApp.factory("acFactory", function($http,$q) {
                            if(html.status_code=='0')
                            {
                              swal('Error!',html.status_text,'error');
-                             
+
                            }
                            if(html.status_code == '1')
-                           { 
+                           {
                             swal('Success!',html.status_text,'success');
                              $scope.get_predata();
                            }
                       }
-                );              
-                    
+                );
+
                 } else {
                     swal("Cancelled", "cancelled:)", "error");
                 }
             });
-         
-           
+
+
         }
 
         $scope.change_ac_status=function()
         {
-          
+
 
            swal({
                 title: "Are you sure ?",
@@ -540,26 +540,26 @@ crawlApp.factory("acFactory", function($http,$q) {
                            if(html.status_code=='0')
                            {
                              swal('Error!',html.status_text,'error');
-                             
+
                            }
                            if(html.status_code == '1')
-                           { 
+                           {
                             swal('Success!',html.status_text,'success');
                              $scope.get_predata();
                            }
                       }
-                );              
-                    
+                );
+
                 } else {
                     swal("Cancelled", "cancelled:)", "error");
                 }
             });
-         
-           
+
+
         }
         $scope.change_lw_bal_status=function()
         {
-          
+
 
            swal({
                 title: "Are you sure ?",
@@ -581,26 +581,26 @@ crawlApp.factory("acFactory", function($http,$q) {
                            if(html.status_code=='0')
                            {
                              swal('Error!',html.status_text,'error');
-                             
+
                            }
                            if(html.status_code == '1')
-                           { 
+                           {
                             swal('Success!',html.status_text,'success');
                              $scope.get_predata();
                            }
                       }
-                );              
-                    
+                );
+
                 } else {
                     swal("Cancelled", "cancelled:)", "error");
                 }
             });
-         
-           
+
+
         }
          $scope.change_lw_inv_status=function()
         {
-          
+
 
            swal({
                 title: "Are you sure ?",
@@ -622,26 +622,26 @@ crawlApp.factory("acFactory", function($http,$q) {
                            if(html.status_code=='0')
                            {
                              swal('Error!',html.status_text,'error');
-                             
+
                            }
                            if(html.status_code == '1')
-                           { 
+                           {
                             swal('Success!',html.status_text,'success');
                              $scope.get_predata();
                            }
                       }
-                );              
-                    
+                );
+
                 } else {
                     swal("Cancelled", "cancelled:)", "error");
                 }
             });
-         
-           
+
+
         }
          $scope.change_plan_ev_status=function()
         {
-          
+
 
            swal({
                 title: "Are you sure ?",
@@ -663,26 +663,26 @@ crawlApp.factory("acFactory", function($http,$q) {
                            if(html.status_code=='0')
                            {
                              swal('Error!',html.status_text,'error');
-                             
+
                            }
                            if(html.status_code == '1')
-                           { 
+                           {
                             swal('Success!',html.status_text,'success');
                              $scope.get_predata();
                            }
                       }
-                );              
-                    
+                );
+
                 } else {
                     swal("Cancelled", "cancelled:)", "error");
                 }
             });
-         
-           
+
+
         }
 
-    
-       
+
+
 
 });
 </script>

@@ -81,7 +81,7 @@ $base_url=base_url();
 									<h3 class="panel-title" style="padding:10px 10px 10px 10px"> Referal List</h3>
 								</div>
 								<div class="panel-body table-responsive">
-									<table class='table '>
+									<table style="border: 1px solid #DEE2E6; text-align: center;" class="table table-hover table-centered mb-0">
 										<tr>
 											<th>S_no</th>
 											<th>Refered Name</th>

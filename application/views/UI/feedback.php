@@ -89,8 +89,8 @@ $base_url=base_url();
                                         </div>
 
                                         <div class="table-responsive">
-                                            <table class="table table-stripped table-hover table-bordered table-centered mb-0">
-                                                <thead class="thead-light">
+                                            <table style="border: 1px solid #DEE2E6; text-align: center;" class="table table-hover table-centered mb-0">
+                                                <thead class="thead-color">
                                                     <tr>
                                                 <th >Image</th>
                                                 <th >Review<i ng-click="change_order('fbk_rating')" class="mdi mdi-sort-numeric "></i></th>

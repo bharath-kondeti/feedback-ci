@@ -7,7 +7,7 @@ $base_url=base_url();
 
                     <!-- Start Content-->
                     <div class="container-fluid">
-                        
+
                         <!-- start page title -->
                         <div class="row">
                             <div class="col-12">
@@ -35,8 +35,8 @@ $base_url=base_url();
                                     <h4 class="page-title">Dashboard</h4>
                                 </div>
                             </div>
-                        </div>     
-                        <!-- end page title --> 
+                        </div>
+                        <!-- end page title -->
 
                         <div class="row">
                             <div class="col-md-6 col-xl-3">
@@ -139,7 +139,7 @@ $base_url=base_url();
                                                 <h4><i class="fe-arrow-down text-danger mr-1"></i>$15k</h4>
                                             </div>
                                         </div>
-                                        
+
                                     </div>
                                 </div> <!-- end card-box -->
                             </div> <!-- end col-->
@@ -160,9 +160,9 @@ $base_url=base_url();
                                     <h4 class="header-title mb-3">Top 5 Users Balances</h4>
 
                                     <div class="table-responsive">
-                                        <table class="table table-borderless table-hover table-centered m-0">
+                                        <table style="border: 1px solid #DEE2E6; text-align: center;" class="table table-hover table-centered mb-0">
 
-                                            <thead class="thead-light">
+                                            <thead class="thead-color">
                                                 <tr>
                                                     <th colspan="2">Profile</th>
                                                     <th>Currency</th>
@@ -176,52 +176,52 @@ $base_url=base_url();
                                                     <td style="width: 36px;">
                                                         <img src="<?php echo $baseurl.'assets/img/user-2.jpg'?>" alt="" title="" class="rounded-circle avatar-sm" />
                                                     </td>
-    
+
                                                     <td>
                                                         <h5 class="m-0 font-weight-normal">Tomaslau</h5>
                                                         <p class="mb-0 text-muted"><small>Member Since 2017</small></p>
                                                     </td>
-    
+
                                                     <td>
                                                         <i class="mdi mdi-currency-usd text-primary"></i> BTC
                                                     </td>
-    
+
                                                     <td>
                                                         0.00816117 BTC
                                                     </td>
-    
+
                                                     <td>
                                                         0.00097036 BTC
                                                     </td>
-    
+
                                                     <td>
                                                         <a href="#" class="btn btn-xs btn-light"><i class="mdi mdi-plus"></i></a>
                                                         <a href="#" class="btn btn-xs btn-danger"><i class="mdi mdi-minus"></i></a>
                                                     </td>
                                                 </tr>
-    
+
                                                 <tr>
                                                     <td style="width: 36px;">
                                                         <img src="<?php echo $baseurl.'assets/img/user-2.jpg'?>" alt="" title="" class="rounded-circle avatar-sm" />
                                                     </td>
-    
+
                                                     <td>
                                                         <h5 class="m-0 font-weight-normal">Erwin E. Brown</h5>
                                                         <p class="mb-0 text-muted"><small>Member Since 2017</small></p>
                                                     </td>
-    
+
                                                     <td>
                                                         <i class="mdi mdi-currency-usd text-primary"></i> ETH
                                                     </td>
-    
+
                                                     <td>
                                                         3.16117008 ETH
                                                     </td>
-    
+
                                                     <td>
                                                         1.70360009 ETH
                                                     </td>
-    
+
                                                     <td>
                                                         <a href="#" class="btn btn-xs btn-light"><i class="mdi mdi-plus"></i></a>
                                                         <a href="#" class="btn btn-xs btn-danger"><i class="mdi mdi-minus"></i></a>
@@ -231,24 +231,24 @@ $base_url=base_url();
                                                     <td style="width: 36px;">
                                                         <img src="<?php echo $baseurl.'assets/img/user-2.jpg'?>" alt="" title="" class="rounded-circle avatar-sm" />
                                                     </td>
-    
+
                                                     <td>
                                                         <h5 class="m-0 font-weight-normal">Margeret V. Ligon</h5>
                                                         <p class="mb-0 text-muted"><small>Member Since 2017</small></p>
                                                     </td>
-    
+
                                                     <td>
                                                         <i class="mdi mdi-currency-usd text-primary"></i> EUR
                                                     </td>
-    
+
                                                     <td>
                                                         25.08 EUR
                                                     </td>
-    
+
                                                     <td>
                                                         12.58 EUR
                                                     </td>
-    
+
                                                     <td>
                                                         <a href="#" class="btn btn-xs btn-light"><i class="mdi mdi-plus"></i></a>
                                                         <a href="#" class="btn btn-xs btn-danger"><i class="mdi mdi-minus"></i></a>
@@ -258,24 +258,24 @@ $base_url=base_url();
                                                     <td style="width: 36px;">
                                                         <img src="<?php echo $baseurl.'assets/img/user-2.jpg'?>" alt="" title="" class="rounded-circle avatar-sm" />
                                                     </td>
-    
+
                                                     <td>
                                                         <h5 class="m-0 font-weight-normal">Jose D. Delacruz</h5>
                                                         <p class="mb-0 text-muted"><small>Member Since 2017</small></p>
                                                     </td>
-    
+
                                                     <td>
                                                         <i class="mdi mdi-currency-usd text-primary"></i> CNY
                                                     </td>
-    
+
                                                     <td>
                                                         82.00 CNY
                                                     </td>
-    
+
                                                     <td>
                                                         30.83 CNY
                                                     </td>
-    
+
                                                     <td>
                                                         <a href="#" class="btn btn-xs btn-light"><i class="mdi mdi-plus"></i></a>
                                                         <a href="#" class="btn btn-xs btn-danger"><i class="mdi mdi-minus"></i></a>
@@ -285,24 +285,24 @@ $base_url=base_url();
                                                     <td style="width: 36px;">
                                                         <img src="<?php echo $baseurl.'assets/img/user-2.jpg'?>" alt="" title="" class="rounded-circle avatar-sm" />
                                                     </td>
-    
+
                                                     <td>
                                                         <h5 class="m-0 font-weight-normal">Luke J. Sain</h5>
                                                         <p class="mb-0 text-muted"><small>Member Since 2017</small></p>
                                                     </td>
-    
+
                                                     <td>
                                                         <i class="mdi mdi-currency-usd text-primary"></i> BTC
                                                     </td>
-    
+
                                                     <td>
                                                         2.00816117 BTC
                                                     </td>
-    
+
                                                     <td>
                                                         1.00097036 BTC
                                                     </td>
-    
+
                                                     <td>
                                                         <a href="#" class="btn btn-xs btn-light"><i class="mdi mdi-plus"></i></a>
                                                         <a href="#" class="btn btn-xs btn-danger"><i class="mdi mdi-minus"></i></a>
@@ -320,9 +320,9 @@ $base_url=base_url();
                                     <h4 class="header-title mb-3">Revenue History</h4>
 
                                     <div class="table-responsive">
-                                        <table class="table table-borderless table-hover table-centered m-0">
+                                        <table style="border: 1px solid #DEE2E6; text-align: center;" class="table table-hover table-centered mb-0">
 
-                                            <thead class="thead-light">
+                                            <thead class="thead-color">
                                                 <tr>
                                                     <th>Marketplaces</th>
                                                     <th>Date</th>
@@ -336,19 +336,19 @@ $base_url=base_url();
                                                     <td>
                                                         <h5 class="m-0 font-weight-normal">Themes Market</h5>
                                                     </td>
-    
+
                                                     <td>
                                                         Oct 15, 2018
                                                     </td>
-    
+
                                                     <td>
                                                         $5848.68
                                                     </td>
-    
+
                                                     <td>
                                                         <span class="badge bg-soft-warning text-warning">Upcoming</span>
                                                     </td>
-    
+
                                                     <td>
                                                         <a href="#" class="btn btn-xs btn-secondary"><i class="mdi mdi-pencil"></i></a>
                                                     </td>
@@ -358,19 +358,19 @@ $base_url=base_url();
                                                     <td>
                                                         <h5 class="m-0 font-weight-normal">Freelance</h5>
                                                     </td>
-    
+
                                                     <td>
                                                         Oct 12, 2018
                                                     </td>
-    
+
                                                     <td>
                                                         $1247.25
                                                     </td>
-    
+
                                                     <td>
                                                         <span class="badge bg-soft-success text-success">Paid</span>
                                                     </td>
-    
+
                                                     <td>
                                                         <a href="#" class="btn btn-xs btn-secondary"><i class="mdi mdi-pencil"></i></a>
                                                     </td>
@@ -380,19 +380,19 @@ $base_url=base_url();
                                                     <td>
                                                         <h5 class="m-0 font-weight-normal">Share Holding</h5>
                                                     </td>
-    
+
                                                     <td>
                                                         Oct 10, 2018
                                                     </td>
-    
+
                                                     <td>
                                                         $815.89
                                                     </td>
-    
+
                                                     <td>
                                                         <span class="badge bg-soft-success text-success">Paid</span>
                                                     </td>
-    
+
                                                     <td>
                                                         <a href="#" class="btn btn-xs btn-secondary"><i class="mdi mdi-pencil"></i></a>
                                                     </td>
@@ -402,19 +402,19 @@ $base_url=base_url();
                                                     <td>
                                                         <h5 class="m-0 font-weight-normal">Envato's Affiliates</h5>
                                                     </td>
-    
+
                                                     <td>
                                                         Oct 03, 2018
                                                     </td>
-    
+
                                                     <td>
                                                         $248.75
                                                     </td>
-    
+
                                                     <td>
                                                         <span class="badge bg-soft-danger text-danger">Overdue</span>
                                                     </td>
-    
+
                                                     <td>
                                                         <a href="#" class="btn btn-xs btn-secondary"><i class="mdi mdi-pencil"></i></a>
                                                     </td>
@@ -424,19 +424,19 @@ $base_url=base_url();
                                                     <td>
                                                         <h5 class="m-0 font-weight-normal">Marketing Revenue</h5>
                                                     </td>
-    
+
                                                     <td>
                                                         Sep 21, 2018
                                                     </td>
-    
+
                                                     <td>
                                                         $978.21
                                                     </td>
-    
+
                                                     <td>
                                                         <span class="badge bg-soft-warning text-warning">Upcoming</span>
                                                     </td>
-    
+
                                                     <td>
                                                         <a href="#" class="btn btn-xs btn-secondary"><i class="mdi mdi-pencil"></i></a>
                                                     </td>
@@ -446,19 +446,19 @@ $base_url=base_url();
                                                     <td>
                                                         <h5 class="m-0 font-weight-normal">Advertise Revenue</h5>
                                                     </td>
-    
+
                                                     <td>
                                                         Sep 15, 2018
                                                     </td>
-    
+
                                                     <td>
                                                         $358.10
                                                     </td>
-    
+
                                                     <td>
                                                         <span class="badge bg-soft-success text-success">Paid</span>
                                                     </td>
-    
+
                                                     <td>
                                                         <a href="#" class="btn btn-xs btn-secondary"><i class="mdi mdi-pencil"></i></a>
                                                     </td>
@@ -471,7 +471,7 @@ $base_url=base_url();
                             </div> <!-- end col -->
                         </div>
                         <!-- end row -->
-                        
+
                     </div> <!-- container -->
 
                 </div> <!-- content -->

@@ -2,13 +2,13 @@
 $baseurl=base_url();
 $base_url=base_url();
 ?>
- 
+
             <div class="wrapper">
                 <div class="content">
 
                     <!-- Start Content-->
                     <div class="container-fluid">
-                        
+
                         <!-- start page title -->
                         <div class="row">
                             <div class="col-12">
@@ -22,8 +22,8 @@ $base_url=base_url();
                                     <h4 class="page-title">Table</h4>
                                 </div>
                             </div>
-                        </div>     
-                        <!-- end page title --> 
+                        </div>
+                        <!-- end page title -->
 
                         <div class="row">
                             <div class="col-12">
@@ -48,21 +48,20 @@ $base_url=base_url();
                                                             <option value="6">Unfulfilled</option>
                                                         </select>
                                                     </div>
-                                                </form>                            
+                                                </form>
                                             </div>
                                             <div class="col-lg-5">
                                                 <div class="text-lg-right">
                                                 	 <button type="button" class="btn btn-success waves-effect waves-light mb-2 mr-2" data-toggle="modal" data-target="#con-close-modal">Modal</button>
                                                     <button type="button" class="btn btn-danger waves-effect waves-light mb-2 mr-2"><i class="mdi mdi-basket mr-1"></i> Add New Order</button>
                                                     <button type="button" class="btn btn-light waves-effect mb-2">Export</button>
-                                                   
+
                                                 </div>
                                             </div><!-- end col-->
                                         </div>
-                
+
                                         <div class="table-responsive">
-                                            <table class="table table-centered mb-0">
-                                                <thead class="thead-light">
+                                            <table style="border: 1px solid #DEE2E6; text-align: center;" class="table table-hover table-centered mb-0">
                                                     <tr>
                                          <th style="width: 20px;">
                                              <div class="custom-control custom-checkbox">
@@ -195,7 +194,7 @@ $base_url=base_url();
                                               <a href="#" class="action-icon"> <i class="mdi mdi-delete"></i></a>
                                              </td>
                                                     </tr>
-            
+
                                                 </tbody>
                                             </table>
                                         </div>
@@ -224,7 +223,7 @@ $base_url=base_url();
                             </div> <!-- end col -->
                         </div>
                         <!-- end row -->
-                        
+
                     </div> <!-- container -->
 
                 </div> <!-- content -->

@@ -97,8 +97,8 @@ input:checked + .slider:before {
 
 <div class="col-sm-12">
 		     <div class="table-responsive">
-                                            <table class="table table-centered mb-0">
-                                                <thead class="thead-light">
+                                            <table style="border: 1px solid #DEE2E6; text-align: center;" class="table table-hover table-centered mb-0">
+                                                <thead class="thead-color">
                                                     <tr>
 														<th>Campaign Details</th>
 			  <th ng-click="filter_data('sent_count')">Email Sent <i class="fa fa-sort" ng-class="sortorder=='sent_count' && direction=='ASC'?'fa-sort':'fa-sort'"></i></th>
@@ -296,7 +296,7 @@ input:checked + .slider:before {
                        <div class="col-sm-12" id='product_list' style=" margin-top:20px;height: 350px;overflow-y:scroll">
 
                          <div class="table-responsive">
-                                            <table class="table table-centered mb-0">
+                                            <table style="border: 1px solid #DEE2E6; text-align: center;" class="table table-hover table-centered mb-0">
                            <tr>
 						   <th style="width: 20px;">
                                              <div class="custom-control custom-checkbox">

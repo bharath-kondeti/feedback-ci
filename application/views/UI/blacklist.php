@@ -19,8 +19,8 @@ $base_url=base_url();
           <div class="card-box pl-5">
             <div class="h3 ml-2">Blacklisted Buyers</div>
             <div class="mt-3 mb-3">
-            <table class="text-center table-bordered table">
-              <thead class="thead-light">
+            <table style="border: 1px solid #DEE2E6; text-align: center;" class="table table-hover table-centered mb-0">
+              <thead class="thead-color">
                 <tr>
                   <th>Buyer Email</th>
                   <th>Order ID</th>

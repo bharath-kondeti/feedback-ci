@@ -314,7 +314,7 @@
                   </div>
                   <div class="row" style="margin-bottom:10px">
                     <div class="col-sm-12 mg-top-10">
-                      <table class='table mg-top-10'>
+                      <table style="border: 1px solid #DEE2E6; text-align: center;" class="table table-hover table-centered mb-0">
                         <tr>
                           <th>From</th>
                           <th>feedback_mail@feedbackgrid.com</th>
@@ -386,8 +386,8 @@
                     <li ng-class="nextPageDisabled()" class="page-item">  <a href="javascript:void(0)" ng-click="nextPage()" class="page-link">Next</a>
                     </li>
                   </ul>
-                  <table class="text-center table-bordered table-striped table table-hover">
-                    <thead class="">
+                  <table style="border: 1px solid #DEE2E6; text-align: center;" class="table table-hover table-centered mb-0">
+                    <thead class="thead-color">
                       <tr>
                         <th style="width: 20px;">
                           <div class="custom-control custom-checkbox">
@@ -605,7 +605,7 @@
                         <div class="form-group">
                           <div class="" id='product_list' style="">
                             <div class="table-responsive">
-                              <table class="table table-center table-striped table-bordered table-hover mb-0" style="text-align: center;">
+                              <table style="border: 1px solid #DEE2E6; text-align: center;" class="table table-hover table-centered mb-0">
                                 <tr>
                                   <th style="width: 20px;">
                                     <div class="custom-control custom-checkbox">
@@ -782,8 +782,8 @@
                   <li ng-class="nextPageDisabledTemplates()" class="page-item">  <a href="javascript:void(0)" ng-click="nextPageTemplates()" class="page-link">Next</a>
                   </li>
                 </ul>
-                <table class="table-bordered table table-hover table-striped">
-                  <thead>
+                <table style="border: 1px solid #DEE2E6; text-align: center;" class="table table-hover table-centered mb-0">
+                  <thead class="thead-color">
                     <tr>
                       <th>Name</th>
                       <th>Subject</th>
@@ -952,8 +952,8 @@
                                 </div>
                               </div>
                               <div class="table-responsive"><h4>Email Junction</h4>
-                                <table class="table table-centered mb-0">
-                                  <thead class="thead-light">
+                                <table style="border: 1px solid #DEE2E6; text-align: center;" class="table table-hover table-centered mb-0">
+                                  <thead class="thead-color">
                                     <tr>
                                       <th style="width: 20px;">
                                         <div class="custom-control custom-checkbox">
@@ -1045,8 +1045,8 @@
                                 </div>
                               </div>
                               <div class="table-responsive">
-                                <table class="table table-centered mb-0">
-                                  <thead class="thead-light">
+                                <table style="border: 1px solid #DEE2E6; text-align: center;" class="table table-hover table-centered mb-0">
+                                  <thead class="thead-color">
                                     <tr>
                                       <th style="width: 20px;">
                                         <div class="custom-control custom-checkbox">
@@ -1134,8 +1134,8 @@
                                 </div>
                               </div>
                               <div class="table-responsive">
-                                <table class="table table-centered mb-0">
-                                  <thead class="thead-light">
+                                <table style="border: 1px solid #DEE2E6; text-align: center;" class="table table-hover table-centered mb-0">
+                                  <thead class="thead-color">
                                     <tr>
                                       <th style="width: 20px;">
                                         <div class="custom-control custom-checkbox">
@@ -2182,7 +2182,7 @@
               $scope.brand_list = response.brand_list;
               $scope.recent_orders = response.recent_orders;
               $scope.country_list = response.country_list;
-              // $scope.template_list = response.template_list;
+              $scope.template_list = response.template_list;
               $scope.metrics = response.metrics;
               $scope.product_list = response.product_list;
               $scope.folders = response.user_folders;

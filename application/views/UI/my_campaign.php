@@ -114,8 +114,8 @@ $base_url=base_url();
 											</div>
 
 											<div class="table-responsive">
-												<table class="table table-centered mb-0">
-													<thead class="thead-light">
+												<table style="border: 1px solid #DEE2E6; text-align: center;" class="table table-hover table-centered mb-0">
+													<thead class="thead-color">
 														<tr>
 															<th style="width: 20px;">
 																<div class="custom-control custom-checkbox">
@@ -211,8 +211,8 @@ $base_url=base_url();
 											</div>
 
 											<div class="table-responsive">
-												<table class="table table-centered mb-0">
-													<thead class="thead-light">
+												<table style="border: 1px solid #DEE2E6; text-align: center;" class="table table-hover table-centered mb-0">
+													<thead class="thead-color">
 														<tr>
 															<th style="width: 20px;">
 																<div class="custom-control custom-checkbox">
@@ -302,8 +302,8 @@ $base_url=base_url();
 												</div>
 											</div>
 											<div class="table-responsive">
-												<table class="table table-centered mb-0">
-													<thead class="thead-light">
+												<table style="border: 1px solid #DEE2E6; text-align: center;" class="table table-hover table-centered mb-0">
+													<thead class="thead-color">
 														<tr>
 															<th style="width: 20px;">
 																<div class="custom-control custom-checkbox">

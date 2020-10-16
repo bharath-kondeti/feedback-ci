@@ -315,62 +315,60 @@ $qry11=$this->db->query("SELECT *,COUNT(*) AS ttl,CONCAT(UCASE(LEFT(status, 1)),
 	 echo json_encode($data);
   }
 
+public function getToken() {
+    $ch = curl_init();
+
+    curl_setopt($ch, CURLOPT_URL, 'https://api.sandbox.paypal.com/v1/oauth2/token');
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($ch, CURLOPT_POST, 1);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, "grant_type=client_credentials");
+    curl_setopt($ch, CURLOPT_USERPWD, 'ARu9gcMwFzhLz11FMKMjBNF7vGyH3uiP4al9h8pF936cRfEpMJrhlyHZre9JEaPt0gm1xLIh3NMYwAHL' . ':' . 'EL0sAFMZ-xu4tg5l6259I-Cn_5pt8-vwo1DjoxnhD1sb5UGorV2iluKGZyatgCdBRIu3mt38kNJ8LPSV');
+
+    $headers = array();
+    $headers[] = 'Accept: application/json';
+    $headers[] = 'Accept-Language: en_US';
+    $headers[] = 'Content-Type: application/x-www-form-urlencoded';
+    curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+
+    $result = curl_exec($ch);
+    if (curl_errno($ch)) {
+        echo 'Error:' . curl_error($ch);
+    }
+    curl_close($ch);
+    return json_decode($result)->access_token;
+
+  }
 
   public function new_plan()
   {
-	  if(isset($_POST['plan_id']) && $_POST['plan_id'] >= 0)
-    {
-          $qry=$this->db->query("SELECT * from plan_manager where plan_id=".$this->db->escape($_POST['plan_id']));
-          $res=$qry->result_array();
-		  $sql_token="SELECT * FROM paypal_access_token_details WHERE expires_in <> '0' ORDER BY id DESC LIMIT 1";
-	      $qry_token=$this->db->query($sql_token);
-		  $res_token=$qry_token->result_array();
-		   if(empty($res))
-          {
-             echo '{"status_code":"0","status_text":"Plan detail info not available"}';
-             die();
-          }
-		  else if(empty($res_token))
-          {
-             echo '{"status_code":"0","status_text":"Plan detail info not available"}';
-             die();
-         }
-         $req_id='SUBSCRIPTION-'.rand().'-321';
-
-         $post_data='
+	  if(isset($_POST['plan_id']) && $_POST['plan_id'] >= 0) {
+      $post_data='
 		 {
-	  "plan_id": "'.$res[0]['paypal_planID'].'",
-	  "subscriber": {
-        "name": {
-          "given_name": "'.$this->fname.'",
-          "surname": "'.$this->lname.'"
-        },
-        "email_address": "'.$this->user_email.'"
+	  "plan_id": "P-8EY48656UV801663BL6EJ7CA",
+    "start_time": "'.date('Y-m-d\\TH:i:s\\Z', time()).'",
+    "application_context": {
+      "brand_name": "FeedbackOutlook",
+      "locale": "en-US",
+      "shipping_preference": "SET_PROVIDED_ADDRESS",
+      "user_action": "SUBSCRIBE_NOW",
+      "payment_method": {
+        "payer_selected": "PAYPAL",
+        "payee_preferred": "IMMEDIATE_PAYMENT_REQUIRED"
       },
-      "application_context": {
-        "brand_name": "FeedbackOutlook",
-        "locale": "en-US",
-        "shipping_preference": "SET_PROVIDED_ADDRESS",
-        "user_action": "SUBSCRIBE_NOW",
-        "payment_method": {
-          "payer_selected": "PAYPAL",
-          "payee_preferred": "IMMEDIATE_PAYMENT_REQUIRED"
-        },
-       "return_url": "http://35.171.8.128/app/paypal/paypal_success",
-       "cancel_url": "http://35.171.8.128/app/paypal/paypal_cancel"
+     "return_url": "http://127.0.0.1/new-project/paypal/paypal_success",
+     "cancel_url": "http://127.0.0.1/new-project/paypal/paypal_cancel"
 	  }
      }';
 		 //print_r($post_data);
 		 //die();
 		  //"start_time": "2019-12-28T02:32:24Z",
-		 $ch = curl_init();curl_setopt($ch, CURLOPT_URL, "https://api.paypal.com/v1/billing/subscriptions");
+		 $ch = curl_init();curl_setopt($ch, CURLOPT_URL, "https://api.sandbox.paypal.com/v1/billing/subscriptions");
          curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
          curl_setopt($ch, CURLOPT_POSTFIELDS, $post_data);
          curl_setopt($ch, CURLOPT_POST, 1);
          $headers = array();
          $headers[] = "Accept: application/json";
-         $headers[] = "Authorization: Bearer ".$res_token[0]['access_token'];
-         $headers[] = "PayPal-Request-Id : ". $req_id;
+         $headers[] = "Authorization: Bearer ".$this->getToken();
          $headers[] = "Prefer: return=representation";
          $headers[] = "Content-Type: application/json";
 	      curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
@@ -383,21 +381,6 @@ $qry11=$this->db->query("SELECT *,COUNT(*) AS ttl,CONCAT(UCASE(LEFT(status, 1)),
          }
          curl_close($ch);
 		 $subscription_deatils = json_decode($result);
-          if(isset($subscription_deatils->id))
-  {
-         $sql="INSERT INTO paypal_subscription_details(added_by,status,status_update_time,subscribe_id,plan_id,start_time,name,surname,email_address,create_time,link_1,link_2,link_3)
-         VALUES('".$this->user_id."',".$this->db->escape($subscription_deatils->status).",
-		 ".$this->db->escape(date('Y-m-d H:i:s',strtotime($subscription_deatils->status_update_time)))."
-		 ,".$this->db->escape($subscription_deatils->id).",".$this->db->escape($subscription_deatils->plan_id).",
-		 ".$this->db->escape(date('Y-m-d H:i:s',strtotime($subscription_deatils->start_time)))."
-		 ,".$this->db->escape($subscription_deatils->subscriber->name->given_name).",".$this->db->escape($subscription_deatils->subscriber->name->surname).",
-		 ".$this->db->escape($subscription_deatils->subscriber->email_address).",
-		 ".$this->db->escape(date('Y-m-d H:i:s',strtotime($subscription_deatils->create_time))).",
-		 ".$this->db->escape($subscription_deatils->links[0]->href).",".$this->db->escape($subscription_deatils->links[1]->href).",
-		 ".$this->db->escape($subscription_deatils->links[2]->href).")
-		 ON DUPLICATE KEY UPDATE status=VALUES(status),status_update_time=VALUES(status_update_time),subscribe_id=VALUES(subscribe_id),start_time=VALUES(start_time)
-		 ,name=VALUES(name),surname=VALUES(surname),email_address=VALUES(email_address),create_time=VALUES(create_time),link_1=VALUES(link_1),link_2=VALUES(link_2),link_3=VALUES(link_3)";
-		 $this->db->query($sql);
 
 		  $data['status_code']=1;
           $data['status_text']='Success';
@@ -411,10 +394,7 @@ $qry11=$this->db->query("SELECT *,COUNT(*) AS ttl,CONCAT(UCASE(LEFT(status, 1)),
 		  echo '{"status_code":"0","status_text":"Subscription Failed.Please Contact Support"}';
         // die();
 	}
-
-
-	}
-  }
+}
 
 	public function cancel_paypal_subscription()
 	{

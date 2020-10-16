@@ -34,7 +34,7 @@ $base_url=base_url();
 									</div>
 
 										<div class="table-responsive">
-                                            <table class="table" style="width: auto;position: relative;">
+                                            <table style="border: 1px solid #DEE2E6; text-align: center;" class="table table-hover table-centered mb-0">
                                                 <thead style="background-color: #f1f5f7;font-size: 12px;font-weight: 200;color: #6c757d;white-space: nowrap">
 												<tr>
 												<th style="color:#6c757d;width: 466px;position: relative;" >Name</th>

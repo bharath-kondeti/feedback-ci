@@ -111,8 +111,8 @@ $base_url=base_url();
                                        </div>
 
                                         <div class="table-responsive">
-                                            <table class="table table-stripped table-hover table-bordered table-centered mb-0" style="text-align: center;">
-                                                <thead class="thead-light">
+                                            <table style="border: 1px solid #DEE2E6; text-align: center;" class="table table-hover table-centered mb-0">
+                                                <thead class="thead-color">
                                                     <tr>
                                                 <th>Channel</th>
                                                 <th ng-click="change_order('asin')" style="width:120px;">ASIN <i class="mdi mdi-sort-alphabetical "></i></th>
@@ -228,7 +228,7 @@ $base_url=base_url();
                               </div>
 
 							  <div class="col-sm-6">
-                                 <table class="table table-condensed table-striped">
+                                 <table style="border: 1px solid #DEE2E6; text-align: center;" class="table table-hover table-centered mb-0">
                                    <tr><th colspan="2" class="text-center">Product Details</th></tr>
                                    <tr><td>Order No</td><td class="text-right">{{ord.order_no}}</td></tr>
                                    <tr><td>Purchase Date</td><td class="text-right">{{ord.purchase_date}}</td></tr>
@@ -258,7 +258,7 @@ $base_url=base_url();
                                  </table>
                                  </div>
                                  <div class="col-sm-6">
-                                 <table class="table table-condensed table-striped">
+                                 <table style="border: 1px solid #DEE2E6; text-align: center;" class="table table-hover table-centered mb-0">
                                    <tr><th colspan="2" class="text-center">Buyer Details</th></tr>
                                    <tr><td>Buyer Name</td><td class="text-right">{{ord.buyer_name}}</td></tr>
                                    <tr><td>Buyer Email</td><td class="text-right">{{ord.buyer_email}}</td></tr>
