@@ -1,3 +1,9 @@
+ <!-- Include Required Prerequisites -->
+<script type="text/javascript" src="//cdn.jsdelivr.net/jquery/1/jquery.min.js"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<!-- Include Date Range Picker -->
+<script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
+<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css" />
  <?php
 $baseurl=base_url();
 $base_url=base_url();
@@ -85,16 +91,35 @@ $base_url=base_url();
             </div>
             <hr>
             <div class="container-fluid">
-            <div class="col-lg-12">
-              <ul class="pagination pagination-rounded justify-content-end my-2">
-                <li ng-class="prevPageDisabled()" class="page-item">  <a href="javascript:void(0)" ng-click="prevPage()" class="page-link">Previous</a>
-                </li>
-                <li ng-repeat="n in range()" ng-class="{active: n == currentPage}" ng-click="setPage(n)" class="page-item"> <a href="javascript:void(0)" class="page-link">{{n+1}}</a>
-                </li>
-                <li ng-class="nextPageDisabled()" class="page-item">  <a href="javascript:void(0)" ng-click="nextPage()" class="page-link">Next</a>
-                </li>
-              </ul>
+            <div class="row">
+              <div class="col-md-3">
+                <div class="form-group">
+                  <label for="search" class="sr-only">Search</label>
+                  <input ng-model="reviews_search" type="text" class="form-control" placeholder="Search Order ID or Buyer Email">
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <div id="reportrange" class="form-control pull-right" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc;">  <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>&nbsp; <span id="calendar-date"></span>  <b class="caret"></b>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3 text-left">
+                <div class="form-group">  <a ng-click="get_predata()" class="btn btn-primary  text-light"> Filter </a>
+                </div>
+              </div>
             </div>
+            <div class="col-lg-12">
+                <ul class="pagination pagination-rounded justify-content-end my-2">
+                  <li ng-class="prevPageDisabled()" class="page-item">  <a href="javascript:void(0)" ng-click="prevPage()" class="page-link">Previous</a>
+                  </li>
+                  <li ng-repeat="n in range()" ng-class="{active: n == currentPage}" ng-click="setPage(n)" class="page-item"> <a href="javascript:void(0)" class="page-link">{{n+1}}</a>
+                  </li>
+                  <li ng-class="nextPageDisabled()" class="page-item">  <a href="javascript:void(0)" ng-click="nextPage()" class="page-link">Next</a>
+                  </li>
+                </ul>
+              </div>
+            
               <div class="row">
                 <div class="col-xl-12">
                   <div class="table-responsive">
@@ -335,17 +360,35 @@ $base_url=base_url();
 </div>
 
 <script type="text/javascript">
+  function cb(start, end) {
+    $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+  }
+  cb(moment().subtract(29, 'days'), moment());
+
+  $('#reportrange').daterangepicker({
+    ranges: {
+      'Today': [moment(), moment()],
+      'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+      'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+      'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+      'This Month': [moment().startOf('month'), moment().endOf('month')],
+      'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+    }
+  }, cb);
+</script>
+
+<script type="text/javascript">
 crawlApp.factory('invFactory', ['$http', '$q','limitToFilter', 'Upload',function($http,$q,limitToFilter,Upload) {
 
 
     var inv_list_url  =   "<?php echo $baseurl ."reviews_new/get_reviews"?>";
 
 
-    var get_transaction_list = function (offset,limit)
+    var get_transaction_list = function (offset,limit,date1,date2,search_var,search_param)
     {
           var deferred = $q.defer();
           var path = inv_list_url;
-          $http.get(path+'/'+offset+'/'+limit)
+          $http.get(path+'/'+offset+'/'+limit+'/'+date1+'/'+date2+'/'+search_var+'/'+search_param)
           .success(function(data,status,headers,config){deferred.resolve(data);})
           .error(function(data, status, headers, config) { deferred.reject(status);});
           return deferred.promise;
@@ -367,6 +410,8 @@ crawlApp.controller('invCtrl', ['$scope','$parse','$window','invFactory','$http'
 	  $scope.reviews_data = [];
 	  $scope.reviews = [];
 	  $scope.expand_b = [];
+    $scope.searchTerm = '';
+    $scope.selectedRange = '';
       $scope.reset=function()
       {
       $scope.cpn={};
@@ -471,7 +516,27 @@ crawlApp.controller('invCtrl', ['$scope','$parse','$window','invFactory','$http'
    $scope.get_transaction_list=function(currentPage)
    {
       $scope.block_site();
-      var promise= invFactory.get_transaction_list(currentPage*$scope.itemsPerPage,$scope.itemsPerPage);
+      var ele,text,dates,date1,date2,search_var,search_param,isOrder;
+      ele = document.getElementById('calendar-date');
+      text = ele.innerHTML;
+      dates = text.split("-");
+      date1 = moment(dates[0], 'MMMM DD, YYYY').format('YYYY-MM-DD');
+      date2 = moment(dates[1], 'MMMM DD, YYYY').format('YYYY-MM-DD');
+      search_term = $scope.searchTerm;
+      if(search_term != '') {
+        isOrder = /^\d+\-\d+\-\d+$/.test(search_term);
+        if(isOrder) {
+          search_var = search_term;
+          search_param = "order";
+        } else {
+          search_var = search_term;
+          search_param = "email";
+        }
+      } else {
+        search_var = "empty";
+        search_param = "empty";
+      }
+      var promise= invFactory.get_transaction_list(currentPage*$scope.itemsPerPage,$scope.itemsPerPage,date1,date2,search_var,search_param);
          promise.then(function(value){
 		  $.unblockUI();
          if(value.status_text === "Success")

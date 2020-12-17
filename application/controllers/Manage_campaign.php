@@ -105,6 +105,7 @@ class Manage_campaign extends CI_Controller
        $data['total_records'] = $countdata[0]['total_count'];
        $data['status_text']='Success';
        $data['status_code']='1';
+       $data['all_products'] = $this->campaign_model->get_all_products($this->input->post('country'),$this->input->post('brand'),$this->input->post('key_word'),$this->input->post('fc_code'),$offset,$limit);
        echo json_encode($data);
     }
   }

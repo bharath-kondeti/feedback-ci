@@ -616,6 +616,31 @@ class Campaign_model extends CI_Model
     $res=$qry->result_array();
     return $res;
   }
+  public function get_all_products($country_code='',$brand_code='',$key_word='',$fc_code='',$offet = '',$limit = '')
+  {
+    $sql="SELECT * from customer_product WHERE store_id=".$this->store_id." AND is_active=1 AND prod_brand<>''";
+    if(!empty($key_word))
+    {
+		$key_word=str_replace("'","\'",$key_word);
+      $sql.=" AND (prod_sku=".$this->db->escape($key_word)." OR prod_asin=".$this->db->escape($key_word)." OR prod_title LIKE '%".$key_word."%')";
+    }
+    if(!empty($country_code))
+    {
+      $sql.=" AND prod_country=".$this->db->escape($country_code);
+    }
+    if(!empty($brand_code) && $brand_code!='ALL')
+    {
+
+      $sql.=" AND prod_brand=".$this->db->escape($brand_code);
+    }
+	if(!empty($fc_code) && $fc_code!='ALL')
+    {
+
+      $sql.=" AND fc_code=".$this->db->escape($fc_code);
+    }
+    $query=$this->db->query($sql);
+    return $query->result_array();
+  }
 }
 ?>
 

@@ -111,10 +111,10 @@ class Template extends CI_Controller {
           }
           $this->db->trans_start();
           if(isset($post->tmp_id) && !empty($post->tmp_id) && $post->tmp_id > 0) {
-            $this->db->query("UPDATE email_template SET template_name=".$this->db->escape($post->template_name).",subject=".$this->db->escape($post->subject).",template_content=".$this->db->escape($post->template_ui)." WHERE template_id=".$this->db->escape($post->tmp_id)." AND created_by=".$this->user_id);
+            $this->db->query("UPDATE email_template SET template_name=".$this->db->escape($post->template_name).",subject=".$this->db->escape($post->subject).",template_content=".$this->db->escape($post->template_ui).",type=".$this->db->escape($post->type).",tmpltrigger=".$this->db->escape($post->trigger).",goal=".$this->db->escape($post->goal)." WHERE template_id=".$this->db->escape($post->tmp_id)." AND created_by=".$this->user_id);
             $post_msg = "Template successfully updated";
           } else {
-            $insert_template=array('subject'=>$post->subject,'template_name'=>$post->template_name,'template_content'=>$post->template_ui,'created_on'=>date('Y-m-d H:i:s'),'created_by'=>$this->user_id);
+            $insert_template=array('subject'=>$post->subject,'template_name'=>$post->template_name,'template_content'=>$post->template_ui,'created_on'=>date('Y-m-d H:i:s'),'created_by'=>$this->user_id,'type'=>$post->type,'tmpltrigger'=>$post->trigger,'goal'=>$post->goal);
               $this->db->insert('email_template',$insert_template);
               $post_msg = "Template successfully created";
             }
