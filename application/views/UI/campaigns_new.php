@@ -377,7 +377,22 @@
               ?>
             <div class="" ng-show='show_dash==1' id="myc1">
               <div class="col-12 card-box">
-                <div ng-cloak class="table-responsive"><h4>My Campaigns</h4>
+                <div ng-cloak class="table-responsive">
+                  <div class="row">
+                    <div class="col-md-3">
+                      <h4>My Campaigns</h4>
+                    </div>
+                    <div class="col-md-3 mt-1">
+                      <div class="form-group">
+                        <label for="search" class="sr-only">Search</label>
+                        <input ng-model="camps_search" type="text" class="form-control" placeholder="Search campaigns">
+                      </div>
+                    </div>
+                    <div class="col-md-3 text-left mt-1">
+                      <div class="form-group">  <a ng-click="get_predata(0)" class="btn btn-primary  text-light"> Search </a>
+                      </div>
+                    </div>
+                  </div>
                   <ul class="pagination pagination-rounded justify-content-end my-2">
                     <li ng-class="prevPageDisabled()" class="page-item">  <a href="javascript:void(0)" ng-click="prevPage()" class="page-link">Previous</a>
                     </li>
@@ -574,13 +589,13 @@
                         <div class="form-group">
                           <div class="row">
                             <div class="col-sm-3 no-padding">
-                              <select class="form-control" ng-model='cmp.camp_brand' ng-change='load_product(0)'>
+                              <select class="form-control" ng-model='cmp.camp_brand' ng-change='load_product(0); clear_all()'>
                                 <option value="ALL">ALL</option>
                                 <option ng-repeat="x in brand_list" value='{{x.prod_brand}}'>{{x.prod_brand}}</option>
                               </select>
                             </div>
                             <div class="col-sm-3 no-padding">
-                              <select class="form-control" ng-model='cmp.fc_code' ng-change='load_product(0)'>
+                              <select class="form-control" ng-model='cmp.fc_code' ng-change='load_product(0); clear_all()'>
                                 <option value="ALL">ALL</option>
                                 <option value='FBA'>FBA</option>
                                 <option value='FBM'>FBM</option>
@@ -593,7 +608,7 @@
                                 <!-- /btn-group -->
                                 <input type="text" ng-model='cmp.prod_search' class="form-control" aria-label="...">
                                 <span class="input-group-btn">
-                                <button style="margin-left:5px;" class="btn btn-info" ng-click='load_product(0)' type="button">Filter</button>
+                                <button style="margin-left:5px;" class="btn btn-info" ng-click='load_product(0); clear_all()' type="button">Filter</button>
                                 </span>
                               </div>
                               <!-- /input-group -->
@@ -731,37 +746,38 @@
             <div class="col-md-2">
               <div class="dropdown">
                 <a class="btn btn-primary btn-block dropdown-toggle tt_design1" href="" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Amazon Templates<i class="mdi mdi-chevron-down"></i>
+                {{templateType}}<i class="mdi mdi-chevron-down"></i>
                 </a>
                 <div class="dropdown-menu icon_menu_size" aria-labelledby="dropdownMenuLink" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 35px, 0px);">
-                  <a class="dropdown-item" href="#"> Amazon Templates</a>
-                  <a class="dropdown-item" href="#"> eBay Templates</a>
+                  <a ng-click="templateFilter = 0;filterTemplates('templates'); templateType = 'All Templates'" class="dropdown-item" href="#"> All Templates</a>
+                  <a ng-click="templateFilter = 1;filterTemplates(''); templateType = 'Amazon Templates'" class="dropdown-item" href="#"> Amazon Templates</a>
+                  <a ng-click="templateFilter = 2;filterTemplates(''); templateType = 'eBay Templates'" class="dropdown-item" href="#"> eBay Templates</a>
                 </div>
               </div>
             </div>
             <div class="col-md-2">
               <div class="dropdown">
                 <a class="btn btn-primary btn-block dropdown-toggle tt_design2" href="" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Any Trigger<i class="mdi mdi-chevron-down"></i>
+                {{triggerType}}<i class="mdi mdi-chevron-down"></i>
                 </a>
                 <div class="dropdown-menu icon_menu_size" aria-labelledby="dropdownMenuLink" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 35px, 0px);">
-                  <a class="dropdown-item" href="#">Any Trigger</a>
-                  <a class="dropdown-item" href="#">Order Confirmed</a>
-                  <a class="dropdown-item" href="#">Order Dispatched</a>
-                  <a class="dropdown-item" href="#">Order Delivered</a>
+                  <a ng-click="triggerFilter = 0;filterTemplates('triggers'); triggerType = 'Any Trigger'" class="dropdown-item" href="#">Any Trigger</a>
+                  <a ng-click="triggerFilter = 1;filterTemplates(''); triggerType = 'Order Confirmed'" class="dropdown-item" href="#">Order Confirmed</a>
+                  <a ng-click="triggerFilter = 2;filterTemplates(''); triggerType = 'Order Dispatched'" class="dropdown-item" href="#">Order Dispatched</a>
+                  <a ng-click="triggerFilter = 3;filterTemplates(''); triggerType = 'Order Delivered'" class="dropdown-item" href="#">Order Delivered</a>
                 </div>
               </div>
             </div>
             <div class="col-md-2">
               <div class="dropdown">
                 <a class="btn btn-primary btn-block dropdown-toggle tt_design3" href="" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                All Goals<i class="mdi mdi-chevron-down"></i>
+                {{goalType}}<i class="mdi mdi-chevron-down"></i>
                 </a>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuLink" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 35px, 0px);">
-                  <a class="dropdown-item" href="#">All Goals</a>
-                  <a class="dropdown-item" href="#">Seller Feedback</a>
-                  <a class="dropdown-item" href="#">Customer Service</a>
-                  <a class="dropdown-item" href="#">Product Review</a>
+                  <a ng-click="goalFilter = 0;filterTemplates('goals'); goalType = 'All Goals'" class="dropdown-item" href="#">All Goals</a>
+                  <a ng-click="goalFilter = 1;filterTemplates(''); goalType = 'Seller Feedback'" class="dropdown-item" href="#">Seller Feedback</a>
+                  <a ng-click="goalFilter = 2;filterTemplates(''); goalType = 'Customer Service'" class="dropdown-item" href="#">Customer Service</a>
+                  <a ng-click="goalFilter = 3;filterTemplates(''); goalType = 'Product Review'" class="dropdown-item" href="#">Product Review</a>
                 </div>
               </div>
             </div>
@@ -797,6 +813,7 @@
                       <td>
                         <div class="form-inline pull-right"><i ng-click='edit_template(idx.template_id);togggle_view_email()' style="font-size:20px;margin-left: 10px" class="fe-edit"></i>
                           <i ng-if="idx.is_default=='0'" ng-click='delete_template(idx.template_id,idx.is_default)' style="font-size:20px;margin-left: 10px" class="fe-trash-2"></i>
+                          <input type="hidden" class="goal" id="goal" value>
                         </div>
                       </td>
                     </tr>
@@ -826,6 +843,35 @@
                       <p class="control-label col-sm-3" style="margin-top:5px;font-weight:700;margin-left:20px;" for="pwd">Subject</p>
                       <div class="col-sm-9">
                         <input type='text' style="margin-left:20px;" class="form-control" ng-model='tmplt.subject'>
+                      </div>
+                      <br>
+                      <p class="control-label col-sm-3" style="margin-top:5px;font-weight:700;margin-left:20px;" for="pwd">Template Type</p>
+                      <div class="col-sm-9">
+                        <select class="form-control" ng-model='tmplt.type'>
+                            <option value='0'>Any Templates</option>
+                            <option value='1'>Amazon Templates</option>
+                            <option value='2'>Ebay Templates</option>
+                        </select>
+                      </div>
+                      <br>
+                      <p class="control-label col-sm-3" style="margin-top:5px;font-weight:700;margin-left:20px;" for="pwd">Trigger Type</p>
+                      <div class="col-sm-9">
+                        <select class="form-control" ng-model='tmplt.tmpltrigger'>
+                            <option value='0'>Any Trigger</option>
+                            <option value='1'>Order Confirmed</option>
+                            <option value='2'>Order Dispatched</option>
+                            <option value='3'>Order Delivered</option>
+                        </select>
+                      </div>
+                      <br>
+                      <p class="control-label col-sm-3" style="margin-top:5px;font-weight:700;margin-left:20px;" for="pwd">Goal Type</p>
+                      <div class="col-sm-9">
+                        <select class="form-control" ng-model='tmplt.goal'>
+                            <option value='0'>All Goals</option>
+                            <option value='1'>Seller Feedback</option>
+                            <option value='2'>Customer Service</option>
+                            <option value='3'>Product Review</option>
+                        </select>
                       </div>
                       <br>
                       <div id='editor'></div>
@@ -1221,10 +1267,10 @@
 <!-- content -->
 <script type="text/javascript">
   crawlApp.factory("campaignFactory", function($http, $q, Upload) {
-    var get_data = function(offset_val, count_limit) {
+    var get_data = function(offset_val, count_limit, searchTerm) {
       var dataset_path = "<?php echo $baseurl . 'manage_campaign/get_pre_data' ?>";
       var deferred = $q.defer();
-      var path = dataset_path+'/'+offset_val+'/'+count_limit;
+      var path = dataset_path+'/'+offset_val+'/'+count_limit+'/'+searchTerm;
       $http.get(path)
         .success(function(data, status, headers, config) {
          deferred.resolve(data);
@@ -1446,6 +1492,7 @@
       $scope.checkCampaigns = [];
       $scope.campStatus = [{name: 'Live', id: 3}, {name: 'Draft', id: 1}, {name: 'Test', id: 2}, {name: 'Paused', id: 4}];
       $scope.showCampDrop = [];
+      $scope.camps_search = '';
 
       $scope.cmp.selected_star.push({
        star: ''
@@ -1912,6 +1959,7 @@
               if (html.status_code == '1')
               {
                 $scope.product_list = html.payload;
+                $scope.all_product_list = html.all_products;
                 $scope.totalProduct = html.total_records;
               }
             }
@@ -2170,7 +2218,7 @@
       $scope.get_predata = function(currentPage)
       {
         $scope.block_site();
-        var promise = campaignFactory.get_data(currentPage*$scope.itemsPerPage,$scope.itemsPerPage);
+        var promise = campaignFactory.get_data(currentPage*$scope.itemsPerPage,$scope.itemsPerPage, $scope.camps_search);
         promise.then(
           function(response)
           {
@@ -2204,9 +2252,9 @@
 
       $scope.select_all = function()
       {
-        for (i = 0; i < $scope.product_list.length; i++)
+        for (i = 0; i < $scope.all_product_list.length; i++)
         {
-          $scope.addToArray($scope.selectedProduct, $scope.product_list[i]);
+          $scope.addToArray($scope.selectedProduct, $scope.all_product_list[i]);
         }
         $scope.selectcount = $scope.selectedProduct.length;
         $scope.totalcount = $scope.total;
@@ -2482,7 +2530,17 @@
       $scope.tmplt.tmp_id = '';
       $scope.tmplt.is_default = '0';
       $scope.tmplt.subject = '';
+      $scope.tmplt.type = '0';
+      $scope.tmplt.tmpltrigger = '0';
+      $scope.tmplt.goal = '0';
       $scope.tmplt.template_name = '';
+      $scope.templateFilter = 0;
+      $scope.triggerFilter = 0;
+      $scope.goalFilter = 0;
+      $scope.templateType = 'All Templates';
+      $scope.triggerType = 'Any Trigger';
+      $scope.goalType = 'Any Goal';
+      originalTemplate_list = [];
       $scope.tmplt.template_content_html = '';
       $scope.activateSave = false;
       $scope.watchTemp = false;
@@ -2626,6 +2684,7 @@
             if (response.status_code == '1') {
               $.unblockUI();
               $scope.template_list = response.template_list;
+              $scope.originalTemplate_list = response.template_list;
               $scope.totalTemplates = response.total_records;
             } else {
               swal('Error!', response.status_text, 'error');
@@ -2635,6 +2694,38 @@
             $scope.serverErrorHandler(reason);
           }
         );
+      }
+      $scope.filterTemplates = function (val) {
+        var selectedTemplate = '', selectedTrigger = '', selectedGoal = '';
+        $scope.template_list = [];
+        selectedTemplate = $scope.templateFilter;
+        selectedTrigger = $scope.triggerFilter;
+        selectedGoal = $scope.goalFilter;
+        if(selectedTemplate == 0) {
+          $scope.originalTemplate_list.forEach(x=> {
+            if(x.goal == selectedGoal && x.trigger == selectedTrigger) {
+              $scope.template_list.push(x);
+            } 
+          })
+        } else if(selectedTrigger == 0) {
+            $scope.originalTemplate_list.forEach(x=> {
+              if(x.goal == selectedGoal && x.template == selectedTemplate) {
+                $scope.template_list.push(x);
+              } 
+            })
+        } else if(selectedGoal == 0) {
+            $scope.originalTemplate_list.forEach(x=> {
+              if(x.trigger == selectedTrigger && x.template == selectedTemplate) {
+                $scope.template_list.push(x);
+              } 
+            })
+        } else {
+            $scope.originalTemplate_list.foreach(x=> {
+              if(x.trigger == selectedTrigger && x.template == selectedTemplate && x.goal == selectedGoal) {
+                $scope.template_list.push(x);
+              } 
+            })
+        }
       }
       $scope.clear_template = function()
       {
